@@ -74,6 +74,12 @@ public final class SoundexFunction extends Function1_2 {
         return e;
     }
 
+    /**
+     * Referrer: https://zh.wikipedia.org/wiki/Soundex
+     *
+     * @param s String
+     * @return byte[]
+     */
     private static byte[] getSoundex(String s) {
         byte[] chars = { '0', '0', '0', '0' };
         byte lastDigit = '0';
