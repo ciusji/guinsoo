@@ -235,6 +235,7 @@ public class TcpServer implements Service {
             serverSocket = NetUtils.createServerSocket(port, ssl);
         } catch (DbException e) {
             if (!portIsSet) {
+                //  port=0 that port is automatically allocated
                 serverSocket = NetUtils.createServerSocket(0, ssl);
             } else {
                 throw e;
