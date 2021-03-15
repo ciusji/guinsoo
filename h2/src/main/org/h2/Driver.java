@@ -46,6 +46,9 @@ public class Driver implements java.sql.Driver, JdbcDriverBackwardsCompat {
      * This method should not be called by an application.
      * Instead, the method DriverManager.getConnection should be used.
      *
+     * <p>
+     * Note! this should be implemented by db vendor\.
+     *
      * @param url the database URL
      * @param info the connection properties
      * @return the new connection or null if the URL is not supported
@@ -67,6 +70,9 @@ public class Driver implements java.sql.Driver, JdbcDriverBackwardsCompat {
     /**
      * Check if the driver understands this URL.
      * This method should not be called by an application.
+     *
+     * <p>
+     * URL format like protocol_name:sub_protocol://ip:port/db_name?arg=value
      *
      * @param url the database URL
      * @return if the driver understands the URL
