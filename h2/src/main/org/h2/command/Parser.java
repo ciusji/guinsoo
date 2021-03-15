@@ -2913,6 +2913,7 @@ public class Parser {
 
     private Query parseSelectUnion() {
         int start = lastParseIndex;
+        // TODO: 2021/3/15 add sub-query cache
         Query command = parseQuerySub();
         for (;;) {
             SelectUnion.UnionType type;

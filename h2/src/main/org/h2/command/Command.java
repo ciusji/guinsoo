@@ -186,6 +186,7 @@ public abstract class Command implements CommandInterface {
                 while (true) {
                     database.checkPowerOff();
                     try {
+                        // sql to kv rows
                         ResultInterface result = query(maxrows);
                         callStop = !result.isLazy();
                         if (database.getMode().charPadding == CharPadding.IN_RESULT_SETS) {
