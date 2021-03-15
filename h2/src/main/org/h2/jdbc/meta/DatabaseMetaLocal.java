@@ -137,17 +137,17 @@ public final class DatabaseMetaLocal extends DatabaseMetaLocalBase {
 
     @Override
     public String getSQLKeywords() {
-        return "CURRENT_CATALOG," //
-                + "CURRENT_SCHEMA," //
+        return "CURRENT_CATALOG,"
+                + "CURRENT_SCHEMA,"
                 + "GROUPS," //
-                + "IF,ILIKE,INTERSECTS," //
-                + "KEY," //
-                + "LIMIT," //
-                + "MINUS," //
-                + "OFFSET," //
-                + "QUALIFY," //
-                + "REGEXP,ROWNUM," //
-                + "TOP,"//
+                + "IF,ILIKE,INTERSECTS,"
+                + "KEY,"
+                + "LIMIT,"
+                + "MINUS,"
+                + "OFFSET,"
+                + "QUALIFY,"
+                + "REGEXP,ROWNUM,"
+                + "TOP,"
                 + "_ROWID_";
     }
 
