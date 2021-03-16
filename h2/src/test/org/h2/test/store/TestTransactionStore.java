@@ -17,6 +17,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.h2.mvstore.DataUtils;
+import org.h2.mvstore.MVMap;
 import org.h2.mvstore.MVStore;
 import org.h2.mvstore.MVStoreException;
 import org.h2.mvstore.tx.Transaction;
@@ -40,7 +41,13 @@ public class TestTransactionStore extends TestBase {
      * @param a ignored
      */
     public static void main(String... a) throws Exception {
-        TestBase.createCaller().init().testFromMain();
+        // TestBase.createCaller().init().testFromMain();
+        MVStore s = MVStore.open("/Users/admin/Tabletrix/usage.mv.db");
+        MVMap<Integer, String> map = s.openMap("usage");
+
+        System.out.println(s.getCurrentVersion());
+
+        s.close();
     }
 
     @Override
