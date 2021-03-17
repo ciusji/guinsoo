@@ -127,6 +127,7 @@ public final class Store {
         this.encrypted = encrypted;
         try {
             this.mvStore = builder.open();
+            // filesystem abstract
             FileStore fs = mvStore.getFileStore();
             fileName = fs != null ? fs.getFileName() : null;
             if (!db.getSettings().reuseSpace) {
