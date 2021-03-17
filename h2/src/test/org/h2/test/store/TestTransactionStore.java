@@ -10,16 +10,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.h2.mvstore.DataUtils;
-import org.h2.mvstore.MVMap;
 import org.h2.mvstore.MVStore;
 import org.h2.mvstore.MVStoreException;
+import org.h2.mvstore.MVStoreTool;
 import org.h2.mvstore.tx.Transaction;
 import org.h2.mvstore.tx.TransactionMap;
 import org.h2.mvstore.tx.TransactionStore;
@@ -42,10 +39,29 @@ public class TestTransactionStore extends TestBase {
      */
     public static void main(String... a) throws Exception {
         // TestBase.createCaller().init().testFromMain();
-        MVStore s = MVStore.open("/Users/admin/Tabletrix/usage.mv.db");
-        MVMap<Integer, String> map = s.openMap("usage");
 
-        System.out.println(s.getCurrentVersion());
+        // Open a store in exclusive mode. For a file-based store, the parent directory must already exist
+        MVStore s = MVStore.open("/Users/admin/Tabletrix/usage.mv.db");
+        System.out.println(s.getMapNames());
+        System.out.println(s.openMap("data").size());
+
+        MVStoreTool.dump(s.getFileStore().getFileName(), true);
+
+        // System.out.println("cache size: " + s.getCacheSize());
+        // System.out.println(Arrays.toString(s.getFileStore().readFully(0, 1000).array()));
+
+        // File format
+        // [file header 1] [file header 2] [chunk] [chunk] ... [chunk]
+        // ...
+
+//        for (int i=0; i<400; i++) {
+//            map.put(i, "Hello");
+//        }
+//        s.commit();
+//        for (int i=0; i<100; i++) {
+//            map.put(i, "Hi");
+//        }
+//        s.commit();
 
         s.close();
     }

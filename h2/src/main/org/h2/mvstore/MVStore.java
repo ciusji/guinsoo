@@ -4082,5 +4082,6 @@ public class MVStore implements AutoCloseable {
             // Cast from HashMap<String, String> to HashMap<String, Object> is safe
             return new Builder((HashMap) DataUtils.parseMap(s));
         }
+
     }
 }
