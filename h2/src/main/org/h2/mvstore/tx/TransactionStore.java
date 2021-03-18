@@ -31,6 +31,10 @@ import org.h2.value.VersionedValue;
 
 /**
  * A store that supports concurrent MVCC read-committed transactions.
+ *
+ * The tool supports "read committed" transaction isolation with savepoints, two-phase commit, and the other features
+ * typically available in a database. There is not limit on the size of a transaction (the log is written ot dis for
+ * large or long running transactions).
  */
 public class TransactionStore {
 
