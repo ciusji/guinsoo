@@ -716,6 +716,7 @@ public class Select extends Query {
                 limitRows = Long.MAX_VALUE;
             }
         }
+        // important query
         LazyResultQueryFlat lazyResult = new LazyResultQueryFlat(expressionArray, columnCount, isForUpdateMvcc);
         skipOffset(lazyResult, offset, quickOffset);
         if (result == null) {

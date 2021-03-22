@@ -82,7 +82,7 @@ public class CommandContainer extends Command {
     private boolean readOnly;
 
     /**
-     * Clears CTE views for a specified statement.
+     * Clears CTE (common table expression) views for a specified statement.
      *
      * @param session the session
      * @param prepared prepared statement

@@ -38,7 +38,8 @@ public class DirectInsert {
     }
 
     private static void initialInsert(String url, int len) throws SQLException {
-        Connection conn = DriverManager.getConnection(url + ";LOG=0");
+        /// Connection conn = DriverManager.getConnection(url + ";LOG=0");
+        Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
         stat.execute("DROP TABLE IF EXISTS TEST");
         stat.execute("CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR)");

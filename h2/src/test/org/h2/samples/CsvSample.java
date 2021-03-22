@@ -10,6 +10,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import org.h2.result.SimpleResult;
 import org.h2.store.fs.FileUtils;
 import org.h2.tools.Csv;
 import org.h2.tools.SimpleResultSet;
