@@ -216,7 +216,7 @@ public class JdbcStatement extends TraceObject implements Statement, JdbcStateme
         checkClosed();
         closeOldResultSet();
         sql = JdbcConnection.translateSQL(sql, escapeProcessing);
-        // prepare command to execute query
+        // prepare `Command` to execute query
         CommandInterface command = conn.prepareCommand(sql, fetchSize);
         boolean lazy = false;
         boolean returnsResultSet;
@@ -227,6 +227,7 @@ public class JdbcStatement extends TraceObject implements Statement, JdbcStateme
                     returnsResultSet = true;
                     boolean scrollable = resultSetType != ResultSet.TYPE_FORWARD_ONLY;
                     boolean updatable = resultSetConcurrency == ResultSet.CONCUR_UPDATABLE;
+                    // execute `Command`
                     ResultInterface result = command.executeQuery(maxRows, scrollable);
                     lazy = result.isLazy();
                     resultSet = new JdbcResultSet(conn, this, command, result, id, scrollable, updatable);

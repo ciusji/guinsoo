@@ -5,18 +5,7 @@
  */
 package org.h2.engine;
 
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.WeakHashMap;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.h2.api.ErrorCode;
@@ -966,6 +955,7 @@ public class SessionLocal extends Session implements TransactionStore.RollbackLi
      */
     public void log(Table table, short operation, Row row) {
         if (table.isMVStore()) {
+            System.out.println(">>>>: " + Arrays.toString(row.getValueList()));
             return;
         }
         if (undoLogEnabled) {
