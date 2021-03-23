@@ -43,7 +43,8 @@ public class DirectInsert {
         Statement stat = conn.createStatement();
         stat.execute("DROP TABLE IF EXISTS TEST");
         stat.execute("CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR)");
-        stat.execute("INSERT INTO TEST VALUES(100, 'HAHAHA')");
+        stat.execute("SELECT *, 1 FROM TEST");
+        /// stat.execute("INSERT INTO TEST VALUES(100, 'HAHAHA')");
 
         PreparedStatement prep = conn.prepareStatement(
                 "INSERT INTO TEST VALUES(?, 'Test' || SPACE(100))");
