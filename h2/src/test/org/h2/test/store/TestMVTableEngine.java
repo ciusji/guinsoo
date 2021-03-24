@@ -39,7 +39,7 @@ import org.h2.util.JdbcUtils;
 import org.h2.util.Task;
 
 /**
- * Tests the MVStore in a database.
+ * Tests the MVStoreUsage in a database.
  */
 public class TestMVTableEngine extends TestDb {
 

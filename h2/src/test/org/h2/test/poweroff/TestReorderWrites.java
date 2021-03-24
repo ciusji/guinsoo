@@ -20,7 +20,7 @@ import org.h2.test.TestBase;
 import org.h2.test.utils.FilePathReorderWrites;
 
 /**
- * Tests that the MVStore recovers from a power failure if the file system or
+ * Tests that the MVStoreUsage recovers from a power failure if the file system or
  * disk re-ordered the write operations.
  */
 public class TestReorderWrites extends TestBase {

@@ -15,7 +15,7 @@ import org.h2.test.TestBase;
 import org.h2.util.Task;
 
 /**
- * Tests the MVStore cache.
+ * Tests the MVStoreUsage cache.
  */
 public class TestMVStoreCachePerformance extends TestBase {
 

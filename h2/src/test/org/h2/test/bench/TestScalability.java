@@ -21,7 +21,7 @@ import org.h2.util.IOUtils;
 import org.h2.util.JdbcUtils;
 
 /**
- * Used to compare scalability between the old engine and the new MVStore
+ * Used to compare scalability between the old engine and the new MVStoreUsage
  * engine. Mostly it runs BenchB with various numbers of threads.
  */
 public class TestScalability implements Database.DatabaseTest {

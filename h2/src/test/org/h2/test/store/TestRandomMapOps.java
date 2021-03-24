@@ -21,7 +21,7 @@ import org.h2.test.TestAll;
 import org.h2.test.TestBase;
 
 /**
- * Tests the MVStore.
+ * Tests the MVStoreUsage.
  */
 public class TestRandomMapOps extends TestBase {
 

@@ -23,7 +23,7 @@ import org.h2.mvstore.MVStore;
 import org.h2.store.fs.FileUtils;
 
 /**
- * An archive tool to compress directories, using the MVStore backend.
+ * An archive tool to compress directories, using the MVStoreUsage backend.
  */
 public class ArchiveToolStore {
 

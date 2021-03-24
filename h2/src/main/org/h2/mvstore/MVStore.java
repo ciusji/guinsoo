@@ -140,7 +140,9 @@ MVStore:
  */
 public class MVStore implements AutoCloseable {
 
-    // The following are attribute names (keys) in store header map
+    /**
+     * The following are attribute names (keys) in store header map
+     */
     private static final String HDR_H = "H";
     private static final String HDR_BLOCK_SIZE = "blockSize";
     private static final String HDR_FORMAT = "format";
@@ -1502,7 +1504,7 @@ public class MVStore implements AutoCloseable {
             lastCommitTime = getTimeSinceCreation();
             int currentUnsavedPageCount = unsavedMemory;
             // it is ok, since that path suppose to be single-threaded under storeLock
-            //noinspection NonAtomicOperationOnVolatileField
+            // noinspection NonAtomicOperationOnVolatileField
             long version = ++currentVersion;
             ArrayList<Page<?,?>> changed = collectChangedMapRoots(version);
 

@@ -386,6 +386,9 @@ public abstract class Page<K,V> implements Cloneable {
      * If not found, the returned value is negative, where -1 means the provided
      * key is smaller than any keys in this page. See also Arrays.binarySearch.
      *
+     * <p>
+     * Arrays.binarySearch() vs Collections.binarysearch().
+     *
      * @param key the key
      * @return the value or null
      */

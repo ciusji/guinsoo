@@ -325,7 +325,7 @@ public class TestTempTables extends TestDb {
 
     /**
      * There was a bug where creating lots of tables would overflow the
-     * transaction table in the MVStore
+     * transaction table in the MVStoreUsage
      */
     private void testLotsOfTables() throws SQLException {
         if (config.networked || config.throttle > 0) {

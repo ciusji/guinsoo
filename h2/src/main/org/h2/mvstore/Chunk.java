@@ -15,10 +15,16 @@ import org.h2.util.StringUtils;
 
 /**
  * A chunk of data, containing one or multiple pages.
+ *
  * <p>
  * Chunks are page aligned (each page is usually 4096 bytes).
  * There are at most 67 million (2^26) chunks,
  * each chunk is at most 2 GB large.
+ *
+ * <p>
+ * A version is a snapshot of all the data of all maps at a given point in time. Creating a snapshot is fast: only
+ * those pages that are changed after a snapshot are copied.
+ *
  */
 public final class Chunk {
 

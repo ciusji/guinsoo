@@ -1844,6 +1844,7 @@ public class MVMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V
                         }
                         break;
                     }
+                    default:
                 }
                 rootPage = replacePage(pos, p, unsavedMemoryHolder);
                 if (!locked) {

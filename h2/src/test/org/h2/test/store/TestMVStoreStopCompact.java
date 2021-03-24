@@ -13,7 +13,7 @@ import org.h2.store.fs.FileUtils;
 import org.h2.test.TestBase;
 
 /**
- * Test that the MVStore eventually stops optimizing (does not excessively opti
+ * Test that the MVStoreUsage eventually stops optimizing (does not excessively opti
  */
 public class TestMVStoreStopCompact extends TestBase {
 

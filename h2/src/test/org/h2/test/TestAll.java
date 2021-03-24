@@ -283,7 +283,7 @@ java org.h2.test.TestAll timer
     static boolean atLeastOneTestFailed;
 
     /**
-     * Whether the MVStore storage is used.
+     * Whether the MVStoreUsage storage is used.
      */
     public boolean mvStore = true;
 

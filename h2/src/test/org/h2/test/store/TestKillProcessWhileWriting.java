@@ -13,7 +13,7 @@ import org.h2.test.TestBase;
 import org.h2.test.utils.FilePathUnstable;
 
 /**
- * Tests the MVStore.
+ * Tests the MVStoreUsage.
  */
 public class TestKillProcessWhileWriting extends TestBase {
 

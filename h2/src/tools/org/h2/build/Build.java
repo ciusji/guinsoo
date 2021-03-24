@@ -554,9 +554,9 @@ public class Build extends BuildBase {
     }
 
     /**
-     * Create the file h2mvstore.jar. This only contains the MVStore.
+     * Create the file h2mvstore.jar. This only contains the MVStoreUsage.
      */
-    @Description(summary = "Create h2mvstore.jar containing only the MVStore.")
+    @Description(summary = "Create h2mvstore.jar containing only the MVStoreUsage.")
     public void jarMVStore() {
         compileMVStore(true);
         addVersions();
@@ -797,7 +797,7 @@ public class Build extends BuildBase {
      */
     @Description(summary = "Build a snapshot H2 jar and upload to local Maven 2 repo.")
     public void mavenInstallLocal() {
-        // MVStore
+        // MVStoreUsage
         jarMVStore();
         String pom = new String(readFile(Paths.get("src/installer/pom-mvstore-template.xml")));
         pom = replaceAll(pom, "@version@", "1.0-SNAPSHOT");
