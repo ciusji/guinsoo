@@ -366,6 +366,16 @@ public class MVStore implements AutoCloseable {
     /**
      * Create and open the store.
      *
+     * <p>
+     * one db contains:
+     * - a MVStore instance
+     * - a TransactionStore instance
+     * - a preparedTransactions MVMap
+     * - a undoLog MVMap
+     *
+     * <p>
+     * a table ~= a MVMap, a MVMap contains many Pages, and all saved in .db file.
+     *
      * @param config the configuration to use
      * @throws MVStoreException if the file is corrupt, or an exception
      *             occurred while opening
@@ -389,7 +399,8 @@ public class MVStore implements AutoCloseable {
         }
         this.fileStore = fileStore;
 
-        int pgSplitSize = 48; // for "mem:" case it is # of keys
+        // for "mem:" case it is # of keys
+        int pgSplitSize = 48;
         CacheLongKeyLIRS.Config cc = null;
         CacheLongKeyLIRS.Config cc2 = null;
         if (this.fileStore != null) {
@@ -448,6 +459,7 @@ public class MVStore implements AutoCloseable {
                         storeHeader.put(HDR_FORMAT, FORMAT_WRITE);
                         storeHeader.put(HDR_CREATED, creationTime);
                         setLastChunk(null);
+                        // write file header
                         writeStoreHeader();
                     } else {
                         readStoreHeader();
@@ -652,6 +664,7 @@ public class MVStore implements AutoCloseable {
             meta.put(MVMap.getMapKey(id), map.asString(name));
             meta.put(DataUtils.META_NAME + name, x);
             long lastStoredVersion = currentVersion - 1;
+            // set root page
             map.setRootPos(0, lastStoredVersion);
             markMetaChanged();
             @SuppressWarnings("unchecked")

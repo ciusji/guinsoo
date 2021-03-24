@@ -29,7 +29,10 @@ public class DirectInsert {
     public static void main(String... args) throws Exception {
         Class.forName("org.h2.Driver");
         DeleteDbFiles.execute("~", "test", true);
-        String url = "jdbc:h2:~/test";
+        // For fast data import
+        // Or use CSV import. Please not that create table(...) ... as select ... is faster that
+        // create table(...); insert into ... select ...
+        String url = "jdbc:h2:~/test;LOG=0;CACHE_SIZE=65536;LOCK_MODE=0";
         initialInsert(url, 200_000);
         for (int i = 0; i < 3; i++) {
             createAsSelect(url, true);

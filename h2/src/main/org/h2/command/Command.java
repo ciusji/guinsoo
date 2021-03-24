@@ -237,7 +237,7 @@ public abstract class Command implements CommandInterface {
         Object sync = database.isMVStore() ? session : database;
         session.waitIfExclusiveModeEnabled();
         boolean callStop = true;
-        //noinspection SynchronizationOnLocalVariableOrMethodParameter
+        // noinspection SynchronizationOnLocalVariableOrMethodParameter
         synchronized (sync) {
             commitIfNonTransactional();
             SessionLocal.Savepoint rollback = session.setSavepoint();

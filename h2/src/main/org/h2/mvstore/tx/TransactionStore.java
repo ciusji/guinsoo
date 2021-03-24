@@ -505,7 +505,8 @@ public class TransactionStore {
                     Record<?,?> op = cursor.getValue();
                     int mapId = op.mapId;
                     MVMap<Object, VersionedValue<Object>> map = openMap(mapId);
-                    if (map != null && !map.isClosed()) { // might be null if map was removed later
+                    // might be null if map was removed later
+                    if (map != null && !map.isClosed()) {
                         Object key = op.key;
                         commitDecisionMaker.setUndoKey(undoKey);
                         // second parameter (value) is not really
