@@ -177,12 +177,17 @@ public final class Chunk {
         block = DataUtils.readHexLong(map, ATTR_BLOCK, 0);
         version = DataUtils.readHexLong(map, ATTR_VERSION, id);
         if (full) {
+            // chunk header
             len = DataUtils.readHexInt(map, ATTR_LEN, 0);
             pageCount = DataUtils.readHexInt(map, ATTR_PAGES, 0);
+            // chunks without live pages are marked as free, so the space can be re-used by more recent chunks.
             pageCountLive = DataUtils.readHexInt(map, ATTR_LIVE_PAGES, pageCount);
+            // the id of the newest map; incremented when a new map is created.
             mapId = DataUtils.readHexInt(map, ATTR_MAP, 0);
+            // the sum of all maximum page size (for more see page format)
             maxLen = DataUtils.readHexLong(map, ATTR_MAX, 0);
             maxLenLive = DataUtils.readHexLong(map, ATTR_LIVE_MAX, maxLen);
+            // the position of the metadata root page (see page format)
             layoutRootPos = DataUtils.readHexLong(map, ATTR_ROOT, 0);
             time = DataUtils.readHexLong(map, ATTR_TIME, 0);
             unused = DataUtils.readHexLong(map, ATTR_UNUSED, 0);
