@@ -39,10 +39,11 @@ public class MVStoreUsage {
         MVMap<Integer, String> map = s.openMap("data");
 
         // add and read some data
-        map.put(5, "Hello World-5");
-        map.put(6, "Hello World-6");
-        map.put(7, "Hello World-7");
-        map.put(8, "Hello World-8");
+        for (int i=0; i<48; i++) {
+            map.put(i, "Hello World-" + i);
+        }
+        map.put(48, "Hello World-48");
+        map.put(49, "Hello World-49");
 
         System.out.println(map.get(1));
         System.out.println(map.get(10));

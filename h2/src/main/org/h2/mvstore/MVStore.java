@@ -3846,6 +3846,19 @@ public class MVStore implements AutoCloseable {
 
     /**
      * A builder for an MVStore.
+     *
+     * <p>
+     * The list of available options are:
+     * - autoCommitBufferSize: the size of the writer buffer.
+     * - autoCommitDisabled: to disable auto-commit.
+     * - backgroundExceptionHandler: a handle for exceptions that could occur while writing in the background.
+     * - cacheSize: the cache size in MB.
+     * - compress: compress the data when storing using a fast algorithm (LZF).
+     * - compressHigh: compress the data when storing using a slower algorithm (Deflate).
+     * - encryptionKey: the key for file encryption.
+     * - fileName: the name of the file, for file based stores.
+     * - fileStore: the storage implementation to use.
+     * - readOnly: open the file in read-only mode.
      */
     public static final class Builder {
 
