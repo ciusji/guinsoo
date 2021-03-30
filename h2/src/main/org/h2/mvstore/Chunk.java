@@ -184,7 +184,7 @@ public final class Chunk {
             pageCountLive = DataUtils.readHexInt(map, ATTR_LIVE_PAGES, pageCount);
             // the id of the newest map; incremented when a new map is created.
             mapId = DataUtils.readHexInt(map, ATTR_MAP, 0);
-            // the sum of all maximum page size (for more see page format)
+            // !!! the sum of all maximum page size (for more see page format)
             maxLen = DataUtils.readHexLong(map, ATTR_MAX, 0);
             maxLenLive = DataUtils.readHexLong(map, ATTR_LIVE_MAX, maxLen);
             // the position of the metadata root page (see page format)
