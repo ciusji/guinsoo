@@ -25,11 +25,12 @@ import org.h2.util.Utils;
  * File format:
  * page length (including length): int
  * check value: short
- * map id: varInt
+ * map id: varInt, the id of the map this map belongs to.
  * number of keys: varInt
  * type: byte (0: leaf, 1: node; +2: compressed)
  * compressed: bytes saved (varInt)
- * keys
+ * children(array of long; internal nodes only): The position of the children.
+ * keys(byte array): All keys, stored depending on the data type.
  * leaf: values (one for each key)
  * node: children (1 more than keys)
  */
@@ -410,7 +411,7 @@ public abstract class Page<K,V> implements Cloneable {
      * Split the current keys array into two arrays.
      *
      * @param aCount size of the first array.
-     * @param bCount size of the second array/
+     * @param bCount size of the second array.
      * @return the second array.
      */
     final K[] splitKeys(int aCount, int bCount) {
@@ -873,17 +874,7 @@ public abstract class Page<K,V> implements Cloneable {
      * @return memory in bytes
      */
     protected int calculateMemory() {
-//*
         return map.evaluateMemoryForKeys(keys, getKeyCount());
-/*/
-        int keyCount = getKeyCount();
-        int mem = keyCount * MEMORY_POINTER;
-        DataType<K> keyType = map.getKeyType();
-        for (int i = 0; i < keyCount; i++) {
-            mem += getMemory(keyType, keys[i]);
-        }
-        return mem;
-//*/
     }
 
     public boolean isComplete() {
@@ -1622,18 +1613,8 @@ public abstract class Page<K,V> implements Cloneable {
 
         @Override
         protected int calculateMemory() {
-//*
             return super.calculateMemory() + PAGE_LEAF_MEMORY +
                         map.evaluateMemoryForValues(values, getKeyCount());
-/*/
-            int keyCount = getKeyCount();
-            int mem = super.calculateMemory() + PAGE_LEAF_MEMORY + keyCount * MEMORY_POINTER;
-            DataType<V> valueType = map.getValueType();
-            for (int i = 0; i < keyCount; i++) {
-                mem += getMemory(valueType, values[i]);
-            }
-            return mem;
-//*/
         }
 
         @Override
