@@ -248,10 +248,6 @@ public abstract class Page<K,V> implements Cloneable {
         return p;
     }
 
-//    static <K> int getMemory(DataType<K> keyType, K key) {
-//        return keyType.getMemory(key);
-//    }
-
     /**
      * Get the id of the page's owner map
      * @return id
@@ -822,8 +818,6 @@ public abstract class Page<K,V> implements Cloneable {
 
     public final int getMemory() {
         if (isPersistent()) {
-//            assert memory == calculateMemory() :
-//                    "Memory calculation error " + memory + " != " + calculateMemory();
             return memory;
         }
         return 0;

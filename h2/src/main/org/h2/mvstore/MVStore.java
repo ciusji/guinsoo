@@ -496,6 +496,7 @@ public class MVStore implements AutoCloseable {
     }
 
     private MVMap<String,String> openMetaMap() {
+        // binary search key
         String metaIdStr = layout.get(META_ID_KEY);
         int metaId;
         if (metaIdStr == null) {
@@ -505,6 +506,7 @@ public class MVStore implements AutoCloseable {
             metaId = DataUtils.parseHexInt(metaIdStr);
         }
         MVMap<String,String> map = new MVMap<>(this, metaId, StringDataType.INSTANCE, StringDataType.INSTANCE);
+        // MetaMap contains Page root cursor, metaMap root position stored in chunk header.
         map.setRootPos(getRootPos(map.getId()), currentVersion - 1);
         return map;
     }
@@ -2555,6 +2557,7 @@ public class MVStore implements AutoCloseable {
             Page<K,V> p = readPageFromCache(pos);
             if (p == null) {
                 Chunk chunk = getChunk(pos);
+                // !!! get page offset
                 int pageOffset = DataUtils.getPageOffset(pos);
                 try {
                     ByteBuffer buff = chunk.readBufferForPage(fileStore, pageOffset, pos);

@@ -33,20 +33,25 @@ public class MVStoreUsage {
 
     public static void main(String[] args) {
         // open the store (in-memory if fileName is null)
-        MVStore s = MVStore.open("~/test");
+        MVStore s = MVStore.open(null);
 
         // create/get the map named "data"
         MVMap<Integer, String> map = s.openMap("data");
 
         // add and read some data
-        for (int i=0; i<48; i++) {
+        for (int i=0; i<2; i++) {
             map.put(i, "Hello World-" + i);
         }
-        map.put(48, "Hello World-48");
-        map.put(49, "Hello World-49");
+        System.out.println(map.getRootPage().toString());
+
+        map.remove(7);
+        System.out.println(map.getRootPage().toString());
+
+        map.replace(8, "Hello World-88888888888");
+        System.out.println(map.getRootPage().toString());
 
         System.out.println(map.get(1));
-        System.out.println(map.get(10));
+        System.out.println(map.get(8));
 
         s.commit();
 

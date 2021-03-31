@@ -1748,6 +1748,8 @@ public class MVMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V
             V result;
             unsavedMemoryHolder.value = 0;
             try {
+                // instance represents a node in a linked list, which traces path from a specific key
+                // within a leaf node all the way up to the root (bottom up path).
                 CursorPos<K,V> pos = CursorPos.traverseDown(rootPage, key);
                 if(!locked && rootReference != getRoot()) {
                     continue;
@@ -1814,6 +1816,7 @@ public class MVMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V
                         if (index < 0) {
                             p.insertLeaf(-index - 1, key, value);
                             int keyCount;
+                            // page split
                             while ((keyCount = p.getKeyCount()) > store.getKeysPerPage()
                                     || p.getMemory() > store.getMaxPageSize()
                                     && keyCount > (p.isLeaf() ? 1 : 2)) {
@@ -1846,6 +1849,7 @@ public class MVMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V
                     }
                     default:
                 }
+                // put/update may change node data
                 rootPage = replacePage(pos, p, unsavedMemoryHolder);
                 if (!locked) {
                     rootReference = rootReference.updateRootPage(rootPage, attempt);
