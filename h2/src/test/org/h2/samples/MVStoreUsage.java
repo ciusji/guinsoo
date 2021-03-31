@@ -39,21 +39,29 @@ public class MVStoreUsage {
         MVMap<Integer, String> map = s.openMap("data");
 
         // add and read some data
-        for (int i=0; i<2; i++) {
+        for (int i=0; i<8; i++) {
             map.put(i, "Hello World-" + i);
         }
-        System.out.println(map.getRootPage().toString());
+        long oldVersion = s.getCurrentVersion();
 
-        map.remove(7);
-        System.out.println(map.getRootPage().toString());
+        // from now on, the old version is read-only
+        s.commit();
 
-        map.replace(8, "Hello World-88888888888");
-        System.out.println(map.getRootPage().toString());
+        // changes can be rolled back if required
+        for (int i=0; i<4; i++) {
+            map.put(i, "Hello World-????-" + i);
+        }
+        map.remove(5);
+        map.remove(6);
 
         System.out.println(map.get(1));
-        System.out.println(map.get(8));
+        System.out.println(map.get(5));
 
-        s.commit();
+        MVMap<Integer, String> oldMap = map.openVersion(oldVersion);
+
+        // print the old version
+        System.out.println(oldMap.get(1));
+        System.out.println(oldMap.get(5));
 
         // close the store (this will persist changes)
         s.close();
