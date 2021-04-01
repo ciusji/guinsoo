@@ -4009,6 +4009,7 @@ public class MVStore implements AutoCloseable {
          * @return the opened store
          */
         public MVStore open() {
+            /// off-heap memory
             config.put("fileStore", new OffHeapStore());
             return new MVStore(config);
         }
