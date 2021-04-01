@@ -95,7 +95,7 @@ public class TreeMapAndBTree {
 
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
-        // tab.sqlInsert();
-        tab.btreeMapUsage();
+        tab.sqlInsert();
+        // tab.btreeMapUsage();
     }
 }

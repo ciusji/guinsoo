@@ -352,13 +352,12 @@ public class MVStore implements AutoCloseable {
                 (UncaughtExceptionHandler)config.get("backgroundExceptionHandler");
         layout = new MVMap<>(this, 0, StringDataType.INSTANCE, StringDataType.INSTANCE);
         if (this.fileStore != null) {
-        /// if (this.fileStore != null && fileName != null) {
             retentionTime = this.fileStore.getDefaultRetentionTime();
             // 19 KB memory is about 1 KB storage
             int kb = Math.max(1, Math.min(19, Utils.scaleForAvailableMemory(64))) * 1024;
             kb = DataUtils.getConfigParam(config, "autoCommitBufferSize", kb);
-            autoCommitMemory = kb * 1024;
-            autoCompactFillRate = DataUtils.getConfigParam(config, "autoCompactFillRate", 90);
+            autoCommitMemory = fileName == null ? 0 : kb * 1024;
+            autoCompactFillRate = fileName == null ? 0 : DataUtils.getConfigParam(config, "autoCompactFillRate", 90);
             char[] encryptionKey = (char[]) config.get("encryptionKey");
             // there is no need to lock store here, since it is not opened (or even created) yet,
             // just to make some assertions happy, when they ensure single-threaded access
@@ -4010,7 +4009,7 @@ public class MVStore implements AutoCloseable {
          * @return the opened store
          */
         public MVStore open() {
-            /// config.put("fileStore", new OffHeapStore());
+            config.put("fileStore", new OffHeapStore());
             return new MVStore(config);
         }
 
