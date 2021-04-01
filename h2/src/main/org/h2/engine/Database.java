@@ -355,6 +355,7 @@ public final class Database implements DataHandler, CastDataProvider {
             Set<String> settingKeys = dbSettings.getSettings().keySet();
             if (store != null) {
                 store.getTransactionStore().init();
+                // Discard page_store engine, the only engine is MVStore.
                 settingKeys.removeIf(name -> name.startsWith("PAGE_STORE_"));
             } else {
                 settingKeys.removeIf(name -> "COMPRESS".equals(name) || "REUSE_SPACE".equals(name));

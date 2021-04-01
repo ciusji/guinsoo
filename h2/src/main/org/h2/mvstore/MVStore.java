@@ -49,91 +49,6 @@ import org.h2.mvstore.type.StringDataType;
 import org.h2.util.MathUtils;
 import org.h2.util.Utils;
 
-/*
-
-TODO:
-
-Documentation
-- rolling docs review: at "Metadata Map"
-- better document that writes are in background thread
-- better document how to do non-unique indexes
-- document pluggable store and OffHeapStore
-
-TransactionStore:
-- ability to disable the transaction log,
-    if there is only one connection
-
-MVStore:
-- better and clearer memory usage accounting rules
-    (heap memory versus disk memory), so that even there is
-    never an out of memory
-    even for a small heap, and so that chunks
-    are still relatively big on average
-- make sure serialization / deserialization errors don't corrupt the file
-- test and possibly improve compact operation (for large dbs)
-- automated 'kill process' and 'power failure' test
-- defragment (re-creating maps, specially those with small pages)
-- store number of write operations per page (maybe defragment
-    if much different than count)
-- r-tree: nearest neighbor search
-- use a small object value cache (StringCache), test on Android
-    for default serialization
-- MVStoreTool.dump should dump the data if possible;
-    possibly using a callback for serialization
-- implement a sharded map (in one store, multiple stores)
-    to support concurrent updates and writes, and very large maps
-- to save space when persisting very small transactions,
-    use a transaction log where only the deltas are stored
-- serialization for lists, sets, sets, sorted sets, maps, sorted maps
-- maybe rename 'rollback' to 'revert' to distinguish from transactions
-- support other compression algorithms (deflate, LZ4,...)
-- remove features that are not really needed; simplify the code
-    possibly using a separate layer or tools
-    (retainVersion?)
-- optional pluggable checksum mechanism (per page), which
-    requires that everything is a page (including headers)
-- rename "store" to "save", as "store" is used in "storeVersion"
-- rename setStoreVersion to setDataVersion, setSchemaVersion or similar
-- temporary file storage
-- simple rollback method (rollback to last committed version)
-- MVMap to implement SortedMap, then NavigableMap
-- storage that splits database into multiple files,
-    to speed up compact and allow using trim
-    (by truncating / deleting empty files)
-- add new feature to the file system API to avoid copying data
-    (reads that returns a ByteBuffer instead of writing into one)
-    for memory mapped files and off-heap storage
-- support log structured merge style operations (blind writes)
-    using one map per level plus bloom filter
-- have a strict call order MVStore -> MVMap -> Page -> FileStore
-- autocommit commits, stores, and compacts from time to time;
-    the background thread should wait at least 90% of the
-    configured write delay to store changes
-- compact* should also store uncommitted changes (if there are any)
-- write a LSM-tree (log structured merge tree) utility on top of the MVStore
-    with blind writes and/or a bloom filter that
-    internally uses regular maps and merge sort
-- chunk metadata: maybe split into static and variable,
-    or use a small page size for metadata
-- data type "string": maybe use prefix compression for keys
-- test chunk id rollover
-- feature to auto-compact from time to time and on close
-- compact very small chunks
-- Page: to save memory, combine keys & values into one array
-    (also children & counts). Maybe remove some other
-    fields (childrenCount for example)
-- Support SortedMap for MVMap
-- compact: copy whole pages (without having to open all maps)
-- maybe change the length code to have lower gaps
-- test with very low limits (such as: short chunks, small pages)
-- maybe allow to read beyond the retention time:
-    when compacting, move live pages in old chunks
-    to a map (possibly the metadata map) -
-    this requires a change in the compaction code, plus
-    a map lookup when reading old data; also, this
-    old data map needs to be cleaned up somehow;
-    maybe using an additional timeout
-*/
 
 /**
  * A persistent storage for maps.
@@ -375,9 +290,6 @@ public class MVStore implements AutoCloseable {
      * - a preparedTransactions MVMap
      * - a undoLog MVMap
      *
-     * <p>
-     * a table ~= a MVMap, a MVMap contains many Pages, and all saved in .db file.
-     *
      * @param config the configuration to use
      * @throws MVStoreException if the file is corrupt, or an exception
      *             occurred while opening
@@ -395,6 +307,8 @@ public class MVStore implements AutoCloseable {
             }
         } else {
             if (fileName != null) {
+                System.out.println(fileName);
+                System.out.println(fileStore.toString());
                 throw new IllegalArgumentException("fileName && fileStore");
             }
             fileStoreIsProvided = true;
@@ -405,6 +319,7 @@ public class MVStore implements AutoCloseable {
         int pgSplitSize = 48;
         CacheLongKeyLIRS.Config cc = null;
         CacheLongKeyLIRS.Config cc2 = null;
+
         if (this.fileStore != null) {
             int mb = DataUtils.getConfigParam(config, "cacheSize", 16);
             if (mb > 0) {
@@ -437,6 +352,7 @@ public class MVStore implements AutoCloseable {
                 (UncaughtExceptionHandler)config.get("backgroundExceptionHandler");
         layout = new MVMap<>(this, 0, StringDataType.INSTANCE, StringDataType.INSTANCE);
         if (this.fileStore != null) {
+        /// if (this.fileStore != null && fileName != null) {
             retentionTime = this.fileStore.getDefaultRetentionTime();
             // 19 KB memory is about 1 KB storage
             int kb = Math.max(1, Math.min(19, Utils.scaleForAvailableMemory(64))) * 1024;
@@ -614,7 +530,7 @@ public class MVStore implements AutoCloseable {
      * @return the store
      */
     public static MVStore open(String fileName) {
-        HashMap<String, Object> config = new HashMap<>();
+        HashMap<String, Object> config = new HashMap<>(8);
         config.put("fileName", fileName);
         return new MVStore(config);
     }
@@ -658,7 +574,7 @@ public class MVStore implements AutoCloseable {
                     || map.getValueType().getClass().equals(builder.getValueType().getClass());
             return map;
         } else {
-            HashMap<String, Object> c = new HashMap<>();
+            HashMap<String, Object> c = new HashMap<>(64);
             id = lastMapId.incrementAndGet();
             assert getMap(id) == null;
             c.put("id", id);
@@ -4094,6 +4010,7 @@ public class MVStore implements AutoCloseable {
          * @return the opened store
          */
         public MVStore open() {
+            /// config.put("fileStore", new OffHeapStore());
             return new MVStore(config);
         }
 

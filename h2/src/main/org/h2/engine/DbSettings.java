@@ -300,6 +300,11 @@ public class DbSettings extends SettingsBase {
     public final boolean mvStore = get("MV_STORE", true);
 
     /**
+     * Database setting <code>DEFAULT_STORE_MODE</code>
+     */
+    public final int defaultStoreMode = get("DEFAULT_STORE_MODE", 0);
+
+    /**
      * Database setting <code>COMPRESS</code>
      * (default: false).<br />
      * Compress data when storing.

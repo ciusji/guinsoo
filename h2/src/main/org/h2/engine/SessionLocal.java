@@ -955,7 +955,6 @@ public class SessionLocal extends Session implements TransactionStore.RollbackLi
      */
     public void log(Table table, short operation, Row row) {
         if (table.isMVStore()) {
-            System.out.println(">>>>: " + Arrays.toString(row.getValueList()));
             return;
         }
         if (undoLogEnabled) {
