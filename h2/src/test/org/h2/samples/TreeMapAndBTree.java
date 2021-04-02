@@ -76,20 +76,33 @@ public class TreeMapAndBTree {
         String name = "relations";
 
         Class.forName("org.h2.Driver");
-        String url = "jdbc:h2:mem:db";
+        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0";
+        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
+        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
+        long startTime2 = System.currentTimeMillis();
+        System.out.println("Duration2: ~ " + (startTime2 - startTime));
 
         // stat.execute("drop table if exists " + name);
         // table: relations
+        // TTT 6306 ms
         stat.execute("create table " + name + "(poi_id long primary key, dt varchar, aor_id long) as select * from csvread('" + path + "');");
+        long startTime3 = System.currentTimeMillis();
+        System.out.println("Duration3: ~ " + (startTime3 - startTime2));
         stat.execute("create index ix_3 on " + name + "(dt, aor_id);");
+        long startTime4 = System.currentTimeMillis();
+        System.out.println("Duration4: ~ " + (startTime4 - startTime3));
 
         conn.commit();
+        long startTime5 = System.currentTimeMillis();
+        System.out.println("Duration5: ~ " + (startTime5 - startTime4));
         stat.close();
+        long startTime6 = System.currentTimeMillis();
+        System.out.println("Duration6: ~ " + (startTime6 - startTime5));
         conn.close();
 
-        System.out.println("Duration: ~ " + (System.currentTimeMillis() - startTime));
+        System.out.println("Duration7: ~ " + (System.currentTimeMillis() - startTime6));
 
     }
 
