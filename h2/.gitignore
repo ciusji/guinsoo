@@ -7,7 +7,6 @@ bin
 coverage
 data
 docs
-ext
 error.*
 temp
 test.out.txt
