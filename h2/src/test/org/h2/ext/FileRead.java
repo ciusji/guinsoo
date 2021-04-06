@@ -94,8 +94,8 @@ public class FileRead {
         FileRead ff = new FileRead();
         long startTime = System.currentTimeMillis();
         // ff.readByOpenCsv();
-        // ff.readByBuffer();
-        ff.readByStream();
+        ff.readByBuffer();
+        // ff.readByStream();
         System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
 
     }

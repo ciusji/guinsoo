@@ -106,9 +106,26 @@ public class TreeMapAndBTree {
 
     }
 
+    public void call() throws Exception {
+        long startTime = System.currentTimeMillis();
+        String path = "/Users/admin/Desktop/relations.csv";
+
+        Class.forName("org.h2.Driver");
+        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        Connection conn = DriverManager.getConnection(url);
+        Statement stat = conn.createStatement();
+
+        // ??? why cost more than 1 seconds.
+        stat.execute("call csvread('" + path + "');");
+        long endTime = System.currentTimeMillis();
+        System.out.println("Duration666: ~ " + (endTime - startTime));
+    }
+
+
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
-        tab.sqlInsert();
+        // tab.sqlInsert();
         // tab.btreeMapUsage();
+        tab.call();
     }
 }
