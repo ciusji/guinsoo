@@ -21,7 +21,6 @@ package org.h2.samples;
 
 import org.h2.mvstore.MVMap;
 import org.h2.mvstore.MVStore;
-import org.h2.mvstore.OffHeapStore;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -107,7 +106,6 @@ public class TreeMapAndBTree {
     }
 
     public void call() throws Exception {
-        long startTime = System.currentTimeMillis();
         String path = "/Users/admin/Desktop/relations.csv";
 
         Class.forName("org.h2.Driver");
@@ -115,12 +113,13 @@ public class TreeMapAndBTree {
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
 
-        // ??? why cost more than 1 seconds.
+        long startTime = System.currentTimeMillis();
+        // ??? why cost more than 1 seconds
+        // !!! char to row object cost more that 1 seconds.
         stat.execute("call csvread('" + path + "');");
         long endTime = System.currentTimeMillis();
         System.out.println("Duration666: ~ " + (endTime - startTime));
     }
-
 
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();

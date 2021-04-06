@@ -47,6 +47,7 @@
         <pgjdbc.version>42.2.14</pgjdbc.version>
         <servlet.version>4.0.1</servlet.version>
         <slf4j.version>1.7.30</slf4j.version>
+        <collections.version>10.2.0</collections.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -93,8 +94,12 @@
             <artifactId>jts-core</artifactId>
             <version>${jts.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>4.0.2</version>
+        </dependency>
         <!-- END COMPILE DEPENDENCIES !-->
-
 
         <!-- START TEST DEPENDENCIES !-->
         <dependency>
@@ -157,23 +162,6 @@
                 </dependency>
             </dependencies>
         </profile>
-        <profile>
-            <id>default-tools.jar-mac</id>
-            <activation>
-                <file>
-                    <exists>${java.home}/../Classes/classes.jar</exists>
-                </file>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sun</groupId>
-                    <artifactId>tools</artifactId>
-                    <scope>system</scope>
-                    <version>1.8</version>
-                    <systemPath>${java.home}/../Classes/classes.jar</systemPath>
-                </dependency>
-            </dependencies>
-        </profile>
     </profiles>
 
     <build>
@@ -218,37 +206,6 @@
             </testResource>
         </testResources>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <executions>
-                    <execution>
-                        <id>enforce-files-exist</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireFilesExist>
-                                    <files>
-                                        <file>src/main/org/h2/res/help.csv</file>
-                                    </files>
-                                    <message>
-                                        <![CDATA[
---------------------------------------------------------------------------------
-!!!         Run "./build.cmd compile" or "./build.sh compile" first,         !!!
-!!!         as described in MAVED.md                                         !!!
---------------------------------------------------------------------------------
-]]>
-                                    </message>
-                                </requireFilesExist>
-                            </rules>
-                            <fail>true</fail>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
