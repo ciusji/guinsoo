@@ -93,7 +93,8 @@ public class LocalResult implements ResultInterface, ResultTarget {
                 this.maxMemoryRows = Integer.MAX_VALUE;
             }
         }
-        rows = Utils.newSmallArrayList();
+        /// rows = Utils.newSmallArrayList();
+        rows = Utils.newHugeArrayList();
         this.visibleColumnCount = visibleColumnCount;
         this.resultColumnCount = resultColumnCount;
         rowId = -1;

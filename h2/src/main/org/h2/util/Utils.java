@@ -300,6 +300,16 @@ public class Utils {
     }
 
     /**
+     * Create a new ArrayList with an initial capacity of 3_000_000.
+     *
+     * @param <T> the type
+     * @return the object
+     */
+    public static <T> ArrayList<T> newHugeArrayList() {
+        return new ArrayList<>(3_000_000);
+    }
+
+    /**
      * Find the top limit values using given comparator and place them as in a
      * full array sort, in descending order.
      *
@@ -365,10 +375,10 @@ public class Utils {
                 array[j--] = temp;
             }
         }
-        if (low < j && /* Intersection with middle region */ start <= j) {
+        if (low < j && start <= j) {
             partialQuickSort(array, low, j, comp, start, end);
         }
-        if (i < high && /* Intersection with middle region */ i <= end) {
+        if (i < high && i <= end) {
             partialQuickSort(array, i, high, comp, start, end);
         }
     }
@@ -687,9 +697,7 @@ public class Utils {
                     getMethod("getTotalPhysicalMemorySize");
             long physicalMemorySize = ((Number) method.invoke(mxBean)).longValue();
             return (int) (value * physicalMemorySize / (1024 * 1024 * 1024));
-        } catch (Exception e) {
-            // ignore
-        } catch (Error error) {
+        } catch (Exception | Error e) {
             // ignore
         }
         return value;

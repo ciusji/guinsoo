@@ -35,8 +35,9 @@ public class FastArray {
     private int limit = 30_000_000;
 
     // Duration: 13987
+    // Duration with capacity: 7163
     public void putNumByArrayList() {
-        ArrayList<Integer> arrayList = new ArrayList<>();
+        ArrayList<Integer> arrayList = new ArrayList<>(limit);
         for (int i=0; i<limit; i++) {
             arrayList.add(i);
         }
@@ -64,8 +65,8 @@ public class FastArray {
     public static void main(String[] args) {
         FastArray fa = new FastArray();
         long start = System.currentTimeMillis();
-        // fa.putNumByArrayList();
-        fa.putNumByFastList();
+        fa.putNumByArrayList();
+        // fa.putNumByFastList();
         // fa.putNumByLinkedList();
         System.out.println("Duration: " + (System.currentTimeMillis() - start));
     }
