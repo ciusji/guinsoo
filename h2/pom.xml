@@ -47,7 +47,6 @@
         <pgjdbc.version>42.2.14</pgjdbc.version>
         <servlet.version>4.0.1</servlet.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <collections.version>10.2.0</collections.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -94,11 +93,6 @@
             <artifactId>jts-core</artifactId>
             <version>${jts.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>4.0.2</version>
-        </dependency>
         <!-- END COMPILE DEPENDENCIES !-->
 
         <!-- START TEST DEPENDENCIES !-->
@@ -130,6 +124,12 @@
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
             <version>5.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>4.0.2</version>
             <scope>test</scope>
         </dependency>
         <!-- END TEST DEPENDENCIES !-->

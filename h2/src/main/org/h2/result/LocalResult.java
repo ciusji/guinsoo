@@ -43,8 +43,10 @@ public class LocalResult implements ResultInterface, ResultTarget {
     private long rowId, rowCount;
     private ArrayList<Value[]> rows;
     private SortOrder sort;
-    // HashSet cannot be used here, because we need to compare values of
-    // different type or scale properly.
+    /**
+     * HashSet cannot be used here, because we need to compare values of
+     * different type or scale properly.
+     */
     private TreeMap<Value, Value[]> distinctRows;
     private Value[] currentRow;
     private long offset;
@@ -336,7 +338,8 @@ public class LocalResult implements ResultInterface, ResultTarget {
 
     /**
      * Add a row to this object.
-     *
+     * <p>
+     * MaxMemoryRows = 2147483647.
      * @param values the row to add
      */
     @Override

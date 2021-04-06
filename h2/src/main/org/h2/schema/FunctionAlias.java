@@ -409,7 +409,7 @@ public final class FunctionAlias extends UserDefinedFunction {
                     columns[i] = e;
                 }
                 LocalResult result = new LocalResult(session, columns, columnCount, columnCount);
-                // add JDBC result set to rows
+                // !!!
                 for (int i = 0; i < maxrows && rs.next(); i++) {
                     Value[] list = new Value[columnCount];
                     for (int j = 0; j < columnCount; j++) {

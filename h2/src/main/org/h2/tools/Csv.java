@@ -197,6 +197,13 @@ public class Csv implements SimpleRowSource {
         return readResultSet(colNames);
     }
 
+    /**
+     * read csv data, then convert to ResultSet
+     *
+     * @param colNames csv column name
+     * @return ResultSet
+     * @throws IOException io exception
+     */
     private ResultSet readResultSet(String[] colNames) throws IOException {
         this.columnNames = colNames;
         initRead();
