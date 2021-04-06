@@ -19,7 +19,7 @@
 
 package org.h2.ext;
 
-import com.zaxxer.hikari.util.FastList;
+import org.h2.util.FastList;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -34,7 +34,7 @@ import java.util.LinkedList;
 public class FastArray {
     private int limit = 30_000_000;
 
-    // Duration: 9067
+    // Duration: 13987
     public void putNumByArrayList() {
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (int i=0; i<limit; i++) {
@@ -43,7 +43,7 @@ public class FastArray {
         System.out.println(arrayList.size());
     }
 
-    // Duration: 6385
+    // Duration: 5753
     public void putNumByFastList() {
         FastList<Integer> fastList = new FastList<>(Integer.class);
         for (int i=0; i<limit; i++) {
@@ -54,9 +54,9 @@ public class FastArray {
 
     // Duration: 22029
     public void putNumByLinkedList() {
-        LinkedList<Integer> linkedList = new LinkedList<>();
+        LinkedList<String> linkedList = new LinkedList<>();
         for (int i=0; i<limit; i++) {
-            linkedList.add(i);
+            linkedList.add("Hello world " + i);
         }
         System.out.println(linkedList.size());
     }
@@ -64,8 +64,8 @@ public class FastArray {
     public static void main(String[] args) {
         FastArray fa = new FastArray();
         long start = System.currentTimeMillis();
-        fa.putNumByArrayList();
-        // fa.putNumByFastList();
+        // fa.putNumByArrayList();
+        fa.putNumByFastList();
         // fa.putNumByLinkedList();
         System.out.println("Duration: " + (System.currentTimeMillis() - start));
     }
