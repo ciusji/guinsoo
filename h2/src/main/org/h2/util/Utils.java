@@ -300,13 +300,13 @@ public class Utils {
     }
 
     /**
-     * Create a new ArrayList with an initial capacity of 3_000_000.
+     * Create a new ArrayList with an initial capacity of 2_000_000.
      *
      * @param <T> the type
      * @return the object
      */
     public static <T> ArrayList<T> newHugeArrayList() {
-        return new ArrayList<>(3_000_000);
+        return new ArrayList<>(2_000_000);
     }
 
     /**

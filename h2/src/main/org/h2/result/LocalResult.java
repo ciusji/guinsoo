@@ -28,10 +28,7 @@ import org.h2.value.ValueRow;
  * and it is also used directly by the ResultSet class in the embedded mode.
  * If the result does not fit in memory, it is written to a temporary file.
  *
- * <p>
- * Grasp why b-tree node data can fetch by JDBC
- *
- * more, seed <code>ResultSet</code>
+ * For more, see <code>ResultSet</code>.
  */
 public class LocalResult implements ResultInterface, ResultTarget {
 
@@ -68,6 +65,11 @@ public class LocalResult implements ResultInterface, ResultTarget {
         // nothing to do
     }
 
+    public LocalResult(SessionLocal session) {
+        this.session = session;
+        rows = Utils.newSmallArrayList();
+    }
+
     /**
      * Construct a local result object.
      *
@@ -93,8 +95,7 @@ public class LocalResult implements ResultInterface, ResultTarget {
                 this.maxMemoryRows = Integer.MAX_VALUE;
             }
         }
-        /// rows = Utils.newSmallArrayList();
-        rows = Utils.newHugeArrayList();
+        rows = Utils.newSmallArrayList();
         this.visibleColumnCount = visibleColumnCount;
         this.resultColumnCount = resultColumnCount;
         rowId = -1;
@@ -627,6 +628,10 @@ public class LocalResult implements ResultInterface, ResultTarget {
     @Override
     public void setFetchSize(int fetchSize) {
         // ignore
+    }
+
+    public ArrayList<Value[]> getRows() {
+        return rows;
     }
 
 }

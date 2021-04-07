@@ -409,15 +409,17 @@ public final class FunctionAlias extends UserDefinedFunction {
                     columns[i] = e;
                 }
                 LocalResult result = new LocalResult(session, columns, columnCount, columnCount);
-                // !!!
+                long start = System.currentTimeMillis();
+                // !!! each one million rows costs more that 1 seconds.
                 for (int i = 0; i < maxrows && rs.next(); i++) {
                     Value[] list = new Value[columnCount];
                     for (int j = 0; j < columnCount; j++) {
                         list[j] = ValueToObjectConverter.objectToValue(session, rs.getObject(j + 1),
-                                columns[j].getType().getValueType());
+                                    columns[j].getType().getValueType());
                     }
                     result.addRow(list);
                 }
+                System.out.println("Duration<addRow>: " + (System.currentTimeMillis() - start));
                 result.done();
                 return result;
             } catch (SQLException e) {

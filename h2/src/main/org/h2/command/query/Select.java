@@ -832,7 +832,9 @@ public class Select extends Query {
             } else if (isDistinctQuery) {
                 queryDistinct(to, offset, limit, withTies, quickOffset);
             } else {
+                long start = System.currentTimeMillis();
                 lazyResult = queryFlat(columnCount, to, offset, limit, withTies, quickOffset);
+                System.out.println("Duration<queryFlat>: " + (System.currentTimeMillis() - start));
             }
             if (quickOffset) {
                 offset = 0;
