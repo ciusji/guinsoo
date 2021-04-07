@@ -1966,6 +1966,7 @@ public class Parser {
                     break readValues;
                 }
                 if (readIf(VALUES)) {
+                    // parse values
                     parseValuesForCommand(command);
                     break readValues;
                 }

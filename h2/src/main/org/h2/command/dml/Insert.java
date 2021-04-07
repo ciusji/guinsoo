@@ -143,7 +143,7 @@ public final class Insert extends CommandWithValues implements ResultTarget {
                      * the same time, the second might accidentally get
                      * sorted-insert-mode.
                      */
-                    table.lock(session, /* exclusive */true, /* forceLockEvenInMvcc */true);
+                    table.lock(session,true,true);
                     index = table.getScanIndex(session);
                     index.setSortedInsertMode(true);
                 }

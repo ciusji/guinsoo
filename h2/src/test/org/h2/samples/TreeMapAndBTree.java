@@ -24,6 +24,7 @@ import org.h2.mvstore.MVStore;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TreeMap;
 
@@ -123,10 +124,29 @@ public class TreeMapAndBTree {
         System.out.println("Duration666: ~ " + (endTime - startTime));
     }
 
+    public void insertDirect() throws ClassNotFoundException, SQLException {
+        Class.forName("org.h2.Driver");
+        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        Connection conn = DriverManager.getConnection(url);
+        Statement stat = conn.createStatement();
+
+        long startTime = System.currentTimeMillis();
+        stat.execute("create table test(poi_id long primary key, dt varchar, aor_id long);");
+        stat.execute("insert into test values (1, '20210606', 80000);");
+
+        conn.commit();
+
+        stat.close();
+        conn.close();
+        long endTime = System.currentTimeMillis();
+        System.out.println("Duration666: ~ " + (endTime - startTime));
+    }
+
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
-        // tab.sqlInsert();
+        tab.sqlInsert();
         // tab.btreeMapUsage();
-        tab.call();
+        // tab.call();
+        // tab.insertDirect();
     }
 }
