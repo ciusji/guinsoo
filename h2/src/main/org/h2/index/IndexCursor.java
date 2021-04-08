@@ -158,6 +158,7 @@ public class IndexCursor implements Cursor {
             if (intersects != null && index instanceof SpatialIndex) {
                 cursor = ((SpatialIndex) index).findByGeometry(session, start, end, intersects);
             } else if (index != null) {
+                // ???
                 cursor = index.find(session, start, end);
             }
         }

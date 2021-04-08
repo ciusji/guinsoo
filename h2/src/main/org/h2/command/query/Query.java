@@ -193,6 +193,7 @@ public abstract class Query extends Prepared {
             session.setLazyQueryExecution(false);
         }
         try {
+            // ???
             return queryWithoutCache(limit, target);
         } finally {
             if (disableLazy) {
