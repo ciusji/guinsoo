@@ -27,6 +27,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TreeMap;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  * TreeMapAndBTree
@@ -72,7 +74,7 @@ public class TreeMapAndBTree {
 
     public void sqlInsert() throws Exception {
         long startTime = System.currentTimeMillis();
-        String path = "/Users/admin/Desktop/relations.csv";
+        String path = "/Users/admin/Desktop/relations2.csv";
         String name = "relations";
 
         Class.forName("org.h2.Driver");
@@ -109,17 +111,23 @@ public class TreeMapAndBTree {
     }
 
     public void sqlInsertByHikari() throws Exception {
-
         long startTime = System.currentTimeMillis();
-        String path = "/Users/admin/Desktop/relations.csv";
+        String path = "/Users/admin/Desktop/relations2.csv";
         String name = "relations";
 
-        Class.forName("org.h2.Driver");
-        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0";
-        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
-        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
-        /// String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
-        Connection conn = DriverManager.getConnection(url);
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName("org.h2.Driver");
+        config.setJdbcUrl("jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096");
+        HikariDataSource dataSource = new HikariDataSource(config);
+
+//        Class.forName("org.h2.Driver");
+//        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0";
+//        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
+//        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+//        /// String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
+//        Connection conn = DriverManager.getConnection(url);
+
+        Connection conn = dataSource.getConnection();
         Statement stat = conn.createStatement();
         long startTime2 = System.currentTimeMillis();
         System.out.println("Duration2: ~ " + (startTime2 - startTime));
@@ -184,6 +192,7 @@ public class TreeMapAndBTree {
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
         tab.sqlInsert();
+        // tab.sqlInsertByHikari();
         // tab.btreeMapUsage();
         // tab.call();
         // tab.insertDirect();

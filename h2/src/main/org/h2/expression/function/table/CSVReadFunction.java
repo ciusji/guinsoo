@@ -64,6 +64,7 @@ public final class CSVReadFunction extends TableFunction {
             result.done();
             return result;
             */
+            System.out.println(132);
             return JavaMethod.resultSetToResult(session, csv.read(fileName, columns, charset), Integer.MAX_VALUE);
         } catch (SQLException e) {
             throw DbException.convert(e);
