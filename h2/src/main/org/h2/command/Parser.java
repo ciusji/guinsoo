@@ -10261,6 +10261,7 @@ public class Parser {
         if (readIf(WITH)) {
             command.setTableEngineParams(readTableEngineParams());
         }
+
         if (temp) {
             if (readIf(ON)) {
                 read("COMMIT");

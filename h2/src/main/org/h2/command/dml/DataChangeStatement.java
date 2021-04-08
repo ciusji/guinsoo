@@ -58,6 +58,7 @@ public abstract class DataChangeStatement extends Prepared {
 
     @Override
     public final long update() {
+        // !!!
         return update(null, null);
     }
 

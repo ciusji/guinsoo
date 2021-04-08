@@ -213,6 +213,7 @@ public final class Insert extends CommandWithValues implements ResultTarget {
             }
         } else {
             table.lock(session, true, false);
+            // !!!
             if (insertFromSelect) {
                 query.query(0, this);
             } else {

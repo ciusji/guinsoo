@@ -716,7 +716,7 @@ public class Select extends Query {
                 limitRows = Long.MAX_VALUE;
             }
         }
-        // important query !!!
+        // !!!
         LazyResultQueryFlat lazyResult = new LazyResultQueryFlat(expressionArray, columnCount, isForUpdateMvcc);
         skipOffset(lazyResult, offset, quickOffset);
         if (result == null) {
@@ -726,6 +726,7 @@ public class Select extends Query {
             limitRows = Long.MAX_VALUE;
         }
         Value[] row = null;
+        // !!!
         while (result.getRowCount() < limitRows && lazyResult.next()) {
             row = lazyResult.currentRow();
             result.addRow(row);
