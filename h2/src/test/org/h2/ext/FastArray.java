@@ -19,6 +19,7 @@
 
 package org.h2.ext;
 
+import org.apache.commons.collections.FastArrayList;
 import org.h2.util.FastList;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import java.util.LinkedList;
  * @since 1.8+
  */
 public class FastArray {
-    private int limit = 30_000_000;
+    private int limit = 3_000_000;
 
     // Duration: 13987
     // Duration with capacity: 7163
@@ -48,6 +49,26 @@ public class FastArray {
     // Duration: 5753
     public void putNumByFastList() {
         FastList<Integer> fastList = new FastList<>(Integer.class);
+        for (int i=0; i<limit; i++) {
+            fastList.add(i);
+        }
+        System.out.println(fastList.size());
+    }
+
+    // Duration:
+    public void putNumByFastArray() {
+        FastArrayList fastList = new FastArrayList();
+        fastList.setFast(true);
+        for (int i=0; i<limit; i++) {
+            fastList.add(i);
+        }
+        System.out.println(fastList.size());
+    }
+
+    // Duration: 10719
+    public void putNumByFastList2() {
+        org.eclipse.collections.impl.list.mutable.FastList<Integer> fastList =
+                new org.eclipse.collections.impl.list.mutable.FastList<>();
         for (int i=0; i<limit; i++) {
             fastList.add(i);
         }
@@ -78,7 +99,9 @@ public class FastArray {
         // fa.putNumByArrayList();
         // fa.putNumByFastList();
         // fa.putNumByLinkedList();
-        fa.putNumByArray();
+        // fa.putNumByArray();
+        // fa.putNumByFastList2();
+        fa.putNumByFastArray();
         System.out.println("Duration: " + (System.currentTimeMillis() - start));
     }
 

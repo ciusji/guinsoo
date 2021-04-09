@@ -80,8 +80,8 @@ public class TreeMapAndBTree {
         Class.forName("org.h2.Driver");
         // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0";
         // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
-        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
-        /// String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
+        // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
         long startTime2 = System.currentTimeMillis();
@@ -90,7 +90,9 @@ public class TreeMapAndBTree {
         // stat.execute("drop table if exists " + name);
         // table: relations
         // TTT 6306 ms
-        stat.execute("create table " + name + "(poi_id long primary key, dt varchar, aor_id long) as select * from csvread('" + path + "');");
+        // TTT 3225 ms (without special data typed key)
+        // stat.execute("create table " + name + "(poi_id long primary key, dt varchar, aor_id long) as select * from csvread('" + path + "');");
+        stat.execute("create table " + name + " as select * from csvread('" + path + "');");
         // stat.execute("create table " + name + "(poi_id long, dt varchar, aor_id long) as select * from csvread('" + path + "');");
         long startTime3 = System.currentTimeMillis();
         System.out.println("Duration3: ~ " + (startTime3 - startTime2));
@@ -156,7 +158,9 @@ public class TreeMapAndBTree {
     }
 
     public void call() throws Exception {
-        String path = "/Users/admin/Desktop/relations.csv";
+        // String path = "/Users/admin/Desktop/relations.csv";
+        // String path = "/Users/admin/Desktop/relations2.csv";
+        String path = "/Users/admin/Desktop/relations3.csv";
 
         Class.forName("org.h2.Driver");
         String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
@@ -191,10 +195,10 @@ public class TreeMapAndBTree {
 
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
-        tab.sqlInsert();
+        // tab.sqlInsert();
         // tab.sqlInsertByHikari();
         // tab.btreeMapUsage();
-        // tab.call();
+        tab.call();
         // tab.insertDirect();
     }
 }

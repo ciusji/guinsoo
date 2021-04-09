@@ -7,6 +7,9 @@ package org.h2.expression.function.table;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.h2.api.ErrorCode;
 import org.h2.engine.SessionLocal;
@@ -49,22 +52,19 @@ public final class CSVReadFunction extends TableFunction {
         char fieldSeparator = csv.getFieldSeparatorRead();
         String[] columns = StringUtils.arraySplit(columnList, fieldSeparator, true);
         try {
-            /*
-            ResultSet rs = csv.read(fileName, columns, charset);
-            ResultSetMetaData meta = rs.getMetaData();
-            int columnCount = meta.getColumnCount();
-            LocalResult result = new LocalResult(session);
-            System.out.println(meta.toString());
-            while (rs.next()) {
-                for (int j = 0; j < columnCount; j++) {
-                    System.out.println(meta.getColumnLabel(j + 1));
-                }
-            }
-            rs.close();
-            result.done();
-            return result;
-            */
-            System.out.println(132);
+//            long start = System.currentTimeMillis();
+//            ResultSet rs = csv.read(fileName, columns, charset);
+//            ArrayList<Object> arrays = new ArrayList<>();
+//            List<Object> segment = new ArrayList<>(20_000);
+//            while (rs.next()) {
+////                if (segment.size() == 20_000) {
+////                    arrays.addAll(segment);
+////                    segment.clear();
+////                }
+////                segment.add(rs);
+//            }
+//            arrays.clear();
+//            System.out.println("Duration<addRs>: " + (System.currentTimeMillis() - start));
             return JavaMethod.resultSetToResult(session, csv.read(fileName, columns, charset), Integer.MAX_VALUE);
         } catch (SQLException e) {
             throw DbException.convert(e);
