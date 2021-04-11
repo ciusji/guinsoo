@@ -24,6 +24,11 @@ import java.sql.SQLException;
 /**
  * A CSVLOAD function.
  *
+ * <p>
+ * TODO:
+ * 1. csv load options
+ * 2. csv load mode
+ *
  * @blame guinsoo Team
  */
 public final class CSVLoadFunction extends TableFunction {
