@@ -61,7 +61,7 @@ public class Call extends Prepared {
     }
 
     @Override
-    public ResultInterface query(long maxrows) {
+    public ResultInterface query(long maxRows) {
         setCurrentRowNumber(1);
         if (tableFunction != null) {
             return tableFunction.getValue(session);

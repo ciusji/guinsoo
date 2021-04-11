@@ -6,20 +6,21 @@
 package org.h2.expression.function.table;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.h2.api.ErrorCode;
 import org.h2.engine.SessionLocal;
 import org.h2.expression.Expression;
 import org.h2.expression.function.CSVWriteFunction;
 import org.h2.message.DbException;
+import org.h2.result.LocalResult;
 import org.h2.result.ResultInterface;
 import org.h2.schema.FunctionAlias.JavaMethod;
 import org.h2.tools.Csv;
 import org.h2.util.StringUtils;
+import org.h2.value.Value;
+import org.h2.value.ValueVarchar;
 
 /**
  * A CSVREAD function.
@@ -52,20 +53,23 @@ public final class CSVReadFunction extends TableFunction {
         char fieldSeparator = csv.getFieldSeparatorRead();
         String[] columns = StringUtils.arraySplit(columnList, fieldSeparator, true);
         try {
-//            long start = System.currentTimeMillis();
-//            ResultSet rs = csv.read(fileName, columns, charset);
-//            ArrayList<Object> arrays = new ArrayList<>();
-//            List<Object> segment = new ArrayList<>(20_000);
-//            while (rs.next()) {
-////                if (segment.size() == 20_000) {
-////                    arrays.addAll(segment);
-////                    segment.clear();
-////                }
-////                segment.add(rs);
-//            }
-//            arrays.clear();
-//            System.out.println("Duration<addRs>: " + (System.currentTimeMillis() - start));
-            return JavaMethod.resultSetToResult(session, csv.read(fileName, columns, charset), Integer.MAX_VALUE);
+            // TODO: 2021/4/11 add jdbc csv load mode 
+            long start = System.currentTimeMillis();
+            ResultSet rs = csv.read(fileName, columns, charset);
+            ResultSetMetaData meta = rs.getMetaData();
+            int columnCount = meta.getColumnCount();
+            LocalResult result = new LocalResult(session);
+            while (rs.next()) {
+                Value[] list = new Value[columnCount];
+                for (int j = 0; j < columnCount; j++) {
+                    list[j] = ValueVarchar.get(rs.getString(j + 1));
+                }
+                result.addRow(list);
+            }
+            System.out.println("Duration<addRs>: " + (System.currentTimeMillis() - start));
+
+            return result;
+            /// return JavaMethod.resultSetToResult(session, csv.read(fileName, columns, charset), Integer.MAX_VALUE);
         } catch (SQLException e) {
             throw DbException.convert(e);
         }

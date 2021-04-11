@@ -86,8 +86,8 @@ public class TreeMapAndBTree {
         Class.forName("org.h2.Driver");
         // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0";
         // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
-        // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
-        String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
+        String url = "jdbc:h2:mem:db;LOG=0;UNDO_LOG=0;CACHE_SIZE=65536";
+        // String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
         long startTime2 = System.currentTimeMillis();
@@ -163,10 +163,10 @@ public class TreeMapAndBTree {
 
     }
 
-    public void call() throws Exception {
+    public void callFunction() throws Exception {
         // String path = "/Users/admin/Desktop/relations.csv";
-        // String path = "/Users/admin/Desktop/relations2.csv";
-        String path = "/Users/admin/Desktop/relations3.csv";
+        String path = "/Users/admin/Desktop/relations2.csv";
+        // String path = "/Users/admin/Desktop/relations3.csv";
 
         Class.forName("org.h2.Driver");
         String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
@@ -201,12 +201,12 @@ public class TreeMapAndBTree {
 
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
-        // tab.sqlInsert();
+        // tab.btreeMapUsage();
+        tab.sqlInsert();
         // tab.sqlInsertByHikari();
         // tab.btreeMapUsage();
-        // tab.call();
+        // tab.callFunction();
         // tab.insertDirect();
 
-        tab.btreeMapUsage();
     }
 }

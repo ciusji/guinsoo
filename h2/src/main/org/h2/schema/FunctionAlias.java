@@ -15,7 +15,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.StreamSupport;
 
 import org.h2.Driver;
 import org.h2.api.ErrorCode;
@@ -376,11 +375,11 @@ public final class FunctionAlias extends UserDefinedFunction {
          *
          * @param session the session
          * @param rs the result set
-         * @param maxrows the maximum number of rows to read (0 to just read the
+         * @param maxRows the maximum number of rows to read (0 to just read the
          *            meta data)
          * @return the value
          */
-        public static ResultInterface resultSetToResult(SessionLocal session, ResultSet rs, int maxrows) {
+        public static ResultInterface resultSetToResult(SessionLocal session, ResultSet rs, int maxRows) {
             try {
                 ResultSetMetaData meta = rs.getMetaData();
                 int columnCount = meta.getColumnCount();
@@ -411,7 +410,7 @@ public final class FunctionAlias extends UserDefinedFunction {
                 LocalResult result = new LocalResult(session, columns, columnCount, columnCount);
                 long start = System.currentTimeMillis();
                 // !!! each one million rows costs more that 1 seconds.
-                for (int i = 0; i < maxrows && rs.next(); i++) {
+                for (int i = 0; i < maxRows && rs.next(); i++) {
                     Value[] list = new Value[columnCount];
                     for (int j = 0; j < columnCount; j++) {
                         list[j] = ValueToObjectConverter.objectToValue(session, rs.getObject(j + 1),
