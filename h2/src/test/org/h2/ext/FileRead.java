@@ -39,7 +39,7 @@ import java.util.stream.Stream;
  */
 public class FileRead {
 
-    private final String file = "/Users/admin/Desktop/relations.csv";
+    private final String file = "/Users/admin/Desktop/relations3.csv";
 
     /**
      * OpenCSV read
@@ -72,6 +72,7 @@ public class FileRead {
         try (BufferedReader br = new BufferedReader(new FileReader(file), bufferSize)) {
             while ((line = br.readLine()) != null) {
                 r.add(line);
+                // System.out.println(line);
             }
         }
         System.out.println(r.size());

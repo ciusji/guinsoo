@@ -9,12 +9,11 @@ import static org.h2.expression.Expression.WITHOUT_PARENTHESES;
 import static org.h2.util.HasSQL.ADD_PLAN_INFORMATION;
 import static org.h2.util.HasSQL.DEFAULT_SQL_FLAGS;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.*;
 import java.util.Map.Entry;
 import org.h2.api.ErrorCode;
 import org.h2.api.Trigger;
@@ -54,12 +53,14 @@ import org.h2.table.Table;
 import org.h2.table.TableFilter;
 import org.h2.table.TableType;
 import org.h2.table.TableView;
+import org.h2.tools.Csv;
 import org.h2.util.ParserUtil;
 import org.h2.util.StringUtils;
 import org.h2.util.Utils;
 import org.h2.value.DataType;
 import org.h2.value.Value;
 import org.h2.value.ValueRow;
+import org.h2.value.ValueVarchar;
 
 /**
  * This class represents a simple SELECT statement.
@@ -716,7 +717,6 @@ public class Select extends Query {
                 limitRows = Long.MAX_VALUE;
             }
         }
-        // !!!
         LazyResultQueryFlat lazyResult = new LazyResultQueryFlat(expressionArray, columnCount, isForUpdateMvcc);
         skipOffset(lazyResult, offset, quickOffset);
         if (result == null) {
@@ -726,11 +726,34 @@ public class Select extends Query {
             limitRows = Long.MAX_VALUE;
         }
         Value[] row = null;
-        // !!!
-        while (result.getRowCount() < limitRows && lazyResult.next()) {
-            row = lazyResult.currentRow();
-            result.addRow(row);
+        // TODO: 2021/4/11 direct add row if ddl is create and function is csvload.
+        if (sqlStatement.toUpperCase().contains("CSVLOAD")) {
+            String fileName = "/Users/admin/Desktop/relations4.csv";
+            System.out.println(fileName);
+            try {
+                int bufferSize = 1024;
+                String line;
+                try (BufferedReader br = new BufferedReader(new FileReader(fileName), bufferSize)) {
+                    while ((line = br.readLine()) != null) {
+                        Value[] list = new Value[columnCount];
+                        for (int j = 0; j < columnCount; j++) {
+                            // !!!
+                            list[j] = ValueVarchar.get(line.split(",")[j]);
+                        }
+                        // !!!
+                        result.addRow(list);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            while (result.getRowCount() < limitRows && lazyResult.next()) {
+                row = lazyResult.currentRow();
+                result.addRow(row);
+            }
         }
+
         if (limitRows != Long.MAX_VALUE && withTies && sort != null && row != null) {
             Value[] expected = row;
             while (lazyResult.next()) {
