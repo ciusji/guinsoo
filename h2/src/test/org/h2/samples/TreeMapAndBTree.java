@@ -29,6 +29,7 @@ import java.sql.Statement;
 import java.util.TreeMap;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.h2.mvstore.OffHeapStore;
 
 /**
  * TreeMapAndBTree
@@ -39,7 +40,9 @@ import com.zaxxer.hikari.HikariDataSource;
  */
 public class TreeMapAndBTree {
 
-    private int limit = 1_000_000;
+    // private int limit = 1_000_000;
+    // private int limit = 3_000_000;
+    private int limit = 5_000_000;
     // private int limit = 30_000_000;
 
     public void treeMapUsage() {
@@ -53,15 +56,18 @@ public class TreeMapAndBTree {
         System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
     }
 
+    // Duration(1_000_000): 703
+    // Duration(3_000_000): 2496
+    // Duration(5_000_000): 4206
     public void btreeMapUsage() {
         long startTime = System.currentTimeMillis();
-//        OffHeapStore offHeapStore = new OffHeapStore();
-//        MVStore store = new MVStore.Builder()
-//                .fileStore(offHeapStore)
-//                .open();
-//        MVMap<Integer, String> bTree = store.openMap("data");
+        OffHeapStore offHeapStore = new OffHeapStore();
+        MVStore store = new MVStore.Builder()
+                .fileStore(offHeapStore)
+                .open();
+        MVMap<Integer, String> bTree = store.openMap("data");
 
-        MVMap<Integer, String> bTree = MVStore.open(null).openMap("data");
+        // MVMap<Integer, String> bTree = MVStore.open(null).openMap("data");
 
         for (int i=0; i<limit; i++) {
             bTree.put(i, "Hello World-" + i);

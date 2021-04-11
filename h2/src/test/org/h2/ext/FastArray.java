@@ -33,7 +33,7 @@ import java.util.LinkedList;
  * @since 1.8+
  */
 public class FastArray {
-    private int limit = 3_000_000;
+    private int limit = 5_000_000;
 
     // Duration: 13987
     // Duration with capacity: 7163
@@ -58,7 +58,7 @@ public class FastArray {
     // Duration:
     public void putNumByFastArray() {
         FastArrayList fastList = new FastArrayList();
-        fastList.setFast(true);
+        // fastList.setFast(true);
         for (int i=0; i<limit; i++) {
             fastList.add(i);
         }
@@ -97,11 +97,11 @@ public class FastArray {
         FastArray fa = new FastArray();
         long start = System.currentTimeMillis();
         // fa.putNumByArrayList();
-        // fa.putNumByFastList();
+        fa.putNumByFastList();
         // fa.putNumByLinkedList();
         // fa.putNumByArray();
         // fa.putNumByFastList2();
-        fa.putNumByFastArray();
+        // fa.putNumByFastArray();
         System.out.println("Duration: " + (System.currentTimeMillis() - start));
     }
 

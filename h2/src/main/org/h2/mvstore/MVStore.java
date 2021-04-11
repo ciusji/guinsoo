@@ -307,8 +307,6 @@ public class MVStore implements AutoCloseable {
             }
         } else {
             if (fileName != null) {
-                System.out.println(fileName);
-                System.out.println(fileStore.toString());
                 throw new IllegalArgumentException("fileName && fileStore");
             }
             fileStoreIsProvided = true;
@@ -3107,7 +3105,6 @@ public class MVStore implements AutoCloseable {
      * @return the name, or null if not found
      */
     public String getMapName(int id) {
-//        checkOpen();
         String m = meta.get(MVMap.getMapKey(id));
         return m == null ? null : DataUtils.getMapName(m);
     }
@@ -3238,7 +3235,8 @@ public class MVStore implements AutoCloseable {
             try {
                 backgroundExceptionHandler.uncaughtException(Thread.currentThread(), ex);
             } catch(Throwable e) {
-                if (ex != e) { // OOME may be the same
+                if (ex != e) {
+                    // OOME may be the same
                     ex.addSuppressed(e);
                 }
             }
