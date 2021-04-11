@@ -4,11 +4,11 @@
 ## V 1.0.0 (2020-04-17)
 
 ### Enhancements
-- Add 
--
+- Add `CSVLOAD()` function
+- 
 
 ### Bug fixes
--
+- 
 -
 
 

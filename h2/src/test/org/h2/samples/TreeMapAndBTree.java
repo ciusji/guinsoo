@@ -201,19 +201,22 @@ public class TreeMapAndBTree {
 
     public void loadFunction() throws Exception {
         // String path = "/Users/admin/Desktop/relations.csv";
-        String path = "/Users/admin/Desktop/relations2.csv";
-        // String path = "/Users/admin/Desktop/relations3.csv";
+        // String path = "/Users/admin/Desktop/relations2.csv";
+        String path = "/Users/admin/Desktop/relations3.csv";
+        String name = "relations";
 
         Class.forName("org.h2.Driver");
-        // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
-        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=6553";
+        // unsupported "MVSTORE && LOG"
+        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=65536";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
 
         long startTime = System.currentTimeMillis();
         // ??? why cost more than 1 seconds
         // !!! char to row object cost more that 1 seconds.
-        stat.execute("call csvload('" + path + "');");
+        // stat.execute("call csvload('" + path + "');");
+        stat.execute("create table " + name + " as select * from csvload('" + path + "');");
         long endTime = System.currentTimeMillis();
         System.out.println("Duration666: ~ " + (endTime - startTime));
     }
