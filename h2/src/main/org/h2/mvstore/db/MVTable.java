@@ -495,7 +495,7 @@ public class MVTable extends RegularTable {
             }
         } catch (Throwable e) {
             try {
-                t.rollbackToSavepoint(savepoint);
+                 t.rollbackToSavepoint(savepoint);
             } catch (Throwable nested) {
                 e.addSuppressed(nested);
             }

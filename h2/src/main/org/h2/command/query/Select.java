@@ -728,21 +728,21 @@ public class Select extends Query {
         Value[] row = null;
         // TODO: 2021/4/11 direct add row if ddl is create and function is csvload.
         if (sqlStatement.toUpperCase().contains("CSVLOAD")) {
-            String fileName = "/Users/admin/Desktop/relations4.csv";
+            String fileName = "/Users/admin/Desktop/relations3.csv";
             System.out.println(fileName);
             try {
                 int bufferSize = 1024;
-                String line;
                 try (BufferedReader br = new BufferedReader(new FileReader(fileName), bufferSize)) {
-                    while ((line = br.readLine()) != null) {
+                    br.lines().parallel().forEach(it -> {
                         Value[] list = new Value[columnCount];
+
                         for (int j = 0; j < columnCount; j++) {
                             // !!!
-                            list[j] = ValueVarchar.get(line.split(",")[j]);
+                            list[j] = ValueVarchar.get(it.split(",")[j]);
                         }
                         // !!!
                         result.addRow(list);
-                    }
+                    });
                 }
             } catch (Exception e) {
                 e.printStackTrace();

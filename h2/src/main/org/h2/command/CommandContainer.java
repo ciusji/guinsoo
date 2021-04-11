@@ -170,7 +170,6 @@ public class CommandContainer extends Command {
                 result = new ResultWithGeneratedKeys.WithKeys(prepared.update(), new LocalResult());
             }
         } else {
-            // ???
             result = ResultWithGeneratedKeys.of(prepared.update());
         }
         prepared.trace(startTimeNanos, result.getUpdateCount());
