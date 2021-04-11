@@ -67,7 +67,7 @@ public final class CSVLoadFunction extends TableFunction {
         super.optimize(session);
         int len = args.length;
         if (len != 1) {
-            throw DbException.get(ErrorCode.INVALID_PARAMETER_COUNT_2, getName(), "1..7");
+            throw DbException.get(ErrorCode.INVALID_PARAMETER_COUNT_2, getName(), "only 1");
         }
     }
 
