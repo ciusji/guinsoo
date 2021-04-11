@@ -106,6 +106,8 @@ public final class BuiltinFunctions {
                 "UNNEST", /* TABLE is a keyword */ "TABLE_DISTINCT",
                 // CSVReadFunction
                 "CSVREAD",
+                // CSVLoadFunction
+                "CSVLOAD",
                 // LinkSchemaFunction
                 "LINK_SCHEMA",
                 //

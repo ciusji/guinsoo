@@ -5,27 +5,30 @@
  */
 package org.h2.expression.function.table;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.h2.api.ErrorCode;
 import org.h2.engine.SessionLocal;
 import org.h2.expression.Expression;
-import org.h2.expression.function.CSVWriteFunction;
 import org.h2.message.DbException;
+import org.h2.result.LocalResult;
 import org.h2.result.ResultInterface;
 import org.h2.schema.FunctionAlias.JavaMethod;
 import org.h2.tools.Csv;
 import org.h2.util.StringUtils;
+import org.h2.value.Value;
+import org.h2.value.ValueVarchar;
+
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 /**
- * A CSVREAD function.
+ * A CSVLOAD function.
  *
  * @blame guinsoo Team
  */
-public final class CSVReadFunction extends TableFunction {
+public final class CSVLoadFunction extends TableFunction {
 
-    public CSVReadFunction() {
+    public CSVLoadFunction() {
         super(new Expression[4]);
     }
 
@@ -35,23 +38,21 @@ public final class CSVReadFunction extends TableFunction {
         String fileName = getValue(session, 0);
         String columnList = getValue(session, 1);
         Csv csv = new Csv();
-        String options = getValue(session, 2);
-        String charset = null;
-        if (options != null && options.indexOf('=') >= 0) {
-            charset = csv.setOptions(options);
-        } else {
-            charset = options;
-            String fieldSeparatorRead = getValue(session, 3);
-            String fieldDelimiter = getValue(session, 4);
-            String escapeCharacter = getValue(session, 5);
-            String nullString = getValue(session, 6);
-            CSVWriteFunction.setCsvDelimiterEscape(csv, fieldSeparatorRead, fieldDelimiter, escapeCharacter);
-            csv.setNullString(nullString);
-        }
         char fieldSeparator = csv.getFieldSeparatorRead();
         String[] columns = StringUtils.arraySplit(columnList, fieldSeparator, true);
         try {
-            return JavaMethod.resultSetToResult(session, csv.read(fileName, columns, charset), Integer.MAX_VALUE);
+            ResultSet rs = csv.read(fileName, columns, null);
+            ResultSetMetaData meta = rs.getMetaData();
+            int columnCount = meta.getColumnCount();
+            LocalResult result = new LocalResult(session);
+            while (rs.next()) {
+                Value[] list = new Value[columnCount];
+                for (int j = 0; j < columnCount; j++) {
+                    list[j] = ValueVarchar.get(rs.getString(j + 1));
+                }
+                result.addRow(list);
+            }
+            return result;
         } catch (SQLException e) {
             throw DbException.convert(e);
         }
@@ -65,7 +66,7 @@ public final class CSVReadFunction extends TableFunction {
     public void optimize(SessionLocal session) {
         super.optimize(session);
         int len = args.length;
-        if (len < 1 || len > 7) {
+        if (len != 1) {
             throw DbException.get(ErrorCode.INVALID_PARAMETER_COUNT_2, getName(), "1..7");
         }
     }
@@ -79,21 +80,10 @@ public final class CSVReadFunction extends TableFunction {
         }
         String columnList = getValue(session, args, 1);
         Csv csv = new Csv();
-        String options = getValue(session, args, 2);
-        String charset = null;
-        if (options != null && options.indexOf('=') >= 0) {
-            charset = csv.setOptions(options);
-        } else {
-            charset = options;
-            String fieldSeparatorRead = getValue(session, args, 3);
-            String fieldDelimiter = getValue(session, args, 4);
-            String escapeCharacter = getValue(session, args, 5);
-            CSVWriteFunction.setCsvDelimiterEscape(csv, fieldSeparatorRead, fieldDelimiter, escapeCharacter);
-        }
         char fieldSeparator = csv.getFieldSeparatorRead();
         String[] columns = StringUtils.arraySplit(columnList, fieldSeparator, true);
         ResultInterface result;
-        try (ResultSet rs = csv.read(fileName, columns, charset)) {
+        try (ResultSet rs = csv.read(fileName, columns, null)) {
             result = JavaMethod.resultSetToResult(session, rs, 0);
         } catch (SQLException e) {
             throw DbException.convert(e);
@@ -109,7 +99,7 @@ public final class CSVReadFunction extends TableFunction {
 
     @Override
     public String getName() {
-        return "CSVREAD";
+        return "CSVLOAD";
     }
 
     @Override

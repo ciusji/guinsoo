@@ -314,11 +314,7 @@ import org.h2.expression.function.ToCharFunction;
 import org.h2.expression.function.TrimFunction;
 import org.h2.expression.function.TruncateValueFunction;
 import org.h2.expression.function.XMLFunction;
-import org.h2.expression.function.table.ArrayTableFunction;
-import org.h2.expression.function.table.CSVReadFunction;
-import org.h2.expression.function.table.JavaTableFunction;
-import org.h2.expression.function.table.LinkSchemaFunction;
-import org.h2.expression.function.table.TableFunction;
+import org.h2.expression.function.table.*;
 import org.h2.index.Index;
 import org.h2.message.DbException;
 import org.h2.mode.FunctionsPostgreSQL;
@@ -2313,6 +2309,9 @@ public class Parser {
             case "CSVREAD":
                 recompileAlways = true;
                 return readParameters(new CSVReadFunction());
+            case "CSVLOAD":
+                 recompileAlways = true;
+                 return readParameters(new CSVLoadFunction());
             case "LINK_SCHEMA":
                 recompileAlways = true;
                 return readParameters(new LinkSchemaFunction());

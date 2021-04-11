@@ -199,14 +199,34 @@ public class TreeMapAndBTree {
         System.out.println("Duration666: ~ " + (endTime - startTime));
     }
 
+    public void loadFunction() throws Exception {
+        // String path = "/Users/admin/Desktop/relations.csv";
+        String path = "/Users/admin/Desktop/relations2.csv";
+        // String path = "/Users/admin/Desktop/relations3.csv";
+
+        Class.forName("org.h2.Driver");
+        // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=6553";
+        Connection conn = DriverManager.getConnection(url);
+        Statement stat = conn.createStatement();
+
+        long startTime = System.currentTimeMillis();
+        // ??? why cost more than 1 seconds
+        // !!! char to row object cost more that 1 seconds.
+        stat.execute("call csvload('" + path + "');");
+        long endTime = System.currentTimeMillis();
+        System.out.println("Duration666: ~ " + (endTime - startTime));
+    }
+
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
         // tab.btreeMapUsage();
-        tab.sqlInsert();
+        // tab.sqlInsert();
         // tab.sqlInsertByHikari();
         // tab.btreeMapUsage();
         // tab.callFunction();
         // tab.insertDirect();
+        tab.loadFunction();
 
     }
 }
