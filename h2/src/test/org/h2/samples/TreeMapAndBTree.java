@@ -39,8 +39,8 @@ import com.zaxxer.hikari.HikariDataSource;
  */
 public class TreeMapAndBTree {
 
-    // private int limit = 1_000_000;
-    private int limit = 30_000_000;
+    private int limit = 1_000_000;
+    // private int limit = 30_000_000;
 
     public void treeMapUsage() {
         long startTime = System.currentTimeMillis();
@@ -198,7 +198,9 @@ public class TreeMapAndBTree {
         // tab.sqlInsert();
         // tab.sqlInsertByHikari();
         // tab.btreeMapUsage();
-        tab.call();
+        // tab.call();
         // tab.insertDirect();
+
+        tab.btreeMapUsage();
     }
 }
