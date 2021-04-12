@@ -19,6 +19,9 @@
 
 package org.h2.ext;
 
+import com.hazelcast.client.HazelcastClient;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.map.IMap;
 import net.openhft.chronicle.map.ChronicleMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
@@ -82,11 +85,29 @@ public class MapdbUsage {
         map.close();
     }
 
+    public void testStoreConcurrency3() throws IOException {
+        HazelcastInstance hz = HazelcastClient.newHazelcastClient();
+
+        IMap<Long, String> map = hz.getMap(name);
+
+        long startTime = System.currentTimeMillis();
+        AtomicLong longKey = new AtomicLong(0);
+        // add and read some data
+        int bufferSize = 1024;
+        try (BufferedReader br = new BufferedReader(new FileReader(path), bufferSize)) {
+            br.lines().parallel().forEach(it -> map.put(longKey.getAndIncrement(), it));
+            // br.lines().parallel().forEach(it -> map.putIfAbsent(longKey.getAndIncrement(), it));
+        }
+        System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
+
+    }
+
     public static void main(String[] args) throws IOException {
         // System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "4");
         // System.out.println(ForkJoinPool.getCommonPoolParallelism());
         MapdbUsage usage = new MapdbUsage();
         // usage.testStoreConcurrency();
         usage.testStoreConcurrency2();
+        // usage.testStoreConcurrency3();
     }
 }

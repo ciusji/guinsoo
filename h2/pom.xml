@@ -150,6 +150,12 @@
             <version>3.17.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+            <version>4.2</version>
+            <scope>test</scope>
+        </dependency>
         <!-- END TEST DEPENDENCIES !-->
     </dependencies>
 
