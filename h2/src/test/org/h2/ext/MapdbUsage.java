@@ -23,6 +23,8 @@ import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.map.IMap;
 import net.openhft.chronicle.map.ChronicleMap;
+import org.h2.mvstore.MVMap;
+import org.h2.mvstore.MVStore;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
@@ -42,7 +44,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class MapdbUsage {
 
-    private String path = "/Users/admin/Desktop/relations4.csv";
+    private String path = "/Users/admin/Desktop/relations2.csv";
     private String name = "relations";
 
     public void testStoreConcurrency() throws IOException {
@@ -102,12 +104,38 @@ public class MapdbUsage {
 
     }
 
+    public void testStoreConcurrency4() throws IOException {
+        // open the store (in-memory if fileName is null)
+        // MVStore s = MVStore.open(null);
+        MVStore s = MVStore.open("~/test");
+//        OffHeapStore offHeapStore = new OffHeapStore();
+//        MVStore s = new MVStore.Builder()
+//                .fileStore(offHeapStore)
+//                .open();
+
+        MVMap<Long, String> map = s.openMap(name);
+
+        long startTime = System.currentTimeMillis();
+        AtomicLong longKey = new AtomicLong(0);
+        // add and read some data
+        int bufferSize = 1024;
+        try (BufferedReader br = new BufferedReader(new FileReader(path), bufferSize)) {
+            br.lines().parallel().forEach(it -> map.put(longKey.getAndIncrement(), it));
+            // br.lines().parallel().forEach(it -> map.putIfAbsent(longKey.getAndIncrement(), it));
+        }
+        System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
+
+        s.commit();
+        s.close();
+    }
+
     public static void main(String[] args) throws IOException {
         // System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "4");
         // System.out.println(ForkJoinPool.getCommonPoolParallelism());
         MapdbUsage usage = new MapdbUsage();
         // usage.testStoreConcurrency();
-        usage.testStoreConcurrency2();
+        // usage.testStoreConcurrency2();
         // usage.testStoreConcurrency3();
+        usage.testStoreConcurrency4();
     }
 }

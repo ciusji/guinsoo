@@ -346,6 +346,7 @@ public class MVStore implements AutoCloseable {
         }
         pageSplitSize = pgSplitSize;
         keysPerPage = DataUtils.getConfigParam(config, "keysPerPage", 48);
+
         backgroundExceptionHandler =
                 (UncaughtExceptionHandler)config.get("backgroundExceptionHandler");
         layout = new MVMap<>(this, 0, StringDataType.INSTANCE, StringDataType.INSTANCE);

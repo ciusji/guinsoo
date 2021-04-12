@@ -84,14 +84,18 @@ public class MVMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V
         setInitialRoot(createEmptyLeaf(), store.getCurrentVersion());
     }
 
-    // constructor for cloneIt()
+    /**
+     * constructor for cloneIt()
+     */
     @SuppressWarnings("CopyConstructorMissesField")
     protected MVMap(MVMap<K, V> source) {
         this(source.store, source.keyType, source.valueType, source.id, source.createVersion,
                 new AtomicReference<>(source.root.get()), source.keysPerPage, source.singleWriter);
     }
 
-    // meta map constructor
+    /**
+     * meta map constructor
+     */
     MVMap(MVStore store, int id, DataType<K> keyType, DataType<V> valueType) {
         this(store, keyType, valueType, id, 0, new AtomicReference<>(), store.getKeysPerPage(), false);
         setInitialRoot(createEmptyLeaf(), store.getCurrentVersion());
@@ -2099,6 +2103,7 @@ public class MVMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V
         public String toString() {
             return "rewrite";
         }
+
     }
 
     private static final class IntValueHolder {
