@@ -152,7 +152,7 @@ public class MVMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V
      */
     @Override
     public V put(K key, V value) {
-        DataUtils.checkArgument(value != null, "The value may not be null");
+        /// DataUtils.checkArgument(value != null, "The value may not be null");
         return operate(key, value, DecisionMaker.PUT);
     }
 

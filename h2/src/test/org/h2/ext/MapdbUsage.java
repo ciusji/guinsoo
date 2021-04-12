@@ -17,14 +17,13 @@
  * under the License.
  */
 
-package org.h2.samples;
+package org.h2.ext;
 
-import org.h2.mvstore.MVMap;
-import org.h2.mvstore.MVStore;
-import org.h2.mvstore.OffHeapStore;
-import org.h2.mvstore.tx.Transaction;
-import org.h2.mvstore.tx.TransactionMap;
-import org.h2.mvstore.tx.TransactionStore;
+import net.openhft.chronicle.map.ChronicleMap;
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
+import org.mapdb.HTreeMap;
+import org.mapdb.Serializer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,26 +31,21 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * MVStoreUsage
+ * MapdbUsage
  *
  * @author cius.ji
  * @blame guinsoo Group
  * @since 1.8+
  */
-public class MVStoreUsage {
+public class MapdbUsage {
 
     private String path = "/Users/admin/Desktop/relations4.csv";
     private String name = "relations";
 
     public void testStoreConcurrency() throws IOException {
-        // open the store (in-memory if fileName is null)
-        // MVStore s = MVStore.open(null);
-        OffHeapStore offHeapStore = new OffHeapStore();
-        MVStore s = new MVStore.Builder()
-                .fileStore(offHeapStore)
-                .open();
+        DB db = DBMaker.memoryDB().make();
 
-        MVMap<Long, String> map = s.openMap(name);
+        HTreeMap<Long, String> map = db.hashMap(name, Serializer.LONG, Serializer.STRING).createOrOpen();
 
         long startTime = System.currentTimeMillis();
         AtomicLong longKey = new AtomicLong(0);
@@ -63,38 +57,36 @@ public class MVStoreUsage {
         }
         System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
 
-        s.commit();
-        s.close();
+        db.close();
     }
 
-    public void testTransaction() {
-        MVStore s = MVStore.open(null);
-        TransactionStore ts = new TransactionStore(s);
-        ts.init();
-        Transaction tx;
-        TransactionMap<Long, String> map;
+    public void testStoreConcurrency2() throws IOException {
 
-        tx = ts.begin();
-
-        map = tx.openMap("test");
+        ChronicleMap<Long, String> map = ChronicleMap
+                .of(Long.class, String.class)
+                .name(name)
+                .entries(10_000_000)
+                .averageValue("340098736478169")
+                .create();
 
         long startTime = System.currentTimeMillis();
         AtomicLong longKey = new AtomicLong(0);
         // add and read some data
-        int bufferSize = 1024;
+        int bufferSize = 1024 * 2;
         try (BufferedReader br = new BufferedReader(new FileReader(path), bufferSize)) {
             br.lines().parallel().forEach(it -> map.put(longKey.getAndIncrement(), it));
-        } catch (IOException e) {
-            e.printStackTrace();
+            // br.lines().parallel().forEach(it -> map.putIfAbsent(longKey.getAndIncrement(), it));
         }
         System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
-
-        s.close();
+        // System.out.println(map.size());
+        map.close();
     }
 
     public static void main(String[] args) throws IOException {
-        MVStoreUsage usage = new MVStoreUsage();
-        usage.testStoreConcurrency();
-        // usage.testTransaction();
+        // System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "4");
+        // System.out.println(ForkJoinPool.getCommonPoolParallelism());
+        MapdbUsage usage = new MapdbUsage();
+        // usage.testStoreConcurrency();
+        usage.testStoreConcurrency2();
     }
 }

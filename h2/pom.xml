@@ -138,6 +138,18 @@
             <version>10.4.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mapdb</groupId>
+            <artifactId>mapdb</artifactId>
+            <version>3.0.8</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.openhft</groupId>
+            <artifactId>chronicle-map</artifactId>
+            <version>3.17.2</version>
+            <scope>test</scope>
+        </dependency>
         <!-- END TEST DEPENDENCIES !-->
     </dependencies>
 
