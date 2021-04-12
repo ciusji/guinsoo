@@ -8,17 +8,10 @@ package org.h2.command.query;
 import static org.h2.expression.Expression.WITHOUT_PARENTHESES;
 import static org.h2.util.HasSQL.ADD_PLAN_INFORMATION;
 import static org.h2.util.HasSQL.DEFAULT_SQL_FLAGS;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.h2.api.ErrorCode;
 import org.h2.api.Trigger;
-import org.h2.command.dml.Insert;
 import org.h2.engine.Constants;
 import org.h2.engine.Database;
 import org.h2.engine.Mode.ExpressionNames;
@@ -41,8 +34,6 @@ import org.h2.index.Index;
 import org.h2.index.ViewIndex;
 import org.h2.message.DbException;
 import org.h2.mode.DefaultNullOrdering;
-import org.h2.mvstore.DataUtils;
-import org.h2.mvstore.db.MVPrimaryIndex;
 import org.h2.result.LazyResult;
 import org.h2.result.LocalResult;
 import org.h2.result.ResultInterface;
@@ -63,7 +54,6 @@ import org.h2.util.Utils;
 import org.h2.value.DataType;
 import org.h2.value.Value;
 import org.h2.value.ValueRow;
-import org.h2.value.ValueVarchar;
 
 /**
  * This class represents a simple SELECT statement.

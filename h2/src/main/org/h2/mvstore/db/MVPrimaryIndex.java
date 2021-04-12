@@ -402,7 +402,7 @@ public class MVPrimaryIndex extends MVIndex<Long, SearchRow> {
      * @param session the session
      * @return the map
      */
-    public TransactionMap<Long,SearchRow> getMap(SessionLocal session) {
+    TransactionMap<Long,SearchRow> getMap(SessionLocal session) {
         if (session == null) {
             return dataMap;
         }
