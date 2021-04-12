@@ -207,7 +207,8 @@ public class TreeMapAndBTree {
 
         Class.forName("org.h2.Driver");
         // unsupported "MVSTORE && LOG"
-        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
         // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=65536";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();

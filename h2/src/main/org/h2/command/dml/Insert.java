@@ -490,4 +490,5 @@ public final class Insert extends CommandWithValues implements ResultTarget {
             query.isEverything(visitor);
         }
     }
+
 }

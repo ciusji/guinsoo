@@ -94,7 +94,6 @@ public class MVPrimaryIndex extends MVIndex<Long, SearchRow> {
             long c = row.getValue(mainIndexColumn).getLong();
             row.setKey(c);
         }
-
         if (mvTable.getContainsLargeObject()) {
             for (int i = 0, len = row.getColumnCount(); i < len; i++) {
                 Value v = row.getValue(i);
@@ -108,7 +107,7 @@ public class MVPrimaryIndex extends MVIndex<Long, SearchRow> {
             }
         }
 
-        TransactionMap<Long,SearchRow> map = getMap(session);
+        TransactionMap<Long, SearchRow> map = getMap(session);
         long rowKey = row.getKey();
         try {
             Row old = (Row)map.putIfAbsent(rowKey, row);
@@ -196,7 +195,6 @@ public class MVPrimaryIndex extends MVIndex<Long, SearchRow> {
         } catch (MVStoreException e) {
             throw mvTable.convertException(e);
         }
-
 
         // because it's possible to directly update the key using the _rowid_
         // syntax
@@ -404,7 +402,7 @@ public class MVPrimaryIndex extends MVIndex<Long, SearchRow> {
      * @param session the session
      * @return the map
      */
-    TransactionMap<Long,SearchRow> getMap(SessionLocal session) {
+    public TransactionMap<Long,SearchRow> getMap(SessionLocal session) {
         if (session == null) {
             return dataMap;
         }
