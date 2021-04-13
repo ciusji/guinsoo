@@ -1,0 +1,64 @@
+/*
+ * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
+ * Initial Developer: Gunsioo Group
+ */
+package org.gunsioo.mode;
+
+import org.gunsioo.command.dml.Update;
+import org.gunsioo.engine.SessionLocal;
+import org.gunsioo.expression.ExpressionVisitor;
+import org.gunsioo.expression.Operation0;
+import org.gunsioo.message.DbException;
+import org.gunsioo.table.Column;
+import org.gunsioo.value.TypeInfo;
+import org.gunsioo.value.Value;
+
+/**
+ * VALUES(column) function for ON DUPLICATE KEY UPDATE clause.
+ */
+public final class OnDuplicateKeyValues extends Operation0 {
+
+    private final Column column;
+
+    private final Update update;
+
+    public OnDuplicateKeyValues(Column column, Update update) {
+        this.column = column;
+        this.update = update;
+    }
+
+    @Override
+    public Value getValue(SessionLocal session) {
+        Value v = update.getOnDuplicateKeyInsert().getOnDuplicateKeyValue(column.getColumnId());
+        if (v == null) {
+            throw DbException.getUnsupportedException(getTraceSQL());
+        }
+        return v;
+    }
+
+    @Override
+    public StringBuilder getUnenclosedSQL(StringBuilder builder, int sqlFlags) {
+        return column.getSQL(builder.append("VALUES("), sqlFlags).append(')');
+    }
+
+    @Override
+    public boolean isEverything(ExpressionVisitor visitor) {
+        switch (visitor.getType()) {
+        case ExpressionVisitor.DETERMINISTIC:
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public TypeInfo getType() {
+        return column.getType();
+    }
+
+    @Override
+    public int getCost() {
+        return 1;
+    }
+
+}
