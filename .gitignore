@@ -1,11 +1,9 @@
-/bin/
 /.settings/
 /.classpath
 /.project
 /dist/
 /build/
 /nbproject/
-/data/
 /error.lock
 /error.txt
 /test.out.txt
@@ -16,7 +14,5 @@
 *.iws
 .checkstyle
 /temp/
-/h2web/
 .pmd
 docs/html/testOutput.html
-src/main/org/h2/faststore/
