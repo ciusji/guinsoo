@@ -135,28 +135,6 @@ public class WebServer implements Service {
      */
     private static final long SESSION_TIMEOUT = SysProperties.CONSOLE_TIMEOUT;
 
-//    public static void main(String... args) throws IOException {
-//        String s = IOUtils.readStringAndClose(new java.io.FileReader(
-//                // "src/main/org/gunsioo/server/web/res/_text_cs.prop"), -1);
-//                "src/main/org/gunsioo/res/_messages_cs.prop"), -1);
-//        System.out.println(StringUtils.javaEncode("..."));
-//        String[] list = Locale.getISOLanguages();
-//        for (int i = 0; i < list.length; i++) {
-//            System.out.print(list[i] + " ");
-//        }
-//        System.out.println();
-//        String l = "de";
-//        String lang = new java.util.Locale(l).
-//            getDisplayLanguage(new java.util.Locale(l));
-//        System.out.println(new java.util.Locale(l).getDisplayLanguage());
-//        System.out.println(lang);
-//        java.util.Locale.CHINESE.getDisplayLanguage(java.util.Locale.CHINESE);
-//        for (int i = 0; i < lang.length(); i++) {
-//            System.out.println(Integer.toHexString(lang.charAt(i)) + " ");
-//        }
-//    }
-
-    // private URLClassLoader urlClassLoader;
     private int port;
     private boolean allowOthers;
     private boolean isDaemon;
@@ -181,7 +159,6 @@ public class WebServer implements Service {
     private TranslateThread translateThread;
     private boolean allowChunked = true;
     private String serverPropertiesDir = Constants.SERVER_PROPERTIES_DIR;
-    // null means the history is not allowed to be stored
     private String commandHistoryString;
 
     /**
@@ -346,19 +323,6 @@ public class WebServer implements Service {
                 trace = true;
             }
         }
-//            if (driverList != null) {
-//                try {
-//                    String[] drivers =
-//                        StringUtils.arraySplit(driverList, ',', false);
-//                    URL[] urls = new URL[drivers.length];
-//                    for(int i=0; i<drivers.length; i++) {
-//                        urls[i] = new URL(drivers[i]);
-//                    }
-//                    urlClassLoader = URLClassLoader.newInstance(urls);
-//                } catch (MalformedURLException e) {
-//                    TraceSystem.traceThrowable(e);
-//                }
-//            }
         for (String[] lang : LANGUAGES) {
             languages.add(lang[0]);
         }

@@ -1,4 +1,4 @@
-.translator=Thomas Mueller
+.translator=cius.ji
 02000=No data is available
 07001=Invalid parameter count for {0}, expected count: {1}
 08000=Error opening database: {0}

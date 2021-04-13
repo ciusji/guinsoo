@@ -209,10 +209,10 @@ public class TreeMapAndBTree {
 
         Class.forName("org.gunsioo.Driver");
         // unsupported "MVSTORE && LOG"
-        // String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        String url = "jdbc:gunsioo:file:~/tb;UNDO_LOG=0;CACHE_SIZE=4096";
         // String url = "jdbc:gunsioo:file:~/test;UNDO_LOG=0;CACHE_SIZE=8192;LOG=1;MV_STORE=FALSE";
         // String url = "jdbc:gunsioo:file:~/test;MV_STORE=FALSE;LOG=0";
-        String url = "jdbc:gunsioo:mem:db;MV_STORE=FALSE;LOG=0";
+        // String url = "jdbc:gunsioo:mem:db;MV_STORE=FALSE;LOG=0";
         // String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=65536";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();

@@ -14,7 +14,7 @@ location.href = 'login.jsp?jsessionid=${sessionId}';
 </head>
 <body style="margin: 20px;">
 
-<h1>Welcome to H2</h1>
+<h1>Welcome to Guinsoo</h1>
 <h2>No Javascript</h2>
 If you are not automatically redirected to the login page, then
 Javascript is currently disabled or your browser does not support Javascript.
