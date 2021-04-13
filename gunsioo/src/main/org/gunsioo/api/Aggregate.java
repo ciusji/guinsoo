@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.api;
@@ -26,13 +26,13 @@ public interface Aggregate {
     }
 
     /**
-     * This method must return the H2 data type, {@link org.gunsioo.value.Value},
-     * of the aggregate function, given the H2 data type of the input data.
+     * This method must return the Gunsioo data type, {@link org.gunsioo.value.Value},
+     * of the aggregate function, given the Gunsioo data type of the input data.
      * The method should check here if the number of parameters
      * passed is correct, and if not it should throw an exception.
      *
-     * @param inputTypes the H2 data type of the parameters,
-     * @return the H2 data type of the result
+     * @param inputTypes the Gunsioo data type of the parameters,
+     * @return the Gunsioo data type of the result
      * @throws SQLException if the number/type of parameters passed is incorrect
      */
     int getInternalType(int[] inputTypes) throws SQLException;

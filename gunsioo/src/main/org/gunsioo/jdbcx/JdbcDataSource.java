@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.jdbcx;
@@ -26,17 +26,17 @@ import org.gunsioo.message.TraceObject;
 import org.gunsioo.util.StringUtils;
 
 /**
- * A data source for H2 database connections. It is a factory for XAConnection
+ * A data source for Gunsioo database connections. It is a factory for XAConnection
  * and Connection objects. This class is usually registered in a JNDI naming
  * service. To create a data source object and register it with a JNDI service,
  * use the following code:
  *
  * <pre>
- * import org.h2.jdbcx.JdbcDataSource;
+ * import org.gunsioo.jdbcx.JdbcDataSource;
  * import javax.naming.Context;
  * import javax.naming.InitialContext;
  * JdbcDataSource ds = new JdbcDataSource();
- * ds.setURL(&quot;jdbc:h2:&tilde;/test&quot;);
+ * ds.setURL(&quot;jdbc:gunsioo:&tilde;/test&quot;);
  * ds.setUser(&quot;sa&quot;);
  * ds.setPassword(&quot;sa&quot;);
  * Context ctx = new InitialContext();

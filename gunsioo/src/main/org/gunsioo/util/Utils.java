@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.util;
@@ -751,7 +751,7 @@ public class Utils {
 
     /**
      * The utility methods will try to use the provided class factories to
-     * convert binary name of class to Class object. Used by H2 OSGi Activator
+     * convert binary name of class to Class object. Used by Gunsioo OSGi Activator
      * in order to provide a class from another bundle ClassLoader.
      */
     public interface ClassFactory {

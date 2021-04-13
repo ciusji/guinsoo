@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -27,7 +27,7 @@ public class HelloWorld {
         DeleteDbFiles.execute("~", "test", true);
 
         Class.forName("org.gunsioo.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:h2:~/test");
+        Connection conn = DriverManager.getConnection("jdbc:gunsioo:~/test");
         Statement stat = conn.createStatement();
 
         // this line would initialize the database

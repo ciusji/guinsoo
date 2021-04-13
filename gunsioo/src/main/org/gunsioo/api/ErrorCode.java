@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.api;
@@ -653,18 +653,18 @@ public class ErrorCode {
     /**
      * The error with code <code>90011</code> is thrown when
      * trying to open a connection to a database using an implicit relative
-     * path, such as "jdbc:h2:test" (in which case the database file would be
+     * path, such as "jdbc:gunsioo:test" (in which case the database file would be
      * stored in the current working directory of the application). This is not
      * allowed because it can lead to confusion where the database file is, and
      * can result in multiple databases because different working directories
-     * are used. Instead, use "jdbc:h2:~/name" (relative to the current user
+     * are used. Instead, use "jdbc:gunsioo:~/name" (relative to the current user
      * home directory), use an absolute path, set the base directory (baseDir),
-     * use "jdbc:h2:./name" (explicit relative path), or set the system property
+     * use "jdbc:gunsioo:./name" (explicit relative path), or set the system property
      * "h2.implicitRelativePath" to "true" (to prevent this check). For Windows,
      * an absolute path also needs to include the drive ("C:/..."). Please see
      * the documentation on the supported URL format. Example:
      * <pre>
-     * jdbc:h2:test
+     * jdbc:gunsioo:test
      * </pre>
      */
     public static final int URL_RELATIVE_TO_CWD = 90011;
@@ -749,7 +749,7 @@ public class ErrorCode {
      * the .trace.db file. Example of wrong usage:
      * <pre>
      * Connection conn;
-     * conn = DriverManager.getConnection(&quot;jdbc:h2:&tilde;/test&quot;);
+     * conn = DriverManager.getConnection(&quot;jdbc:gunsioo:&tilde;/test&quot;);
      * conn = null;
      * The connection was not closed by the application and is
      * garbage collected
@@ -776,10 +776,10 @@ public class ErrorCode {
      * database in embedded mode if this database is already in use in another
      * process (or in a different class loader). Multiple connections to the
      * same database are supported in the following cases:
-     * <ul><li>In embedded mode (URL of the form jdbc:h2:~/test) if all
+     * <ul><li>In embedded mode (URL of the form jdbc:gunsioo:~/test) if all
      * connections are opened within the same process and class loader.
      * </li><li>In server and cluster mode (URL of the form
-     * jdbc:h2:tcp://localhost/test) using remote connections.
+     * jdbc:gunsioo:tcp://localhost/test) using remote connections.
      * </li></ul>
      * The mixed mode is also supported. This mode requires to start a server
      * in the same process where the database is open in embedded mode.
@@ -872,7 +872,7 @@ public class ErrorCode {
      * The error with code <code>90030</code> is thrown when
      * the database engine has detected a checksum mismatch in the data
      * or index. To solve this problem, restore a backup or use the
-     * Recovery tool (org.h2.tools.Recover).
+     * Recovery tool (org.gunsioo.tools.Recover).
      */
     public static final int FILE_CORRUPTED_1 = 90030;
 
@@ -976,9 +976,9 @@ public class ErrorCode {
      * <pre>
      * CREATE TABLE TEST(ID INT);
      * CREATE TRIGGER TRIGGER_A AFTER INSERT ON TEST
-     *      CALL "org.h2.samples.TriggerSample$MyTrigger";
+     *      CALL "org.gunsioo.samples.TriggerSample$MyTrigger";
      * CREATE TRIGGER TRIGGER_A AFTER INSERT ON TEST
-     *      CALL "org.h2.samples.TriggerSample$MyTrigger";
+     *      CALL "org.gunsioo.samples.TriggerSample$MyTrigger";
      * </pre>
      */
     public static final int TRIGGER_ALREADY_EXISTS_1 = 90041;
@@ -1031,7 +1031,7 @@ public class ErrorCode {
      * format. Please see the documentation on the supported URL format and
      * examples. Example:
      * <pre>
-     * jdbc:h2:;;
+     * jdbc:gunsioo:;;
      * </pre>
      */
     public static final int URL_FORMAT_ERROR_2 = 90046;
@@ -1065,13 +1065,13 @@ public class ErrorCode {
      * spaces. File passwords (as well as user passwords) are case sensitive.
      * Example of wrong usage:
      * <pre>
-     * String url = &quot;jdbc:h2:&tilde;/test;CIPHER=AES&quot;;
+     * String url = &quot;jdbc:gunsioo:&tilde;/test;CIPHER=AES&quot;;
      * String passwords = &quot;filePasswordUserPassword&quot;;
      * DriverManager.getConnection(url, &quot;sa&quot;, pwds);
      * </pre>
      * Correct:
      * <pre>
-     * String url = &quot;jdbc:h2:&tilde;/test;CIPHER=AES&quot;;
+     * String url = &quot;jdbc:gunsioo:&tilde;/test;CIPHER=AES&quot;;
      * String passwords = &quot;filePassword userPassword&quot;;
      * DriverManager.getConnection(url, &quot;sa&quot;, pwds);
      * </pre>
@@ -1121,7 +1121,7 @@ public class ErrorCode {
      * Supported is AES.
      * Example:
      * <pre>
-     * jdbc:h2:~/test;CIPHER=DES
+     * jdbc:gunsioo:~/test;CIPHER=DES
      * </pre>
      */
     public static final int UNSUPPORTED_CIPHER = 90055;
@@ -1170,7 +1170,7 @@ public class ErrorCode {
      * Currently only FILE (the default) and SOCKET are supported
      * Example:
      * <pre>
-     * jdbc:h2:~/test;FILE_LOCK=LDAP
+     * jdbc:gunsioo:~/test;FILE_LOCK=LDAP
      * </pre>
      */
     public static final int UNSUPPORTED_LOCK_METHOD_1 = 90060;
@@ -1238,7 +1238,7 @@ public class ErrorCode {
      * the connection properties.
      * Example:
      * <pre>
-     * jdbc:h2:~/test;LOCK_TIMEOUT=0;LOCK_TIMEOUT=1
+     * jdbc:gunsioo:~/test;LOCK_TIMEOUT=0;LOCK_TIMEOUT=1
      * </pre>
      */
     public static final int DUPLICATE_PROPERTY_1 = 90066;
@@ -1248,7 +1248,7 @@ public class ErrorCode {
      * not connect to the database, or if the connection was lost. Possible
      * reasons are: the database server is not running at the given port, the
      * connection was closed due to a shutdown, or the server was stopped. Other
-     * possible causes are: the server is not an H2 server, or the network
+     * possible causes are: the server is not an Gunsioo server, or the network
      * connection is broken.
      */
     public static final int CONNECTION_BROKEN_1 = 90067;
@@ -1593,7 +1593,7 @@ public class ErrorCode {
      * trying to delete or update a database if it is open in read-only mode.
      * Example:
      * <pre>
-     * jdbc:h2:~/test;ACCESS_MODE_DATA=R
+     * jdbc:gunsioo:~/test;ACCESS_MODE_DATA=R
      * CREATE TABLE TEST(ID INT);
      * </pre>
      */
@@ -1611,7 +1611,7 @@ public class ErrorCode {
      * The error with code <code>90099</code> is thrown when an error occurred
      * trying to initialize the database event listener. Example:
      * <pre>
-     * jdbc:h2:&tilde;/test;DATABASE_EVENT_LISTENER='java.lang.String'
+     * jdbc:gunsioo:&tilde;/test;DATABASE_EVENT_LISTENER='java.lang.String'
      * </pre>
      */
     public static final int ERROR_SETTING_DATABASE_EVENT_LISTENER_2 = 90099;
@@ -1745,7 +1745,7 @@ public class ErrorCode {
      * the database URL contains unsupported settings.
      * Example:
      * <pre>
-     * jdbc:h2:~/test;UNKNOWN=TRUE
+     * jdbc:gunsioo:~/test;UNKNOWN=TRUE
      * </pre>
      */
     public static final int UNSUPPORTED_SETTING_1 = 90113;
@@ -1790,7 +1790,7 @@ public class ErrorCode {
      * connections are not allowed. To allow remote connections,
      * start the TCP server using the option -tcpAllowOthers as in:
      * <pre>
-     * java org.h2.tools.Server -tcp -tcpAllowOthers
+     * java org.gunsioo.tools.Server -tcp -tcpAllowOthers
      * </pre>
      * Or, when starting the server from an application, use:
      * <pre>
@@ -1899,7 +1899,7 @@ public class ErrorCode {
      * trying to call the BACKUP statement for an in-memory database.
      * Example:
      * <pre>
-     * jdbc:h2:mem:
+     * jdbc:gunsioo:mem:
      * BACKUP TO 'test.zip';
      * </pre>
      */
@@ -1963,7 +1963,7 @@ public class ErrorCode {
      * connections at the same time, or trying to insert two rows with the same
      * key from two connections. Example:
      * <pre>
-     * jdbc:h2:~/test
+     * jdbc:gunsioo:~/test
      * Session 1:
      * CREATE TABLE TEST(ID INT);
      * INSERT INTO TEST VALUES(1);
@@ -2040,13 +2040,13 @@ public class ErrorCode {
      *
      * Example of wrong usage:
      * <pre>
-     * DriverManager.getConnection("jdbc:h2:~/t");
-     * DriverManager.getConnection("jdbc:h2:~/test/");
+     * DriverManager.getConnection("jdbc:gunsioo:~/t");
+     * DriverManager.getConnection("jdbc:gunsioo:~/test/");
      * </pre>
      * Correct:
      * <pre>
-     * DriverManager.getConnection("jdbc:h2:~/te");
-     * DriverManager.getConnection("jdbc:h2:~/test/te");
+     * DriverManager.getConnection("jdbc:gunsioo:~/te");
+     * DriverManager.getConnection("jdbc:gunsioo:~/test/te");
      * </pre>
      */
     public static final int INVALID_DATABASE_NAME_1 = 90138;
@@ -2118,7 +2118,7 @@ public class ErrorCode {
      * The error with code <code>90146</code> is thrown when trying to open a
      * database that does not exist using the flag IFEXISTS=TRUE
      * <pre>
-     * jdbc:h2:./database_that_does_not_exist
+     * jdbc:gunsioo:./database_that_does_not_exist
      * </pre>
      */
     public static final int DATABASE_NOT_FOUND_WITH_IF_EXISTS_1 = 90146;
@@ -2148,7 +2148,7 @@ public class ErrorCode {
      * database that does not exist remotely without enabling remote database
      * creation first.
      * <pre>
-     * jdbc:h2:./database_that_does_not_exist
+     * jdbc:gunsioo:./database_that_does_not_exist
      * </pre>
      */
     public static final int REMOTE_DATABASE_NOT_FOUND_1 = 90149;

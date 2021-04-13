@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -62,9 +62,9 @@ public class TestOpenClose extends TestDb {
         }
         deleteDb("openClose");
         Connection conn;
-        conn = getConnection("jdbc:h2:" + getBaseDir() + "/openClose;FILE_LOCK=FS");
+        conn = getConnection("jdbc:gunsioo:" + getBaseDir() + "/openClose;FILE_LOCK=FS");
         assertThrows(ErrorCode.DATABASE_ALREADY_OPEN_1,
-                () -> getConnection("jdbc:h2:" + getBaseDir() + "/openClose;FILE_LOCK=FS;OPEN_NEW=TRUE"));
+                () -> getConnection("jdbc:gunsioo:" + getBaseDir() + "/openClose;FILE_LOCK=FS;OPEN_NEW=TRUE"));
         conn.close();
     }
 
@@ -80,7 +80,7 @@ public class TestOpenClose extends TestDb {
         }
         FileUtils.delete("split:" + fn);
         Connection conn;
-        String url = getURL("jdbc:h2:split:18:" + getBaseDir() + "/openClose2", true);
+        String url = getURL("jdbc:gunsioo:split:18:" + getBaseDir() + "/openClose2", true);
         conn = DriverManager.getConnection(url);
         conn.createStatement().execute("create table test(id int, name varchar) " +
                 "as select 1, space(1000000)");
@@ -228,7 +228,7 @@ public class TestOpenClose extends TestDb {
         Files.createFile(old);
         try {
             assertThrows(ErrorCode.FILE_VERSION_ERROR_1,
-                    () -> DriverManager.getConnection("jdbc:h2:" + getBaseDir() + "/db"));
+                    () -> DriverManager.getConnection("jdbc:gunsioo:" + getBaseDir() + "/db"));
         } finally {
             Files.deleteIfExists(old);
         }

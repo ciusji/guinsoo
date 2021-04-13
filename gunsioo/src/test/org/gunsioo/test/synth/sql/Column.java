@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.synth.sql;
@@ -75,8 +75,8 @@ class Column {
      */
     static boolean isConditionType(TestSynth config, int type) {
         switch (config.getMode()) {
-        case TestSynth.H2:
-        case TestSynth.H2_MEM:
+        case TestSynth.GUNSIOO:
+        case TestSynth.GUNSIOO_MEM:
             return true;
         case TestSynth.MYSQL:
         case TestSynth.HSQLDB:

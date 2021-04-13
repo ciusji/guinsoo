@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -272,7 +272,7 @@ public class TestRunscript extends TestDb implements Trigger {
         stat.execute("create schema c");
         stat.execute("create table a.test1(x varchar, y int)");
         stat.execute("create trigger trigger_insert before insert on a.test1 " +
-                "for each row call \"org.h2.test.db.TestRunscript\"");
+                "for each row call \"org.gunsioo.test.db.TestRunscript\"");
         stat.execute("script schema b");
         rs = stat.getResultSet();
         while (rs.next()) {
@@ -333,7 +333,7 @@ public class TestRunscript extends TestDb implements Trigger {
         Connection conn;
         conn = getConnection("runscript");
         Statement stat = conn.createStatement();
-        stat.execute("runscript from 'classpath:/org/h2/samples/newsfeed.sql'");
+        stat.execute("runscript from 'classpath:/org/gunsioo/samples/newsfeed.sql'");
         stat.execute("select * from version");
         conn.close();
     }

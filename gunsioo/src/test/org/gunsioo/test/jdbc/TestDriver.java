@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.jdbc;
@@ -43,7 +43,7 @@ public class TestDriver extends TestDb {
         prop.put("password", getPassword());
         prop.put("max_compact_time", "1234");
         prop.put("unknown", "1234");
-        String url = getURL("jdbc:h2:mem:driver", true);
+        String url = getURL("jdbc:gunsioo:mem:driver", true);
         Connection conn = DriverManager.getConnection(url, prop);
         ResultSet rs;
         rs = conn.createStatement().executeQuery(
@@ -55,11 +55,11 @@ public class TestDriver extends TestDb {
 
     private void testDriverObject() throws Exception {
         Driver instance = Driver.load();
-        assertTrue(DriverManager.getDriver("jdbc:h2:~/test") == instance);
+        assertTrue(DriverManager.getDriver("jdbc:gunsioo:~/test") == instance);
         Driver.unload();
-        assertThrows(SQLException.class, () -> DriverManager.getDriver("jdbc:h2:~/test"));
+        assertThrows(SQLException.class, () -> DriverManager.getDriver("jdbc:gunsioo:~/test"));
         Driver.load();
-        assertTrue(DriverManager.getDriver("jdbc:h2:~/test") == instance);
+        assertTrue(DriverManager.getDriver("jdbc:gunsioo:~/test") == instance);
     }
 
     private void testURLs() throws Exception {

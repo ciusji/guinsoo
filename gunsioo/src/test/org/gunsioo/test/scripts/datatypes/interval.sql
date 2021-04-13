@@ -1,5 +1,5 @@
 -- Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
--- and the EPL 1.0 (https://h2database.com/html/license.html).
+-- and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
 -- Initial Developer: Gunsioo Group
 --
 
@@ -1051,7 +1051,7 @@ SELECT CAST(10.123456789123456789 AS INTERVAL MINUTE TO SECOND);
 SELECT CAST(INTERVAL '10:07.407407' MINUTE TO SECOND AS NUMERIC(13, 11));
 >> 10.12345678333
 
--- H2 uses 1970-01-01 as start datetime
+-- Gunsioo uses 1970-01-01 as start datetime
 
 SELECT TIMESTAMP '2001-01-05 10:30:00' - TIME '11:45:30.5';
 >> INTERVAL '11326 22:44:29.5' DAY TO SECOND

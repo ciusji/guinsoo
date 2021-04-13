@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.engine;
@@ -121,14 +121,14 @@ public class SysProperties {
 
     /**
      * System property <code>h2.consoleStream</code> (default: true).<br />
-     * H2 Console: stream query results.
+     * Gunsioo Console: stream query results.
      */
     public static final boolean CONSOLE_STREAM =
             Utils.getProperty("h2.consoleStream", true);
 
     /**
      * System property <code>h2.consoleTimeout</code> (default: 1800000).<br />
-     * H2 Console: session timeout in milliseconds. The default is 30 minutes.
+     * Gunsioo Console: session timeout in milliseconds. The default is 30 minutes.
      */
     public static final int CONSOLE_TIMEOUT =
             Utils.getProperty("h2.consoleTimeout", 30 * 60 * 1000);

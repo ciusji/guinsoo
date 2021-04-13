@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.bnf.context;
@@ -19,7 +19,7 @@ import org.gunsioo.util.Utils;
 
 /**
  * Contains meta data information about a database schema.
- * This class is used by the H2 Console.
+ * This class is used by the Gunsioo Console.
  */
 public class DbSchema {
 
@@ -75,7 +75,7 @@ public class DbSchema {
             isSystem = true;
         } else if ("INFORMATION_SCHEMA".equalsIgnoreCase(name)) {
             isSystem = true;
-        } else if (!contents.isH2() &&
+        } else if (!contents.isGunsioo() &&
                 StringUtils.toUpperEnglish(name).startsWith("INFO")) {
             isSystem = true;
         } else if (contents.isPostgreSQL() &&
@@ -129,7 +129,7 @@ public class DbSchema {
         rs.close();
         tables = list.toArray(new DbTableOrView[0]);
         if (tables.length < SysProperties.CONSOLE_MAX_TABLES_LIST_COLUMNS) {
-            try (PreparedStatement ps = contents.isH2() ? prepareColumnsQueryH2(meta.getConnection()) : null) {
+            try (PreparedStatement ps = contents.isGunsioo() ? prepareColumnsQueryH2(meta.getConnection()) : null) {
                 for (DbTableOrView tab : tables) {
                     try {
                         tab.readColumns(meta, ps);

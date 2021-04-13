@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.server.web;
@@ -68,7 +68,7 @@ import org.gunsioo.value.DataType;
 
 /**
  * For each connection to a session, an object of this class is created.
- * This class is used by the H2 Console.
+ * This class is used by the Gunsioo Console.
  */
 public class WebApp {
 
@@ -757,13 +757,13 @@ public class WebApp {
 
     private String tables() {
         DbContents contents = session.getContents();
-        boolean isH2 = false;
+        boolean isGunsioo = false;
         try {
             String url = (String) session.get("url");
             Connection conn = session.getConnection();
             contents.readContents(url, conn);
             session.loadBnf();
-            isH2 = contents.isH2();
+            isGunsioo = contents.isGunsioo();
 
             StringBuilder buff = new StringBuilder()
                     .append("setNode(0, 0, 0, 'database', '")
@@ -784,7 +784,7 @@ public class WebApp {
                 treeIndex++;
                 treeIndex = addTablesAndViews(schema, false, buff, treeIndex);
             }
-            if (isH2) {
+            if (isGunsioo) {
                 try (Statement stat = conn.createStatement()) {
                     ResultSet rs;
                     try {
@@ -861,18 +861,18 @@ public class WebApp {
             session.put("tree", buff.toString());
         } catch (Exception e) {
             session.put("tree", "");
-            session.put("error", getStackTrace(0, e, isH2));
+            session.put("error", getStackTrace(0, e, isGunsioo));
         }
         return "tables.jsp";
     }
 
-    private String getStackTrace(int id, Throwable e, boolean isH2) {
+    private String getStackTrace(int id, Throwable e, boolean isGunsioo) {
         try {
             StringWriter writer = new StringWriter();
             e.printStackTrace(new PrintWriter(writer));
             String stackTrace = writer.toString();
             stackTrace = PageParser.escapeHtml(stackTrace);
-            if (isH2) {
+            if (isGunsioo) {
                 stackTrace = linkToSource(stackTrace);
             }
             stackTrace = StringUtils.replaceAll(stackTrace, "\t",
@@ -885,7 +885,7 @@ public class WebApp {
             if (e instanceof SQLException) {
                 SQLException se = (SQLException) e;
                 error += " " + se.getSQLState() + "/" + se.getErrorCode();
-                if (isH2) {
+                if (isGunsioo) {
                     int code = se.getErrorCode();
                     error += " <a href=\"https://h2database.com/javadoc/" +
                             "org/h2/api/ErrorCode.html#c" + code +
@@ -908,7 +908,7 @@ public class WebApp {
             int idx = s.indexOf("<br />");
             result.append(s, 0, idx);
             while (true) {
-                int start = s.indexOf("org.h2.", idx);
+                int start = s.indexOf("org.gunsioo.", idx);
                 if (start < 0) {
                     result.append(s.substring(idx));
                     break;
@@ -957,7 +957,7 @@ public class WebApp {
         session.put("driver", driver);
         session.put("url", url);
         session.put("user", user);
-        boolean isH2 = url.startsWith("jdbc:h2:");
+        boolean isGunsioo = url.startsWith("jdbc:gunsioo:");
         try {
             long start = System.currentTimeMillis();
             String profOpen = "", profClose = "";
@@ -997,7 +997,7 @@ public class WebApp {
             // session.put("error", "${text.login.testSuccessful}");
             return "login.jsp";
         } catch (Exception e) {
-            session.put("error", getLoginError(e, isH2));
+            session.put("error", getLoginError(e, isGunsioo));
             return "login.jsp";
         }
     }
@@ -1006,14 +1006,14 @@ public class WebApp {
      * Get the formatted login error message.
      *
      * @param e the exception
-     * @param isH2 if the current database is a H2 database
+     * @param isGunsioo if the current database is a Gunsioo database
      * @return the formatted error message
      */
-    private String getLoginError(Exception e, boolean isH2) {
+    private String getLoginError(Exception e, boolean isGunsioo) {
         if (e instanceof JdbcException && ((JdbcException) e).getErrorCode() == ErrorCode.CLASS_NOT_FOUND_1) {
-            return "${text.login.driverNotFound}<br />" + getStackTrace(0, e, isH2);
+            return "${text.login.driverNotFound}<br />" + getStackTrace(0, e, isGunsioo);
         }
-        return getStackTrace(0, e, isH2);
+        return getStackTrace(0, e, isGunsioo);
     }
 
     private String login(NetworkConnectionInfo networkConnectionInfo) {
@@ -1024,7 +1024,7 @@ public class WebApp {
         session.put("autoCommit", "checked");
         session.put("autoComplete", "1");
         session.put("maxrows", "1000");
-        boolean isH2 = url.startsWith("jdbc:h2:");
+        boolean isGunsioo = url.startsWith("jdbc:gunsioo:");
         try {
             Connection conn = server.getConnection(driver, url, user, password, (String) session.get("key"),
                     networkConnectionInfo);
@@ -1035,7 +1035,7 @@ public class WebApp {
             settingSave();
             return "frame.jsp";
         } catch (Exception e) {
-            session.put("error", getLoginError(e, isH2));
+            session.put("error", getLoginError(e, isGunsioo));
             return "login.jsp";
         }
     }
@@ -1111,7 +1111,7 @@ public class WebApp {
             result = buff.toString();
             session.put("result", result);
         } catch (Throwable e) {
-            session.put("result", getStackTrace(0, e, session.getContents().isH2()));
+            session.put("result", getStackTrace(0, e, session.getContents().isGunsioo()));
         }
         return "result.jsp";
     }
@@ -1163,7 +1163,7 @@ public class WebApp {
                 // cancel
             }
         } catch (Throwable e) {
-            result = "<br />" + getStackTrace(0, e, session.getContents().isH2());
+            result = "<br />" + getStackTrace(0, e, session.getContents().isGunsioo());
             error = formatAsError(e.getMessage());
         }
         String sql = "@edit " + (String) session.get("resultSetSQL");
@@ -1194,7 +1194,7 @@ public class WebApp {
             }
             Statement stat;
             DbContents contents = session.getContents();
-            if (forceEdit || (allowEdit && contents.isH2())) {
+            if (forceEdit || (allowEdit && contents.isGunsioo())) {
                 stat = conn.createStatement(
                         ResultSet.TYPE_SCROLL_INSENSITIVE,
                         ResultSet.CONCUR_UPDATABLE);
@@ -1375,7 +1375,7 @@ public class WebApp {
             return buff.toString();
         } catch (Throwable e) {
             // throwable: including OutOfMemoryError and so on
-            return getStackTrace(id, e, session.getContents().isH2());
+            return getStackTrace(id, e, session.getContents().isGunsioo());
         } finally {
             session.executingStatement = null;
         }
@@ -1781,7 +1781,7 @@ public class WebApp {
             return;
         }
         int type = meta.getColumnType(columnIndex);
-        if (session.getContents().isH2()) {
+        if (session.getContents().isGunsioo()) {
             rs.updateString(columnIndex, x);
             return;
         }

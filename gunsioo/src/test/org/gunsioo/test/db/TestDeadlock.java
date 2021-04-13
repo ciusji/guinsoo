@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -70,7 +70,7 @@ public class TestDeadlock extends TestDb {
         final Statement stat = conn.createStatement();
         Statement stat2 = conn2.createStatement();
         stat.execute("create alias if not exists ft_init for " +
-                "\"org.h2.fulltext.FullText.init\"");
+                "\"org.gunsioo.fulltext.FullText.init\"");
         stat.execute("call ft_init()");
         stat.execute("create table test(id int primary key, name varchar)");
         stat.execute("call ft_create_index('PUBLIC', 'TEST', null)");

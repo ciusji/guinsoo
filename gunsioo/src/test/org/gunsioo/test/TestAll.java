@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test;
@@ -253,8 +253,8 @@ public class TestAll {
 
 PIT test:
 java org.pitest.mutationtest.MutationCoverageReport
---reportDir data --targetClasses org.h2.dev.store.btree.StreamStore*
---targetTests org.h2.test.store.TestStreamStore
+--reportDir data --targetClasses org.gunsioo.dev.store.btree.StreamStore*
+--targetTests org.gunsioo.test.store.TestStreamStore
 --sourceDirs src/test,src/tools
 
 Dump heap on out of memory:
@@ -264,15 +264,15 @@ Random test:
 java15
 cd h2database/h2/bin
 del *.db
-start cmd /k "java -cp .;%H2DRIVERS% org.h2.test.TestAll join >testJoin.txt"
-start cmd /k "java -cp . org.h2.test.TestAll synth >testSynth.txt"
-start cmd /k "java -cp . org.h2.test.TestAll all >testAll.txt"
-start cmd /k "java -cp . org.h2.test.TestAll random >testRandom.txt"
-start cmd /k "java -cp . org.h2.test.TestAll btree >testBtree.txt"
-start cmd /k "java -cp . org.h2.test.TestAll halt >testHalt.txt"
-java -cp . org.h2.test.TestAll crash >testCrash.txt
+start cmd /k "java -cp .;%H2DRIVERS% org.gunsioo.test.TestAll join >testJoin.txt"
+start cmd /k "java -cp . org.gunsioo.test.TestAll synth >testSynth.txt"
+start cmd /k "java -cp . org.gunsioo.test.TestAll all >testAll.txt"
+start cmd /k "java -cp . org.gunsioo.test.TestAll random >testRandom.txt"
+start cmd /k "java -cp . org.gunsioo.test.TestAll btree >testBtree.txt"
+start cmd /k "java -cp . org.gunsioo.test.TestAll halt >testHalt.txt"
+java -cp . org.gunsioo.test.TestAll crash >testCrash.txt
 
-java org.h2.test.TestAll timer
+java org.gunsioo.test.TestAll timer
 
 */
 
@@ -470,7 +470,7 @@ java org.h2.test.TestAll timer
 
 recovery tests with small freeList pages, page size 64
 
-reopen org.h2.test.unit.TestPageStore
+reopen org.gunsioo.test.unit.TestPageStore
 -Xmx1500m -D reopenOffset=3 -D reopenShift=1
 
 power failure test
@@ -488,7 +488,7 @@ documentation: rolling review at main.html
 -------------
 
 kill a test:
-kill -9 `jps -l | grep "org.h2.test." | cut -d " " -f 1`
+kill -9 `jps -l | grep "org.gunsioo.test." | cut -d " " -f 1`
 
 */
         TestAll test = new TestAll();
@@ -896,7 +896,7 @@ kill -9 `jps -l | grep "org.h2.test." | cut -d " " -f 1`
         addTest(new TestPgServer());
         addTest(new TestRecovery());
         addTest(new RecoverLobTest());
-        addTest(createTest("org.h2.test.unit.TestServlet"));
+        addTest(createTest("org.gunsioo.test.unit.TestServlet"));
         addTest(new TestTimeStampWithTimeZone());
         addTest(new TestValue());
 
@@ -1107,7 +1107,7 @@ kill -9 `jps -l | grep "org.h2.test." | cut -d " " -f 1`
      */
     public static void printSystemInfo() {
         Properties prop = System.getProperties();
-        System.out.println("H2 " + Constants.FULL_VERSION +
+        System.out.println("Gunsioo " + Constants.FULL_VERSION +
                 " @ " + new java.sql.Timestamp(System.currentTimeMillis()).toString());
         System.out.println("Java " +
                 prop.getProperty("java.runtime.version") + ", " +

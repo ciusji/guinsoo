@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -556,7 +556,7 @@ public class TestKeywords extends TestBase {
     }
 
     private void testParser() throws Exception {
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:keywords")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:gunsioo:mem:keywords")) {
             Statement stat = conn.createStatement();
             for (Entry<String, TokenType> entry : TOKENS.entrySet()) {
                 String s = entry.getKey();
@@ -664,7 +664,7 @@ public class TestKeywords extends TestBase {
     }
 
     private void testInformationSchema() throws Exception {
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:gunsioo:mem:")) {
             Statement stat = conn.createStatement();
             try (ResultSet rs = stat.executeQuery("SELECT TABLE_NAME, COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS")) {
                 while (rs.next()) {
@@ -701,14 +701,14 @@ public class TestKeywords extends TestBase {
             }
             }
         }
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:gunsioo:mem:")) {
             assertEquals(setToString(set), conn.getMetaData().getSQLKeywords());
         }
         set.add("SYSDATE");
         set.add("SYSTIME");
         set.add("SYSTIMESTAMP");
         set.add("TODAY");
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:;OLD_INFORMATION_SCHEMA=TRUE")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:gunsioo:mem:;OLD_INFORMATION_SCHEMA=TRUE")) {
             assertEquals(setToString(set), conn.getMetaData().getSQLKeywords());
         }
     }

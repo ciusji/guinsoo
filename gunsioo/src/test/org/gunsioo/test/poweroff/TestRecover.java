@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.poweroff;
@@ -43,9 +43,9 @@ public class TestRecover {
     private static final String TEST_DIRECTORY = DIR + "/data" + NODE;
     private static final String BACKUP_DIRECTORY = DIR + "/last";
     private static final String URL = System.getProperty(
-            "test.url", "jdbc:h2:" + TEST_DIRECTORY + "/test");
+            "test.url", "jdbc:gunsioo:" + TEST_DIRECTORY + "/test");
     private static final String DRIVER = System.getProperty(
-            "test.driver", "org.h2.Driver");
+            "test.driver", "org.gunsioo.Driver");
 
     // private static final String DIR =
     //     System.getProperty("test.dir", "/temp/derby");

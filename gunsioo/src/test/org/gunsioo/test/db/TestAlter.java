@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -90,7 +90,7 @@ public class TestAlter extends TestDb {
 
         stat.execute("create table test(id int, name varchar(255))");
         stat.execute("alter table test add constraint x check (name > 'TEST.ID')");
-        // previous versions of H2 used sql.indexOf(columnName)
+        // previous versions of Gunsioo used sql.indexOf(columnName)
         // to check if the column is referenced
         stat.execute("alter table test drop column id");
         stat.execute("drop table test");

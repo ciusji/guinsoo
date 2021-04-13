@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.build.code;
@@ -74,9 +74,9 @@ public class AbbaDetect {
     }
 
     private static String disable(String source) {
-        source = source.replaceAll("\\{org.h2.util.AbbaDetector.begin\\(.*\\);", "{");
-        source = source.replaceAll("org.h2.util.AbbaDetector.begin\\((.*\\(\\))\\)", "$1");
-        source = source.replaceAll("org.h2.util.AbbaDetector.begin\\((.*)\\)", "$1");
+        source = source.replaceAll("\\{org.gunsioo.util.AbbaDetector.begin\\(.*\\);", "{");
+        source = source.replaceAll("org.gunsioo.util.AbbaDetector.begin\\((.*\\(\\))\\)", "$1");
+        source = source.replaceAll("org.gunsioo.util.AbbaDetector.begin\\((.*)\\)", "$1");
         source = source.replaceAll("synchronized  ", "synchronized ");
         return source;
     }
@@ -86,14 +86,14 @@ public class AbbaDetect {
         source = source.replaceAll("(// .* synchronized )([^ ])", "$1 $2");
 
         source = source.replaceAll("synchronized \\((.*)\\(\\)\\)",
-                "synchronized  \\(org.h2.util.AbbaDetector.begin\\($1\\(\\)\\)\\)");
+                "synchronized  \\(org.gunsioo.util.AbbaDetector.begin\\($1\\(\\)\\)\\)");
         source = source.replaceAll("synchronized \\((.*)\\)",
-                "synchronized  \\(org.h2.util.AbbaDetector.begin\\($1\\)\\)");
+                "synchronized  \\(org.gunsioo.util.AbbaDetector.begin\\($1\\)\\)");
 
         source = source.replaceAll("static synchronized ([^ (].*)\\{",
-                "static synchronized  $1{org.h2.util.AbbaDetector.begin\\(null\\);");
+                "static synchronized  $1{org.gunsioo.util.AbbaDetector.begin\\(null\\);");
         source = source.replaceAll("synchronized ([^ (].*)\\{",
-                "synchronized  $1{org.h2.util.AbbaDetector.begin\\(this\\);");
+                "synchronized  $1{org.gunsioo.util.AbbaDetector.begin\\(this\\);");
 
         return source;
     }

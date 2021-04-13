@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.jdbcx;
@@ -53,7 +53,7 @@ public class TestDataSource extends TestDb {
 //     System.setProperty(Context.PROVIDER_URL, "rmi://localhost:1099");
 //
 //     JdbcDataSource ds = new JdbcDataSource();
-//     ds.setURL("jdbc:h2:./test");
+//     ds.setURL("jdbc:gunsioo:./test");
 //     ds.setUser("test");
 //     ds.setPassword("");
 //
@@ -87,7 +87,7 @@ public class TestDataSource extends TestDb {
         Reference ref = new Reference("java.lang.String");
         assertTrue(null == factory.getObjectInstance(ref, null, null, null));
         ref = new Reference(JdbcDataSource.class.getName());
-        ref.add(new StringRefAddr("url", "jdbc:h2:mem:"));
+        ref.add(new StringRefAddr("url", "jdbc:gunsioo:mem:"));
         ref.add(new StringRefAddr("user", "u"));
         ref.add(new StringRefAddr("password", "p"));
         ref.add(new StringRefAddr("loginTimeout", "1"));
@@ -96,7 +96,7 @@ public class TestDataSource extends TestDb {
                 ref, null, null, null);
         assertEquals(1, ds.getLoginTimeout());
         assertEquals("test", ds.getDescription());
-        assertEquals("jdbc:h2:mem:", ds.getURL());
+        assertEquals("jdbc:gunsioo:mem:", ds.getURL());
         assertEquals("u", ds.getUser());
         assertEquals("p", ds.getPassword());
         Reference ref2 = ds.getReference();

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -250,7 +250,7 @@ public class TestFileSystem extends TestBase {
         FileUtils.deleteRecursive(dir, false);
         Connection conn;
         Statement stat;
-        conn = DriverManager.getConnection("jdbc:h2:split:18:"+dir+"/test");
+        conn = DriverManager.getConnection("jdbc:gunsioo:split:18:"+dir+"/test");
         stat = conn.createStatement();
         stat.execute(
                 "create table test(id int primary key, name varchar) " +
@@ -260,7 +260,7 @@ public class TestFileSystem extends TestBase {
         Backup.execute(dir + "/test.zip", dir, "", true);
         DeleteDbFiles.execute("split:" + dir, "test", true);
         conn = DriverManager.getConnection(
-                "jdbc:h2:split:zip:"+dir+"/test.zip!/test");
+                "jdbc:gunsioo:split:zip:"+dir+"/test.zip!/test");
         conn.createStatement().execute("select * from test where id=1");
         conn.close();
         FileUtils.deleteRecursive(dir, false);
@@ -270,7 +270,7 @@ public class TestFileSystem extends TestBase {
         org.gunsioo.Driver.load();
         String dir = getBaseDir() + "/fsMem";
         FileUtils.deleteRecursive(dir, false);
-        String url = "jdbc:h2:" + dir + "/fsMem";
+        String url = "jdbc:gunsioo:" + dir + "/fsMem";
         Connection conn = DriverManager.getConnection(url, "sa", "sa");
         conn.createStatement().execute(
                 "CREATE TABLE TEST AS SELECT * FROM DUAL");
@@ -278,7 +278,7 @@ public class TestFileSystem extends TestBase {
                 "BACKUP TO '" + getBaseDir() + "/fsMem.zip'");
         conn.close();
         org.gunsioo.tools.Restore.main("-file", getBaseDir() + "/fsMem.zip", "-dir", "memFS:");
-        conn = DriverManager.getConnection("jdbc:h2:memFS:fsMem", "sa", "sa");
+        conn = DriverManager.getConnection("jdbc:gunsioo:memFS:fsMem", "sa", "sa");
         ResultSet rs = conn.createStatement()
                 .executeQuery("SELECT * FROM TEST");
         rs.close();
@@ -297,7 +297,7 @@ public class TestFileSystem extends TestBase {
         }
         org.gunsioo.Driver.load();
         String dir = getBaseDir() + "/fsJar";
-        String url = "jdbc:h2:" + dir + "/fsJar";
+        String url = "jdbc:gunsioo:" + dir + "/fsJar";
         Connection conn = DriverManager.getConnection(url, "sa", "sa");
         Statement stat = conn.createStatement();
         stat.execute("create table test(id int primary key, " +
@@ -333,7 +333,7 @@ public class TestFileSystem extends TestBase {
             assertEquals(len, FileUtils.size(f));
             testReadOnly(f);
         }
-        String urlJar = "jdbc:h2:zip:" + getBaseDir() + "/fsJar.zip!/fsJar";
+        String urlJar = "jdbc:gunsioo:zip:" + getBaseDir() + "/fsJar.zip!/fsJar";
         conn = DriverManager.getConnection(urlJar, "sa", "sa");
         stat = conn.createStatement();
         rs = stat.executeQuery("select * from test");

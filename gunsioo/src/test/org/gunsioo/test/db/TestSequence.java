@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -378,7 +378,7 @@ public class TestSequence extends TestDb {
             script.add(rs.getString(1));
         }
         Collections.sort(script);
-        assertEquals("-- H2 " + Constants.VERSION + ";", script.get(0));
+        assertEquals("-- Gunsioo " + Constants.VERSION + ";", script.get(0));
         assertEquals("CREATE SEQUENCE \"PUBLIC\".\"A\" START WITH 1;", script.get(1));
         assertEquals("CREATE SEQUENCE \"PUBLIC\".\"B\" START " +
                 "WITH 5 INCREMENT BY 2 " +

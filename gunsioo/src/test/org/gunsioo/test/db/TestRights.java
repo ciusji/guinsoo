@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -75,7 +75,7 @@ public class TestRights extends TestDb {
             stat = conn.createStatement();
             stat.execute("create user test password 'test'");
             stat.execute("create linked table test" +
-                    "(null, 'jdbc:h2:mem:', 'sa', 'sa', 'DUAL')");
+                    "(null, 'jdbc:gunsioo:mem:', 'sa', 'sa', 'DUAL')");
             // password is invisible to non-admin
             Connection conn2 = getConnection(
                     "rights", "test", getPassword("test"));

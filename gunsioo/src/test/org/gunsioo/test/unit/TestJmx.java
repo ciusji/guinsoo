@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -51,7 +51,7 @@ public class TestJmx extends TestDb {
         conn = getConnection("mem:jmx;jmx=true");
         stat = conn.createStatement();
 
-        name = new ObjectName("org.h2:name=JMX,path=mem_jmx");
+        name = new ObjectName("org.gunsioo:name=JMX,path=mem_jmx");
         info = mbeanServer.getMBeanInfo(name);
         assertEquals("0", mbeanServer.
                 getAttribute(name, "CacheSizeMax").toString());
@@ -124,7 +124,7 @@ public class TestJmx extends TestDb {
         conn.close();
         conn = getConnection("jmx;jmx=true");
 
-        name = new ObjectName("org.h2:name=JMX,*");
+        name = new ObjectName("org.gunsioo:name=JMX,*");
         @SuppressWarnings("rawtypes")
         Set set = mbeanServer.queryNames(name, null);
         name = (ObjectName) set.iterator().next();

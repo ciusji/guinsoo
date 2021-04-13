@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.java;
@@ -67,16 +67,16 @@ public class Test extends TestBase {
         assertEquals("6.022137e+23f", JavaParser.readNumber("6.022137e+23f+1"));
 
         JavaParser parser = new JavaParser();
-        parser.parse("src/tools/org/h2", "java.lang.Object");
-        parser.parse("src/tools/org/h2", "java.lang.String");
-        parser.parse("src/tools/org/h2", "java.lang.Math");
-        parser.parse("src/tools/org/h2", "java.lang.Integer");
-        parser.parse("src/tools/org/h2", "java.lang.Long");
-        parser.parse("src/tools/org/h2", "java.lang.StringBuilder");
-        parser.parse("src/tools/org/h2", "java.io.PrintStream");
-        parser.parse("src/tools/org/h2", "java.lang.System");
-        parser.parse("src/tools/org/h2", "java.util.Arrays");
-        parser.parse("src/tools", "org.h2.java.TestApp");
+        parser.parse("src/tools/org/gunsioo", "java.lang.Object");
+        parser.parse("src/tools/org/gunsioo", "java.lang.String");
+        parser.parse("src/tools/org/gunsioo", "java.lang.Math");
+        parser.parse("src/tools/org/gunsioo", "java.lang.Integer");
+        parser.parse("src/tools/org/gunsioo", "java.lang.Long");
+        parser.parse("src/tools/org/gunsioo", "java.lang.StringBuilder");
+        parser.parse("src/tools/org/gunsioo", "java.io.PrintStream");
+        parser.parse("src/tools/org/gunsioo", "java.lang.System");
+        parser.parse("src/tools/org/gunsioo", "java.util.Arrays");
+        parser.parse("src/tools", "org.gunsioo.java.TestApp");
 
         PrintWriter w = new PrintWriter(System.out);
         parser.writeHeader(w);

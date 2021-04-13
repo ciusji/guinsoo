@@ -1,14 +1,14 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 
 CREATE TABLE CHANNEL(TITLE VARCHAR, LINK VARCHAR, DESC VARCHAR,
     LANGUAGE VARCHAR, PUB TIMESTAMP, LAST TIMESTAMP, AUTHOR VARCHAR);
 
-INSERT INTO CHANNEL VALUES('H2 Database Automated Build' ,
-    'https://h2database.com/html/build.html#automated', 'H2 Database Automated Build', 'en-us', LOCALTIMESTAMP, LOCALTIMESTAMP, 'Thomas Mueller');
+INSERT INTO CHANNEL VALUES('Gunsioo Database Automated Build' ,
+    'https://h2database.com/html/build.html#automated', 'Gunsioo Database Automated Build', 'en-us', LOCALTIMESTAMP, LOCALTIMESTAMP, 'Thomas Mueller');
 
 SELECT XMLSTARTDOC() ||
     XMLNODE('feed', XMLATTR('xmlns', 'http://www.w3.org/2005/Atom') || XMLATTR('xml:lang', C.LANGUAGE),

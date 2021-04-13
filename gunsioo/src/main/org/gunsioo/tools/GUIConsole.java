@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.tools;
@@ -134,7 +134,7 @@ public class GUIConsole extends Console implements ActionListener, MouseListener
                 return false;
             }
             PopupMenu menuConsole = new PopupMenu();
-            MenuItem itemConsole = new MenuItem("H2 Console");
+            MenuItem itemConsole = new MenuItem("Gunsioo Console");
             itemConsole.setActionCommand("console");
             itemConsole.addActionListener(this);
             itemConsole.setFont(font);
@@ -162,22 +162,22 @@ public class GUIConsole extends Console implements ActionListener, MouseListener
             Dimension d = (Dimension) Utils.callMethod(tray, "getTrayIconSize");
             String iconFile;
             if (d.width >= 24 && d.height >= 24) {
-                iconFile = "/org/h2/res/h2-24.png";
+                iconFile = "/org/gunsioo/res/h2-24.png";
             } else if (d.width >= 22 && d.height >= 22) {
                 // for Mac OS X 10.8.1 with retina display:
                 // the reported resolution is 22 x 22, but the image
                 // is scaled and the real resolution is 44 x 44
-                iconFile = "/org/h2/res/h2-64-t.png";
-                // iconFile = "/org/h2/res/h2-22-t.png";
+                iconFile = "/org/gunsioo/res/h2-64-t.png";
+                // iconFile = "/org/gunsioo/res/h2-22-t.png";
             } else {
-                iconFile = "/org/h2/res/h2.png";
+                iconFile = "/org/gunsioo/res/h2.png";
             }
             Image icon = loadImage(iconFile);
 
-            // trayIcon = new TrayIcon(image, "H2 Database Engine",
+            // trayIcon = new TrayIcon(image, "Gunsioo Database Engine",
             //         menuConsole);
             trayIcon = Utils.newInstance("java.awt.TrayIcon",
-                    icon, "H2 Database Engine", menuConsole);
+                    icon, "Gunsioo Database Engine", menuConsole);
 
             // trayIcon.addMouseListener(this);
             Utils.callMethod(trayIcon, "addMouseListener", this);
@@ -197,9 +197,9 @@ public class GUIConsole extends Console implements ActionListener, MouseListener
         if (statusFrame != null) {
             return;
         }
-        statusFrame = new Frame("H2 Console");
+        statusFrame = new Frame("Gunsioo Console");
         statusFrame.addWindowListener(this);
-        Image image = loadImage("/org/h2/res/h2.png");
+        Image image = loadImage("/org/gunsioo/res/h2.png");
         if (image != null) {
             statusFrame.setIconImage(image);
         }
@@ -238,7 +238,7 @@ public class GUIConsole extends Console implements ActionListener, MouseListener
         constraintsLabel.gridx = 0;
         constraintsLabel.gridy = 0;
 
-        Label label = new Label("H2 Console URL:", Label.LEFT);
+        Label label = new Label("Gunsioo Console URL:", Label.LEFT);
         label.setFont(font);
         mainPanel.add(label, constraintsLabel);
 
@@ -298,9 +298,9 @@ public class GUIConsole extends Console implements ActionListener, MouseListener
         if (createFrame != null) {
             return;
         }
-        createFrame = new Frame("H2 Console");
+        createFrame = new Frame("Gunsioo Console");
         createFrame.addWindowListener(this);
-        Image image = loadImage("/org/h2/res/h2.png");
+        Image image = loadImage("/org/gunsioo/res/h2.png");
         if (image != null) {
             createFrame.setIconImage(image);
         }
@@ -462,12 +462,12 @@ public class GUIConsole extends Console implements ActionListener, MouseListener
             errorArea.setText("Specify a password");
             return;
         }
-        String url = "jdbc:h2:" + path;
+        String url = "jdbc:gunsioo:" + path;
         try {
             new JdbcConnection(url, null, user, password).close();
             errorArea.setForeground(new Color(0, 0x99, 0));
             errorArea.setText("Database was created successfully.\n\n"
-                    + "JDBC URL for H2 Console:\n"
+                    + "JDBC URL for Gunsioo Console:\n"
                     + url);
         } catch (Exception ex) {
             errorArea.setForeground(Color.RED);

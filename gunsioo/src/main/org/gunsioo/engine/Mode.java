@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.engine;
@@ -557,7 +557,7 @@ public class Mode {
         mode.takeGeneratedSequenceValue = true;
         mode.expressionNames = ExpressionNames.POSTGRESQL_STYLE;
         mode.allowUsingFromClauseInUpdateStatement = true;
-        // Enumerate all H2 types NOT supported by PostgreSQL:
+        // Enumerate all Gunsioo types NOT supported by PostgreSQL:
         Set<String> disallowedTypes = new java.util.HashSet<>();
         disallowedTypes.add("NUMBER");
         disallowedTypes.add("IDENTITY");

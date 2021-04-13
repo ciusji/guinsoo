@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -69,7 +69,7 @@ public class TestReadOnly extends TestDb {
         conn.close();
         Backup.execute(dir + "/readonly.zip", dir, "readonlyInZip", true);
         conn = getConnection(
-                "jdbc:h2:zip:"+dir+"/readonly.zip!/readonlyInZip", getUser(), getPassword());
+                "jdbc:gunsioo:zip:"+dir+"/readonly.zip!/readonlyInZip", getUser(), getPassword());
         conn.createStatement().execute("select * from test where id=1");
         conn.close();
         Server server = Server.createTcpServer("-baseDir", dir);
@@ -77,13 +77,13 @@ public class TestReadOnly extends TestDb {
         int port = server.getPort();
         try {
             conn = getConnection(
-                    "jdbc:h2:tcp://localhost:" + port + "/zip:readonly.zip!/readonlyInZip",
+                    "jdbc:gunsioo:tcp://localhost:" + port + "/zip:readonly.zip!/readonlyInZip",
                         getUser(), getPassword());
             conn.createStatement().execute("select * from test where id=1");
             conn.close();
             FilePathZip2.register();
             conn = getConnection(
-                    "jdbc:h2:tcp://localhost:" + port + "/zip2:readonly.zip!/readonlyInZip",
+                    "jdbc:gunsioo:tcp://localhost:" + port + "/zip2:readonly.zip!/readonlyInZip",
                         getUser(), getPassword());
             conn.createStatement().execute("select * from test where id=1");
             conn.close();
@@ -125,7 +125,7 @@ public class TestReadOnly extends TestDb {
         assertThrows(ErrorCode.TABLE_OR_VIEW_NOT_FOUND_1, stat).
                 execute("SELECT * FROM TEST");
         stat.execute("create local temporary linked table test(" +
-                "null, 'jdbc:h2:mem:test3', 'sa', 'sa', 'INFORMATION_SCHEMA.TABLES')");
+                "null, 'jdbc:gunsioo:mem:test3', 'sa', 'sa', 'INFORMATION_SCHEMA.TABLES')");
         ResultSet rs = stat.executeQuery("select * from test");
         assertTrue(rs.next());
         conn.close();

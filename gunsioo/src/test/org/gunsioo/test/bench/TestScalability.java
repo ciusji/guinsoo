@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.bench;
@@ -47,7 +47,7 @@ public class TestScalability implements Database.DatabaseTest {
 
     private static Connection getResultConnection() throws SQLException {
         org.gunsioo.Driver.load();
-        return DriverManager.getConnection("jdbc:h2:./data/results");
+        return DriverManager.getConnection("jdbc:gunsioo:./data/results");
     }
 
     private static void openResults() throws SQLException {
@@ -73,7 +73,7 @@ public class TestScalability implements Database.DatabaseTest {
 
         ArrayList<Database> dbs = new ArrayList<>();
         int id = 1;
-        final String h2Url = "jdbc:h2:./data/test;" +
+        final String h2Url = "jdbc:gunsioo:./data/test;" +
                 "LOCK_TIMEOUT=10000;MV_STORE=FALSE";
         dbs.add(createDbEntry(id++, "H2", 1, h2Url));
         dbs.add(createDbEntry(id++, "H2", 2, h2Url));
@@ -83,7 +83,7 @@ public class TestScalability implements Database.DatabaseTest {
         dbs.add(createDbEntry(id++, "H2", 32, h2Url));
         dbs.add(createDbEntry(id++, "H2", 64, h2Url));
 
-        final String mvUrl = "jdbc:h2:./data/mvTest;" +
+        final String mvUrl = "jdbc:gunsioo:./data/mvTest;" +
                 "LOCK_MODE=0";
         dbs.add(createDbEntry(id++, "MV", 1, mvUrl));
         dbs.add(createDbEntry(id++, "MV", 2, mvUrl));
@@ -161,7 +161,7 @@ public class TestScalability implements Database.DatabaseTest {
     private Database createDbEntry(int id, String namePrefix,
             int threadCount, String url) {
         Database db = Database.parse(this, id, namePrefix +
-                ", org.h2.Driver, " + url + ", sa, sa", threadCount);
+                ", org.gunsioo.Driver, " + url + ", sa, sa", threadCount);
         return db;
     }
 

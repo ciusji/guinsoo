@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -30,11 +30,11 @@ public class Function {
     public static void main(String... args) throws Exception {
         Class.forName("org.gunsioo.Driver");
         Connection conn = DriverManager.getConnection(
-                "jdbc:h2:mem:", "sa", "");
+                "jdbc:gunsioo:mem:", "sa", "");
         Statement stat = conn.createStatement();
 
         // Using a custom Java function
-        stat.execute("CREATE ALIAS IS_PRIME FOR 'org.h2.samples.Function.isPrime'");
+        stat.execute("CREATE ALIAS IS_PRIME FOR 'org.gunsioo.samples.Function.isPrime'");
         ResultSet rs;
         rs = stat.executeQuery("SELECT IS_PRIME(X), X " +
                 "FROM SYSTEM_RANGE(1, 20) ORDER BY X");
@@ -63,7 +63,7 @@ public class Function {
         rs.close();
 
         // Using a custom function like table
-        stat.execute("CREATE ALIAS MATRIX FOR 'org.h2.samples.Function.getMatrix'");
+        stat.execute("CREATE ALIAS MATRIX FOR 'org.gunsioo.samples.Function.getMatrix'");
         prep = conn.prepareStatement("SELECT * FROM MATRIX(?) " +
                 "ORDER BY X, Y");
         prep.setInt(1, 2);

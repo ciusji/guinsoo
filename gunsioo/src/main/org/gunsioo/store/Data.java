@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  *
  * The variable size number format code is a port from SQLite,
@@ -135,7 +135,7 @@ public class Data {
 
     /**
      * Raw offset doesn't change during DST transitions, but changes during
-     * other transitions that some time zones have. H2 1.4.193 and later
+     * other transitions that some time zones have. Gunsioo 1.4.193 and later
      * versions use zone offset that is valid for startup time for performance
      * reasons. Datetime storage code of PageStore has issues with all time zone
      * transitions, so this buggy logic is preserved as is too.

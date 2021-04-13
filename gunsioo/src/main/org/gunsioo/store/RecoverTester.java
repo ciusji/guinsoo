@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.store;
@@ -102,7 +102,7 @@ public class RecoverTester implements Recorder {
             }
             verifyCount++;
             // avoid using the Engine class to avoid deadlocks
-            ConnectionInfo ci = new ConnectionInfo("jdbc:h2:" + testDatabase +
+            ConnectionInfo ci = new ConnectionInfo("jdbc:gunsioo:" + testDatabase +
                     ";FILE_LOCK=NO;TRACE_LEVEL_FILE=0", null, "", "");
             Database database = new Database(ci, null);
             // close the database
@@ -144,7 +144,7 @@ public class RecoverTester implements Recorder {
         try {
             IOUtils.copyFiles(fileName, testDatabase + Constants.SUFFIX_PAGE_FILE);
             // avoid using the Engine class to avoid deadlocks
-            ConnectionInfo ci = new ConnectionInfo("jdbc:h2:" +
+            ConnectionInfo ci = new ConnectionInfo("jdbc:gunsioo:" +
                         testDatabase + ";FILE_LOCK=NO", null, null, null);
             Database database = new Database(ci, null);
             // close the database

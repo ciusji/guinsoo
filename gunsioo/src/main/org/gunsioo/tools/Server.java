@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.tools;
@@ -22,7 +22,7 @@ import org.gunsioo.util.Tool;
 import org.gunsioo.util.Utils;
 
 /**
- * Starts the H2 Console (web-) server, TCP, and PG server.
+ * Starts the Gunsioo Console (web-) server, TCP, and PG server.
  */
 public class Server extends Tool implements Runnable, ShutdownHandler {
 
@@ -60,7 +60,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      * <tr><td>[-help] or [-?]</td>
      * <td>Print the list of options</td></tr>
      * <tr><td>[-web]</td>
-     * <td>Start the web server with the H2 Console</td></tr>
+     * <td>Start the web server with the Gunsioo Console</td></tr>
      * <tr><td>[-webAllowOthers]</td>
      * <td>Allow other computers to connect - see below</td></tr>
      * <tr><td>[-webDaemon]</td>
@@ -100,7 +100,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      * <tr><td>[-properties "&lt;dir&gt;"]</td>
      * <td>Server properties (default: ~, disable: null)</td></tr>
      * <tr><td>[-baseDir &lt;dir&gt;]</td>
-     * <td>The base directory for H2 databases (all servers)</td></tr>
+     * <td>The base directory for Gunsioo databases (all servers)</td></tr>
      * <tr><td>[-ifExists]</td>
      * <td>Only existing databases may be opened (all servers)</td></tr>
      * <tr><td>[-ifNotExists]</td>

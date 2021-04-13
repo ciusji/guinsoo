@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.dev.ftp.server;
@@ -97,7 +97,7 @@ public class FtpServer extends Tool implements Service {
      * <tr><td>[-help] or [-?]</td>
      * <td>Print the list of options</td></tr>
      * <tr><td>[-web]</td>
-     * <td>Start the web server with the H2 Console</td></tr>
+     * <td>Start the web server with the Gunsioo Console</td></tr>
      * <tr><td>[-webAllowOthers]</td>
      * <td>Allow other computers to connect</td></tr>
      * <tr><td>[-webPort &lt;port&gt;]</td>
@@ -139,7 +139,7 @@ public class FtpServer extends Tool implements Service {
      * <tr><td>[-ftpWritePassword &lt;p&gt;]</td>
      * <td>The write password (default: sa)</td></tr>
      * <tr><td>[-baseDir &lt;dir&gt;]</td>
-     * <td>The base directory for H2 databases; for all servers</td></tr>
+     * <td>The base directory for Gunsioo databases; for all servers</td></tr>
      * <tr><td>[-ifExists]</td>
      * <td>Only existing databases may be opened; for all servers</td></tr>
      * <tr><td>[-trace]</td>
@@ -414,7 +414,7 @@ public class FtpServer extends Tool implements Service {
 
     @Override
     public String getName() {
-        return "H2 FTP Server";
+        return "Gunsioo FTP Server";
     }
 
     /**

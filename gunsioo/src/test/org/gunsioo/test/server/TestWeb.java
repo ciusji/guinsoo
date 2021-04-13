@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.server;
@@ -52,7 +52,7 @@ import org.gunsioo.util.Task;
 import org.gunsioo.util.Utils10;
 
 /**
- * Tests the H2 Console application.
+ * Tests the Gunsioo Console application.
  */
 public class TestWeb extends TestDb {
 
@@ -246,7 +246,7 @@ public class TestWeb extends TestDb {
     }
 
     private void testIfExists() throws Exception {
-        Connection conn = getConnection("jdbc:h2:mem:" + getTestName(),
+        Connection conn = getConnection("jdbc:gunsioo:mem:" + getTestName(),
                 getUser(), getPassword());
         Server server = new Server();
         server.setOut(new PrintStream(new ByteArrayOutputStream()));
@@ -261,13 +261,13 @@ public class TestWeb extends TestDb {
             result = client.get(url);
             client.readSessionId(result);
             result = client.get(url, "login.jsp");
-            result = client.get(url, "test.do?driver=org.h2.Driver" +
-                    "&url=jdbc:h2:mem:" + getTestName() +
+            result = client.get(url, "test.do?driver=org.gunsioo.Driver" +
+                    "&url=jdbc:gunsioo:mem:" + getTestName() +
                     "&user=" + getUser() + "&password=" +
                     getPassword() + "&name=_test_");
             assertTrue(result.indexOf("Exception") < 0);
-            result = client.get(url, "test.do?driver=org.h2.Driver" +
-                    "&url=jdbc:h2:mem:" + getTestName() + "Wrong" +
+            result = client.get(url, "test.do?driver=org.gunsioo.Driver" +
+                    "&url=jdbc:gunsioo:mem:" + getTestName() + "Wrong" +
                     "&user=" + getUser() + "&password=" +
                     getPassword() + "&name=_test_");
             assertContains(result, "Exception");
@@ -302,12 +302,12 @@ public class TestWeb extends TestDb {
                     "&url=jdbc:abc:mem: " + getTestName() +
                     "&user=sa&password=sa&name=_test_");
             assertContains(result, "Exception");
-            result = client.get(url, "test.do?driver=org.h2.Driver" +
-                    "&url=jdbc:h2:mem:" + getTestName() +
+            result = client.get(url, "test.do?driver=org.gunsioo.Driver" +
+                    "&url=jdbc:gunsioo:mem:" + getTestName() +
                     "&user=sa&password=sa&name=_test_");
             assertTrue(result.indexOf("Exception") < 0);
-            result = client.get(url, "login.do?driver=org.h2.Driver" +
-                    "&url=jdbc:h2:mem:" + getTestName() +
+            result = client.get(url, "login.do?driver=org.gunsioo.Driver" +
+                    "&url=jdbc:gunsioo:mem:" + getTestName() +
                     "&user=sa&password=sa&name=_test_");
             result = client.get(url, "header.jsp");
             result = client.get(url, "query.do?sql=" +
@@ -531,8 +531,8 @@ public class TestWeb extends TestDb {
             assertContains(result, "getCatalog");
 
             result = client.get(url, "logout.do");
-            result = client.get(url, "login.do?driver=org.h2.Driver&" +
-                    "url=jdbc:h2:mem:" + getTestName() +
+            result = client.get(url, "login.do?driver=org.gunsioo.Driver&" +
+                    "url=jdbc:gunsioo:mem:" + getTestName() +
                     "&user=sa&password=sa&name=_test_");
 
             result = client.get(url, "logout.do");

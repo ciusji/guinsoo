@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -32,12 +32,12 @@ public class MixedMode {
         System.out.println(
                 "You can access the database remotely now, using the URL:");
         System.out.println(
-                "jdbc:h2:tcp://localhost:9081/~/test (user: sa, password: sa)");
+                "jdbc:gunsioo:tcp://localhost:9081/~/test (user: sa, password: sa)");
 
         // now use the database in your application in embedded mode
         Class.forName("org.gunsioo.Driver");
         Connection conn = DriverManager.getConnection(
-                "jdbc:h2:~/test", "sa", "sa");
+                "jdbc:gunsioo:~/test", "sa", "sa");
 
         // some simple 'business usage'
         Statement stat = conn.createStatement();

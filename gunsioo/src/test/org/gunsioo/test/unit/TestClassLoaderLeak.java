@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -83,10 +83,10 @@ public class TestClassLoaderLeak extends TestBase {
     static void runTest() throws Exception {
         Class.forName("org.gunsioo.Driver");
         Class.forName("org.gunsioo.upgrade.v1_1.Driver");
-        Driver d1 = DriverManager.getDriver("jdbc:h2:mem:test");
-        Driver d2 = DriverManager.getDriver("jdbc:h2v1_1:mem:test");
+        Driver d1 = DriverManager.getDriver("jdbc:gunsioo:mem:test");
+        Driver d2 = DriverManager.getDriver("jdbc:gunsioov1_1:mem:test");
         Connection connection;
-        connection = DriverManager.getConnection("jdbc:h2:mem:test");
+        connection = DriverManager.getConnection("jdbc:gunsioo:mem:test");
         DriverManager.deregisterDriver(d1);
         DriverManager.deregisterDriver(d2);
         connection.close();
@@ -103,11 +103,11 @@ public class TestClassLoaderLeak extends TestBase {
                     .getURLs(), ClassLoader.getSystemClassLoader());
         }
 
-        // allows delegation of H2 to the AppClassLoader
+        // allows delegation of Gunsioo to the AppClassLoader
         @Override
         public synchronized Class<?> loadClass(String name, boolean resolve)
                 throws ClassNotFoundException {
-            if (!name.contains(CLASS_NAME) && !name.startsWith("org.h2.")) {
+            if (!name.contains(CLASS_NAME) && !name.startsWith("org.gunsioo.")) {
                 return super.loadClass(name, resolve);
             }
             Class<?> c = findLoadedClass(name);

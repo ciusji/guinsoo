@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.engine;
@@ -1031,7 +1031,7 @@ public class SessionLocal extends Session implements TransactionStore.RollbackLi
                 modificationId++;
                 table.setModified();
                 it.remove();
-                // Exception thrown in org.h2.engine.Database.removeMeta
+                // Exception thrown in org.gunsioo.engine.Database.removeMeta
                 // if line below is missing with TestDeadlock
                 database.lockMeta(this);
                 table.removeChildrenAndResources(this);

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.synth;
@@ -53,7 +53,7 @@ public class TestDiskFull extends TestDb {
     private boolean test(int x) throws SQLException {
         deleteDb("memFS:", null);
         fs.setDiskFullCount(x, 0);
-        String url = "jdbc:h2:unstable:memFS:diskFull" + x +
+        String url = "jdbc:gunsioo:unstable:memFS:diskFull" + x +
             ";FILE_LOCK=NO;TRACE_LEVEL_FILE=0;WRITE_DELAY=10;" +
             "LOCK_TIMEOUT=100;CACHE_SIZE=4096;MAX_COMPACT_TIME=10";
         url = getURL(url, true);

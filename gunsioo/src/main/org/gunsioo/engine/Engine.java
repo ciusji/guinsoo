@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.engine;
@@ -177,7 +177,7 @@ public final class Engine {
         if (ci.getProperty("JMX", false)) {
             try {
                 Utils.callStaticMethod(
-                        "org.h2.jmx.DatabaseInfo.registerMBean", ci, database);
+                        "org.gunsioo.jmx.DatabaseInfo.registerMBean", ci, database);
             } catch (Exception e) {
                 database.removeSession(session);
                 throw DbException.get(ErrorCode.FEATURE_NOT_SUPPORTED_1, e, "JMX");
@@ -328,7 +328,7 @@ public final class Engine {
     static void close(String name) {
         if (JMX) {
             try {
-                Utils.callStaticMethod("org.h2.jmx.DatabaseInfo.unregisterMBean", name);
+                Utils.callStaticMethod("org.gunsioo.jmx.DatabaseInfo.unregisterMBean", name);
             } catch (Exception e) {
                 throw DbException.get(ErrorCode.FEATURE_NOT_SUPPORTED_1, e, "JMX");
             }

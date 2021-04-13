@@ -85,10 +85,10 @@ public class TreeMapAndBTree {
         String name = "relations";
 
         Class.forName("org.gunsioo.Driver");
-        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0";
-        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
-        String url = "jdbc:h2:mem:db;LOG=0;UNDO_LOG=0;CACHE_SIZE=65536";
-        // String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
+        // String url = "jdbc:gunsioo:mem:db;LOCK_MODE=0;UNDO_LOG=0";
+        // String url = "jdbc:gunsioo:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
+        String url = "jdbc:gunsioo:mem:db;LOG=0;UNDO_LOG=0;CACHE_SIZE=65536";
+        // String url = "jdbc:gunsioo:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
         long startTime2 = System.currentTimeMillis();
@@ -125,15 +125,15 @@ public class TreeMapAndBTree {
         String name = "relations";
 
         HikariConfig config = new HikariConfig();
-        config.setDriverClassName("org.h2.Driver");
-        config.setJdbcUrl("jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096");
+        config.setDriverClassName("org.gunsioo.Driver");
+        config.setJdbcUrl("jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096");
         HikariDataSource dataSource = new HikariDataSource(config);
 
-//        Class.forName("org.h2.Driver");
-//        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0";
-//        // String url = "jdbc:h2:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
-//        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
-//        /// String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
+//        Class.forName("org.gunsioo.Driver");
+//        // String url = "jdbc:gunsioo:mem:db;LOCK_MODE=0;UNDO_LOG=0";
+//        // String url = "jdbc:gunsioo:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
+//        String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+//        /// String url = "jdbc:gunsioo:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
 //        Connection conn = DriverManager.getConnection(url);
 
         Connection conn = dataSource.getConnection();
@@ -170,7 +170,7 @@ public class TreeMapAndBTree {
         // String path = "/Users/admin/Desktop/relations3.csv";
 
         Class.forName("org.gunsioo.Driver");
-        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
 
@@ -184,7 +184,7 @@ public class TreeMapAndBTree {
 
     public void insertDirect() throws ClassNotFoundException, SQLException {
         Class.forName("org.gunsioo.Driver");
-        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
 
@@ -209,11 +209,11 @@ public class TreeMapAndBTree {
 
         Class.forName("org.gunsioo.Driver");
         // unsupported "MVSTORE && LOG"
-        // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
-        // String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=8192;LOG=1;MV_STORE=FALSE";
-        // String url = "jdbc:h2:file:~/test;MV_STORE=FALSE;LOG=0";
-        String url = "jdbc:h2:mem:db;MV_STORE=FALSE;LOG=0";
-        // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=65536";
+        // String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        // String url = "jdbc:gunsioo:file:~/test;UNDO_LOG=0;CACHE_SIZE=8192;LOG=1;MV_STORE=FALSE";
+        // String url = "jdbc:gunsioo:file:~/test;MV_STORE=FALSE;LOG=0";
+        String url = "jdbc:gunsioo:mem:db;MV_STORE=FALSE;LOG=0";
+        // String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=65536";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
 

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.synth;
@@ -45,7 +45,7 @@ public class TestPowerOffFs2 extends TestDb {
     @Override
     public void test() throws Exception {
         fs = FilePathDebug.register();
-        url = "jdbc:h2:debug:memFS:powerOffFs;FILE_LOCK=NO;" +
+        url = "jdbc:gunsioo:debug:memFS:powerOffFs;FILE_LOCK=NO;" +
                 "TRACE_LEVEL_FILE=0;WRITE_DELAY=0;CACHE_SIZE=32";
         for (int i = 0;; i++) {
             test(i);

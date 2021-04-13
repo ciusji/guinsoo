@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.expression.function;
@@ -42,7 +42,7 @@ public final class SubstringFunction extends FunctionN {
             }
             int end = v3 == null ? Math.max(sl + 1, start) : start + v3.getInt();
             // SQL Standard requires "data exception - substring error" when
-            // end < start but H2 does not throw it for compatibility
+            // end < start but Gunsioo does not throw it for compatibility
             start = Math.max(start, 1);
             end = Math.min(end, sl + 1);
             if (start > sl || end <= start) {
@@ -66,7 +66,7 @@ public final class SubstringFunction extends FunctionN {
             }
             int end = v3 == null ? Math.max(sl + 1, start) : start + v3.getInt();
             // SQL Standard requires "data exception - substring error" when
-            // end < start but H2 does not throw it for compatibility
+            // end < start but Gunsioo does not throw it for compatibility
             start = Math.max(start, 1);
             end = Math.min(end, sl + 1);
             if (start > sl || end <= start) {

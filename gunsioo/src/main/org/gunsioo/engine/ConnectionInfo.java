@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.engine;
@@ -61,7 +61,7 @@ public class ConnectionInfo implements Cloneable {
      * Create a connection info object.
      *
      * @param name the database name (including tags), but without the
-     *            "jdbc:h2:" prefix
+     *            "jdbc:gunsioo:" prefix
      */
     public ConnectionInfo(String name) {
         this.name = name;
@@ -72,7 +72,7 @@ public class ConnectionInfo implements Cloneable {
     /**
      * Create a connection info object.
      *
-     * @param u the database URL (must start with jdbc:h2:)
+     * @param u the database URL (must start with jdbc:gunsioo:)
      * @param info the connection properties or {@code null}
      * @param user the user name or {@code null}
      * @param password
@@ -107,7 +107,7 @@ public class ConnectionInfo implements Cloneable {
         if (recoverTest != null) {
             FilePathRec.register();
             try {
-                Utils.callStaticMethod("org.h2.store.RecoverTester.init", recoverTest);
+                Utils.callStaticMethod("org.gunsioo.store.RecoverTester.init", recoverTest);
             } catch (Exception e) {
                 throw DbException.convert(e);
             }

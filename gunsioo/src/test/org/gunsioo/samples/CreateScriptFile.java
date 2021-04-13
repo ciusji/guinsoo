@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -45,7 +45,7 @@ public class CreateScriptFile {
         String filePassword = "password";
         String compressionAlgorithm = "DEFLATE";
 
-        String url = "jdbc:h2:mem:test";
+        String url = "jdbc:gunsioo:mem:test";
         String user = "sa", dbPassword = "sa";
 
         PrintWriter w = openScriptWriter(file,

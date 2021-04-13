@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.pagestore.db;
@@ -50,7 +50,7 @@ import org.gunsioo.value.ValueLobInMemory;
  * <p>
  * Locking
  * <p>
- * Normally, the locking order in H2 is: first lock the Session object, then
+ * Normally, the locking order in Gunsioo is: first lock the Session object, then
  * lock the Database object. However, in the case of the LOB data, we are using
  * the system session to store the data. If we locked the normal way, we see
  * deadlocks caused by the following pattern:

@@ -1,5 +1,5 @@
 -- Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
--- and the EPL 1.0 (https://h2database.com/html/license.html).
+-- and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
 -- Initial Developer: Gunsioo Group
 --
 select 1000L / 10;
@@ -1020,7 +1020,7 @@ select remarks from information_schema.users where user_name = 'SALES_USER';
 create table test(id int);
 > ok
 
-create linked table test_link('org.gunsioo.Driver', 'jdbc:h2:mem:', 'sa', 'sa', 'DUAL');
+create linked table test_link('org.gunsioo.Driver', 'jdbc:gunsioo:mem:', 'sa', 'sa', 'DUAL');
 > ok
 
 comment on table test_link is '123';

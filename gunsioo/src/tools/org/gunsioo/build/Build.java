@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.build;
@@ -109,7 +109,7 @@ public class Build extends BuildBase {
                 File.pathSeparator + "ext/postgresql-" + PGJDBC_VERSION + ".jar" +
                 File.pathSeparator + "ext/mysql-connector-java-" + MYSQL_CONNECTOR_VERSION + ".jar";
         StringList args = args("-Xmx128m",
-                "-cp", cp, "org.h2.test.bench.TestPerformance");
+                "-cp", cp, "org.gunsioo.test.bench.TestPerformance");
         execJava(args.plus("-init", "-db", "1"));
         execJava(args.plus("-db", "2"));
         execJava(args.plus("-db", "3", "-out", "pe.html"));
@@ -165,7 +165,7 @@ public class Build extends BuildBase {
         files = files("src/test");
         files.addAll(files("src/tools"));
         // we don't use Junit for this test framework
-        files = files.exclude("src/test/org/h2/test/TestAllJunit.java");
+        files = files.exclude("src/test/org/gunsioo/test/TestAllJunit.java");
         args = args("-Xlint:unchecked", "-Xlint:deprecation",
                 "-d", "temp", "-sourcepath", "src/test" + File.pathSeparator + "src/tools",
                 "-classpath", classpath);
@@ -179,15 +179,15 @@ public class Build extends BuildBase {
             exclude("*/package.html");
         copy("temp", files, "src/test");
 
-        java("org.h2.build.doc.GenerateHelp", null);
-        javadoc("-sourcepath", "src/main", "org.h2.tools", "org.h2.jmx",
+        java("org.gunsioo.build.doc.GenerateHelp", null);
+        javadoc("-sourcepath", "src/main", "org.gunsioo.tools", "org.gunsioo.jmx",
                 "-classpath",
                 "ext/lucene-core-" + LUCENE_VERSION + ".jar" +
                 File.pathSeparator + "ext/lucene-analyzers-common-" + LUCENE_VERSION + ".jar" +
                 File.pathSeparator + "ext/lucene-queryparser-" + LUCENE_VERSION + ".jar" +
                 File.pathSeparator + "ext/jts-core-" + JTS_VERSION + ".jar",
                 "-docletpath", "bin" + File.pathSeparator + "temp",
-                "-doclet", "org.h2.build.doclet.ResourceDoclet");
+                "-doclet", "org.gunsioo.build.doclet.ResourceDoclet");
 
         files = files("src/main").
             exclude("*.MF").
@@ -195,12 +195,12 @@ public class Build extends BuildBase {
             exclude("*/package.html").
             exclude("*/java.sql.Driver").
             exclude("*.DS_Store");
-        zip("temp/org/h2/util/data.zip", files, "src/main", true, false);
+        zip("temp/org/gunsioo/util/data.zip", files, "src/main", true, false);
     }
 
     private void compileTools() {
         mkdir("temp");
-        FileList files = files("src/tools").keep("src/tools/org/h2/build/*");
+        FileList files = files("src/tools").keep("src/tools/org/gunsioo/build/*");
         StringList args = args("-d", "temp", "-sourcepath", "src/tools" +
                 File.pathSeparator + "src/test" +
                 File.pathSeparator + "src/main");
@@ -269,13 +269,13 @@ public class Build extends BuildBase {
         execJava(args(
                 "-Xmx128m",
                 "-javaagent:ext/jacocoagent.jar=destfile=coverage/jacoco.exec,"
-                        + "excludes=org.h2.test.*:org.h2.tools.*:org.h2.sample.*",
+                        + "excludes=org.gunsioo.test.*:org.gunsioo.tools.*:org.gunsioo.sample.*",
                 "-cp", cp,
-                "org.h2.test.TestAll", "codeCoverage"));
+                "org.gunsioo.test.TestAll", "codeCoverage"));
         // Remove classes that we don't want to include in report
-        delete(files("coverage/bin/org/h2/test"));
-        delete(files("coverage/bin/org/h2/tools"));
-        delete(files("coverage/bin/org/h2/sample"));
+        delete(files("coverage/bin/org/gunsioo/test"));
+        delete(files("coverage/bin/org/gunsioo/tools"));
+        delete(files("coverage/bin/org/gunsioo/sample"));
         // Generate report
         execJava(args("-cp",
                 "ext/org.jacoco.cli-" + JACOCO_VERSION + ".jar" + File.pathSeparator
@@ -312,8 +312,8 @@ public class Build extends BuildBase {
         mkdir("temp");
         String classpath = "temp" +
             File.pathSeparator + "ext/jts-core-" + JTS_VERSION + ".jar";
-        FileList files = files("src/main/org/h2/mvstore").
-                exclude("src/main/org/h2/mvstore/db/*");
+        FileList files = files("src/main/org/gunsioo/mvstore").
+                exclude("src/main/org/gunsioo/mvstore/db/*");
         StringList args = args();
         if (debugInfo) {
             args = args.plus("-Xlint:unchecked", "-d", "temp", "-sourcepath",
@@ -344,18 +344,18 @@ public class Build extends BuildBase {
     public void docs() {
         javadoc();
         copy("docs", files("src/docsrc/index.html"), "src/docsrc");
-        java("org.h2.build.doc.XMLChecker", null);
-        java("org.h2.build.code.CheckJavadoc", null);
-        java("org.h2.build.code.CheckTextFiles", null);
-        java("org.h2.build.doc.GenerateDoc", null);
-        java("org.h2.build.doc.GenerateHelp", null);
-        java("org.h2.build.indexer.Indexer", null);
-        java("org.h2.build.doc.MergeDocs", null);
-        java("org.h2.build.doc.WebSite", null);
-        java("org.h2.build.doc.LinkChecker", null);
-        java("org.h2.build.doc.XMLChecker", null);
-        java("org.h2.build.doc.SpellChecker", null);
-        java("org.h2.build.code.CheckTextFiles", null);
+        java("org.gunsioo.build.doc.XMLChecker", null);
+        java("org.gunsioo.build.code.CheckJavadoc", null);
+        java("org.gunsioo.build.code.CheckTextFiles", null);
+        java("org.gunsioo.build.doc.GenerateDoc", null);
+        java("org.gunsioo.build.doc.GenerateHelp", null);
+        java("org.gunsioo.build.indexer.Indexer", null);
+        java("org.gunsioo.build.doc.MergeDocs", null);
+        java("org.gunsioo.build.doc.WebSite", null);
+        java("org.gunsioo.build.doc.LinkChecker", null);
+        java("org.gunsioo.build.doc.XMLChecker", null);
+        java("org.gunsioo.build.doc.SpellChecker", null);
+        java("org.gunsioo.build.code.CheckTextFiles", null);
         beep();
     }
 
@@ -430,7 +430,7 @@ public class Build extends BuildBase {
     }
 
     private static String getVersion() {
-        return getStaticField("org.h2.engine.Constants", "VERSION");
+        return getStaticField("org.gunsioo.engine.Constants", "VERSION");
     }
 
     private static String getJarSuffix() {
@@ -476,7 +476,7 @@ public class Build extends BuildBase {
         } catch (Exception e) {
             println("NSIS is not available: " + e);
         }
-        String buildDate = getStaticField("org.h2.engine.Constants", "BUILD_DATE");
+        String buildDate = getStaticField("org.gunsioo.engine.Constants", "BUILD_DATE");
         byte[] data = readFile(Paths.get("../h2web/h2.zip"));
         String sha1Zip = getSHA1(data), sha1Exe = null;
         writeFile(Paths.get("../h2web/h2-" + buildDate + ".zip"), data);
@@ -534,14 +534,14 @@ public class Build extends BuildBase {
         addVersions();
         manifest("src/main/META-INF/MANIFEST.MF");
         FileList files = files("temp").
-            exclude("temp/org/h2/build/*").
-            exclude("temp/org/h2/dev/*").
-            exclude("temp/org/h2/jcr/*").
-            exclude("temp/org/h2/java/*").
-            exclude("temp/org/h2/jcr/*").
-            exclude("temp/org/h2/samples/*").
-            exclude("temp/org/h2/server/ftp/*").
-            exclude("temp/org/h2/test/*").
+            exclude("temp/org/gunsioo/build/*").
+            exclude("temp/org/gunsioo/dev/*").
+            exclude("temp/org/gunsioo/jcr/*").
+            exclude("temp/org/gunsioo/java/*").
+            exclude("temp/org/gunsioo/jcr/*").
+            exclude("temp/org/gunsioo/samples/*").
+            exclude("temp/org/gunsioo/server/ftp/*").
+            exclude("temp/org/gunsioo/test/*").
             exclude("*.bat").
             exclude("*.sh").
             exclude("*.txt").
@@ -575,15 +575,15 @@ public class Build extends BuildBase {
         compileTools();
         delete("docs");
         mkdir("docs/javadoc");
-        javadoc("-sourcepath", "src/main", "org.h2.jdbc", "org.h2.jdbcx",
-                "org.h2.tools", "org.h2.api", "org.h2.engine", "org.h2.fulltext",
+        javadoc("-sourcepath", "src/main", "org.gunsioo.jdbc", "org.gunsioo.jdbcx",
+                "org.gunsioo.tools", "org.gunsioo.api", "org.gunsioo.engine", "org.gunsioo.fulltext",
                 "-classpath",
                 "ext/lucene-core-" + LUCENE_VERSION + ".jar" +
                 File.pathSeparator + "ext/lucene-analyzers-common-" + LUCENE_VERSION + ".jar" +
                 File.pathSeparator + "ext/lucene-queryparser-" + LUCENE_VERSION + ".jar" +
                 File.pathSeparator + "ext/jts-core-" + JTS_VERSION + ".jar",
                 "-docletpath", "bin" + File.pathSeparator + "temp",
-                "-doclet", "org.h2.build.doclet.Doclet");
+                "-doclet", "org.gunsioo.build.doclet.Doclet");
         copy("docs/javadoc", files("src/docsrc/javadoc"), "src/docsrc/javadoc");
     }
 
@@ -614,7 +614,7 @@ public class Build extends BuildBase {
                 File.pathSeparator + "ext/jts-core-" + JTS_VERSION + ".jar" +
                 File.pathSeparator + "ext/asm-" + ASM_VERSION + ".jar" +
                 File.pathSeparator + "ext/junit-jupiter-api-" + JUNIT_VERSION + ".jar",
-                "-subpackages", "org.h2");
+                "-subpackages", "org.gunsioo");
 
         mkdir("docs/javadocImpl3");
         javadoc("-sourcepath", "src/main",
@@ -630,8 +630,8 @@ public class Build extends BuildBase {
                 File.pathSeparator + "ext/org.osgi.core-" + OSGI_VERSION + ".jar" +
                 File.pathSeparator + "ext/org.osgi.enterprise-" + OSGI_VERSION + ".jar" +
                 File.pathSeparator + "ext/jts-core-" + JTS_VERSION + ".jar",
-                "-subpackages", "org.h2.mvstore",
-                "-exclude", "org.h2.mvstore.db");
+                "-subpackages", "org.gunsioo.mvstore",
+                "-exclude", "org.gunsioo.mvstore.db");
 
         System.setProperty("h2.interfacesOnly", "false");
         System.setProperty("h2.javadocDestDir", "docs/javadocImpl");
@@ -649,10 +649,10 @@ public class Build extends BuildBase {
                 File.pathSeparator + "ext/jts-core-" + JTS_VERSION + ".jar" +
                 File.pathSeparator + "ext/asm-" + ASM_VERSION + ".jar" +
                 File.pathSeparator + "ext/junit-jupiter-api-" + JUNIT_VERSION + ".jar",
-                "-subpackages", "org.h2",
+                "-subpackages", "org.gunsioo",
                 "-package",
                 "-docletpath", "bin" + File.pathSeparator + "temp",
-                "-doclet", "org.h2.build.doclet.Doclet");
+                "-doclet", "org.gunsioo.build.doclet.Doclet");
         copy("docs/javadocImpl", files("src/docsrc/javadoc"), "src/docsrc/javadoc");
     }
 
@@ -668,11 +668,11 @@ public class Build extends BuildBase {
     }
 
     /**
-     * This will build a release of the H2 .jar files and upload it to
+     * This will build a release of the Gunsioo .jar files and upload it to
      * file:///data/h2database/m2-repo. This is only required when
-     * a new H2 version is made.
+     * a new Gunsioo version is made.
      */
-    @Description(summary = "Build H2 release jars and upload to file:///data/h2database/m2-repo.")
+    @Description(summary = "Build Gunsioo release jars and upload to file:///data/h2database/m2-repo.")
     public void mavenDeployCentral() {
         // generate and deploy h2*-sources.jar file
         FileList files = files("src/main");
@@ -735,8 +735,8 @@ public class Build extends BuildBase {
         // generate the h2-mvstore-*-sources.jar file
         files = files("src/main");
         copy("docs", files, "src/main");
-        files = files("docs").keep("docs/org/h2/mvstore/*").
-                exclude("docs/org/h2/mvstore/db/*").
+        files = files("docs").keep("docs/org/gunsioo/mvstore/*").
+                exclude("docs/org/gunsioo/mvstore/db/*").
                 keep("*.java");
         files.addAll(files("docs").keep("docs/META-INF/*"));
         manifest = new String(readFile(Paths.get("src/installer/source-mvstore-manifest.mf")));
@@ -792,10 +792,10 @@ public class Build extends BuildBase {
     }
 
     /**
-     * This will build a 'snapshot' H2 .jar file and upload it to the local
+     * This will build a 'snapshot' Gunsioo .jar file and upload it to the local
      * Maven 2 repository.
      */
-    @Description(summary = "Build a snapshot H2 jar and upload to local Maven 2 repo.")
+    @Description(summary = "Build a snapshot Gunsioo jar and upload to local Maven 2 repo.")
     public void mavenInstallLocal() {
         // MVStoreUsage
         jarMVStore();
@@ -830,7 +830,7 @@ public class Build extends BuildBase {
      * required files are missing, they are listed, and the jar file is not
      * built.
      */
-    @Description(summary = "Build H2 jar avoiding downloads (list missing files).")
+    @Description(summary = "Build Gunsioo jar avoiding downloads (list missing files).")
     public void offline() {
         downloadOrVerify(true);
         if (filesMissing) {
@@ -845,7 +845,7 @@ public class Build extends BuildBase {
      */
     @Description(summary = "Run the spellchecker.")
     public void spellcheck() {
-        java("org.h2.build.doc.SpellChecker", null);
+        java("org.gunsioo.build.doc.SpellChecker", null);
     }
 
     /**
@@ -893,13 +893,13 @@ public class Build extends BuildBase {
                     "-Xmx128m",
                     "-XX:MaxDirectMemorySize=2g",
                     "-cp", cp,
-                    "org.h2.test.TestAll", "travis"));
+                    "org.gunsioo.test.TestAll", "travis"));
         } else {
             ret = execJava(args(
                     "-ea",
                     "-Xmx128m",
                     "-cp", cp,
-                    "org.h2.test.TestAll"));
+                    "org.gunsioo.test.TestAll"));
         }
         // return a failure code for Jenkins/Travis/CI builds
         if (ret != 0) {
@@ -1052,7 +1052,7 @@ public class Build extends BuildBase {
         String cp = "bin" + File.pathSeparator + "temp";
         execJava(args("-Xmx512m", "-cp", cp,
                 "-Dh2.ftpPassword=" + password,
-                "org.h2.build.doc.UploadBuild"));
+                "org.gunsioo.build.doc.UploadBuild"));
     }
 
     /**

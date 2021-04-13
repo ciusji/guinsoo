@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.tools;
@@ -32,9 +32,9 @@ public class CreateCluster extends Tool {
      * <tr><td>[-help] or [-?]</td>
      * <td>Print the list of options</td></tr>
      * <tr><td>[-urlSource "&lt;url&gt;"]</td>
-     * <td>The database URL of the source database (jdbc:h2:...)</td></tr>
+     * <td>The database URL of the source database (jdbc:gunsioo:...)</td></tr>
      * <tr><td>[-urlTarget "&lt;url&gt;"]</td>
-     * <td>The database URL of the target database (jdbc:h2:...)</td></tr>
+     * <td>The database URL of the target database (jdbc:gunsioo:...)</td></tr>
      * <tr><td>[-user &lt;user&gt;]</td>
      * <td>The user name (default: sa)</td></tr>
      * <tr><td>[-password &lt;pwd&gt;]</td>

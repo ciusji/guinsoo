@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -61,7 +61,7 @@ public class TestFileLockProcess extends TestDb {
     @Override
     public void test() throws Exception {
         deleteDb("lock");
-        String url = "jdbc:h2:"+getBaseDir()+"/lock";
+        String url = "jdbc:gunsioo:"+getBaseDir()+"/lock";
 
         println("socket");
         test(4, url + ";file_lock=socket");

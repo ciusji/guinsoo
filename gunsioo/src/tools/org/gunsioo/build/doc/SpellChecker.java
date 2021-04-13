@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.build.doc;
@@ -69,7 +69,7 @@ public class SpellChecker {
      */
     public static void main(String... args) throws IOException {
         String dir = Utils.getProperty("spellcheckDir", "src");
-        new SpellChecker().run("src/tools/org/h2/build/doc/dictionary.txt", dir);
+        new SpellChecker().run("src/tools/org/gunsioo/build/doc/dictionary.txt", dir);
     }
 
     private void run(String dictionaryFileName, String dir) throws IOException {

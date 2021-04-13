@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -64,7 +64,7 @@ public class TestCluster extends TestDb {
 
         Server n1 = org.gunsioo.tools.Server.createTcpServer("-ifNotExists", "-baseDir", getBaseDir() + "/node1").start();
         int port1 = n1.getPort();
-        String url1 = getURL("jdbc:h2:tcp://localhost:" + port1 + "/test", false);
+        String url1 = getURL("jdbc:gunsioo:tcp://localhost:" + port1 + "/test", false);
 
         conn = getConnection(url1, user, password);
         stat = conn.createStatement();
@@ -74,10 +74,10 @@ public class TestCluster extends TestDb {
 
         Server n2 = org.gunsioo.tools.Server.createTcpServer("-ifNotExists", "-baseDir", getBaseDir() + "/node2").start();
         int port2 = n2.getPort();
-        String url2 = getURL("jdbc:h2:tcp://localhost:" + port2 + "/test", false);
+        String url2 = getURL("jdbc:gunsioo:tcp://localhost:" + port2 + "/test", false);
 
         String serverList = "localhost:" + port1 + ",localhost:" + port2;
-        String urlCluster = getURL("jdbc:h2:tcp://" + serverList + "/test", true);
+        String urlCluster = getURL("jdbc:gunsioo:tcp://" + serverList + "/test", true);
         CreateCluster.main("-urlSource", url1, "-urlTarget", url2,
                 "-user", user, "-password", password, "-serverList",
                 serverList);
@@ -107,10 +107,10 @@ public class TestCluster extends TestDb {
                 .start();
         int port2 = server2.getPort();
 
-        String url1 = getURL("jdbc:h2:tcp://localhost:" + port1 + "/test", true);
-        String url2 = getURL("jdbc:h2:tcp://localhost:" + port2 + "/test", true);
+        String url1 = getURL("jdbc:gunsioo:tcp://localhost:" + port1 + "/test", true);
+        String url2 = getURL("jdbc:gunsioo:tcp://localhost:" + port2 + "/test", true);
         String serverList = "localhost:" + port1 + ",localhost:" + port2;
-        String urlCluster = getURL("jdbc:h2:tcp://" + serverList + "/test", true);
+        String urlCluster = getURL("jdbc:gunsioo:tcp://" + serverList + "/test", true);
 
         CreateCluster.main("-urlSource", url1, "-urlTarget", url2,
                 "-user", user, "-password", password, "-serverList",
@@ -166,10 +166,10 @@ public class TestCluster extends TestDb {
         Server n2 = org.gunsioo.tools.Server.createTcpServer("-ifNotExists", "-baseDir", getBaseDir() + "/node2").start();
         int port2 = n2.getPort();
 
-        String url1 = getURL("jdbc:h2:tcp://localhost:" + port1 + "/test", true);
-        String url2 = getURL("jdbc:h2:tcp://localhost:" + port2 + "/test", true);
+        String url1 = getURL("jdbc:gunsioo:tcp://localhost:" + port1 + "/test", true);
+        String url2 = getURL("jdbc:gunsioo:tcp://localhost:" + port2 + "/test", true);
         String serverList = "localhost:" + port1 + ",localhost:" + port2;
-        String urlCluster = getURL("jdbc:h2:tcp://" + serverList + "/test", true);
+        String urlCluster = getURL("jdbc:gunsioo:tcp://" + serverList + "/test", true);
 
         CreateCluster.main("-urlSource", url1, "-urlTarget", url2,
                 "-user", user, "-password", password, "-serverList",
@@ -211,9 +211,9 @@ public class TestCluster extends TestDb {
         Server n2 = org.gunsioo.tools.Server.createTcpServer("-ifNotExists", "-baseDir", getBaseDir() + "/node2").start();
         int port2 = n2.getPort();
         String serverList = "localhost:" + port1 + ",localhost:" + port2;
-        String url1 = getURL("jdbc:h2:tcp://localhost:" + port1 + "/test", true);
-        String url2 = getURL("jdbc:h2:tcp://localhost:" + port2 + "/test", true);
-        String urlCluster = getURL("jdbc:h2:tcp://" + serverList + "/test", true);
+        String url1 = getURL("jdbc:gunsioo:tcp://localhost:" + port1 + "/test", true);
+        String url2 = getURL("jdbc:gunsioo:tcp://localhost:" + port2 + "/test", true);
+        String urlCluster = getURL("jdbc:gunsioo:tcp://" + serverList + "/test", true);
 
         CreateCluster.main("-urlSource", url1, "-urlTarget", url2,
                 "-user", user, "-password", password, "-serverList",
@@ -263,9 +263,9 @@ public class TestCluster extends TestDb {
         int port2 = n2.getPort();
 
         String serverList = "localhost:" + port1 + ",localhost:" + port2;
-        String url1 = getURL("jdbc:h2:tcp://localhost:" + port1 + "/test", true);
-        String url2 = getURL("jdbc:h2:tcp://localhost:" + port2 + "/test", true);
-        String urlCluster = getURL("jdbc:h2:tcp://" + serverList + "/test", true);
+        String url1 = getURL("jdbc:gunsioo:tcp://localhost:" + port1 + "/test", true);
+        String url2 = getURL("jdbc:gunsioo:tcp://localhost:" + port2 + "/test", true);
+        String urlCluster = getURL("jdbc:gunsioo:tcp://" + serverList + "/test", true);
 
         CreateCluster.main("-urlSource", url1, "-urlTarget", url2,
                 "-user", user, "-password", password, "-serverList",
@@ -310,7 +310,7 @@ public class TestCluster extends TestDb {
         // initialize the database
         Server n1 = org.gunsioo.tools.Server.createTcpServer("-ifNotExists", "-baseDir", getBaseDir() + "/node1").start();
         int port1 = n1.getPort();
-        String url1 = getURL("jdbc:h2:tcp://localhost:" + port1 + "/test", false);
+        String url1 = getURL("jdbc:gunsioo:tcp://localhost:" + port1 + "/test", false);
         conn = getConnection(url1, user, password);
         stat = conn.createStatement();
         stat.execute("create table test(id int primary key, name varchar) as " +
@@ -321,7 +321,7 @@ public class TestCluster extends TestDb {
         // start the second server
         Server n2 = org.gunsioo.tools.Server.createTcpServer("-ifNotExists", "-baseDir", getBaseDir() + "/node2").start();
         int port2 = n2.getPort();
-        String url2 = getURL("jdbc:h2:tcp://localhost:" + port2 + "/test", false);
+        String url2 = getURL("jdbc:gunsioo:tcp://localhost:" + port2 + "/test", false);
 
         // copy the database and initialize the cluster
         String serverList = "localhost:" + port1 + ",localhost:" + port2;
@@ -335,7 +335,7 @@ public class TestCluster extends TestDb {
         JdbcUtils.closeSilently(conn);
 
         // test the cluster connection
-        String urlCluster = getURL("jdbc:h2:tcp://" + serverList + "/test", false);
+        String urlCluster = getURL("jdbc:gunsioo:tcp://" + serverList + "/test", false);
         Connection connApp = getConnection(urlCluster +
                 ";AUTO_RECONNECT=TRUE", user, password);
         check(connApp, len, "'" + serverList + "'");
@@ -429,26 +429,26 @@ public class TestCluster extends TestDb {
         // try to connect in standalone mode - should fail
         // should not be able to connect in standalone mode
         assertThrows(ErrorCode.CLUSTER_ERROR_DATABASE_RUNS_CLUSTERED_1,
-                () -> getConnection("jdbc:h2:tcp://localhost:" + port1 + "/test", user, password));
+                () -> getConnection("jdbc:gunsioo:tcp://localhost:" + port1 + "/test", user, password));
         assertThrows(ErrorCode.CLUSTER_ERROR_DATABASE_RUNS_CLUSTERED_1,
-                () -> getConnection("jdbc:h2:tcp://localhost:" + port2 + "/test", user, password));
+                () -> getConnection("jdbc:gunsioo:tcp://localhost:" + port2 + "/test", user, password));
 
         // test a cluster connection
-        conn = getConnection("jdbc:h2:tcp://" + serverList + "/test", user, password);
+        conn = getConnection("jdbc:gunsioo:tcp://" + serverList + "/test", user, password);
         check(conn, len, "'"+serverList+"'");
         conn.close();
 
         // stop server 2, and test if only one server is available
         n2.stop();
-        conn = getConnection("jdbc:h2:tcp://" + serverList + "/test", user, password);
+        conn = getConnection("jdbc:gunsioo:tcp://" + serverList + "/test", user, password);
         check(conn, len, "''");
         conn.close();
-        conn = getConnection("jdbc:h2:tcp://" + serverList + "/test", user, password);
+        conn = getConnection("jdbc:gunsioo:tcp://" + serverList + "/test", user, password);
         check(conn, len, "''");
         conn.close();
 
         // disable the cluster
-        conn = getConnection("jdbc:h2:tcp://localhost:"+
+        conn = getConnection("jdbc:gunsioo:tcp://localhost:"+
                 port1+"/test;CLUSTER=''", user, password);
         conn.close();
         n1.stop();
@@ -463,7 +463,7 @@ public class TestCluster extends TestDb {
         n2 = org.gunsioo.tools.Server.createTcpServer("-tcpPort", "" +
                 port2, "-baseDir", getBaseDir() + "/node2").start();
 
-        conn = getConnection("jdbc:h2:tcp://" + serverList + "/test", user, password);
+        conn = getConnection("jdbc:gunsioo:tcp://" + serverList + "/test", user, password);
         stat = conn.createStatement();
         stat.execute("CREATE TABLE BOTH(ID INT)");
 
@@ -475,7 +475,7 @@ public class TestCluster extends TestDb {
 
         n1 = org.gunsioo.tools.Server.createTcpServer("-tcpPort", "" +
                 port1, "-baseDir", getBaseDir() + "/node1").start();
-        conn = getConnection("jdbc:h2:tcp://localhost:"+
+        conn = getConnection("jdbc:gunsioo:tcp://localhost:"+
                 port1+"/test;CLUSTER=''", user, password);
         check(conn, len, "''");
         conn.close();
@@ -483,7 +483,7 @@ public class TestCluster extends TestDb {
 
         n2 = org.gunsioo.tools.Server.createTcpServer("-tcpPort", "" +
                 port2, "-baseDir", getBaseDir() + "/node2").start();
-        conn = getConnection("jdbc:h2:tcp://localhost:" +
+        conn = getConnection("jdbc:gunsioo:tcp://localhost:" +
                 port2 + "/test;CLUSTER=''", user, password);
         check(conn, len, "''");
         conn.createStatement().execute("SELECT * FROM A");

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -472,7 +472,7 @@ public class TestTriggersConstraints extends TestDb implements Trigger {
             String triggerClassName = this.getClass().getName() + "."
                     + TestTriggerAlterTable.class.getSimpleName();
             stat.execute("create trigger test_upd before insert on test "
-                    + "as $$org.h2.api.Trigger create() " + "{ return new "
+                    + "as $$org.gunsioo.api.Trigger create() " + "{ return new "
                     + triggerClassName + "(); } $$");
         } else if ("javascript".equals(sourceLang)) {
             String triggerClassName = this.getClass().getName() + "."

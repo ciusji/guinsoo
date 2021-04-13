@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -48,8 +48,8 @@ public class TestBnf extends TestDb {
     private void testModes(Connection conn) throws Exception {
         DbContents dbContents;
         dbContents = new DbContents();
-        dbContents.readContents("jdbc:h2:./test", conn);
-        assertTrue(dbContents.isH2());
+        dbContents.readContents("jdbc:gunsioo:./test", conn);
+        assertTrue(dbContents.isGunsioo());
         dbContents = new DbContents();
         dbContents.readContents("jdbc:derby:test", conn);
         assertTrue(dbContents.isDerby());
@@ -88,8 +88,8 @@ public class TestBnf extends TestDb {
                 "CREATE TABLE " +
                 "TABLE_WITH_STRING_FIELD (STRING_FIELD VARCHAR(50), INT_FIELD integer)");
         DbContents dbContents = new DbContents();
-        dbContents.readContents("jdbc:h2:./test", conn);
-        assertTrue(dbContents.isH2());
+        dbContents.readContents("jdbc:gunsioo:./test", conn);
+        assertTrue(dbContents.isGunsioo());
         assertFalse(dbContents.isDerby());
         assertFalse(dbContents.isFirebird());
         assertEquals(null, dbContents.quoteIdentifier(null));

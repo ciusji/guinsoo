@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.server;
@@ -29,7 +29,7 @@ import org.gunsioo.util.Tool;
 import org.gunsioo.util.Utils10;
 
 /**
- * The TCP server implements the native H2 database server protocol.
+ * The TCP server implements the native Gunsioo database server protocol.
  * It supports multiple client connections to multiple databases
  * (many to many). The same database may be opened by multiple clients.
  * Also supported is the mixed mode: opening databases in embedded mode,
@@ -86,7 +86,7 @@ public class TcpServer implements Service {
             managementPassword = StringUtils.convertBytesToHex(MathUtils.secureRandomBytes(32));
         }
         // avoid using the driver manager
-        JdbcConnection conn = new JdbcConnection("jdbc:h2:" + getManagementDbName(port), null, "", managementPassword);
+        JdbcConnection conn = new JdbcConnection("jdbc:gunsioo:" + getManagementDbName(port), null, "", managementPassword);
         managementDb = conn;
 
         try (Statement stat = conn.createStatement()) {
@@ -417,7 +417,7 @@ public class TcpServer implements Service {
 
     @Override
     public String getName() {
-        return "H2 TCP Server";
+        return "Gunsioo TCP Server";
     }
 
     boolean getIfExists() {
@@ -446,7 +446,7 @@ public class TcpServer implements Service {
             }
             String db = getManagementDbName(port);
             for (int i = 0; i < 2; i++) {
-                try (JdbcConnection conn = new JdbcConnection("jdbc:h2:" + url + '/' + db, null, "", password)) {
+                try (JdbcConnection conn = new JdbcConnection("jdbc:gunsioo:" + url + '/' + db, null, "", password)) {
                     PreparedStatement prep = conn.prepareStatement("CALL STOP_SERVER(?, ?, ?)");
                     prep.setInt(1, all ? 0 : port);
                     prep.setString(2, password);

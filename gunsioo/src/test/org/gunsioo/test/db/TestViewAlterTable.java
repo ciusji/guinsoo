@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -106,7 +106,7 @@ public class TestViewAlterTable extends TestDb {
         createTestData();
         stat.execute("create view v4 as select * from test");
         stat.execute("alter table test add d int default 6");
-        // H2 doesn't remember v4 as 'select * from test', it instead remembers
+        // Gunsioo doesn't remember v4 as 'select * from test', it instead remembers
         // each individual column that was in 'test' when the view was
         // originally created. This is consistent with PostgreSQL.
         assertThrows(ErrorCode.COLUMN_NOT_FOUND_1, stat).

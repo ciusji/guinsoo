@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -65,17 +65,17 @@ public class TestAutoReconnect extends TestDb {
         deleteDb(getTestName());
         Server tcp = Server.createTcpServer().start();
         try {
-            conn = getConnection("jdbc:h2:" + getBaseDir() + '/' + getTestName() + ";AUTO_SERVER=TRUE");
+            conn = getConnection("jdbc:gunsioo:" + getBaseDir() + '/' + getTestName() + ";AUTO_SERVER=TRUE");
             assertThrows(ErrorCode.DATABASE_ALREADY_OPEN_1,
-                    () -> getConnection("jdbc:h2:" + getBaseDir() + '/' + getTestName() + ";OPEN_NEW=TRUE"));
+                    () -> getConnection("jdbc:gunsioo:" + getBaseDir() + '/' + getTestName() + ";OPEN_NEW=TRUE"));
             assertThrows(ErrorCode.DATABASE_ALREADY_OPEN_1,
-                    () -> getConnection("jdbc:h2:" + getBaseDir() + '/' + getTestName() + ";OPEN_NEW=TRUE"));
+                    () -> getConnection("jdbc:gunsioo:" + getBaseDir() + '/' + getTestName() + ";OPEN_NEW=TRUE"));
             conn.close();
 
-            conn = getConnection("jdbc:h2:tcp://localhost:" + tcp.getPort() + '/' + getBaseDir() + '/' //
+            conn = getConnection("jdbc:gunsioo:tcp://localhost:" + tcp.getPort() + '/' + getBaseDir() + '/' //
                     + getTestName());
             assertThrows(ErrorCode.DATABASE_ALREADY_OPEN_1, () -> getConnection(
-                    "jdbc:h2:" + getBaseDir() + '/' + getTestName() + ";AUTO_SERVER=TRUE;OPEN_NEW=TRUE"));
+                    "jdbc:gunsioo:" + getBaseDir() + '/' + getTestName() + ";AUTO_SERVER=TRUE;OPEN_NEW=TRUE"));
             conn.close();
         } finally {
             tcp.stop();
@@ -85,14 +85,14 @@ public class TestAutoReconnect extends TestDb {
     private void testReconnect() throws Exception {
         deleteDb(getTestName());
         if (autoServer) {
-            url = "jdbc:h2:" + getBaseDir() + "/" + getTestName() + ";" +
+            url = "jdbc:gunsioo:" + getBaseDir() + "/" + getTestName() + ";" +
                 "FILE_LOCK=SOCKET;" +
                 "AUTO_SERVER=TRUE;OPEN_NEW=TRUE";
             restart();
         } else {
             server = Server.createTcpServer("-ifNotExists").start();
             int port = server.getPort();
-            url = "jdbc:h2:tcp://localhost:" + port + "/" + getBaseDir() + "/" + getTestName() + ";" +
+            url = "jdbc:gunsioo:tcp://localhost:" + port + "/" + getBaseDir() + "/" + getTestName() + ";" +
                 "FILE_LOCK=SOCKET;AUTO_RECONNECT=TRUE";
         }
 

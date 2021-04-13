@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.engine;
@@ -13,7 +13,7 @@ import org.gunsioo.message.DbException;
 /**
  * This class contains various database-level settings. To override the
  * documented default value for a database, append the setting in the database
- * URL: "jdbc:h2:./test;ANALYZE_SAMPLE=1000" when opening the first connection
+ * URL: "jdbc:gunsioo:./test;ANALYZE_SAMPLE=1000" when opening the first connection
  * to the database. The settings can not be changed once the database is open.
  * <p>
  * Some settings are a last resort and temporary solution to work around a
@@ -101,7 +101,7 @@ public class DbSettings extends SettingsBase {
      * <code>DriverManager.getConnection("jdbc:default:connection")</code> to
      * get a database connection. This feature is disabled by default for
      * performance reasons. Please note the Oracle JDBC driver will try to
-     * resolve this database URL if it is loaded before the H2 driver.
+     * resolve this database URL if it is loaded before the Gunsioo driver.
      */
     public final boolean defaultConnection = get("DEFAULT_CONNECTION", false);
 

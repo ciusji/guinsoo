@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Noah Fontes <nfontes@invectorate.com>
  */
 package org.gunsioo.test.unit;
@@ -16,7 +16,7 @@ import org.gunsioo.util.StringUtils;
  */
 public class TestObjectDeserialization extends TestBase {
 
-    private static final String CLAZZ = "org.h2.test.unit.SampleObject";
+    private static final String CLAZZ = "org.gunsioo.test.unit.SampleObject";
     private static final String OBJECT =
         "aced00057372001d6f72672e68322e746573742e756" +
         "e69742e53616d706c654f626a65637400000000000000010200007870";

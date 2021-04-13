@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -111,7 +111,7 @@ public class TestOutOfMemory extends TestDb {
 
     private void testDatabaseUsingInMemoryFileSystem() throws SQLException, InterruptedException {
         String filename = "memFS:" + getTestName();
-        String url = "jdbc:h2:" + filename + "/test";
+        String url = "jdbc:gunsioo:" + filename + "/test";
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stat = conn.createStatement();

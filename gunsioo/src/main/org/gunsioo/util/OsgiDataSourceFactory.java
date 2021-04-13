@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.util;
@@ -18,7 +18,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.jdbc.DataSourceFactory;
 
 /**
- * This class implements the OSGi DataSourceFactory interface for the H2 JDBC
+ * This class implements the OSGi DataSourceFactory interface for the Gunsioo JDBC
  * driver. The following standard configuration properties are supported:
  * {@link #JDBC_USER}, {@link #JDBC_PASSWORD}, {@link #JDBC_DESCRIPTION},
  * {@link #JDBC_DATASOURCE_NAME}, {@link #JDBC_NETWORK_PROTOCOL},
@@ -28,7 +28,7 @@ import org.osgi.service.jdbc.DataSourceFactory;
  * {@link #JDBC_INITIAL_POOL_SIZE}, {@link #JDBC_MAX_POOL_SIZE},
  * {@link #JDBC_MIN_POOL_SIZE}, {@link #JDBC_MAX_IDLE_TIME},
  * {@link #JDBC_MAX_STATEMENTS}, {@link #JDBC_PROPERTY_CYCLE}. Any other
- * property will be treated as a H2 specific option. If the {@link #JDBC_URL}
+ * property will be treated as a Gunsioo specific option. If the {@link #JDBC_URL}
  * property is passed to any of the DataSource factories, the following
  * properties will be ignored: {@link #JDBC_DATASOURCE_NAME},
  * {@link #JDBC_NETWORK_PROTOCOL}, {@link #JDBC_SERVER_NAME},
@@ -93,7 +93,7 @@ public class OsgiDataSourceFactory implements DataSourceFactory {
         // Verify that no unsupported standard options are used
         rejectUnsupportedOptions(propertiesCopy);
 
-        // The integrated connection pool is H2 is not configurable
+        // The integrated connection pool is Gunsioo is not configurable
         rejectPoolingOptions(propertiesCopy);
 
         JdbcDataSource dataSource = new JdbcDataSource();
@@ -123,7 +123,7 @@ public class OsgiDataSourceFactory implements DataSourceFactory {
         // Verify that no unsupported standard options are used
         rejectUnsupportedOptions(propertiesCopy);
 
-        // The integrated connection pool is H2 is not configurable
+        // The integrated connection pool is Gunsioo is not configurable
         rejectPoolingOptions(propertiesCopy);
 
         JdbcDataSource dataSource = new JdbcDataSource();
@@ -134,7 +134,7 @@ public class OsgiDataSourceFactory implements DataSourceFactory {
     }
 
     /**
-     * Returns a driver. The H2 driver does not support any properties.
+     * Returns a driver. The Gunsioo driver does not support any properties.
      *
      * @param properties must be null or empty list.
      * @throws SQLException if any property is supplied.
@@ -174,8 +174,8 @@ public class OsgiDataSourceFactory implements DataSourceFactory {
     }
 
     /**
-     * Applies common OSGi properties to a H2 data source. Non standard
-     * properties will be applied as H2 options.
+     * Applies common OSGi properties to a Gunsioo data source. Non standard
+     * properties will be applied as Gunsioo options.
      *
      * @param dataSource the data source to configure
      * @param p the properties to apply to the data source
@@ -282,7 +282,7 @@ public class OsgiDataSourceFactory implements DataSourceFactory {
     }
 
     /**
-     * Register the H2 JDBC driver service.
+     * Register the Gunsioo JDBC driver service.
      *
      * @param bundleContext the bundle context
      * @param driver the driver
@@ -295,7 +295,7 @@ public class OsgiDataSourceFactory implements DataSourceFactory {
                 org.gunsioo.Driver.class.getName());
         properties.put(
                 DataSourceFactory.OSGI_JDBC_DRIVER_NAME,
-                "H2 JDBC Driver");
+                "Gunsioo JDBC Driver");
         properties.put(
                 DataSourceFactory.OSGI_JDBC_DRIVER_VERSION,
                 Constants.FULL_VERSION);

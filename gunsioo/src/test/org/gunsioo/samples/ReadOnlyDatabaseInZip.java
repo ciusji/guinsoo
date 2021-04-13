@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -41,7 +41,7 @@ public class ReadOnlyDatabaseInZip {
         // the prefix split:22: is used, which means each part is
         // 2^22 bytes long
         conn = DriverManager.getConnection(
-                "jdbc:h2:split:22:~/temp/test");
+                "jdbc:gunsioo:split:22:~/temp/test");
 
         System.out.println("adding test data...");
         Statement stat = conn.createStatement();
@@ -61,7 +61,7 @@ public class ReadOnlyDatabaseInZip {
 
         System.out.println("open the database from the zip file...");
         conn = DriverManager.getConnection(
-                "jdbc:h2:split:zip:~/temp/test.zip!/test");
+                "jdbc:gunsioo:split:zip:~/temp/test.zip!/test");
         // the database can now be used
         conn.close();
     }

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.mvstore.tx;
@@ -28,7 +28,7 @@ import org.gunsioo.value.VersionedValue;
  * <p>
  * <b>Methods of this class may be changed at any time without notice.</b> If
  * you use this class directly make sure that your application or library
- * requires exactly the same version of MVStore or H2 jar as the version that
+ * requires exactly the same version of MVStore or Gunsioo jar as the version that
  * you use during its development and build.
  * </p>
  *

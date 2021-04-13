@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.bnf.context;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  * Contains meta data information about a table or a view.
- * This class is used by the H2 Console.
+ * This class is used by the Gunsioo Console.
  */
 public class DbTableOrView {
 
@@ -89,12 +89,12 @@ public class DbTableOrView {
      * Read the column for this table from the database meta data.
      *
      * @param meta the database meta data
-     * @param ps prepared statement with custom query for H2 database, null for
+     * @param ps prepared statement with custom query for Gunsioo database, null for
      *           others
      */
     public void readColumns(DatabaseMetaData meta, PreparedStatement ps) throws SQLException {
         ResultSet rs;
-        if (schema.getContents().isH2()) {
+        if (schema.getContents().isGunsioo()) {
             ps.setString(1, schema.name);
             ps.setString(2, name);
             rs = ps.executeQuery();

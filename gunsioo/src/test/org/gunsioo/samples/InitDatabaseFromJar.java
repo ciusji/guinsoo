@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -36,7 +36,7 @@ public class InitDatabaseFromJar {
      */
     private static void createScript() throws Exception {
         Class.forName("org.gunsioo.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:h2:mem:test");
+        Connection conn = DriverManager.getConnection("jdbc:gunsioo:mem:test");
         Statement stat = conn.createStatement();
         stat.execute("CREATE TABLE TEST(NAME VARCHAR)");
         stat.execute("INSERT INTO TEST VALUES('Hello World')");
@@ -55,7 +55,7 @@ public class InitDatabaseFromJar {
             System.out.println("Please add the file script.sql to the classpath, package "
                     + getClass().getPackage().getName());
         } else {
-            Connection conn = DriverManager.getConnection("jdbc:h2:mem:test");
+            Connection conn = DriverManager.getConnection("jdbc:gunsioo:mem:test");
             RunScript.execute(conn, new InputStreamReader(in));
             Statement stat = conn.createStatement();
             ResultSet rs = stat.executeQuery("SELECT * FROM TEST");

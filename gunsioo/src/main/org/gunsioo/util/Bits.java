@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.util;
@@ -16,8 +16,8 @@ public final class Bits {
 
     /*
      * Signatures of methods should match with
-     * h2/src/java9/src/org/h2/util/Bits.java and precompiled
-     * h2/src/java9/precompiled/org/h2/util/Bits.class.
+     * h2/src/java9/src/org/gunsioo/util/Bits.java and precompiled
+     * h2/src/java9/precompiled/org/gunsioo/util/Bits.class.
      */
 
     /**

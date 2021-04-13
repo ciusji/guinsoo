@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.util;
@@ -17,7 +17,7 @@ import org.gunsioo.store.fs.FileUtils;
 
 /**
  * Command line tools implement the tool interface so that they can be used in
- * the H2 Console.
+ * the Gunsioo Console.
  */
 public abstract class Tool {
 
@@ -97,7 +97,7 @@ public abstract class Tool {
     protected void showUsage() {
         if (resources == null) {
             resources = new Properties();
-            String resourceName = "/org/h2/res/javadoc.properties";
+            String resourceName = "/org/gunsioo/res/javadoc.properties";
             try {
                 byte[] buff = Utils.getResource(resourceName);
                 if (buff != null) {

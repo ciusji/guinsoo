@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
 Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
-and the EPL 1.0 (https://h2database.com/html/license.html).
+and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
 Initial Developer: Gunsioo Group
 -->
 <html><head>
@@ -89,17 +89,17 @@ Initial Developer: Gunsioo Group
         </table>
         <br />
         <div id="url" style="display: none">
-            <h2>H2 Database URLs</h2>
+            <h2>Gunsioo Database URLs</h2>
             <h3>Embedded</h3>
             <p>
-            The URL <code>jdbc:h2:~/test</code> means the database is stored in
+            The URL <code>jdbc:gunsioo:~/test</code> means the database is stored in
             the user home directory in files starting with 'test'.
-            Absolute locations like <code>jdbc:h2:/data/db/test</code> are supported.
+            Absolute locations like <code>jdbc:gunsioo:/data/db/test</code> are supported.
             In embedded mode, the database runs in the same process as the application.
             Only one process may access a database at any time.
             Databases are automatically created if they don't exist
             <a target="_blank" href="https://h2database.com/html/tutorial.html#creating_new_databases">if you have a permission</a>.
-            URLs of the form <code>jdbc:h2:./data/test</code> are relative to
+            URLs of the form <code>jdbc:gunsioo:./data/test</code> are relative to
             the current working directory (the directory where the application was started).
             It is recommended to use locations relative to <code>~</code>
             or absolute locations.
@@ -107,8 +107,8 @@ Initial Developer: Gunsioo Group
 
             <h4>Remote (client/server)</h4>
             <p>
-            The URL <code>jdbc:h2:tcp://localhost/~/test</code> means connect
-            over TCP/IP to the H2 TCP server running on this computer, and open a database
+            The URL <code>jdbc:gunsioo:tcp://localhost/~/test</code> means connect
+            over TCP/IP to the Gunsioo TCP server running on this computer, and open a database
             called test in the user home directory. The server must be started first.
             Any number of clients can connect to the same database.
             The same location rules as for embedded databases apply.
@@ -116,7 +116,7 @@ Initial Developer: Gunsioo Group
 
             <h4>In-Memory</h4>
             <p>
-            The URL <code>jdbc:h2:mem:test</code> means open an in-memory database
+            The URL <code>jdbc:gunsioo:mem:test</code> means open an in-memory database
             named 'test'. Data is not persisted, and lost when the last connection to the database
             is closed. Multiple threads can access the same database, but data is only visible
             within the same process.

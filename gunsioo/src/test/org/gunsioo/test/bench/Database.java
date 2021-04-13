@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.bench;
@@ -49,7 +49,7 @@ class Database {
     private final AtomicInteger executedStatements = new AtomicInteger();
     private int threadCount;
 
-    private Server serverH2;
+    private Server serverGunsioo;
     private Object serverDerby;
     private boolean serverHSQLDB;
 
@@ -102,8 +102,8 @@ class Database {
      * Start the server if the this is a remote connection.
      */
     void startServer() throws Exception {
-        if (url.startsWith("jdbc:h2:tcp:")) {
-            serverH2 = Server.createTcpServer("-ifNotExists").start();
+        if (url.startsWith("jdbc:gunsioo:tcp:")) {
+            serverGunsioo = Server.createTcpServer("-ifNotExists").start();
             Thread.sleep(100);
         } else if (url.startsWith("jdbc:derby://")) {
             serverDerby = Class.forName(
@@ -136,9 +136,9 @@ class Database {
      * Stop the server if this is a remote connection.
      */
     void stopServer() throws Exception {
-        if (serverH2 != null) {
-            serverH2.stop();
-            serverH2 = null;
+        if (serverGunsioo != null) {
+            serverGunsioo.stop();
+            serverGunsioo = null;
         }
         if (serverDerby != null) {
             Method m = serverDerby.getClass().getMethod("shutdown");

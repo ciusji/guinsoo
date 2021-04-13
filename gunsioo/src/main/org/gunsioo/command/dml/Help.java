@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.command.dml;
@@ -95,7 +95,7 @@ public class Help extends Prepared {
      *             on I/O exception
      */
     public static ResultSet getTable() throws IOException {
-        Reader reader = new InputStreamReader(new ByteArrayInputStream(Utils.getResource("/org/h2/res/help.csv")));
+        Reader reader = new InputStreamReader(new ByteArrayInputStream(Utils.getResource("/org/gunsioo/res/help.csv")));
         Csv csv = new Csv();
         csv.setLineCommentCharacter('#');
         return csv.read(reader, null);

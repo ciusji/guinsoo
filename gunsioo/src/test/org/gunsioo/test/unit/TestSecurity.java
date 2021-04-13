@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -47,11 +47,11 @@ public class TestSecurity extends TestBase {
 
     private static void testConnectWithHash() throws SQLException {
         Connection conn = DriverManager.getConnection(
-                "jdbc:h2:mem:test", "sa", "sa");
+                "jdbc:gunsioo:mem:test", "sa", "sa");
         String pwd = StringUtils.convertBytesToHex(
                 SHA256.getKeyPasswordHash("SA", "sa".toCharArray()));
         Connection conn2 = DriverManager.getConnection(
-                "jdbc:h2:mem:test;PASSWORD_HASH=TRUE", "sa", pwd);
+                "jdbc:gunsioo:mem:test;PASSWORD_HASH=TRUE", "sa", pwd);
         conn.close();
         conn2.close();
     }

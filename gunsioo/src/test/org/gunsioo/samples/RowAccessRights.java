@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -32,7 +32,7 @@ public class RowAccessRights extends TriggerAdapter {
 
         Class.forName("org.gunsioo.Driver");
         Connection conn = DriverManager.getConnection(
-                "jdbc:h2:~/test");
+                "jdbc:gunsioo:~/test");
         Statement stat = conn.createStatement();
 
         stat.execute("create table test_data(" +
@@ -52,14 +52,14 @@ public class RowAccessRights extends TriggerAdapter {
         ResultSet rs;
 
         Connection connA = DriverManager.getConnection(
-                "jdbc:h2:~/test", "a", "a");
+                "jdbc:gunsioo:~/test", "a", "a");
         Statement statA = connA.createStatement();
         statA.execute("insert into test values(1, 'Hello'), (2, 'World')");
         statA.execute("update test set data = 'Hello!' where id = 1");
         statA.execute("delete from test where id = 2");
 
         Connection connB = DriverManager.getConnection(
-                "jdbc:h2:~/test", "b", "b");
+                "jdbc:gunsioo:~/test", "b", "b");
         Statement statB = connB.createStatement();
         statB.execute("insert into test values(1, 'Hallo'), (2, 'Welt')");
         statB.execute("update test set data = 'Hallo!' where id = 1");

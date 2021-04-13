@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.server.web;
@@ -15,7 +15,7 @@ import org.gunsioo.util.StringUtils;
 
 /**
  * A page parser can parse an HTML page and replace the tags there.
- * This class is used by the H2 Console.
+ * This class is used by the Gunsioo Console.
  */
 public class PageParser {
     private static final int TAB_WIDTH = 4;

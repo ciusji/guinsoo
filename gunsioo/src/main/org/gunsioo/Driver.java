@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo;
@@ -23,9 +23,9 @@ import org.gunsioo.message.DbException;
  * the following code:
  *
  * <pre>
- * Class.forName(&quot;org.h2.Driver&quot;);
+ * Class.forName(&quot;org.gunsioo.Driver&quot;);
  * Connection conn = DriverManager.getConnection(
- *      &quot;jdbc:h2:&tilde;/test&quot;, &quot;sa&quot;, &quot;sa&quot;);
+ *      &quot;jdbc:gunsioo:&tilde;/test&quot;, &quot;sa&quot;, &quot;sa&quot;);
  * </pre>
  */
 public class Driver implements java.sql.Driver, JdbcDriverBackwardsCompat {

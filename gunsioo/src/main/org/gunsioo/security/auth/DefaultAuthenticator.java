@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Alessandro Ventura
  */
 package org.gunsioo.security.auth;
@@ -44,7 +44,7 @@ import org.xml.sax.SAXException;
  * Rights assignment can be managed through {@link org.gunsioo.api.UserToRolesMapper}
  * </p>
  * <p>
- * Default configuration has a realm H2 that validate credentials through JAAS
+ * Default configuration has a realm Gunsioo that validate credentials through JAAS
  * api (appName=h2). To customize configuration set h2.authConfigFile system
  * property to refer a valid h2auth.xml config file
  * </p>

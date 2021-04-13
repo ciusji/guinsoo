@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.synth;
@@ -137,8 +137,8 @@ public class TestKillRestart extends TestDb {
      */
     public static void main(String... args) {
         SelfDestructor.startCountdown(60);
-        String driver = "org.h2.Driver";
-        String url = "jdbc:h2:mem:test", user = "sa", password = "sa";
+        String driver = "org.gunsioo.Driver";
+        String url = "jdbc:gunsioo:mem:test", user = "sa", password = "sa";
         for (int i = 0; i < args.length; i++) {
             if ("-url".equals(args[i])) {
                 url = args[++i];

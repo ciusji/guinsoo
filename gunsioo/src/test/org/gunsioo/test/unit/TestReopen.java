@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -30,7 +30,7 @@ import org.gunsioo.util.Utils;
  */
 public class TestReopen extends TestBase implements Recorder {
 
-    // TODO this is largely a copy of org.h2.util.RecoverTester
+    // TODO this is largely a copy of org.gunsioo.util.RecoverTester
 
     private String testDatabase = "memFS:" + TestBase.BASE_TEST_DIR + "/reopen";
     private int writeCount = Utils.getProperty("h2.reopenOffset", 0);
@@ -108,7 +108,7 @@ public class TestReopen extends TestBase implements Recorder {
             }
             verifyCount++;
             // avoid using the Engine class to avoid deadlocks
-            String url = "jdbc:h2:" + testDatabase +
+            String url = "jdbc:gunsioo:" + testDatabase +
                     ";FILE_LOCK=NO;TRACE_LEVEL_FILE=0";
             ConnectionInfo ci = new ConnectionInfo(url, null, getUser(), getPassword());
             Database database = new Database(ci, null);
@@ -159,7 +159,7 @@ public class TestReopen extends TestBase implements Recorder {
                         Constants.SUFFIX_MV_FILE);
             }
             // avoid using the Engine class to avoid deadlocks
-            String url = "jdbc:h2:" + testDatabase + ";FILE_LOCK=NO";
+            String url = "jdbc:gunsioo:" + testDatabase + ";FILE_LOCK=NO";
             ConnectionInfo ci = new ConnectionInfo(url, null, null, null);
             Database database = new Database(ci, null);
             // close the database

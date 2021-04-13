@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -32,8 +32,8 @@ public class SQLInjection {
      * @param args the command line parameters
      */
     public static void main(String... args) throws Exception {
-        new SQLInjection().run("org.h2.Driver",
-                "jdbc:h2:./test", "sa", "sa");
+        new SQLInjection().run("org.gunsioo.Driver",
+                "jdbc:gunsioo:./test", "sa", "sa");
 //        new SQLInjection().run("org.postgresql.Driver",
 //                "jdbc:postgresql:jpox2", "sa", "sa");
 //        new SQLInjection().run("com.mysql.cj.jdbc.Driver",
@@ -71,14 +71,14 @@ public class SQLInjection {
 
         loginByNameInsecure();
 
-        if (url.startsWith("jdbc:h2:")) {
+        if (url.startsWith("jdbc:gunsioo:")) {
             loginStoredProcedureInsecure();
             limitRowAccess();
         }
 
         loginByNameSecure();
 
-        if (url.startsWith("jdbc:h2:")) {
+        if (url.startsWith("jdbc:gunsioo:")) {
             stat.execute("SET ALLOW_LITERALS NONE");
             stat.execute("SET ALLOW_LITERALS NUMBERS");
             stat.execute("SET ALLOW_LITERALS ALL");
@@ -103,7 +103,7 @@ public class SQLInjection {
 
         listActiveItems();
 
-        if (url.startsWith("jdbc:h2:")) {
+        if (url.startsWith("jdbc:gunsioo:")) {
             stat.execute("DROP CONSTANT IF EXISTS TYPE_INACTIVE");
             stat.execute("DROP CONSTANT IF EXISTS TYPE_ACTIVE");
             stat.execute("CREATE CONSTANT TYPE_INACTIVE VALUE 0");
@@ -114,7 +114,7 @@ public class SQLInjection {
         listItemsSortedInsecure();
         listItemsSortedSecure();
 
-        if (url.startsWith("jdbc:h2:")) {
+        if (url.startsWith("jdbc:gunsioo:")) {
             listItemsSortedSecureParam();
             storePasswordHashWithSalt();
         }
@@ -181,8 +181,8 @@ public class SQLInjection {
      */
     void loginStoredProcedureInsecure() throws Exception {
         System.out.println("Insecure Systems Inc. - login using a stored procedure");
-        stat.execute("CREATE ALIAS IF NOT EXISTS GET_USER FOR 'org.h2.samples.SQLInjection.getUser'");
-        stat.execute("CREATE ALIAS IF NOT EXISTS CHANGE_PASSWORD FOR 'org.h2.samples.SQLInjection.changePassword'");
+        stat.execute("CREATE ALIAS IF NOT EXISTS GET_USER FOR 'org.gunsioo.samples.SQLInjection.getUser'");
+        stat.execute("CREATE ALIAS IF NOT EXISTS CHANGE_PASSWORD FOR 'org.gunsioo.samples.SQLInjection.changePassword'");
         String name = input("Name?");
         String password = input("Password?");
         ResultSet rs = stat.executeQuery(

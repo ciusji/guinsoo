@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -26,12 +26,12 @@ public class FileFunctions {
      */
     public static void main(String... args) throws Exception {
         Class.forName("org.gunsioo.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:h2:mem:", "sa", "");
+        Connection conn = DriverManager.getConnection("jdbc:gunsioo:mem:", "sa", "");
         Statement stat = conn.createStatement();
-        stat.execute("CREATE ALIAS READ_TEXT_FILE FOR 'org.h2.samples.FileFunctions.readTextFile'");
+        stat.execute("CREATE ALIAS READ_TEXT_FILE FOR 'org.gunsioo.samples.FileFunctions.readTextFile'");
         stat.execute("CREATE ALIAS READ_TEXT_FILE_WITH_ENCODING " +
-                "FOR 'org.h2.samples.FileFunctions.readTextFileWithEncoding'");
-        stat.execute("CREATE ALIAS READ_FILE FOR 'org.h2.samples.FileFunctions.readFile'");
+                "FOR 'org.gunsioo.samples.FileFunctions.readTextFileWithEncoding'");
+        stat.execute("CREATE ALIAS READ_FILE FOR 'org.gunsioo.samples.FileFunctions.readFile'");
         ResultSet rs = stat.executeQuery("CALL READ_FILE('test.txt')");
         rs.next();
         byte[] data = rs.getBytes(1);

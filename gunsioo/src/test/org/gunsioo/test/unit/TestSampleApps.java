@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -52,7 +52,7 @@ public class TestSampleApps extends TestDb {
         FileOutputStream out = new FileOutputStream(getBaseDir() +
                 "/optimizations.sql");
         IOUtils.copyAndClose(in, out);
-        String url = "jdbc:h2:" + getBaseDir() + "/" + getTestName();
+        String url = "jdbc:gunsioo:" + getBaseDir() + "/" + getTestName();
         testApp("", org.gunsioo.tools.RunScript.class, "-url", url, "-user", "sa",
                 "-password", "sa", "-script", getBaseDir() +
                         "/optimizations.sql", "-checkResults");
@@ -85,7 +85,7 @@ public class TestSampleApps extends TestDb {
                 org.gunsioo.samples.Function.class);
         // Not compatible with PostgreSQL JDBC driver (throws a
         // NullPointerException):
-        // testApp(org.h2.samples.SecurePassword.class, null, "Joe");
+        // testApp(org.gunsioo.samples.SecurePassword.class, null, "Joe");
         // TODO test ShowProgress (percent numbers are hardware specific)
         // TODO test ShutdownServer (server needs to be started in a separate
         // process)

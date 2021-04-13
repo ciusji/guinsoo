@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.message;
@@ -67,14 +67,14 @@ public class DbException extends RuntimeException {
 
     static {
         try {
-            byte[] messages = Utils.getResource("/org/h2/res/_messages_en.prop");
+            byte[] messages = Utils.getResource("/org/gunsioo/res/_messages_en.prop");
             if (messages != null) {
                 MESSAGES.load(new ByteArrayInputStream(messages));
             }
             String language = Locale.getDefault().getLanguage();
             if (!"en".equals(language)) {
                 byte[] translations = Utils.getResource(
-                        "/org/h2/res/_messages_" + language + ".prop");
+                        "/org/gunsioo/res/_messages_" + language + ".prop");
                 // message: translated message + english
                 // (otherwise certain applications don't work)
                 if (translations != null) {

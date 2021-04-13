@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.bnf.context;
@@ -19,14 +19,14 @@ import org.gunsioo.util.Utils;
 
 /**
  * Keeps meta data information about a database.
- * This class is used by the H2 Console.
+ * This class is used by the Gunsioo Console.
  */
 public class DbContents {
 
     private DbSchema[] schemas;
     private DbSchema defaultSchema;
     private boolean isOracle;
-    private boolean isH2;
+    private boolean isGunsioo;
     private boolean isPostgreSQL;
     private boolean isDerby;
     private boolean isSQLite;
@@ -61,10 +61,10 @@ public class DbContents {
     }
 
     /**
-     * @return true if this is a H2 database.
+     * @return true if this is a Gunsioo database.
      */
-    public boolean isH2() {
-        return isH2;
+    public boolean isGunsioo() {
+        return isGunsioo;
     }
 
     /**
@@ -142,7 +142,7 @@ public class DbContents {
      */
     public synchronized void readContents(String url, Connection conn)
             throws SQLException {
-        isH2 = url.startsWith("jdbc:h2:");
+        isGunsioo = url.startsWith("jdbc:gunsioo:");
         isDB2 = url.startsWith("jdbc:db2:");
         isSQLite = url.startsWith("jdbc:sqlite:");
         isOracle = url.startsWith("jdbc:oracle:");
@@ -153,7 +153,7 @@ public class DbContents {
         isDerby = url.startsWith("jdbc:derby:");
         isFirebird = url.startsWith("jdbc:firebirdsql:");
         isMSSQLServer = url.startsWith("jdbc:sqlserver:");
-        if (isH2) {
+        if (isGunsioo) {
             Session.StaticSettings settings = ((JdbcConnection) conn).getStaticSettings();
             databaseToUpper = settings.databaseToUpper;
             databaseToLower = settings.databaseToLower;
@@ -253,7 +253,7 @@ public class DbContents {
     private String getDefaultSchemaName(DatabaseMetaData meta) {
         String defaultSchemaName = "";
         try {
-            if (isH2) {
+            if (isGunsioo) {
                 return meta.storesLowerCaseIdentifiers() ? "public" : "PUBLIC";
             } else if (isOracle) {
                 return meta.getUserName();

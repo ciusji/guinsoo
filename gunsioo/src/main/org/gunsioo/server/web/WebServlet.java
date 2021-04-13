@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.server.web;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.gunsioo.util.NetworkConnectionInfo;
 
 /**
- * This servlet lets the H2 Console be used in a standard servlet container
+ * This servlet lets the Gunsioo Console be used in a standard servlet container
  * such as Tomcat or Jetty.
  */
 public class WebServlet extends HttpServlet {

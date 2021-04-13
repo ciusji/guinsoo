@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.message;
@@ -310,7 +310,7 @@ public abstract class TraceObject {
             return "null";
         }
         StringBuilder builder = new StringBuilder(x.length * 2 + 45)
-                .append("org.h2.util.StringUtils.convertHexToBytes(\"");
+                .append("org.gunsioo.util.StringUtils.convertHexToBytes(\"");
         return StringUtils.convertBytesToHex(builder, x).append("\")").toString();
     }
 

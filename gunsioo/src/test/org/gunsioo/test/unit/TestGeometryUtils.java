@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -46,7 +46,7 @@ import org.locationtech.jts.io.WKTReader;
 import org.locationtech.jts.io.WKTWriter;
 
 /**
- * Tests the classes from org.h2.util.geometry package.
+ * Tests the classes from org.gunsioo.util.geometry package.
  */
 public class TestGeometryUtils extends TestBase {
 
@@ -212,8 +212,8 @@ public class TestGeometryUtils extends TestBase {
         }
 
         // Test WKB->Geometry conversion
-        Geometry geometryFromH2 = JTSUtils.ewkb2geometry(wkbFromJTS);
-        String got = new WKTWriter(numOfDimensions).write(geometryFromH2);
+        Geometry geometryFromGunsioo = JTSUtils.ewkb2geometry(wkbFromJTS);
+        String got = new WKTWriter(numOfDimensions).write(geometryFromGunsioo);
         if (!jtsWkt.equals(got)) {
             assertEquals(jtsWkt.replaceAll(" Z ", " Z"), got);
         }

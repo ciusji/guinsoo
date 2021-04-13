@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.server;
@@ -168,7 +168,7 @@ public class TcpServerThread implements Runnable {
                 if (clientVersion < Constants.TCP_PROTOCOL_VERSION_20) {
                     // For DatabaseMetaData
                     ci.setProperty("OLD_INFORMATION_SCHEMA", "TRUE");
-                    // For H2 Console
+                    // For Gunsioo Console
                     ci.setProperty("NON_KEYWORDS", "VALUE");
                 }
                 session = Engine.createSession(ci);

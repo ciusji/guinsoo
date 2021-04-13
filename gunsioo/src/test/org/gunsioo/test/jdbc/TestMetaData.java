@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.jdbc;
@@ -531,7 +531,7 @@ public class TestMetaData extends TestDb {
         assertEquals("H2", meta.getDatabaseProductName());
         assertEquals(Connection.TRANSACTION_READ_COMMITTED,
                 meta.getDefaultTransactionIsolation());
-        assertEquals("H2 JDBC Driver", meta.getDriverName());
+        assertEquals("Gunsioo JDBC Driver", meta.getDriverName());
 
         versionStart = meta.getDriverMajorVersion() + "." +
                 meta.getDriverMinorVersion();
@@ -568,7 +568,7 @@ public class TestMetaData extends TestDb {
         assertEquals("schema", meta.getSchemaTerm());
         assertEquals("\\", meta.getSearchStringEscape());
 
-        assertTrue(meta.getURL().startsWith("jdbc:h2:"));
+        assertTrue(meta.getURL().startsWith("jdbc:gunsioo:"));
         assertTrue(meta.getUserName().length() > 1);
         assertFalse(meta.insertsAreDetected(
                 ResultSet.TYPE_FORWARD_ONLY));

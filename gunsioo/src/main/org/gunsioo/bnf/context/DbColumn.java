@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.bnf.context;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  * Keeps the meta data information of a column.
- * This class is used by the H2 Console.
+ * This class is used by the Gunsioo Console.
  */
 public class DbColumn {
 
@@ -28,7 +28,7 @@ public class DbColumn {
         name = rs.getString("COLUMN_NAME");
         quotedName = contents.quoteIdentifier(name);
         position = rs.getInt("ORDINAL_POSITION");
-        if (contents.isH2() && !procedureColumn) {
+        if (contents.isGunsioo() && !procedureColumn) {
             dataType = rs.getString("COLUMN_TYPE");
             return;
         }

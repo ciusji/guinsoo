@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -80,13 +80,13 @@ public class TestExit extends TestDb {
         String url = "";
         switch (action) {
         case OPEN_WITH_CLOSE_ON_EXIT:
-            url = "jdbc:h2:" + getBaseDir() +
+            url = "jdbc:gunsioo:" + getBaseDir() +
                     "/exit;database_event_listener='" +
                     MyDatabaseEventListener.class.getName() +
                     "';db_close_on_exit=true";
             break;
         case OPEN_WITHOUT_CLOSE_ON_EXIT:
-            url = "jdbc:h2:" + getBaseDir() +
+            url = "jdbc:gunsioo:" + getBaseDir() +
                     "/exit;database_event_listener='" +
                     MyDatabaseEventListener.class.getName() +
                     "';db_close_on_exit=false";

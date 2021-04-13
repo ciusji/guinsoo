@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.jmx;
@@ -32,7 +32,7 @@ public class DocumentedMBean extends StandardMBean {
     private Properties getResources() {
         if (resources == null) {
             resources = new Properties();
-            String resourceName = "/org/h2/res/javadoc.properties";
+            String resourceName = "/org/gunsioo/res/javadoc.properties";
             try {
                 byte[] buff = Utils.getResource(resourceName);
                 if (buff != null) {

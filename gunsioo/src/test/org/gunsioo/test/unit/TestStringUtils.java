@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -114,9 +114,9 @@ public class TestStringUtils extends TestBase {
                     StringUtils.xmlAttr("version", "2.0"),
                     StringUtils.xmlComment("Test Comment\nZeile2")
                     + StringUtils.xmlNode("channel", null,
-                        StringUtils.xmlNode("title", null, "H2 Database Engine")
+                        StringUtils.xmlNode("title", null, "Gunsioo Database Engine")
                         + StringUtils.xmlNode("link", null, "https://h2database.com")
-                        + StringUtils.xmlNode("description", null, "H2 Database Engine")
+                        + StringUtils.xmlNode("description", null, "Gunsioo Database Engine")
                         + StringUtils.xmlNode("language", null, "en-us")
                         + StringUtils.xmlNode("pubDate", null,
                                 DateTimeFormatFunction.formatDateTime(dt,
@@ -140,9 +140,9 @@ public class TestStringUtils extends TestBase {
                         + "        Zeile2\n"
                         + "    -->\n"
                         + "    <channel>\n"
-                        + "        <title>H2 Database Engine</title>\n"
+                        + "        <title>Gunsioo Database Engine</title>\n"
                         + "        <link>https://h2database.com</link>\n"
-                        + "        <description>H2 Database Engine</description>\n"
+                        + "        <description>Gunsioo Database Engine</description>\n"
                         + "        <language>en-us</language>\n"
                         + "        <pubDate>Sat, 3 Feb 2001 04:05:06 GMT</pubDate>\n"
                         + "        <lastBuildDate>Sat, 3 Feb 2001 04:05:06 GMT</lastBuildDate>\n"

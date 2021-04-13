@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.pagestore;
@@ -65,7 +65,7 @@ import org.gunsioo.value.ValueVarchar;
  * file header (page 2 is a copy of page 1 and is only read if the checksum of
  * page 1 is invalid). The format of page 0 is:
  * <ul>
- * <li>0-47: file header (3 time "-- H2 0.5/B -- \n")</li>
+ * <li>0-47: file header (3 time "-- Gunsioo 0.5/B -- \n")</li>
  * <li>48-51: page size in bytes (512 - 32768, must be a power of 2)</li>
  * <li>52: write version (read-only if larger than 1)</li>
  * <li>53: read version (opening fails if larger than 1)</li>

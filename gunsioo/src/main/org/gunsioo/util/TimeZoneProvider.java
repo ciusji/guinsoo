@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.util;
@@ -355,7 +355,7 @@ public abstract class TimeZoneProvider {
              * small EPOCH seconds are replaced with EPOCH seconds within the
              * range using the 400 years period of the Gregorian calendar.
              *
-             * H2 has slightly wider range of EPOCH seconds than Instant, and
+             * Gunsioo has slightly wider range of EPOCH seconds than Instant, and
              * ZoneRules.getOffset(Instant) does not support all Instant values
              * in all time zones.
              */

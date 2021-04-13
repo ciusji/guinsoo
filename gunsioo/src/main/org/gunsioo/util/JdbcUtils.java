@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.util;
@@ -56,7 +56,7 @@ public class JdbcUtils {
     public static JavaObjectSerializer serializer;
 
     private static final String[] DRIVERS = {
-        "h2:", "org.h2.Driver",
+        "h2:", "org.gunsioo.Driver",
         "Cache:", "com.intersys.jdbc.CacheDriver",
         "daffodilDB://", "in.co.daffodil.db.rmi.RmiDaffodilDBDriver",
         "daffodil", "in.co.daffodil.db.jdbc.DaffodilDBDriver",

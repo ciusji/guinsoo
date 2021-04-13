@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.server.web;
@@ -121,11 +121,11 @@ public class WebServer implements Service {
                 "jdbc:derby://localhost:1527/test;create=true|sa",
         "Generic Derby (Embedded)|org.apache.derby.iapi.jdbc.AutoloadedDriver|" +
                 "jdbc:derby:test;create=true|sa",
-        "Generic H2 (Server)|org.h2.Driver|" +
-                "jdbc:h2:tcp://localhost/~/test|sa",
+        "Generic Gunsioo (Server)|org.gunsioo.Driver|" +
+                "jdbc:gunsioo:tcp://localhost/~/test|sa",
         // this will be listed on top for new installations
-        "Generic H2 (Embedded)|org.h2.Driver|" +
-                "jdbc:h2:~/test|sa",
+        "Generic Gunsioo (Embedded)|org.gunsioo.Driver|" +
+                "jdbc:gunsioo:~/test|sa",
     };
 
     private static int ticker;
@@ -137,8 +137,8 @@ public class WebServer implements Service {
 
 //    public static void main(String... args) throws IOException {
 //        String s = IOUtils.readStringAndClose(new java.io.FileReader(
-//                // "src/main/org/h2/server/web/res/_text_cs.prop"), -1);
-//                "src/main/org/h2/res/_messages_cs.prop"), -1);
+//                // "src/main/org/gunsioo/server/web/res/_text_cs.prop"), -1);
+//                "src/main/org/gunsioo/res/_messages_cs.prop"), -1);
 //        System.out.println(StringUtils.javaEncode("..."));
 //        String[] list = Locale.getISOLanguages();
 //        for (int i = 0; i < list.length; i++) {
@@ -192,7 +192,7 @@ public class WebServer implements Service {
      */
     byte[] getFile(String file) throws IOException {
         trace("getFile <" + file + ">");
-        byte[] data = Utils.getResource("/org/h2/server/web/res/" + file);
+        byte[] data = Utils.getResource("/org/gunsioo/server/web/res/" + file);
         if (data == null) {
             trace(" null");
         } else {
@@ -535,7 +535,7 @@ public class WebServer implements Service {
 
     @Override
     public String getName() {
-        return "H2 Console Server";
+        return "Gunsioo Console Server";
     }
 
     void setAllowOthers(boolean b) {
@@ -750,7 +750,7 @@ public class WebServer implements Service {
             if (!"null".equals(serverPropertiesDir)) {
                 OutputStream out = FileUtils.newOutputStream(
                         serverPropertiesDir + "/" + Constants.SERVER_PROPERTIES_NAME, false);
-                prop.store(out, "H2 Server Properties");
+                prop.store(out, "Gunsioo Server Properties");
                 out.close();
             }
         } catch (Exception e) {
@@ -773,7 +773,7 @@ public class WebServer implements Service {
             String password, String userKey, NetworkConnectionInfo networkConnectionInfo) throws SQLException {
         driver = driver.trim();
         databaseUrl = databaseUrl.trim();
-        if (databaseUrl.startsWith("jdbc:h2:")) {
+        if (databaseUrl.startsWith("jdbc:gunsioo:")) {
             if (!allowSecureCreation || key == null || !key.equals(userKey)) {
                 if (ifExists) {
                     databaseUrl += ";FORBID_CREATION=TRUE";
@@ -781,7 +781,7 @@ public class WebServer implements Service {
             }
         }
         // do not trim the password, otherwise an
-        // encrypted H2 database with empty user password doesn't work
+        // encrypted Gunsioo database with empty user password doesn't work
         return JdbcUtils.getConnection(driver, databaseUrl, user.trim(), password, networkConnectionInfo);
     }
 

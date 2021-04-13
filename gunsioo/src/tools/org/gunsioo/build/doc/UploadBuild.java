@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.build.doc;
@@ -32,7 +32,7 @@ import org.gunsioo.util.ScriptReader;
 import org.gunsioo.util.StringUtils;
 
 /**
- * Upload the code coverage result to the H2 web site.
+ * Upload the code coverage result to the Gunsioo web site.
  */
 public class UploadBuild {
 
@@ -137,13 +137,13 @@ public class UploadBuild {
         Connection conn;
         try {
             Class.forName("org.gunsioo.Driver");
-            conn = DriverManager.getConnection("jdbc:h2:mem:");
+            conn = DriverManager.getConnection("jdbc:gunsioo:mem:");
         } catch (Exception e) {
             Class.forName("org.gunsioo.upgrade.v1_1.Driver");
-            conn = DriverManager.getConnection("jdbc:h2v1_1:mem:");
+            conn = DriverManager.getConnection("jdbc:gunsioov1_1:mem:");
         }
         conn.createStatement().execute(buildSql);
-        String newsfeed = new String(Files.readAllBytes(Paths.get("src/tools/org/h2/build/doc/buildNewsfeed.sql")),
+        String newsfeed = new String(Files.readAllBytes(Paths.get("src/tools/org/gunsioo/build/doc/buildNewsfeed.sql")),
                 StandardCharsets.UTF_8);
         ScriptReader r = new ScriptReader(new StringReader(newsfeed));
         Statement stat = conn.createStatement();

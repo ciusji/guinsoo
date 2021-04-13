@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -635,7 +635,7 @@ public class TestCompatibility extends TestDb {
         stat.execute("create table test(date TIMESTAMP)");
         stat.executeUpdate("insert into test (date) values ('2014-04-05-09.48.28.020005')");
         assertResult("2014-04-05 09:48:28.020005", stat,
-                "select date from test"); // <- result is always H2 format timestamp!
+                "select date from test"); // <- result is always Gunsioo format timestamp!
         assertResult("2014-04-05 09:48:28.020005", stat,
                 "select date from test where date = '2014-04-05-09.48.28.020005'");
         assertResult("2014-04-05 09:48:28.020005", stat,
@@ -644,7 +644,7 @@ public class TestCompatibility extends TestDb {
         // Test limited support for DB2's special registers
 
         // Standard SQL functions like LOCALTIMESTAMP, CURRENT_TIMESTAMP and
-        // others are used to compare values, their implementation in H2 is
+        // others are used to compare values, their implementation in Gunsioo is
         // compatible with standard, but may be not really compatible with DB2.
         assertResult("TRUE", stat, "SELECT LOCALTIMESTAMP = CURRENT TIMESTAMP");
         assertResult("TRUE", stat, "SELECT CAST(LOCALTIMESTAMP AS VARCHAR) = CAST(CURRENT TIMESTAMP AS VARCHAR)");

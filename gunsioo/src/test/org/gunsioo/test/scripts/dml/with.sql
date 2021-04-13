@@ -1,5 +1,5 @@
 -- Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
--- and the EPL 1.0 (https://h2database.com/html/license.html).
+-- and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
 -- Initial Developer: Gunsioo Group
 --
 
@@ -24,7 +24,7 @@ with link(id, name, level) as (select id, name, 0 from folder where parent is nu
 > src/main
 > src/main/META-INF
 > src/main/org
-> src/main/org/h2
+> src/main/org/gunsioo
 > src/test
 > src/tools
 > rows (ordered): 15

@@ -1,5 +1,5 @@
 -- Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
--- and the EPL 1.0 (https://h2database.com/html/license.html).
+-- and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
 -- Initial Developer: Gunsioo Group
 --
 
@@ -87,7 +87,7 @@ CREATE INDEX TEST_INDEX ON TEST(V);
 SELECT * FROM TEST WHERE V >= -1;
 >> -1
 
--- H2 may use the index for a table scan, but may not create index conditions due to incompatible type
+-- Gunsioo may use the index for a table scan, but may not create index conditions due to incompatible type
 EXPLAIN SELECT * FROM TEST WHERE V >= -1;
 >> SELECT "PUBLIC"."TEST"."V" FROM "PUBLIC"."TEST" /* PUBLIC.TEST_INDEX */ WHERE "V" >= -1
 

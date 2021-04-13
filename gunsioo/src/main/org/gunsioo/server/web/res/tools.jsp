@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
 Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
-and the EPL 1.0 (https://h2database.com/html/license.html).
+and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
 Initial Developer: Gunsioo Group
 -->
 <html><head>
@@ -157,7 +157,7 @@ function update() {
     <p>${text.tools.script.help}</p>
     <table class="tool">
         <tr><td>
-        ${text.tools.sourceDatabaseURL}:&nbsp;</td><td><input id="optionScript.0" name="url" onkeyup="update()" onchange="update()" value="jdbc:h2:~/test" size="50" />
+        ${text.tools.sourceDatabaseURL}:&nbsp;</td><td><input id="optionScript.0" name="url" onkeyup="update()" onchange="update()" value="jdbc:gunsioo:~/test" size="50" />
         </td></tr><tr><td>
         ${text.a.user}:&nbsp;</td><td><input id="optionScript.1" name="user" onkeyup="update()" onchange="update()" value="sa" />
         </td></tr><tr><td>
@@ -172,7 +172,7 @@ function update() {
     <p>${text.tools.runScript.help}</p>
     <table class="tool">
         <tr><td>
-        ${text.tools.targetDatabaseURL}:&nbsp;</td><td><input id="optionRunScript.0" name="url" onkeyup="update()" onchange="update()" value="jdbc:h2:~/test" size="50" />
+        ${text.tools.targetDatabaseURL}:&nbsp;</td><td><input id="optionRunScript.0" name="url" onkeyup="update()" onchange="update()" value="jdbc:gunsioo:~/test" size="50" />
         </td></tr><tr><td>
         ${text.a.user}:&nbsp;</td><td><input id="optionRunScript.1" name="user" onkeyup="update()" onchange="update()" value="sa" />
         </td></tr><tr><td>
@@ -200,9 +200,9 @@ function update() {
     <p>${text.tools.createCluster.help}</p>
     <table class="tool">
         <tr><td>
-        ${text.tools.sourceDatabaseURL}:&nbsp;</td><td><input id="optionCreateCluster.0" name="urlSource" onkeyup="update()" onchange="update()" value="jdbc:h2:~/test" size="50" />
+        ${text.tools.sourceDatabaseURL}:&nbsp;</td><td><input id="optionCreateCluster.0" name="urlSource" onkeyup="update()" onchange="update()" value="jdbc:gunsioo:~/test" size="50" />
         </td></tr><tr><td>
-        ${text.tools.targetDatabaseURL}:&nbsp;</td><td><input id="optionCreateCluster.1" name="urlTarget" onkeyup="update()" onchange="update()" value="jdbc:h2:~/copy/test" size="50" />
+        ${text.tools.targetDatabaseURL}:&nbsp;</td><td><input id="optionCreateCluster.1" name="urlTarget" onkeyup="update()" onchange="update()" value="jdbc:gunsioo:~/copy/test" size="50" />
         </td></tr><tr><td>
         ${text.a.user}:&nbsp;</td><td><input id="optionCreateCluster.2" name="user" onkeyup="update()" onchange="update()" value="sa" />
         </td></tr><tr><td>

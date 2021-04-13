@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -55,7 +55,7 @@ public class TestOldVersion extends TestDb {
             println("not found: ext/h2-1.2.127.jar - test skipped");
             return;
         }
-        Connection conn = driver.connect("jdbc:h2:mem:", null);
+        Connection conn = driver.connect("jdbc:gunsioo:mem:", null);
         assertEquals("1.2.127 (2010-01-15)", conn.getMetaData()
                 .getDatabaseProductVersion());
         conn.close();
@@ -67,7 +67,7 @@ public class TestOldVersion extends TestDb {
         deleteDb("oldVersion");
         Connection conn;
         Statement stat;
-        conn = driver.connect("jdbc:h2:" + getBaseDir() + "/oldVersion", null);
+        conn = driver.connect("jdbc:gunsioo:" + getBaseDir() + "/oldVersion", null);
         stat = conn.createStatement();
         stat.execute("create table test(id int primary key, b blob, c clob)");
         PreparedStatement prep = conn
@@ -90,7 +90,7 @@ public class TestOldVersion extends TestDb {
         prep.execute();
         conn.close();
         try {
-            conn = DriverManager.getConnection("jdbc:h2:" + getBaseDir() +
+            conn = DriverManager.getConnection("jdbc:gunsioo:" + getBaseDir() +
                     "/oldVersion", new Properties());
             conn.createStatement().executeQuery("select * from test");
         } catch (SQLException e) {
@@ -105,7 +105,7 @@ public class TestOldVersion extends TestDb {
         server.start();
         int port = server.getPort();
         assertThrows(ErrorCode.DRIVER_VERSION_ERROR_2, driver).connect(
-                "jdbc:h2:tcp://localhost:" + port + "/mem:test", null);
+                "jdbc:gunsioo:tcp://localhost:" + port + "/mem:test", null);
         server.stop();
 
         Class<?> serverClass = cl.loadClass("org.gunsioo.tools.Server");
@@ -116,7 +116,7 @@ public class TestOldVersion extends TestDb {
         m = serverOld.getClass().getMethod("start");
         m.invoke(serverOld);
         Connection conn;
-        conn = org.gunsioo.Driver.load().connect("jdbc:h2:mem:", null);
+        conn = org.gunsioo.Driver.load().connect("jdbc:gunsioo:mem:", null);
         Statement stat = conn.createStatement();
         ResultSet rs = stat.executeQuery("call 1");
         rs.next();
@@ -131,7 +131,7 @@ public class TestOldVersion extends TestDb {
         return new URLClassLoader(urls, null) {
             @Override
             protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-                if (name.startsWith("org.h2."))
+                if (name.startsWith("org.gunsioo."))
                     return super.loadClass(name, resolve);
                 return TestOldVersion.class.getClassLoader().loadClass(name);
             }

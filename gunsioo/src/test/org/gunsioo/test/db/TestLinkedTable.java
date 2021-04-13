@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -86,16 +86,16 @@ public class TestLinkedTable extends TestDb {
             return;
         }
         deleteDb("linkedTable");
-        Connection connMain = DriverManager.getConnection("jdbc:h2:mem:linkedTable");
+        Connection connMain = DriverManager.getConnection("jdbc:gunsioo:mem:linkedTable");
         Statement statMain = connMain.createStatement();
         statMain.execute("create table test(id identity, name varchar default 'test')");
 
         Connection conn = getConnection("linkedTable");
         Statement stat = conn.createStatement();
         stat.execute("create linked table test1('', " +
-                "'jdbc:h2:mem:linkedTable', '', '', 'TEST') emit updates");
+                "'jdbc:gunsioo:mem:linkedTable', '', '', 'TEST') emit updates");
         stat.execute("create linked table test2('', " +
-                "'jdbc:h2:mem:linkedTable', '', '', 'TEST')");
+                "'jdbc:gunsioo:mem:linkedTable', '', '', 'TEST')");
         stat.execute("insert into test1 values(default, default)");
         stat.execute("insert into test2 values(default, default)");
         stat.execute("merge into test2 values(3, default)");
@@ -134,14 +134,14 @@ public class TestLinkedTable extends TestDb {
                 "linkedTable;SHARE_LINKED_CONNECTIONS=TRUE");
         try {
             conn.createStatement().execute("create linked table test" +
-                    "(null, 'jdbc:h2:mem:', 'sa', 'pwd', 'DUAL2')");
+                    "(null, 'jdbc:gunsioo:mem:', 'sa', 'pwd', 'DUAL2')");
             fail();
         } catch (SQLException e) {
             assertContains(e.toString(), "pwd");
         }
         try {
             conn.createStatement().execute("create linked table test" +
-                    "(null, 'jdbc:h2:mem:', 'sa', 'pwd', 'DUAL2') --hide--");
+                    "(null, 'jdbc:gunsioo:mem:', 'sa', 'pwd', 'DUAL2') --hide--");
             fail();
         } catch (SQLException e) {
             assertTrue(e.toString().indexOf("pwd") < 0);
@@ -151,17 +151,17 @@ public class TestLinkedTable extends TestDb {
 
     // this is not a bug, it is the documented behavior
 //    private void testLinkAutoAdd() throws SQLException {
-//        Class.forName("org.h2.Driver");
+//        Class.forName("org.gunsioo.Driver");
 //        Connection ca =
-//            DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
+//            DriverManager.getConnection("jdbc:gunsioo:mem:one", "sa", "sa");
 //        Connection cb =
-//            DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
+//            DriverManager.getConnection("jdbc:gunsioo:mem:two", "sa", "sa");
 //        Statement sa = ca.createStatement();
 //        Statement sb = cb.createStatement();
 //        sa.execute("CREATE TABLE ONE (X NUMBER)");
 //        sb.execute(
 //            "CALL LINK_SCHEMA('GOOD', '', " +
-//            "'jdbc:h2:mem:one', 'sa', 'sa', 'PUBLIC'); ");
+//            "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'PUBLIC'); ");
 //        sb.executeQuery("SELECT * FROM GOOD.ONE");
 //        sa.execute("CREATE TABLE TWO (X NUMBER)");
 //        sb.executeQuery("SELECT * FROM GOOD.TWO"); // FAILED
@@ -182,7 +182,7 @@ public class TestLinkedTable extends TestDb {
         Statement sa = ca.createStatement();
         sa.execute("CREATE TABLE TEST(ID INT) AS SELECT 1");
         ca.close();
-        Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
+        Connection cb = DriverManager.getConnection("jdbc:gunsioo:mem:two", "sa", "sa");
         Statement sb = cb.createStatement();
         sb.execute("CREATE LINKED TABLE T1(NULL, '" +
                 url + "', '"+user+"', '"+password+"', 'TEST')");
@@ -205,7 +205,7 @@ public class TestLinkedTable extends TestDb {
         Statement sa = ca.createStatement();
         sa.execute("CREATE TABLE TEST(ID INT)");
         ca.close();
-        Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
+        Connection cb = DriverManager.getConnection("jdbc:gunsioo:mem:two", "sa", "sa");
         Statement sb = cb.createStatement();
         sb.execute("CREATE LINKED TABLE T1(NULL, '" + url +
                 ";OPEN_NEW=TRUE', '"+user+"', '"+password+"', 'TEST')");
@@ -217,8 +217,8 @@ public class TestLinkedTable extends TestDb {
 
     private void testMultipleSchemas() throws SQLException {
         org.gunsioo.Driver.load();
-        Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
-        Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
+        Connection ca = DriverManager.getConnection("jdbc:gunsioo:mem:one", "sa", "sa");
+        Connection cb = DriverManager.getConnection("jdbc:gunsioo:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
         Statement sb = cb.createStatement();
         sa.execute("CREATE TABLE TEST(ID INT)");
@@ -228,11 +228,11 @@ public class TestLinkedTable extends TestDb {
         sa.execute("INSERT INTO P.TEST VALUES(2)");
         assertThrows(ErrorCode.SCHEMA_NAME_MUST_MATCH, sb).
                 execute("CREATE LINKED TABLE T(NULL, " +
-                        "'jdbc:h2:mem:one', 'sa', 'sa', 'TEST')");
+                        "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'TEST')");
         sb.execute("CREATE LINKED TABLE T(NULL, " +
-                        "'jdbc:h2:mem:one', 'sa', 'sa', 'PUBLIC', 'TEST')");
+                        "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'PUBLIC', 'TEST')");
         sb.execute("CREATE LINKED TABLE T2(NULL, " +
-                        "'jdbc:h2:mem:one', 'sa', 'sa', 'P', 'TEST')");
+                        "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'P', 'TEST')");
         assertSingleValue(sb, "SELECT * FROM T", 1);
         assertSingleValue(sb, "SELECT * FROM T2", 2);
         sa.execute("DROP ALL OBJECTS");
@@ -245,8 +245,8 @@ public class TestLinkedTable extends TestDb {
 
     private void testReadOnlyLinkedTable() throws SQLException {
         org.gunsioo.Driver.load();
-        Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
-        Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
+        Connection ca = DriverManager.getConnection("jdbc:gunsioo:mem:one", "sa", "sa");
+        Connection cb = DriverManager.getConnection("jdbc:gunsioo:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
         Statement sb = cb.createStatement();
         sa.execute("CREATE TABLE TEST(ID INT)");
@@ -254,7 +254,7 @@ public class TestLinkedTable extends TestDb {
         String[] suffix = {"", "READONLY", "EMIT UPDATES"};
         for (int i = 0; i < suffix.length; i++) {
             String sql = "CREATE LINKED TABLE T(NULL, " +
-                    "'jdbc:h2:mem:one', 'sa', 'sa', 'TEST')" + suffix[i];
+                    "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'TEST')" + suffix[i];
             sb.execute(sql);
             sb.executeQuery("SELECT * FROM T");
             String[] update = {"DELETE FROM T",
@@ -281,17 +281,17 @@ public class TestLinkedTable extends TestDb {
 
     private static void testLinkOtherSchema() throws SQLException {
         org.gunsioo.Driver.load();
-        Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
-        Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
+        Connection ca = DriverManager.getConnection("jdbc:gunsioo:mem:one", "sa", "sa");
+        Connection cb = DriverManager.getConnection("jdbc:gunsioo:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
         Statement sb = cb.createStatement();
         sa.execute("CREATE TABLE GOOD (X NUMBER)");
         sa.execute("CREATE SCHEMA S");
         sa.execute("CREATE TABLE S.BAD (X NUMBER)");
         sb.execute("SELECT * FROM LINK_SCHEMA('G', '', " +
-                "'jdbc:h2:mem:one', 'sa', 'sa', 'PUBLIC'); ");
+                "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'PUBLIC'); ");
         sb.execute("SELECT * FROM LINK_SCHEMA('B', '', " +
-                "'jdbc:h2:mem:one', 'sa', 'sa', 'S'); ");
+                "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'S'); ");
         // OK
         sb.executeQuery("SELECT * FROM G.GOOD");
         // FAILED
@@ -303,19 +303,19 @@ public class TestLinkedTable extends TestDb {
     private void testLinkTwoTables() throws SQLException {
         org.gunsioo.Driver.load();
         Connection conn = DriverManager.getConnection(
-                "jdbc:h2:mem:one", "sa", "sa");
+                "jdbc:gunsioo:mem:one", "sa", "sa");
         Statement stat = conn.createStatement();
         stat.execute("CREATE SCHEMA Y");
         stat.execute("CREATE TABLE A( C INT)");
         stat.execute("INSERT INTO A VALUES(1)");
         stat.execute("CREATE TABLE Y.A (C INT)");
         stat.execute("INSERT INTO Y.A VALUES(2)");
-        Connection conn2 = DriverManager.getConnection("jdbc:h2:mem:two");
+        Connection conn2 = DriverManager.getConnection("jdbc:gunsioo:mem:two");
         Statement stat2 = conn2.createStatement();
-        stat2.execute("CREATE LINKED TABLE one('org.h2.Driver', " +
-                "'jdbc:h2:mem:one', 'sa', 'sa', 'Y.A');");
-        stat2.execute("CREATE LINKED TABLE two('org.h2.Driver', " +
-                "'jdbc:h2:mem:one', 'sa', 'sa', 'PUBLIC.A');");
+        stat2.execute("CREATE LINKED TABLE one('org.gunsioo.Driver', " +
+                "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'Y.A');");
+        stat2.execute("CREATE LINKED TABLE two('org.gunsioo.Driver', " +
+                "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'PUBLIC.A');");
         ResultSet rs = stat2.executeQuery("SELECT * FROM one");
         rs.next();
         assertEquals(2, rs.getInt(1));
@@ -328,19 +328,19 @@ public class TestLinkedTable extends TestDb {
 
     private static void testLinkDrop() throws SQLException {
         org.gunsioo.Driver.load();
-        Connection connA = DriverManager.getConnection("jdbc:h2:mem:a");
+        Connection connA = DriverManager.getConnection("jdbc:gunsioo:mem:a");
         Statement statA = connA.createStatement();
         statA.execute("CREATE TABLE TEST(ID INT)");
-        Connection connB = DriverManager.getConnection("jdbc:h2:mem:b");
+        Connection connB = DriverManager.getConnection("jdbc:gunsioo:mem:b");
         Statement statB = connB.createStatement();
         statB.execute("CREATE LINKED TABLE " +
-                "TEST_LINK('', 'jdbc:h2:mem:a', '', '', 'TEST')");
+                "TEST_LINK('', 'jdbc:gunsioo:mem:a', '', '', 'TEST')");
         connA.close();
         // the connection should be closed now
         // (and the table should disappear because the last connection was
         // closed)
         statB.execute("DROP TABLE TEST_LINK");
-        connA = DriverManager.getConnection("jdbc:h2:mem:a");
+        connA = DriverManager.getConnection("jdbc:gunsioo:mem:a");
         statA = connA.createStatement();
         // table should not exist now
         statA.execute("CREATE TABLE TEST(ID INT)");
@@ -487,10 +487,10 @@ public class TestLinkedTable extends TestDb {
         conn = DriverManager.getConnection(url2, "sa2", "def def");
         stat = conn.createStatement();
         stat.execute("CREATE LINKED TABLE IF NOT EXISTS " +
-                "LINK_TEST('org.h2.Driver', '" + url1 +
+                "LINK_TEST('org.gunsioo.Driver', '" + url1 +
                 "', 'sa1', 'abc abc', 'TEST')");
         stat.execute("CREATE LINKED TABLE IF NOT EXISTS " +
-                "LINK_TEST('org.h2.Driver', '" + url1 +
+                "LINK_TEST('org.gunsioo.Driver', '" + url1 +
                 "', 'sa1', 'abc abc', 'TEST')");
         testRow(stat, "LINK_TEST");
         ResultSet rs = stat.executeQuery("SELECT * FROM LINK_TEST");
@@ -548,7 +548,7 @@ public class TestLinkedTable extends TestDb {
 
         stat.execute("DROP TABLE LINK_TEST");
 
-        stat.execute("CREATE LINKED TABLE LINK_TEST('org.h2.Driver', '" + url1
+        stat.execute("CREATE LINKED TABLE LINK_TEST('org.gunsioo.Driver', '" + url1
                 + "', 'sa1', 'abc abc', '(SELECT COUNT(*) FROM TEST)')");
         rs = stat.executeQuery("SELECT * FROM LINK_TEST");
         rs.next();
@@ -586,16 +586,16 @@ public class TestLinkedTable extends TestDb {
     private void testCachingResults() throws SQLException {
         org.gunsioo.Driver.load();
         Connection ca = DriverManager.getConnection(
-                "jdbc:h2:mem:one", "sa", "sa");
+                "jdbc:gunsioo:mem:one", "sa", "sa");
         Connection cb = DriverManager.getConnection(
-                "jdbc:h2:mem:two", "sa", "sa");
+                "jdbc:gunsioo:mem:two", "sa", "sa");
 
         Statement sa = ca.createStatement();
         Statement sb = cb.createStatement();
         sa.execute("CREATE TABLE TEST(ID VARCHAR)");
         sa.execute("INSERT INTO TEST (ID) VALUES('abc')");
         sb.execute("CREATE LOCAL TEMPORARY LINKED TABLE T" +
-                "(NULL, 'jdbc:h2:mem:one', 'sa', 'sa', 'TEST')");
+                "(NULL, 'jdbc:gunsioo:mem:one', 'sa', 'sa', 'TEST')");
 
         PreparedStatement paData = ca.prepareStatement(
                 "select id from TEST where id = ?");
@@ -657,7 +657,7 @@ public class TestLinkedTable extends TestDb {
         org.gunsioo.Driver.load();
 
         Connection memConn = DriverManager.getConnection(
-                "jdbc:h2:mem:one", "sa", "sa");
+                "jdbc:gunsioo:mem:one", "sa", "sa");
         Statement memStat = memConn.createStatement();
         memStat.execute("CREATE TABLE TEST(ID VARCHAR)");
 
@@ -683,7 +683,7 @@ public class TestLinkedTable extends TestDb {
         conn = DriverManager.getConnection(url1, "sa1", "abc abc");
         stat = conn.createStatement();
         stat.execute("CREATE LOCAL TEMPORARY LINKED TABLE T" +
-                "(NULL, 'jdbc:h2:mem:one', 'sa', 'sa', 'TEST')");
+                "(NULL, 'jdbc:gunsioo:mem:one', 'sa', 'sa', 'TEST')");
         // This is valid because it's a linked table
         stat.execute("INSERT INTO T VALUES('abc')");
 
@@ -698,14 +698,14 @@ public class TestLinkedTable extends TestDb {
             return;
         }
         org.gunsioo.Driver.load();
-        Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
-        Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
+        Connection ca = DriverManager.getConnection("jdbc:gunsioo:mem:one", "sa", "sa");
+        Connection cb = DriverManager.getConnection("jdbc:gunsioo:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
         Statement sb = cb.createStatement();
         sa.execute("CREATE TABLE TEST(ID SERIAL, the_geom geometry)");
         sa.execute("INSERT INTO TEST(THE_GEOM) VALUES('POINT (1 1)')");
         String sql = "CREATE LINKED TABLE T(NULL, " +
-                "'jdbc:h2:mem:one', 'sa', 'sa', 'TEST') READONLY";
+                "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'TEST') READONLY";
         sb.execute(sql);
         try (ResultSet rs = sb.executeQuery("SELECT * FROM T")) {
             assertTrue(rs.next());
@@ -721,14 +721,14 @@ public class TestLinkedTable extends TestDb {
             return;
         }
         org.gunsioo.Driver.load();
-        Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
-        Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
+        Connection ca = DriverManager.getConnection("jdbc:gunsioo:mem:one", "sa", "sa");
+        Connection cb = DriverManager.getConnection("jdbc:gunsioo:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
         Statement sb = cb.createStatement();
         sa.execute("DROP TABLE IF EXISTS TEST; "
                 + "CREATE TABLE TEST as select * from SYSTEM_RANGE(1,1000) as n;");
         String sql = "CREATE LINKED TABLE T(NULL, " +
-                "'jdbc:h2:mem:one', 'sa', 'sa', 'TEST') FETCH_SIZE 10";
+                "'jdbc:gunsioo:mem:one', 'sa', 'sa', 'TEST') FETCH_SIZE 10";
         sb.execute(sql);
         try (ResultSet rs = sb.executeQuery("SELECT count(*) FROM T")) {
             assertTrue(rs.next());
@@ -736,7 +736,7 @@ public class TestLinkedTable extends TestDb {
         }
         ResultSet res = sb.executeQuery("CALL DB_OBJECT_SQL('TABLE', 'PUBLIC', 'T')");
         res.next();
-        assertEquals("CREATE FORCE LINKED TABLE \"PUBLIC\".\"T\"(NULL, 'jdbc:h2:mem:one', 'sa', 'sa', 'TEST') FETCH_SIZE 10 /*--hide--*/", res.getString(1));
+        assertEquals("CREATE FORCE LINKED TABLE \"PUBLIC\".\"T\"(NULL, 'jdbc:gunsioo:mem:one', 'sa', 'sa', 'TEST') FETCH_SIZE 10 /*--hide--*/", res.getString(1));
         sb.execute("DROP TABLE T");
         ca.close();
         cb.close();

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -52,7 +52,7 @@ public class TestMVTempResult extends TestBase {
         String dir = getBaseDir();
         String name = "testResultExternal";
         DeleteDbFiles.execute(dir, name, true);
-        try (Connection c = DriverManager.getConnection("jdbc:h2:" + dir + '/' + name)) {
+        try (Connection c = DriverManager.getConnection("jdbc:gunsioo:" + dir + '/' + name)) {
             Statement s = c.createStatement();
             s.execute("CREATE TABLE TEST(I BIGINT, E ENUM('a', 'b'))" //
                     + " AS SELECT X, 'a' FROM SYSTEM_RANGE(1, " + ROWS + ')');

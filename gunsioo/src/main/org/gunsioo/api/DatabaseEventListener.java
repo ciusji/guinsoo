@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.api;
@@ -12,7 +12,7 @@ import java.util.EventListener;
  * A class that implements this interface can get notified about exceptions
  * and other events. A database event listener can be registered when
  * connecting to a database. Example database URL:
- * jdbc:h2:./test;DATABASE_EVENT_LISTENER='com.acme.DbListener'
+ * jdbc:gunsioo:./test;DATABASE_EVENT_LISTENER='com.acme.DbListener'
  */
 public interface DatabaseEventListener extends EventListener {
 

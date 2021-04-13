@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.server.pg;
@@ -270,7 +270,7 @@ public final class PgServerThread implements Runnable {
                 info.put("MODE", "PostgreSQL");
                 info.put("DATABASE_TO_LOWER", "TRUE");
                 info.put("DEFAULT_NULL_ORDERING", "HIGH");
-                String url = "jdbc:h2:" + databaseName;
+                String url = "jdbc:gunsioo:" + databaseName;
                 ConnectionInfo ci = new ConnectionInfo(url, info, userName, password);
                 String baseDir = server.getBaseDir();
                 if (baseDir == null) {

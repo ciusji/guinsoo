@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.jdbc;
@@ -98,12 +98,12 @@ public final class JdbcDatabaseMetaData extends TraceObject
     /**
      * Gets the name of the JDBC driver.
      *
-     * @return the driver name ("H2 JDBC Driver")
+     * @return the driver name ("Gunsioo JDBC Driver")
      */
     @Override
     public String getDriverName() {
         debugCodeCall("getDriverName");
-        return "H2 JDBC Driver";
+        return "Gunsioo JDBC Driver";
     }
 
     /**

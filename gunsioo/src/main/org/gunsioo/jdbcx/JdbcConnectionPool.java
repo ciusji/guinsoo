@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Christian d'Heureuse, www.source-code.biz
  *
  * This class is multi-licensed under LGPL, MPL 2.0, and EPL 1.0.
@@ -44,11 +44,11 @@ import org.gunsioo.message.DbException;
  * </a>. It is used as follows:
  * <pre>
  * import java.sql.*;
- * import org.h2.jdbcx.JdbcConnectionPool;
+ * import org.gunsioo.jdbcx.JdbcConnectionPool;
  * public class Test {
  *     public static void main(String... args) throws Exception {
  *         JdbcConnectionPool cp = JdbcConnectionPool.create(
- *             "jdbc:h2:~/test", "sa", "sa");
+ *             "jdbc:gunsioo:~/test", "sa", "sa");
  *         for (String sql : args) {
  *             Connection conn = cp.getConnection();
  *             conn.createStatement().execute(sql);
@@ -99,9 +99,9 @@ public final class JdbcConnectionPool
     }
 
     /**
-     * Constructs a new connection pool for H2 databases.
+     * Constructs a new connection pool for Gunsioo databases.
      *
-     * @param url the database URL of the H2 connection
+     * @param url the database URL of the Gunsioo connection
      * @param user the user name
      * @param password the password
      * @return the connection pool

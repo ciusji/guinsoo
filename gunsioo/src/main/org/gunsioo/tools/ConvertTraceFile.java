@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.tools;
@@ -127,7 +127,7 @@ public class ConvertTraceFile extends Tool {
         javaWriter.println("public class " + cn + " {");
         javaWriter.println("    public static void main(String... args) " +
                 "throws Exception {");
-        javaWriter.println("        Class.forName(\"org.h2.Driver\");");
+        javaWriter.println("        Class.forName(\"org.gunsioo.Driver\");");
         while (true) {
             String line = reader.readLine();
             if (line == null) {

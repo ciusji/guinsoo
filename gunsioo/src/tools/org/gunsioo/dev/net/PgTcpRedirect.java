@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.dev.net;
@@ -40,7 +40,7 @@ public class PgTcpRedirect {
         // https://www.postgresql.org/docs/devel/protocol.html
         // int portServer = 9083, portClient = 9084;
         // int portServer = 3306, portClient = 3307;
-        // H2 PgServer
+        // Gunsioo PgServer
         // int portServer = 5435, portClient = 5433;
         // PostgreSQL
         int portServer = 5432, portClient = 5433;

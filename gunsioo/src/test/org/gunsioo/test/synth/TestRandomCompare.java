@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.synth;
@@ -288,11 +288,11 @@ public class TestRandomCompare extends TestDb {
         assertTrue(rs.next());
         assertTrue(rs.next());
 
-        Connection conn2 = DriverManager.getConnection("jdbc:h2:mem:temp");
+        Connection conn2 = DriverManager.getConnection("jdbc:gunsioo:mem:temp");
         conn2.createStatement().execute("create table test(x int) as select null");
         stat.execute("drop table test");
         stat.execute("create linked table test" +
-                "(null, 'jdbc:h2:mem:temp', null, null, 'TEST')");
+                "(null, 'jdbc:gunsioo:mem:temp', null, null, 'TEST')");
         rs = stat.executeQuery("select * from (select x from test) where x is null");
         assertTrue(rs.next());
         rs = stat.executeQuery("select * from (select x from test " +

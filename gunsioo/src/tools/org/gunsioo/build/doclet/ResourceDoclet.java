@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.build.doclet;
@@ -23,7 +23,7 @@ import com.sun.javadoc.Tag;
 public class ResourceDoclet {
 
     private String destFile = System.getProperty("h2.javadocResourceFile",
-            "src/main/org/h2/res/javadoc.properties");
+            "src/main/org/gunsioo/res/javadoc.properties");
 
     private final SortedProperties resources = new SortedProperties();
 

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -94,7 +94,7 @@ public class TestRecovery extends TestDb {
         DeleteDbFiles.execute(getBaseDir(), "recovery", true);
         Connection conn = getConnection("recovery");
         Statement stat = conn.createStatement();
-        stat.execute("CREATE ALIAS IF NOT EXISTS FTL_INIT FOR 'org.h2.fulltext.FullTextLucene.init'");
+        stat.execute("CREATE ALIAS IF NOT EXISTS FTL_INIT FOR 'org.gunsioo.fulltext.FullTextLucene.init'");
         stat.execute("CALL FTL_INIT()");
         stat.execute("create table test(id int primary key, name varchar) as " +
                 "select 1, 'Hello'");

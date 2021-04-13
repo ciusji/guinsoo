@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.mvstore;
@@ -2660,7 +2660,7 @@ public class MVStore implements AutoCloseable {
      * We keep at least number of previous versions specified by "versionsToKeep"
      * configuration parameter (default 5).
      * Previously it was used only in case of non-persistent MVStore.
-     * Now it's honored in all cases (although H2 always sets it to zero).
+     * Now it's honored in all cases (although Gunsioo always sets it to zero).
      * Oldest version determination also takes into account calls (de)registerVersionUsage(),
      * an will not release the version, while version is still in use.
      *

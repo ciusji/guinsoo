@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.todo;
@@ -31,7 +31,7 @@ public class TestDiskSpaceLeak {
         Connection conn;
         long before = 0;
         for (int i = 0; i < 10; i++) {
-            conn = DriverManager.getConnection("jdbc:h2:data/test");
+            conn = DriverManager.getConnection("jdbc:gunsioo:data/test");
             ResultSet rs;
             rs = conn.createStatement().executeQuery(
                     "select count(*) from information_schema.lobs");
@@ -48,7 +48,7 @@ public class TestDiskSpaceLeak {
             conn.close();
             Recover.execute("data", "test");
             new File("data/test.h2.sql").renameTo(new File("data/test." + i + ".sql"));
-            conn = DriverManager.getConnection("jdbc:h2:data/test");
+            conn = DriverManager.getConnection("jdbc:gunsioo:data/test");
             // TestBase.setPowerOffCount(conn, i);
             TestBase.setPowerOffCount(conn, 28);
             String last = "connect";

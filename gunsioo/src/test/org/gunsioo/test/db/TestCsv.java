@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -568,7 +568,7 @@ public class TestCsv extends TestDb {
         }
         trace("read: " + TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - time));
         rs = new Csv().read(getBaseDir() + "/testRW.csv", null, "UTF8");
-        // stat.execute("CREATE ALIAS CSVREAD FOR 'org.h2.tools.Csv.read'");
+        // stat.execute("CREATE ALIAS CSVREAD FOR 'org.gunsioo.tools.Csv.read'");
         ResultSetMetaData meta = rs.getMetaData();
         assertEquals(2, meta.getColumnCount());
         for (int i = 0; i < len; i++) {

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 
@@ -28,13 +28,13 @@ INSERT INTO VERSION VALUES
 CREATE TABLE CHANNEL(TITLE VARCHAR, LINK VARCHAR, DESC VARCHAR,
     LANGUAGE VARCHAR, PUB TIMESTAMP, LAST TIMESTAMP, AUTHOR VARCHAR);
 
-INSERT INTO CHANNEL VALUES('H2 Database Engine' ,
-    'https://h2database.com/', 'H2 Database Engine', 'en-us', LOCALTIMESTAMP, LOCALTIMESTAMP, 'Thomas Mueller');
+INSERT INTO CHANNEL VALUES('Gunsioo Database Engine' ,
+    'https://h2database.com/', 'Gunsioo Database Engine', 'en-us', LOCALTIMESTAMP, LOCALTIMESTAMP, 'Thomas Mueller');
 
 CREATE VIEW ITEM AS
 SELECT ID, 'New version available: ' || VERSION || ' (' || CREATED || ')' TITLE,
 CAST((CREATED || ' 12:00:00') AS TIMESTAMP) ISSUED,
-$$A new version of H2 is available for
+$$A new version of Gunsioo is available for
 <a href="https://h2database.com">download</a>.
 (You may have to click 'Refresh').
 <br />
@@ -89,7 +89,7 @@ SELECT 'doap-h2.rdf' FILE,
     XMLSTARTDOC() ||
 $$<rdf:RDF xmlns="http://usefulinc.com/ns/doap#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xml:lang="en">
 <Project rdf:about="https://h2database.com">
-    <name>H2 Database Engine</name>
+    <name>Gunsioo Database Engine</name>
     <homepage rdf:resource="https://h2database.com"/>
     <programming-language>Java</programming-language>
     <category rdf:resource="http://projects.apache.org/category/database"/>
@@ -98,9 +98,9 @@ $$<rdf:RDF xmlns="http://usefulinc.com/ns/doap#" xmlns:rdf="http://www.w3.org/19
     <license rdf:resource="http://usefulinc.com/doap/licenses/mpl"/>
     <bug-database rdf:resource="https://github.com/h2database/h2database/issues"/>
     <download-page rdf:resource="https://h2database.com/html/download.html"/>
-    <shortdesc xml:lang="en">H2 Database Engine</shortdesc>
+    <shortdesc xml:lang="en">Gunsioo Database Engine</shortdesc>
     <description xml:lang="en">
-    H2 is a relational database management system written in Java.
+    Gunsioo is a relational database management system written in Java.
     It can be embedded in Java applications or run in the client-server mode.
     The disk footprint is about 1 MB. The main programming APIs are SQL and JDBC,
     however the database also supports using the PostgreSQL ODBC driver by acting like a PostgreSQL server.
@@ -120,7 +120,7 @@ $$ ||
     GROUP_CONCAT(
         XMLNODE('release', NULL,
             XMLNODE('Version', NULL,
-                XMLNODE('name', NULL, 'H2 ' || V.VERSION) ||
+                XMLNODE('name', NULL, 'Gunsioo ' || V.VERSION) ||
                 XMLNODE('created', NULL, V.CREATED) ||
                 XMLNODE('revision', NULL, V.VERSION)
             )

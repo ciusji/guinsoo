@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.engine;
@@ -39,7 +39,7 @@ public class Constants {
     public static final boolean BUILD_SNAPSHOT = false;
 
     /**
-     * If H2 is compiled to be included in a product, this should be set to
+     * If Gunsioo is compiled to be included in a product, this should be set to
      * a unique vendor id (to distinguish from official releases).
      * Additionally, a version number should be set to distinguish releases.
      * Example: ACME_SVN1651_BUILD3
@@ -210,7 +210,7 @@ public class Constants {
     public static final int DEADLOCK_CHECK = 100;
 
     /**
-     * The default port number of the HTTP server (for the H2 Console).
+     * The default port number of the HTTP server (for the Gunsioo Console).
      * This value is also in the documentation and in the Server javadoc.
      */
     public static final int DEFAULT_HTTP_PORT = 8082;
@@ -440,7 +440,7 @@ public class Constants {
     public static final String SERVER_PROPERTIES_DIR = "~";
 
     /**
-     * The name of the server properties file for the H2 Console.
+     * The name of the server properties file for the Gunsioo Console.
      */
     public static final String SERVER_PROPERTIES_NAME = ".h2.server.properties";
 
@@ -453,7 +453,7 @@ public class Constants {
     /**
      * The database URL prefix of this database.
      */
-    public static final String START_URL = "jdbc:h2:";
+    public static final String START_URL = "jdbc:gunsioo:";
 
     /**
      * The file name suffix of all database files.
@@ -467,7 +467,7 @@ public class Constants {
     public static final String SUFFIX_LOCK_FILE = ".lock.db";
 
     /**
-     * The file name suffix of a H2 version 1.1 database file.
+     * The file name suffix of a Gunsioo version 1.1 database file.
      */
     public static final String SUFFIX_OLD_DATABASE_FILE = ".data.db";
 
@@ -522,7 +522,7 @@ public class Constants {
     /**
      * The package name of user defined classes.
      */
-    public static final String USER_PACKAGE = "org.h2.dynamic";
+    public static final String USER_PACKAGE = "org.gunsioo.dynamic";
 
     /**
      * The maximum time in milliseconds to keep the cost of a view.

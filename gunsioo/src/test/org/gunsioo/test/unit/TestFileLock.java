@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -68,7 +68,7 @@ public class TestFileLock extends TestDb implements Runnable {
 
     private void testFsFileLock() throws Exception {
         deleteDb("fileLock");
-        String url = "jdbc:h2:" + getBaseDir() +
+        String url = "jdbc:gunsioo:" + getBaseDir() +
                 "/fileLock;FILE_LOCK=FS;OPEN_NEW=TRUE";
         Connection conn = getConnection(url);
         assertThrows(ErrorCode.DATABASE_ALREADY_OPEN_1, () -> getConnection(url));

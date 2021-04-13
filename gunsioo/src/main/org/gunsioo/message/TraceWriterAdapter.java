@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.message;
@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * opening a database:
  *
  * <pre>
- * jdbc:h2:&tilde;/test;TRACE_LEVEL_FILE=4
+ * jdbc:gunsioo:&tilde;/test;TRACE_LEVEL_FILE=4
  * </pre>
  *
  * The logger name is 'h2database'.

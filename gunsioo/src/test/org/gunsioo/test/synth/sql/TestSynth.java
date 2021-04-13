@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.synth.sql;
@@ -22,14 +22,14 @@ public class TestSynth extends TestDb {
     //  TODO hsqldb: call mod(1) should return invalid parameter count
 
     /**
-     * A H2 database connection.
+     * A Gunsioo database connection.
      */
-    static final int H2 = 0;
+    static final int GUNSIOO = 0;
 
     /**
-     * An in-memory H2 database connection.
+     * An in-memory Gunsioo database connection.
      */
-    static final int H2_MEM = 1;
+    static final int GUNSIOO_MEM = 1;
 
     /**
      * An HSQLDB database connection.
@@ -157,37 +157,6 @@ public class TestSynth extends TestDb {
         for (int i = 0; i < 2000; i++) {
             addRandomCommands();
         }
-        // for (int i = 0; i < 20; i++) {
-        // Table table = randomTable();
-        // add(Command.getRandomInsert(this, table));
-        // }
-        // for (int i = 0; i < 100; i++) {
-        // Table table = randomTable();
-        // add(Command.getRandomSelect(this, table));
-        // }
-        // for (int i = 0; i < 10; i++) {
-        // Table table = randomTable();
-        // add(Command.getRandomUpdate(this, table));
-        // }
-        // for (int i = 0; i < 30; i++) {
-        // Table table = randomTable();
-        // add(Command.getRandomSelect(this, table));
-        // }
-        // for (int i = 0; i < 50; i++) {
-        // Table table = randomTable();
-        // add(Command.getRandomDelete(this, table));
-        // }
-        // for (int i = 0; i < 10; i++) {
-        // Table table = randomTable();
-        // add(Command.getRandomSelect(this, table));
-        // }
-        // while(true) {
-        // Table table = randomTable();
-        // if(table == null) {
-        // break;
-        // }
-        // add(Command.getDropTable(this, table));
-        // }
         add(Command.getDisconnect(this));
         add(Command.getEnd(this));
 
@@ -280,31 +249,21 @@ public class TestSynth extends TestDb {
         deleteDb("synth/synth");
         databases = new ArrayList<>();
 
-        // mode = HSQLDB;
-        // addDatabase("org.hsqldb.jdbcDriver", "jdbc:hsqldb:test", "sa", "" );
-        // addDatabase("org.h2.Driver", "jdbc:h2:synth;mode=hsqldb", "sa", "");
-
-        // mode = POSTGRESQL;
-        // addDatabase("org.postgresql.Driver", "jdbc:postgresql:test", "sa",
-        // "sa");
-        // addDatabase("org.h2.Driver", "jdbc:h2:synth;mode=postgresql", "sa",
-        // "");
-
-        mode = H2_MEM;
+        mode = GUNSIOO_MEM;
         org.gunsioo.Driver.load();
-        addDatabase("org.h2.Driver", "jdbc:h2:mem:synth", "sa", "", true);
-        addDatabase("org.h2.Driver", "jdbc:h2:" +
+        addDatabase("org.gunsioo.Driver", "jdbc:gunsioo:mem:synth", "sa", "", true);
+        addDatabase("org.gunsioo.Driver", "jdbc:gunsioo:" +
                 getBaseDir() + "/synth/synth", "sa", "", false);
 
         // addDatabase("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost/test",
         // "sa", "");
-        // addDatabase("org.h2.Driver", "jdbc:h2:synth;mode=mysql", "sa", "");
+        // addDatabase("org.gunsioo.Driver", "jdbc:gunsioo:synth;mode=mysql", "sa", "");
 
         // addDatabase("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost/test",
         // "sa", "");
         // addDatabase("org.ldbc.jdbc.jdbcDriver",
         // "jdbc:ldbc:mysql://localhost/test", "sa", "");
-        // addDatabase("org.h2.Driver", "jdbc:h2:memFS:synth", "sa", "");
+        // addDatabase("org.gunsioo.Driver", "jdbc:gunsioo:memFS:synth", "sa", "");
 
         // MySQL: NOT is bound to column: NOT ID = 1 means (NOT ID) = 1 instead
         // of NOT (ID=1)

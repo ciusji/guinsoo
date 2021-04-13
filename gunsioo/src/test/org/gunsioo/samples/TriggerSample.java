@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -28,7 +28,7 @@ public class TriggerSample {
      */
     public static void main(String... args) throws Exception {
         Class.forName("org.gunsioo.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:h2:mem:", "sa", "");
+        Connection conn = DriverManager.getConnection("jdbc:gunsioo:mem:", "sa", "");
         Statement stat = conn.createStatement();
         stat.execute("CREATE TABLE INVOICE(ID INT PRIMARY KEY, AMOUNT DECIMAL(10, 2))");
         stat.execute("CREATE TABLE INVOICE_SUM(AMOUNT DECIMAL(10, 2))");
@@ -36,13 +36,13 @@ public class TriggerSample {
 
         stat.execute("CREATE TRIGGER INV_INS " +
                 "AFTER INSERT ON INVOICE FOR EACH ROW " +
-                "CALL \"org.h2.samples.TriggerSample$MyTrigger\" ");
+                "CALL \"org.gunsioo.samples.TriggerSample$MyTrigger\" ");
         stat.execute("CREATE TRIGGER INV_UPD " +
                 "AFTER UPDATE ON INVOICE FOR EACH ROW " +
-                "CALL \"org.h2.samples.TriggerSample$MyTrigger\" ");
+                "CALL \"org.gunsioo.samples.TriggerSample$MyTrigger\" ");
         stat.execute("CREATE TRIGGER INV_DEL " +
                 "AFTER DELETE ON INVOICE FOR EACH ROW " +
-                "CALL \"org.h2.samples.TriggerSample$MyTrigger\" ");
+                "CALL \"org.gunsioo.samples.TriggerSample$MyTrigger\" ");
 
         stat.execute("INSERT INTO INVOICE VALUES(1, 10.0)");
         stat.execute("INSERT INTO INVOICE VALUES(2, 19.95)");

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.dev.util;
@@ -23,13 +23,13 @@ import org.gunsioo.engine.Constants;
 import org.gunsioo.tools.RunScript;
 
 /**
- * Migrate a H2 database version 1.1.x (page store not enabled) to 1.2.x (page
- * store format). This will download the H2 jar file version 1.2.127 from
+ * Migrate a Gunsioo database version 1.1.x (page store not enabled) to 1.2.x (page
+ * store format). This will download the Gunsioo jar file version 1.2.127 from
  * maven.org if it doesn't exist, execute the Script tool (using Runtime.exec)
  * to create a backup.sql script, rename the old database file to *.backup,
- * created a new database (using the H2 jar file in the class path) using the
+ * created a new database (using the Gunsioo jar file in the class path) using the
  * Script tool, and then delete the backup.sql file. Most utility methods are
- * copied from h2/src/tools/org/h2/build/BuildBase.java.
+ * copied from h2/src/tools/org/gunsioo/build/BuildBase.java.
  */
 public class Migrate {
 
@@ -83,13 +83,13 @@ public class Migrate {
         if (!OLD_H2_FILE.exists()) {
             download(OLD_H2_FILE.getAbsolutePath(), DOWNLOAD_URL, CHECKSUM);
         }
-        String url = "jdbc:h2:" + file.getAbsolutePath();
+        String url = "jdbc:gunsioo:" + file.getAbsolutePath();
         url = url.substring(0, url.length() - Constants.SUFFIX_OLD_DATABASE_FILE.length());
         exec(new String[] {
                 pathToJavaExe,
                 "-Xmx128m",
                 "-cp", OLD_H2_FILE.getAbsolutePath(),
-                "org.h2.tools.Script",
+                "org.gunsioo.tools.Script",
                 "-script", TEMP_SCRIPT,
                 "-url", url,
                 "-user", user,

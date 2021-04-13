@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.mode;
@@ -219,7 +219,7 @@ public final class FunctionsPostgreSQL extends ModeFunction {
             break;
         case VERSION:
             result = ValueVarchar
-                    .get("PostgreSQL " + Constants.PG_VERSION + " server protocol using H2 " + Constants.FULL_VERSION);
+                    .get("PostgreSQL " + Constants.PG_VERSION + " server protocol using Gunsioo " + Constants.FULL_VERSION);
             break;
         case OBJ_DESCRIPTION:
             // Not implemented

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -50,7 +50,7 @@ public class TestShell extends TestBase {
         Shell shell = new Shell();
         ByteArrayOutputStream buff = new ByteArrayOutputStream();
         shell.setOut(new PrintStream(buff, false, "UTF-8"));
-        shell.runTool("-url", "jdbc:h2:mem:", "-driver", "org.h2.Driver",
+        shell.runTool("-url", "jdbc:gunsioo:mem:", "-driver", "org.gunsioo.Driver",
                 "-user", "sa", "-password", "sa", "-properties", "null",
                 "-sql", "select 'Hello ' || 'World' as hi");
         String s = Utils10.byteArrayOutputStreamToString(buff, StandardCharsets.UTF_8);
@@ -86,7 +86,7 @@ public class TestShell extends TestBase {
                     shell.setOut(toolOut);
                     shell.setErr(toolOut);
                     if (commandLineArgs) {
-                        shell.runTool("-url", "jdbc:h2:mem:",
+                        shell.runTool("-url", "jdbc:gunsioo:mem:",
                                 "-user", "sa", "-password", "sa");
                     } else {
                         shell.runTool();
@@ -100,11 +100,11 @@ public class TestShell extends TestBase {
         InputStreamReader reader = new InputStreamReader(testIn);
         lineReader = new LineNumberReader(reader);
         read("");
-        read("Welcome to H2 Shell");
+        read("Welcome to Gunsioo Shell");
         read("Exit with");
         if (!commandLineArgs) {
             read("[Enter]");
-            testOut.println("jdbc:h2:mem:");
+            testOut.println("jdbc:gunsioo:mem:");
             read("URL");
             testOut.println("");
             read("Driver");

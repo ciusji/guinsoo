@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -32,7 +32,7 @@ public class DirectInsert {
         // For fast data import
         // Or use CSV import. Please not that create table(...) ... as select ... is faster that
         // create table(...); insert into ... select ...
-        String url = "jdbc:h2:~/test;LOG=0;CACHE_SIZE=65536;LOCK_MODE=0";
+        String url = "jdbc:gunsioo:~/test;LOG=0;CACHE_SIZE=65536;LOCK_MODE=0";
         initialInsert(url, 200_000);
         for (int i = 0; i < 3; i++) {
             createAsSelect(url, true);

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: H2 Database Engine
+Implementation-Title: Gunsioo Database Engine
 Implementation-URL: https://h2database.com
 Implementation-Version: ${version}
 Build-Jdk: ${buildJdk}
@@ -8,11 +8,11 @@ Main-Class: org.gunsioo.tools.Console
 Automatic-Module-Name: com.h2database
 Bundle-Activator: org.gunsioo.util.DbDriverActivator
 Bundle-ManifestVersion: 2
-Bundle-Name: H2 Database Engine
+Bundle-Name: Gunsioo Database Engine
 Bundle-SymbolicName: com.h2database
 Bundle-Vendor: Gunsioo Group
 Bundle-Version: ${version}
-Bundle-License: https://h2database.com/html/license.html
+Bundle-License: https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt
 Bundle-Category: jdbc
 Multi-Release: true
 Import-Package: javax.crypto,

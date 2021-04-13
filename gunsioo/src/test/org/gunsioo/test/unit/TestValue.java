@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -329,7 +329,7 @@ public class TestValue extends TestDb {
         assertEquals(-1, testLobComparisonImpl(null, Value.CLOB, 1, 1, 'a', 'b'));
         assertEquals(1, testLobComparisonImpl(null, Value.BLOB, 512, 512, 210, 200));
         assertEquals(1, testLobComparisonImpl(null, Value.CLOB, 512, 512, 'B', 'A'));
-        try (Connection c = DriverManager.getConnection("jdbc:h2:mem:testValue")) {
+        try (Connection c = DriverManager.getConnection("jdbc:gunsioo:mem:testValue")) {
             Database dh = ((SessionLocal) ((JdbcConnection) c).getSession()).getDatabase();
             assertEquals(1, testLobComparisonImpl(dh, Value.BLOB, 1_024, 1_024, 210, 200));
             assertEquals(1, testLobComparisonImpl(dh, Value.CLOB, 1_024, 1_024, 'B', 'A'));

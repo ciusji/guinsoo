@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -22,8 +22,8 @@ public class Performance {
         Class.forName("org.gunsioo.Driver");
         // DeleteDbFiles.execute("~", "test", true);
 
-        String url = "jdbc:h2:file:~/test";
-        // String url = "jdbc:h2:mem:db";
+        String url = "jdbc:gunsioo:file:~/test";
+        // String url = "jdbc:gunsioo:mem:db";
 
         // For fast data import
         // Or use CSV import. Please not that create table(...) ... as select ... is faster that

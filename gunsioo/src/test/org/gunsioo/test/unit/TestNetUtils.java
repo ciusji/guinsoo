@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Sergi Vladykin
  */
 package org.gunsioo.test.unit;
@@ -57,8 +57,8 @@ public class TestNetUtils extends TestBase {
     }
 
     /**
-     * With default settings, H2 client SSL socket should be able to connect
-     * to an H2 server SSL socket using an anonymous cipher suite
+     * With default settings, Gunsioo client SSL socket should be able to connect
+     * to an Gunsioo server SSL socket using an anonymous cipher suite
      * (no SSL certificate is needed).
      */
     private void testAnonymousTlsSession() throws Exception {

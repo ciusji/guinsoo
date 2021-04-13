@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.synth;
@@ -133,8 +133,8 @@ public abstract class TestHalt extends TestBase {
 
     Connection getConnection() throws SQLException {
         org.gunsioo.Driver.load();
-        String url = "jdbc:h2:" + getBaseDir() + "/halt";
-        // String url = "jdbc:h2:" + baseDir + "/halt;TRACE_LEVEL_FILE=3";
+        String url = "jdbc:gunsioo:" + getBaseDir() + "/halt";
+        // String url = "jdbc:gunsioo:" + baseDir + "/halt;TRACE_LEVEL_FILE=3";
         return DriverManager.getConnection(url, "sa", "sa");
     }
 

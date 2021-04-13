@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.dev.fs;
@@ -120,7 +120,7 @@ public class FileShell extends Tool {
 
     private void promptLoop() {
         println("");
-        println("Welcome to H2 File Shell " + Constants.FULL_VERSION);
+        println("Welcome to Gunsioo File Shell " + Constants.FULL_VERSION);
         println("Exit with Ctrl+C");
         showHelp();
         if (reader == null) {

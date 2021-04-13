@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -48,7 +48,7 @@ public class ShowProgress implements DatabaseEventListener {
      */
     void test() throws Exception {
         Class.forName("org.gunsioo.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:h2:./test", "sa", "");
+        Connection conn = DriverManager.getConnection("jdbc:gunsioo:./test", "sa", "");
         Statement stat = conn.createStatement();
         stat.execute("DROP TABLE IF EXISTS TEST");
         stat.execute("CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR)");
@@ -81,7 +81,7 @@ public class ShowProgress implements DatabaseEventListener {
         System.out.println("Open connection...");
         time = System.nanoTime();
         conn = DriverManager.getConnection(
-                "jdbc:h2:./test;DATABASE_EVENT_LISTENER='" +
+                "jdbc:gunsioo:./test;DATABASE_EVENT_LISTENER='" +
                 getClass().getName() + "'", "sa", "");
         time = System.nanoTime() - time;
         System.out.println("Done after " + TimeUnit.NANOSECONDS.toMillis(time) + " ms");

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.samples;
@@ -34,7 +34,7 @@ public class Newsfeed {
     public static void main(String... args) throws Exception {
         Path targetDir = Paths.get(args.length == 0 ? "." : args[0]);
         Class.forName("org.gunsioo.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:h2:mem:", "sa", "");
+        Connection conn = DriverManager.getConnection("jdbc:gunsioo:mem:", "sa", "");
         InputStream in = Newsfeed.class.getResourceAsStream("newsfeed.sql");
         ResultSet rs = RunScript.execute(conn, new InputStreamReader(in, StandardCharsets.ISO_8859_1));
         in.close();

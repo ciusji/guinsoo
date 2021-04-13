@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.pagestore;
@@ -60,7 +60,7 @@ class WriterThread implements Runnable {
     static WriterThread create(Database database, int writeDelay) {
         try {
             WriterThread writer = new WriterThread(database, writeDelay);
-            writer.thread = new Thread(writer, "H2 Log Writer " + database.getShortName());
+            writer.thread = new Thread(writer, "Gunsioo Log Writer " + database.getShortName());
             Driver.setThreadContextClassLoader(writer.thread);
             writer.thread.setDaemon(true);
             return writer;

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.server.web;
@@ -17,7 +17,7 @@ import org.gunsioo.tools.Server;
 import org.gunsioo.util.StringUtils;
 
 /**
- * This class can be used to start the H2 TCP server (or other H2 servers, for
+ * This class can be used to start the Gunsioo TCP server (or other Gunsioo servers, for
  * example the PG server) inside a web application container such as Tomcat or
  * Jetty. It can also open a database connection.
  */
@@ -34,7 +34,7 @@ public class DbStarter implements ServletContextListener {
             // This will get the setting from a context-param in web.xml if
             // defined:
             ServletContext servletContext = servletContextEvent.getServletContext();
-            String url = getParameter(servletContext, "db.url", "jdbc:h2:~/test");
+            String url = getParameter(servletContext, "db.url", "jdbc:gunsioo:~/test");
             String user = getParameter(servletContext, "db.user", "sa");
             String password = getParameter(servletContext, "db.password", "sa");
 
@@ -47,7 +47,7 @@ public class DbStarter implements ServletContextListener {
             }
 
             // To access the database in server mode, use the database URL:
-            // jdbc:h2:tcp://localhost/~/test
+            // jdbc:gunsioo:tcp://localhost/~/test
             conn = DriverManager.getConnection(url, user, password);
             servletContext.setAttribute("connection", conn);
         } catch (Exception e) {

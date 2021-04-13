@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.bnf.context;
@@ -21,7 +21,7 @@ import org.gunsioo.util.StringUtils;
 
 /**
  * A BNF terminal rule that is linked to the database context information.
- * This class is used by the H2 Console, to support auto-complete.
+ * This class is used by the Gunsioo Console, to support auto-complete.
  */
 public class DbContextRule implements Rule {
 

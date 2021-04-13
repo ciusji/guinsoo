@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.unit;
@@ -523,11 +523,11 @@ public class TestTools extends TestDb {
     }
 
     private void testJdbcDriverUtils() {
-        assertEquals("org.h2.Driver", JdbcUtils.getDriver("jdbc:h2:~/test"));
+        assertEquals("org.gunsioo.Driver", JdbcUtils.getDriver("jdbc:gunsioo:~/test"));
         assertEquals("org.postgresql.Driver", JdbcUtils.getDriver("jdbc:postgresql:test"));
         assertEquals(null, JdbcUtils.getDriver("jdbc:unknown:test"));
         try {
-            JdbcUtils.getConnection("org.h2.Driver", "jdbc:h2x:test", "sa", "");
+            JdbcUtils.getConnection("org.gunsioo.Driver", "jdbc:gunsioox:test", "sa", "");
             fail("Expected SQLException: 08001");
         } catch (SQLException e) {
             assertEquals("08001", e.getSQLState());
@@ -536,7 +536,7 @@ public class TestTools extends TestDb {
 
     private void testWrongServer() throws Exception {
         // try to connect when the server is not running
-        assertThrows(ErrorCode.CONNECTION_BROKEN_1, () -> getConnection("jdbc:h2:tcp://localhost:9001/test"));
+        assertThrows(ErrorCode.CONNECTION_BROKEN_1, () -> getConnection("jdbc:gunsioo:tcp://localhost:9001/test"));
         final ServerSocket serverSocket = new ServerSocket(9001);
         Task task = new Task() {
             @Override
@@ -555,7 +555,7 @@ public class TestTools extends TestDb {
         try {
             task.execute();
             Thread.sleep(100);
-            assertThrows(ErrorCode.CONNECTION_BROKEN_1, () -> getConnection("jdbc:h2:tcp://localhost:9001/test"));
+            assertThrows(ErrorCode.CONNECTION_BROKEN_1, () -> getConnection("jdbc:gunsioo:tcp://localhost:9001/test"));
         } finally {
             serverSocket.close();
             task.getException();
@@ -596,19 +596,19 @@ public class TestTools extends TestDb {
 
         try {
             result = runServer(0, new String[]{"-?"});
-            assertContains(result, "Starts the H2 Console");
+            assertContains(result, "Starts the Gunsioo Console");
             assertTrue(result.indexOf("Unknown option") < 0);
 
             result = runServer(1, new String[]{"-xy"});
-            assertContains(result, "Starts the H2 Console");
+            assertContains(result, "Starts the Gunsioo Console");
             assertContains(result, "Feature not supported");
             result = runServer(0, new String[]{"-ifNotExists", "-tcp",
                     "-tcpPort", "9001", "-tcpPassword", "abc"});
             assertContains(result, "tcp://");
             assertContains(result, ":9001");
             assertContains(result, "only local");
-            assertTrue(result.indexOf("Starts the H2 Console") < 0);
-            conn = getConnection("jdbc:h2:tcp://localhost:9001/mem:", "sa", "sa");
+            assertTrue(result.indexOf("Starts the Gunsioo Console") < 0);
+            conn = getConnection("jdbc:gunsioo:tcp://localhost:9001/mem:", "sa", "sa");
             conn.close();
             result = runServer(0, new String[]{"-tcpShutdown",
                     "tcp://localhost:9001", "-tcpPassword", "abc", "-tcpShutdownForce"});
@@ -628,15 +628,15 @@ public class TestTools extends TestDb {
             assertContains(result, "ssl://");
             assertContains(result, ":9001");
             assertContains(result, "others can");
-            assertTrue(result.indexOf("Starts the H2 Console") < 0);
-            conn = getConnection("jdbc:h2:ssl://localhost:9001/mem:", "sa", "sa");
+            assertTrue(result.indexOf("Starts the Gunsioo Console") < 0);
+            conn = getConnection("jdbc:gunsioo:ssl://localhost:9001/mem:", "sa", "sa");
             conn.close();
 
             result = runServer(0, new String[]{"-tcpShutdown",
                     "ssl://localhost:9001", "-tcpPassword", "abcdef"});
             assertContains(result, "Shutting down");
             assertThrows(ErrorCode.CONNECTION_BROKEN_1,
-                    () -> getConnection("jdbc:h2:ssl://localhost:9001/mem:", "sa", "sa"));
+                    () -> getConnection("jdbc:gunsioo:ssl://localhost:9001/mem:", "sa", "sa"));
 
             result = runServer(0, new String[]{
                     "-ifNotExists", "-web", "-webPort", "9002", "-webAllowOthers", "-webSSL",
@@ -652,7 +652,7 @@ public class TestTools extends TestDb {
             assertContains(result, "tcp://");
             assertContains(result, ":9006");
 
-            conn = getConnection("jdbc:h2:tcp://localhost:9006/mem:", "sa", "sa");
+            conn = getConnection("jdbc:gunsioo:tcp://localhost:9006/mem:", "sa", "sa");
             conn.close();
 
             result = runServer(0, new String[]{"-tcpShutdown",
@@ -660,7 +660,7 @@ public class TestTools extends TestDb {
             assertContains(result, "Shutting down");
             stop.shutdown();
             assertThrows(ErrorCode.CONNECTION_BROKEN_1,
-                    () -> getConnection("jdbc:h2:tcp://localhost:9006/mem:", "sa", "sa"));
+                    () -> getConnection("jdbc:gunsioo:tcp://localhost:9006/mem:", "sa", "sa"));
         } finally {
             shutdownServers();
         }
@@ -701,7 +701,7 @@ public class TestTools extends TestDb {
     private void testConvertTraceFile() throws Exception {
         deleteDb("toolsConvertTraceFile");
         org.gunsioo.Driver.load();
-        String url = "jdbc:h2:" + getBaseDir() + "/toolsConvertTraceFile";
+        String url = "jdbc:gunsioo:" + getBaseDir() + "/toolsConvertTraceFile";
         url = getURL(url, true);
         Connection conn = getConnection(url + ";TRACE_LEVEL_FILE=3", "sa", "sa");
         Statement stat = conn.createStatement();
@@ -790,7 +790,7 @@ public class TestTools extends TestDb {
         }
         deleteDb("toolsRemove");
         org.gunsioo.Driver.load();
-        String url = "jdbc:h2:" + getBaseDir() + "/toolsRemove";
+        String url = "jdbc:gunsioo:" + getBaseDir() + "/toolsRemove";
         Connection conn = getConnection(url, "sa", "sa");
         Statement stat = conn.createStatement();
         stat.execute("create table test(id int primary key, name varchar)");
@@ -882,7 +882,7 @@ public class TestTools extends TestDb {
     }
 
     private void testScriptRunscriptLob() throws Exception {
-        String url = getURL("jdbc:h2:" + getBaseDir() +
+        String url = getURL("jdbc:gunsioo:" + getBaseDir() +
                 "/testScriptRunscriptLob", true);
         String user = "sa", password = "abc";
         String fileName = getBaseDir() + "/b2.sql";
@@ -935,7 +935,7 @@ public class TestTools extends TestDb {
                     "testScriptRunscriptLob", "-quiet");
             RunScript.main("-url", url, "-user", user, "-password", password,
                     "-script", fileName);
-            conn = getConnection("jdbc:h2:" + getBaseDir() +
+            conn = getConnection("jdbc:gunsioo:" + getBaseDir() +
                     "/testScriptRunscriptLob", "sa", "abc");
         }
         conn.close();
@@ -943,7 +943,7 @@ public class TestTools extends TestDb {
     }
 
     private void testScriptRunscript() throws Exception {
-        String url = getURL("jdbc:h2:" + getBaseDir() + "/testScriptRunscript",
+        String url = getURL("jdbc:gunsioo:" + getBaseDir() + "/testScriptRunscript",
                 true);
         String user = "sa", password = "abc";
         String fileName = getBaseDir() + "/b2.sql";
@@ -967,7 +967,7 @@ public class TestTools extends TestDb {
                 "-script", fileName, "-options", "compression", "lzf",
                 "cipher", "aes", "password", "'123'", "charset", "'utf-8'");
         conn = getConnection(
-                "jdbc:h2:" + getBaseDir() + "/testScriptRunscript", "sa", "abc");
+                "jdbc:gunsioo:" + getBaseDir() + "/testScriptRunscript", "sa", "abc");
         ResultSet rs = conn.createStatement()
                 .executeQuery("SELECT * FROM TEST");
         assertFalse(rs.next());
@@ -999,7 +999,7 @@ public class TestTools extends TestDb {
 
     private void testBackupRestore() throws SQLException {
         org.gunsioo.Driver.load();
-        String url = "jdbc:h2:" + getBaseDir() + "/testBackupRestore";
+        String url = "jdbc:gunsioo:" + getBaseDir() + "/testBackupRestore";
         String user = "sa", password = "abc";
         final String fileName = getBaseDir() + "/b2.zip";
         DeleteDbFiles.main("-dir", getBaseDir(), "-db", "testBackupRestore",
@@ -1015,7 +1015,7 @@ public class TestTools extends TestDb {
                 "-quiet");
         Restore.main("-file", fileName, "-dir", getBaseDir(), "-db",
                 "testBackupRestore", "-quiet");
-        conn = getConnection("jdbc:h2:" + getBaseDir() + "/testBackupRestore",
+        conn = getConnection("jdbc:gunsioo:" + getBaseDir() + "/testBackupRestore",
                 "sa", "abc");
         ResultSet rs = conn.createStatement()
                 .executeQuery("SELECT * FROM TEST");
@@ -1032,7 +1032,7 @@ public class TestTools extends TestDb {
     private void testChangeFileEncryption(boolean split) throws SQLException {
         org.gunsioo.Driver.load();
         final String dir = (split ? "split:19:" : "") + getBaseDir();
-        String url = "jdbc:h2:" + dir + "/testChangeFileEncryption;CIPHER=AES";
+        String url = "jdbc:gunsioo:" + dir + "/testChangeFileEncryption;CIPHER=AES";
         DeleteDbFiles.execute(dir, "testChangeFileEncryption", true);
         Connection conn = getConnection(url, "sa", "abc 123");
         Statement stat = conn.createStatement();
@@ -1060,7 +1060,7 @@ public class TestTools extends TestDb {
     private void testChangeFileEncryptionWithWrongPassword() throws SQLException {
         org.gunsioo.Driver.load();
         final String dir = getBaseDir();
-        String url = "jdbc:h2:" + dir + "/testChangeFileEncryption;CIPHER=AES";
+        String url = "jdbc:gunsioo:" + dir + "/testChangeFileEncryption;CIPHER=AES";
         DeleteDbFiles.execute(dir, "testChangeFileEncryption", true);
         Connection conn = getConnection(url, "sa", "abc 123");
         Statement stat = conn.createStatement();
@@ -1092,13 +1092,13 @@ public class TestTools extends TestDb {
                             "-tcpAllowOthers").start();
             remainingServers.add(tcpServer);
             final int port = tcpServer.getPort();
-            conn = getConnection("jdbc:h2:tcp://localhost:" + port + "/test", "sa", "");
+            conn = getConnection("jdbc:gunsioo:tcp://localhost:" + port + "/test", "sa", "");
             conn.close();
             // must not be able to use a different base dir
             assertThrows(ErrorCode.IO_EXCEPTION_1,
-                    () -> getConnection("jdbc:h2:tcp://localhost:" + port + "/../test", "sa", ""));
+                    () -> getConnection("jdbc:gunsioo:tcp://localhost:" + port + "/../test", "sa", ""));
             assertThrows(ErrorCode.IO_EXCEPTION_1,
-                    () -> getConnection("jdbc:h2:tcp://localhost:" + port + "/../test2/test", "sa", ""));
+                    () -> getConnection("jdbc:gunsioo:tcp://localhost:" + port + "/../test2/test", "sa", ""));
             assertThrows(ErrorCode.WRONG_USER_OR_PASSWORD,
                     () -> Server.shutdownTcpServer("tcp://localhost:" + port, "", true, false));
             tcpServer.stop();
@@ -1110,21 +1110,21 @@ public class TestTools extends TestDb {
             remainingServers.add(tcpServerWithPassword);
             // must not be able to create new db
             assertThrows(ErrorCode.REMOTE_DATABASE_NOT_FOUND_1,
-                    () -> getConnection("jdbc:h2:tcp://localhost:" + prt + "/test2", "sa", ""));
+                    () -> getConnection("jdbc:gunsioo:tcp://localhost:" + prt + "/test2", "sa", ""));
             assertThrows(ErrorCode.REMOTE_DATABASE_NOT_FOUND_1,
-                    () -> getConnection("jdbc:h2:tcp://localhost:" + prt + "/test2;ifexists=false", "sa", ""));
-            conn = getConnection("jdbc:h2:tcp://localhost:" + prt + "/test", "sa", "");
+                    () -> getConnection("jdbc:gunsioo:tcp://localhost:" + prt + "/test2;ifexists=false", "sa", ""));
+            conn = getConnection("jdbc:gunsioo:tcp://localhost:" + prt + "/test", "sa", "");
             conn.close();
             assertThrows(ErrorCode.WRONG_USER_OR_PASSWORD,
                     () -> Server.shutdownTcpServer("tcp://localhost:" + prt, "", true, false));
-            conn = getConnection("jdbc:h2:tcp://localhost:" + prt + "/test", "sa", "");
+            conn = getConnection("jdbc:gunsioo:tcp://localhost:" + prt + "/test", "sa", "");
             // conn.close();
             Server.shutdownTcpServer("tcp://localhost:" + prt, "abc", true, false);
             // check that the database is closed
             deleteDb("test");
             // server must have been closed
             assertThrows(ErrorCode.CONNECTION_BROKEN_1,
-                    () -> getConnection("jdbc:h2:tcp://localhost:" + prt + "/test", "sa", ""));
+                    () -> getConnection("jdbc:gunsioo:tcp://localhost:" + prt + "/test", "sa", ""));
             JdbcUtils.closeSilently(conn);
             // Test filesystem prefix and escape from baseDir
             deleteDb("testSplit");
@@ -1132,11 +1132,11 @@ public class TestTools extends TestDb {
                             "-baseDir", getBaseDir(),
                             "-tcpAllowOthers").start();
             final int p = server.getPort();
-            conn = getConnection("jdbc:h2:tcp://localhost:" + p + "/split:testSplit", "sa", "");
+            conn = getConnection("jdbc:gunsioo:tcp://localhost:" + p + "/split:testSplit", "sa", "");
             conn.close();
 
             assertThrows(ErrorCode.IO_EXCEPTION_1,
-                    () -> getConnection("jdbc:h2:tcp://localhost:" + p + "/../test", "sa", ""));
+                    () -> getConnection("jdbc:gunsioo:tcp://localhost:" + p + "/../test", "sa", ""));
 
             server.stop();
             deleteDb("testSplit");

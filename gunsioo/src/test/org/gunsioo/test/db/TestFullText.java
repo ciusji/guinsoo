@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.db;
@@ -38,7 +38,7 @@ public class TestFullText extends TestDb {
     static final String[] KNOWN_WORDS = { "skiing", "balance", "storage",
             "water", "train" };
     private static final String LUCENE_FULLTEXT_CLASS_NAME =
-            "org.h2.fulltext.FullTextLucene";
+            "org.gunsioo.fulltext.FullTextLucene";
 
     /**
      * Run just this test.
@@ -107,7 +107,7 @@ public class TestFullText extends TestDb {
 
         conn = getConnection("fullTextNative", connList);
         stat = conn.createStatement();
-        stat.execute("create alias if not exists ft_init for 'org.h2.fulltext.FullText.init'");
+        stat.execute("create alias if not exists ft_init for 'org.gunsioo.fulltext.FullText.init'");
         stat.execute("call ft_init()");
         stat.execute("create table test(id int primary key, name varchar)");
         stat.execute("call ft_create_index('PUBLIC', 'TEST', 'NAME')");
@@ -127,7 +127,7 @@ public class TestFullText extends TestDb {
         ArrayList<Connection> connList = new ArrayList<>();
         Connection conn = getConnection("fullTextNative", connList);
         Statement stat = conn.createStatement();
-        stat.execute("CREATE ALIAS IF NOT EXISTS FT_INIT FOR 'org.h2.fulltext.FullText.init'");
+        stat.execute("CREATE ALIAS IF NOT EXISTS FT_INIT FOR 'org.gunsioo.fulltext.FullText.init'");
         stat.execute("CALL FT_INIT()");
         FullText.setIgnoreList(conn, "to,this");
         FullText.setWhitespaceChars(conn, " ,.-");
@@ -316,7 +316,7 @@ public class TestFullText extends TestDb {
         deleteDb("fullText");
         Connection conn = getConnection("fullText");
         Statement stat = conn.createStatement();
-        stat.execute("CREATE ALIAS IF NOT EXISTS FT_INIT FOR 'org.h2.fulltext.FullText.init'");
+        stat.execute("CREATE ALIAS IF NOT EXISTS FT_INIT FOR 'org.gunsioo.fulltext.FullText.init'");
         stat.execute("CREATE TABLE TEST(ID INT PRIMARY KEY, DATA CLOB)");
         FullText.createIndex(conn, "PUBLIC", "TEST", null);
         conn.setAutoCommit(false);
@@ -361,7 +361,7 @@ public class TestFullText extends TestDb {
         FileUtils.deleteRecursive(getBaseDir() + "/fullText", false);
         Connection conn = getConnection("fullText");
         Statement stat = conn.createStatement();
-        stat.execute("CREATE ALIAS IF NOT EXISTS FT_INIT FOR 'org.h2.fulltext.FullText.init'");
+        stat.execute("CREATE ALIAS IF NOT EXISTS FT_INIT FOR 'org.gunsioo.fulltext.FullText.init'");
         stat.execute("CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR)");
         for (int i = 0; i < 10; i++) {
             FullText.createIndex(conn, "PUBLIC", "TEST", null);
@@ -495,7 +495,7 @@ public class TestFullText extends TestDb {
         String prefix = lucene ? "FTL_" : "FT_";
         Statement stat = conn.createStatement();
         String className = lucene ? "FullTextLucene" : "FullText";
-        stat.execute("CREATE ALIAS IF NOT EXISTS " + prefix + "INIT FOR 'org.h2.fulltext." + className + ".init'");
+        stat.execute("CREATE ALIAS IF NOT EXISTS " + prefix + "INIT FOR 'org.gunsioo.fulltext." + className + ".init'");
         stat.execute("CALL " + prefix + "INIT()");
         stat.execute("DROP TABLE IF EXISTS TEST");
         stat.execute("CREATE TABLE TEST(ID INT PRIMARY KEY, NAME " + dataType + ")");
@@ -632,7 +632,7 @@ public class TestFullText extends TestDb {
             throws SQLException {
         String prefix = lucene ? "FTL" : "FT";
         String className = lucene ? "FullTextLucene" : "FullText";
-        stat.execute("CREATE ALIAS IF NOT EXISTS " + prefix + "_INIT FOR 'org.h2.fulltext." + className + ".init'");
+        stat.execute("CREATE ALIAS IF NOT EXISTS " + prefix + "_INIT FOR 'org.gunsioo.fulltext." + className + ".init'");
         stat.execute("CALL " + prefix + "_INIT()");
     }
 }

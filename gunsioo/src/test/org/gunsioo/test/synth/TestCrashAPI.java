@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.synth;
@@ -132,7 +132,7 @@ public class TestCrashAPI extends TestDb implements Runnable {
                 }
                 name = name.substring(0, name.length() - 6);
                 try {
-                    DriverManager.getConnection("jdbc:h2:data/" + name, "sa", "").close();
+                    DriverManager.getConnection("jdbc:gunsioo:data/" + name, "sa", "").close();
                     System.out.println(f.getName() + " OK");
                 } catch (SQLException e) {
                     System.out.println(f.getName() + " " + e);

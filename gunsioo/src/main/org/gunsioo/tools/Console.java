@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.tools;
@@ -15,7 +15,7 @@ import org.gunsioo.util.Tool;
 import org.gunsioo.util.Utils;
 
 /**
- * Starts the H2 Console (web-) server, as well as the TCP and PG server.
+ * Starts the Gunsioo Console (web-) server, as well as the TCP and PG server.
  * @h2.resource
  *
  * @author Thomas Mueller, Ridvan Agar
@@ -44,7 +44,7 @@ public class Console extends Tool implements ShutdownHandler {
      * <tr><td>[-password]</td>
      * <td>Used together with -url: the password</td></tr>
      * <tr><td>[-web]</td>
-     * <td>Start the web server with the H2 Console</td></tr>
+     * <td>Start the web server with the Gunsioo Console</td></tr>
      * <tr><td>[-tool]</td>
      * <td>Start the icon or window that allows to start a browser</td></tr>
      * <tr><td>[-browser]</td>
@@ -65,7 +65,7 @@ public class Console extends Tool implements ShutdownHandler {
     public static void main(String... args) throws SQLException {
         Console console;
         try {
-            console = (Console) Utils.newInstance("org.h2.tools.GUIConsole");
+            console = (Console) Utils.newInstance("org.gunsioo.tools.GUIConsole");
         } catch (Exception | NoClassDefFoundError e) {
             console = new Console();
         }
@@ -73,7 +73,7 @@ public class Console extends Tool implements ShutdownHandler {
     }
 
     /**
-     * This tool starts the H2 Console (web-) server, as well as the TCP and PG
+     * This tool starts the Gunsioo Console (web-) server, as well as the TCP and PG
      * server. A system tray icon is created, for platforms that
      * support it. Otherwise, a small window opens.
      *

@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.server;
@@ -46,10 +46,10 @@ public class TestAutoServer extends TestDb {
 
     private void testUnsupportedCombinations() {
         String[] urls = {
-                "jdbc:h2:" + getTestName() + ";file_lock=no;auto_server=true",
-                "jdbc:h2:" + getTestName() + ";file_lock=serialized;auto_server=true",
-                "jdbc:h2:" + getTestName() + ";access_mode_data=r;auto_server=true",
-                "jdbc:h2:mem:" + getTestName() + ";auto_server=true"
+                "jdbc:gunsioo:" + getTestName() + ";file_lock=no;auto_server=true",
+                "jdbc:gunsioo:" + getTestName() + ";file_lock=serialized;auto_server=true",
+                "jdbc:gunsioo:" + getTestName() + ";access_mode_data=r;auto_server=true",
+                "jdbc:gunsioo:mem:" + getTestName() + ";auto_server=true"
         };
         for (String url : urls) {
             assertThrows(SQLException.class, () -> getConnection(url));
@@ -82,7 +82,7 @@ public class TestAutoServer extends TestDb {
                 String server = prop.getProperty("server");
                 if (server != null) {
                     String u2 = url.substring(url.indexOf(';'));
-                    u2 = "jdbc:h2:tcp://" + server + "/" + key + u2;
+                    u2 = "jdbc:gunsioo:tcp://" + server + "/" + key + u2;
                     Connection conn = DriverManager.getConnection(u2, user, password);
                     conn.close();
                     int gotPort = Integer.parseInt(server.substring(server.lastIndexOf(':') + 1));
@@ -131,7 +131,7 @@ public class TestAutoServer extends TestDb {
             if (server != null) {
                 String u2 = url.substring(url.indexOf(';'));
                 //todo java.net.SocketTimeoutException: Read timed out
-                u2 = "jdbc:h2:tcp://" + server + "/" + key + u2 + ";NETWORK_TIMEOUT=100";
+                u2 = "jdbc:gunsioo:tcp://" + server + "/" + key + u2 + ";NETWORK_TIMEOUT=100";
                 Connection conn = DriverManager.getConnection(u2, user, password);
                 Statement stat = conn.createStatement();
                 assertThrows(ErrorCode.CONNECTION_BROKEN_1, stat).

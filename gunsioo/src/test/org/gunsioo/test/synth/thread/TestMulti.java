@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2021 Gunsioo Group. Multiple-Licensed under the MPL 2.0,
- * and the EPL 1.0 (https://h2database.com/html/license.html).
+ * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Gunsioo Group
  */
 package org.gunsioo.test.synth.thread;
@@ -55,7 +55,7 @@ public class TestMulti extends TestDb {
     }
 
     Connection getConnection() throws SQLException {
-        final String url = "jdbc:h2:" + getBaseDir() +
+        final String url = "jdbc:gunsioo:" + getBaseDir() +
                 "/openClose;LOCK_MODE=3;DB_CLOSE_DELAY=-1";
         Connection conn = DriverManager.getConnection(url, "sa", "");
         return conn;
