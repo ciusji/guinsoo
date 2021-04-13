@@ -106,7 +106,6 @@ public class MVPrimaryIndex extends MVIndex<Long, SearchRow> {
                 }
             }
         }
-
         TransactionMap<Long, SearchRow> map = getMap(session);
         long rowKey = row.getKey();
         try {

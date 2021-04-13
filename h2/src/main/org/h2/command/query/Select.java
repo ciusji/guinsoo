@@ -8,8 +8,10 @@ package org.h2.command.query;
 import static org.h2.expression.Expression.WITHOUT_PARENTHESES;
 import static org.h2.util.HasSQL.ADD_PLAN_INFORMATION;
 import static org.h2.util.HasSQL.DEFAULT_SQL_FLAGS;
+
 import java.util.*;
 import java.util.Map.Entry;
+
 import org.h2.api.ErrorCode;
 import org.h2.api.Trigger;
 import org.h2.engine.Constants;
@@ -167,13 +169,6 @@ public class Select extends Query {
      * @param isTop if the table can be the first table in the query plan
      */
     public void addTableFilter(TableFilter filter, boolean isTop) {
-        // Oracle doesn't check on duplicate aliases
-        // String alias = filter.getAlias();
-        // if (filterNames.contains(alias)) {
-        //     throw Message.getSQLException(
-        //         ErrorCode.DUPLICATE_TABLE_ALIAS, alias);
-        // }
-        // filterNames.add(alias);
         filters.add(filter);
         if (isTop) {
             topFilters.add(filter);

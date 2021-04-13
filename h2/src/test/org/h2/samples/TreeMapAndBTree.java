@@ -30,6 +30,7 @@ import java.util.TreeMap;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.h2.mvstore.OffHeapStore;
+import org.h2.tools.DeleteDbFiles;
 
 /**
  * TreeMapAndBTree
@@ -200,6 +201,7 @@ public class TreeMapAndBTree {
     }
 
     public void loadFunction() throws Exception {
+        DeleteDbFiles.execute("~", "test", true);
         // String path = "/Users/admin/Desktop/relations.csv";
         // String path = "/Users/admin/Desktop/relations2.csv";
         String path = "/Users/admin/Desktop/relations3.csv";
@@ -207,8 +209,10 @@ public class TreeMapAndBTree {
 
         Class.forName("org.h2.Driver");
         // unsupported "MVSTORE && LOG"
-        String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
-        // String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
+        // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        // String url = "jdbc:h2:file:~/test;UNDO_LOG=0;CACHE_SIZE=8192;LOG=1;MV_STORE=FALSE";
+        // String url = "jdbc:h2:file:~/test;MV_STORE=FALSE;LOG=0";
+        String url = "jdbc:h2:mem:db;MV_STORE=FALSE;LOG=0";
         // String url = "jdbc:h2:mem:db;UNDO_LOG=0;CACHE_SIZE=65536";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
@@ -217,7 +221,13 @@ public class TreeMapAndBTree {
         // ??? why cost more than 1 seconds
         // !!! char to row object cost more that 1 seconds.
         // stat.execute("call csvload('" + path + "');");
-        stat.execute("create table " + name + " as select * from csvload('" + path + "');");
+        stat.execute("create table " + name + " as select * from csvread('" + path + "');");
+
+        conn.commit();
+
+        stat.close();
+        conn.close();;
+
         long endTime = System.currentTimeMillis();
         System.out.println("Duration666: ~ " + (endTime - startTime));
     }
