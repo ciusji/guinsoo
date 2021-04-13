@@ -2,13 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>gunsioo-db</groupId>
-    <artifactId>gunsioo</artifactId>
+    <groupId>guinsoo-db</groupId>
+    <artifactId>guinsoo</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Gunsioo Database Engine</name>
+    <name>Guinsoo Database Engine</name>
     <url>https://github.com/ciusji/guinsoo</url>
-    <description>Gunsioo Database Engine</description>
+    <description>Guinsoo Database Engine</description>
 
     <licenses>
         <license>
