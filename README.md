@@ -1,6 +1,6 @@
 # Guinsoo
 
-[![Build Status](https://travis-ci.org/h2database/h2database.svg?branch=master)](https://travis-ci.org/h2database/h2database)
+![logo](./public/gunsioo.svg)
 
 Welcome to Guinsoo, a database based on H2 & Chronicle-Map, the Java SQL database.
 

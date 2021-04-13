@@ -184,11 +184,11 @@
             <testResource>
                 <directory>src/test</directory>
                 <includes>
-                    <include>org/h2/test/bench/test.properties</include>
-                    <include>org/h2/test/script/testScrip.sql</include>
-                    <include>org/h2/test/scripts/**/*.sql</include>
-                    <include>org/h2/samples/newsfeed.sql</include>
-                    <include>org/h2/samples/optimizations.sql</include>
+                    <include>org/gunsioo/test/bench/test.properties</include>
+                    <include>org/gunsioo/test/script/testScrip.sql</include>
+                    <include>org/gunsioo/test/scripts/**/*.sql</include>
+                    <include>org/gunsioo/samples/newsfeed.sql</include>
+                    <include>org/gunsioo/samples/optimizations.sql</include>
                 </includes>
             </testResource>
         </testResources>
