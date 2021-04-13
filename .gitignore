@@ -19,3 +19,4 @@
 /h2web/
 .pmd
 docs/html/testOutput.html
+src/main/org/h2/faststore/
