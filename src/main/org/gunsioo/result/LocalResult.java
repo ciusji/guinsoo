@@ -291,6 +291,7 @@ public class LocalResult implements ResultInterface, ResultTarget {
 
     @Override
     public boolean next() {
+        /// !!!
         if (!closed && rowId < rowCount) {
             rowId++;
             if (rowId < rowCount) {
@@ -387,6 +388,7 @@ public class LocalResult implements ResultInterface, ResultTarget {
         if (external == null) {
             createExternalResult();
         }
+        // !!!
         rowCount = external.addRows(rows);
         rows.clear();
     }

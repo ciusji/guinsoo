@@ -159,6 +159,7 @@ public class CommandContainer extends Command {
     public ResultWithGeneratedKeys update(Object generatedKeysRequest) {
         recompileIfRequired();
         setProgress(DatabaseEventListener.STATE_STATEMENT_START);
+        // start the stopWatch
         start();
         prepared.checkParameters();
         ResultWithGeneratedKeys result;

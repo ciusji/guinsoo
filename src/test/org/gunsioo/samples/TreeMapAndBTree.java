@@ -204,7 +204,7 @@ public class TreeMapAndBTree {
         DeleteDbFiles.execute("~", "tb", true);
         // String path = "/Users/admin/Desktop/relations.csv";
         // String path = "/Users/admin/Desktop/relations2.csv";
-        String path = "/Users/admin/Desktop/relations3.csv";
+        String path = "/Users/admin/Desktop/relations4.csv";
         String name = "relations";
 
         Class.forName("org.gunsioo.Driver");
@@ -221,15 +221,24 @@ public class TreeMapAndBTree {
         // ??? why cost more than 1 seconds
         // !!! char to row object cost more that 1 seconds.
         // stat.execute("call csvload('" + path + "');");
+        // create table ... as select ... from => tableAlias
         stat.execute("create table " + name + " as select * from csvread('" + path + "');");
+        System.out.println("Duration600: ~ " + (System.currentTimeMillis() - startTime));
+
+        long startTime2 = System.currentTimeMillis();
+        stat.execute("create index idx1 on " + name + "(poi_id);");
+        System.out.println("Duration601: ~ " + (System.currentTimeMillis() - startTime2));
+
+        long startTime3 = System.currentTimeMillis();
+        stat.execute("select count(distinct poi_id) from relations;");
+        System.out.println("Duration602: ~ " + (System.currentTimeMillis() - startTime3));
 
         conn.commit();
 
         stat.close();
         conn.close();;
 
-        long endTime = System.currentTimeMillis();
-        System.out.println("Duration666: ~ " + (endTime - startTime));
+        System.out.println("Duration666: ~ " + (System.currentTimeMillis() - startTime));
     }
 
     public static void main(String[] args) throws Exception {

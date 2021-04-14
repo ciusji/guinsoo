@@ -195,6 +195,7 @@ public final class Store {
     public MVTable createTable(CreateTableData data) {
         try {
             MVTable table = new MVTable(data, this);
+            /// !!!
             tableMap.put(table.getMapName(), table);
             return table;
         } catch (MVStoreException e) {

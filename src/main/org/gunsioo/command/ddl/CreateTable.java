@@ -89,6 +89,7 @@ public class CreateTable extends CommandWithColumns {
             throw DbException.get(ErrorCode.TABLE_OR_VIEW_ALREADY_EXISTS_1, data.tableName);
         }
         if (asQuery != null) {
+            // OPTIMIZED_SQL
             asQuery.prepare();
             if (data.columns.isEmpty()) {
                 generateColumnsFromQuery();
@@ -108,6 +109,7 @@ public class CreateTable extends CommandWithColumns {
         data.id = getObjectId();
         data.create = create;
         data.session = session;
+        /// !!!
         Table table = schema.createTable(data);
         ArrayList<Sequence> sequences = generateSequences(data.columns, data.temporary);
         table.setComment(comment);

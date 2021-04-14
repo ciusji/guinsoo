@@ -1764,7 +1764,6 @@ public class MVMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V
                 pos = pos.parent;
                 result = index < 0 ? null : p.getValue(index);
                 Decision decision = decisionMaker.decide(result, value, tip);
-
                 switch (decision) {
                     case REPEAT:
                         decisionMaker.reset();

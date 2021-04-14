@@ -484,8 +484,8 @@ public class TransactionStore {
             // First, mark log as "committed".
             // It does not change the way this transaction is treated by others,
             // but preserves fact of commit in case of abrupt termination.
-            MVMap<Long,Record<?,?>> undoLog = undoLogs[transactionId];
-            Cursor<Long,Record<?,?>> cursor;
+            MVMap<Long, Record<?,?>> undoLog = undoLogs[transactionId];
+            Cursor<Long, Record<?,?>> cursor;
             if(recovery) {
                 removeUndoLogRecord(transactionId);
                 cursor = undoLog.cursor(null);
@@ -548,6 +548,7 @@ public class TransactionStore {
         VersionedValueType<V,?> vt = valueType == null ? null : new VersionedValueType<>(valueType);
         MVMap.Builder<K, VersionedValue<V>> builder = new TxMapBuilder<K,VersionedValue<V>>(typeRegistry, dataType)
                 .keyType(keyType).valueType(vt);
+        /// !!!
         MVMap<K, VersionedValue<V>> map = store.openMap(name, builder);
         return map;
     }

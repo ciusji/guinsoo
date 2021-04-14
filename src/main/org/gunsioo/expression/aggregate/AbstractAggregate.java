@@ -277,6 +277,7 @@ public abstract class AbstractAggregate extends DataAnalysisOperation {
                     updateAggregate(session, getWindowData(session, groupData, false));
                 }
             } else {
+                // update aggregate data
                 updateAggregate(session, getGroupData(groupData, false));
             }
         } else if (over != null && over.isOrdered()) {

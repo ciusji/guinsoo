@@ -503,14 +503,18 @@ public class Select extends Query {
     private void gatherGroup(int columnCount, int stage) {
         long rowNumber = 0;
         setCurrentRowNumber(0);
+        long start = System.currentTimeMillis();
+        /// topTableFilter.getIndexCursor().next()
         while (topTableFilter.next()) {
             setCurrentRowNumber(rowNumber + 1);
             if (isForUpdateMvcc ? isConditionMetForUpdate() : isConditionMet()) {
                 rowNumber++;
                 groupData.nextSource();
+                // update aggregate data
                 updateAgg(columnCount, stage);
             }
         }
+        System.out.println("Duration<updateAgg>: " + (System.currentTimeMillis() - start));
         groupData.done();
     }
 
@@ -705,6 +709,7 @@ public class Select extends Query {
                 limitRows = Long.MAX_VALUE;
             }
         }
+        /// !!!
         LazyResultQueryFlat lazyResult = new LazyResultQueryFlat(expressionArray, columnCount, isForUpdateMvcc);
         skipOffset(lazyResult, offset, quickOffset);
         if (result == null) {
@@ -778,6 +783,7 @@ public class Select extends Query {
                 quickOffset = false;
             }
         }
+        /// !!! distinct vs group by
         if (distinct) {
             if (!isDistinctQuery) {
                 quickOffset = false;
@@ -817,7 +823,9 @@ public class Select extends Query {
                 if (isGroupSortedQuery) {
                     lazyResult = queryGroupSorted(columnCount, to, offset, quickOffset);
                 } else {
+                    long start = System.currentTimeMillis();
                     queryGroup(columnCount, result, offset, quickOffset);
+                    System.out.println("Duration<queryGroup>: " + (System.currentTimeMillis() - start));
                 }
             } else if (isDistinctQuery) {
                 queryDistinct(to, offset, limit, withTies, quickOffset);

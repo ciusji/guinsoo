@@ -5,8 +5,7 @@
  */
 package org.gunsioo.mvstore.db;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicLong;
 import org.gunsioo.api.ErrorCode;
@@ -27,6 +26,7 @@ import org.gunsioo.result.SortOrder;
 import org.gunsioo.table.Column;
 import org.gunsioo.table.IndexColumn;
 import org.gunsioo.table.TableFilter;
+import org.gunsioo.util.FastList;
 import org.gunsioo.value.Value;
 import org.gunsioo.value.ValueLob;
 import org.gunsioo.value.ValueNull;
@@ -381,13 +381,24 @@ public class MVPrimaryIndex extends MVIndex<Long, SearchRow> {
     }
 
     private Cursor find(SessionLocal session, Long first, Long last) {
-        TransactionMap<Long,SearchRow> map = getMap(session);
+        TransactionMap<Long, SearchRow> map = getMap(session);
         if (first != null && last != null && first.longValue() == last.longValue()) {
             Row row = (Row)map.getFromSnapshot(first);
             ensureRowKey(row, first);
             return new SingleRowCursor(row);
         }
+        /// load(session);
         return new MVStoreCursor(map.entryIterator(first, last));
+    }
+
+    private void load(SessionLocal session) {
+        TransactionMap<Long, SearchRow> map = getMap(session);
+        FastList<Map.Entry<Long, SearchRow>> fastList = new FastList<>(Map.Entry.class);
+        long start = System.currentTimeMillis();
+        /// !!!
+        map.entrySet().parallelStream().forEach(fastList::add);
+        System.out.println("DDDD: " + (System.currentTimeMillis() - start));
+        System.out.println(fastList.size());
     }
 
     @Override
@@ -427,11 +438,11 @@ public class MVPrimaryIndex extends MVIndex<Long, SearchRow> {
      */
     static final class MVStoreCursor implements Cursor {
 
-        private final Iterator<Entry<Long,SearchRow>> it;
-        private Entry<Long,SearchRow> current;
+        private final Iterator<Entry<Long, SearchRow>> it;
+        private Entry<Long, SearchRow> current;
         private Row row;
 
-        public MVStoreCursor(Iterator<Entry<Long,SearchRow>> it) {
+        public MVStoreCursor(Iterator<Entry<Long, SearchRow>> it) {
             this.it = it;
         }
 

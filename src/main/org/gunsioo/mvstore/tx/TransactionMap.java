@@ -443,33 +443,33 @@ public final class TransactionMap<K, V> extends AbstractMap<K,V> {
      */
     public V getFromSnapshot(K key) {
         switch (transaction.isolationLevel) {
-        case READ_UNCOMMITTED: {
-            Snapshot<K,VersionedValue<V>> snapshot = getStatementSnapshot();
-            VersionedValue<V> data = map.get(snapshot.root.root, key);
-            if (data != null) {
-                return data.getCurrentValue();
-            }
-            return null;
-        }
-        case REPEATABLE_READ:
-        case SNAPSHOT:
-        case SERIALIZABLE:
-            if (transaction.hasChanges()) {
+            case READ_UNCOMMITTED: {
                 Snapshot<K,VersionedValue<V>> snapshot = getStatementSnapshot();
                 VersionedValue<V> data = map.get(snapshot.root.root, key);
                 if (data != null) {
-                    long id = data.getOperationId();
-                    if (id != 0L && transaction.transactionId == TransactionStore.getTransactionId(id)) {
-                        return data.getCurrentValue();
+                    return data.getCurrentValue();
+                }
+                return null;
+            }
+            case REPEATABLE_READ:
+            case SNAPSHOT:
+            case SERIALIZABLE:
+                if (transaction.hasChanges()) {
+                    Snapshot<K,VersionedValue<V>> snapshot = getStatementSnapshot();
+                    VersionedValue<V> data = map.get(snapshot.root.root, key);
+                    if (data != null) {
+                        long id = data.getOperationId();
+                        if (id != 0L && transaction.transactionId == TransactionStore.getTransactionId(id)) {
+                            return data.getCurrentValue();
+                        }
                     }
                 }
+                //$FALL-THROUGH$
+            case READ_COMMITTED:
+            default:
+                Snapshot<K,VersionedValue<V>> snapshot = getSnapshot();
+                return getFromSnapshot(snapshot.root, snapshot.committingTransactions, key);
             }
-            //$FALL-THROUGH$
-        case READ_COMMITTED:
-        default:
-            Snapshot<K,VersionedValue<V>> snapshot = getSnapshot();
-            return getFromSnapshot(snapshot.root, snapshot.committingTransactions, key);
-        }
     }
 
     private V getFromSnapshot(RootReference<K, VersionedValue<V>> rootRef, BitSet committingTransactions, K key) {
@@ -758,6 +758,10 @@ public final class TransactionMap<K, V> extends AbstractMap<K,V> {
      */
     public Iterator<Map.Entry<K, V>> entryIterator(final K from, final K to) {
         return chooseIterator(from, to, false, true);
+    }
+
+    public MVMap<K, VersionedValue<V>> getTMap() {
+        return map;
     }
 
     private <X> Iterator<X> chooseIterator(K from, K to, boolean reverse, boolean forEntries) {

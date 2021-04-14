@@ -255,6 +255,7 @@ public final class Insert extends CommandWithValues implements ResultTarget {
             table.addRow(session, newRow);
             DataChangeDeltaTable.collectInsertedFinalRow(session, table, deltaChangeCollector,
                     deltaChangeCollectionMode, newRow);
+            /// MVStore not log insert record
             session.log(table, UndoLogRecord.INSERT, newRow);
             table.fireAfterRow(session, null, newRow, false);
         } else {
