@@ -58,6 +58,14 @@ public class ConnectionInfo implements Cloneable {
     private NetworkConnectionInfo networkConnectionInfo;
 
     /**
+     * The database engine
+     * 1: PAGE_STORE
+     * 2: MV_STORE (default)
+     * 3: QUICK_STORE
+     */
+    private String store;
+
+    /**
      * Create a connection info object.
      *
      * @param name the database name (including tags), but without the
@@ -134,7 +142,8 @@ public class ConnectionInfo implements Cloneable {
                 "NO_UPGRADE", //
                 "PASSWORD", "PASSWORD_HASH", //
                 "RECOVER_TEST", //
-                "USER" //
+                "USER", //
+                "STORE", //
         };
         HashSet<String> set = new HashSet<>(128);
         set.addAll(SetTypes.getTypes());
@@ -347,6 +356,7 @@ public class ConnectionInfo implements Cloneable {
                 throw DbException.get(ErrorCode.UNSUPPORTED_SETTING_1, unknownSetting);
             }
         }
+        this.store = prop.getProperty("STORE");
     }
 
     private void preservePasswordForAuthentication(Object password) {
@@ -755,6 +765,14 @@ public class ConnectionInfo implements Cloneable {
             }
         }
         return url;
+    }
+
+    public String getStore() {
+        return store;
+    }
+
+    public void setStore(String store) {
+        this.store = store;
     }
 
     /**

@@ -203,13 +203,14 @@ public class TreeMapAndBTree {
     public void loadFunction() throws Exception {
         DeleteDbFiles.execute("~", "tb", true);
         // String path = "/Users/admin/Desktop/relations.csv";
-        // String path = "/Users/admin/Desktop/relations2.csv";
-        String path = "/Users/admin/Desktop/relations4.csv";
+        String path = "/Users/admin/Desktop/relations2.csv";
+        // String path = "/Users/admin/Desktop/relations4.csv";
         String name = "relations";
 
         Class.forName("org.gunsioo.Driver");
         // unsupported "MVSTORE && LOG"
-        String url = "jdbc:gunsioo:file:~/tb;UNDO_LOG=0;CACHE_SIZE=4096";
+        // STORE: 1==pagestore, 2==mvstore, 3==quickstore
+        String url = "jdbc:gunsioo:file:~/tb;UNDO_LOG=0;CACHE_SIZE=4096;STORE=1";
         // String url = "jdbc:gunsioo:file:~/test;UNDO_LOG=0;CACHE_SIZE=8192;LOG=1;MV_STORE=FALSE";
         // String url = "jdbc:gunsioo:file:~/test;MV_STORE=FALSE;LOG=0";
         // String url = "jdbc:gunsioo:mem:db;MV_STORE=FALSE;LOG=0";

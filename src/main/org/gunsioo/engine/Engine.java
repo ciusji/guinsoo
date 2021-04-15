@@ -13,6 +13,7 @@ import org.gunsioo.command.CommandInterface;
 import org.gunsioo.command.dml.SetTypes;
 import org.gunsioo.message.DbException;
 import org.gunsioo.message.Trace;
+import org.gunsioo.schema.Constant;
 import org.gunsioo.security.auth.AuthenticationException;
 import org.gunsioo.security.auth.AuthenticationInfo;
 import org.gunsioo.security.auth.Authenticator;
@@ -60,6 +61,7 @@ public final class Engine {
         } else {
             databaseHolder = new DatabaseHolder();
         }
+
         synchronized (databaseHolder) {
             database = databaseHolder.database;
             if (database == null || openNew) {
@@ -67,7 +69,16 @@ public final class Engine {
                     String p = ci.getProperty("MV_STORE");
                     String fileName;
                     if (p == null) {
-                        fileName = name + Constants.SUFFIX_MV_FILE;
+                        String store = ci.getStore();
+                        if ("2".equals(store)) {
+                            fileName = name + Constants.SUFFIX_MV_FILE;
+                        } else if ("1".equals(store)) {
+                            fileName = name + Constants.SUFFIX_PAGE_FILE;
+                        } else if ("3".equals(store)) {
+                            fileName = name + Constants.SUFFIX_QUICK_FILE;
+                        } else {
+                            fileName = name + Constants.SUFFIX_MV_FILE;
+                        }
                         if (!FileUtils.exists(fileName)) {
                             fileName = name + Constants.SUFFIX_PAGE_FILE;
                             if (FileUtils.exists(fileName)) {
@@ -89,6 +100,9 @@ public final class Engine {
                             fileName = null;
                         }
                     }
+                    // remove not parse property
+                    ci.removeProperty("STORE", false);
+                    ci.setStore("0");
                     if (fileName != null && !FileUtils.canWrite(fileName)) {
                         ci.setProperty("ACCESS_MODE_DATA", "r");
                     }
@@ -226,6 +240,7 @@ public final class Engine {
         SessionLocal session;
         long start = System.nanoTime();
         for (;;) {
+            // custom self property
             session = openSession(ci, ifExists, forbidCreation, cipher);
             if (session != null) {
                 break;

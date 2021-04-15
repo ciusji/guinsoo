@@ -472,13 +472,19 @@ public class Constants {
     public static final String SUFFIX_OLD_DATABASE_FILE = ".data.db";
 
     /**
-     * The file name suffix of page files.
+     * The file name suffix of PageStore file.
      */
-    public static final String SUFFIX_PAGE_FILE = ".h2.db";
+    public static final String SUFFIX_PAGE_FILE = ".page.db";
+
     /**
      * The file name suffix of a MVStore file.
      */
     public static final String SUFFIX_MV_FILE = ".mv.db";
+
+    /**
+     * The file name suffix of a QuickStore file.
+     */
+    public static final String SUFFIX_QUICK_FILE = ".quick.db";
 
     /**
      * The file name suffix of a new MVStore file, used when compacting a store.

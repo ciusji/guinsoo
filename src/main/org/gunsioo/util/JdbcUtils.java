@@ -56,7 +56,7 @@ public class JdbcUtils {
     public static JavaObjectSerializer serializer;
 
     private static final String[] DRIVERS = {
-        "h2:", "org.gunsioo.Driver",
+        "gunsioo:", "org.gunsioo.Driver",
         "Cache:", "com.intersys.jdbc.CacheDriver",
         "daffodilDB://", "in.co.daffodil.db.rmi.RmiDaffodilDBDriver",
         "daffodil", "in.co.daffodil.db.jdbc.DaffodilDBDriver",

@@ -281,6 +281,7 @@ public final class MVSecondaryIndex extends MVIndex<SearchRow, Value> {
         SearchRow min = convertToKey(first, bigger);
         TransactionMap<SearchRow,Value> map = getMap(session);
         SearchRow max = convertToKey(last, Boolean.TRUE);
+        /// !!!
         return new MVStoreCursor(session, map.keyIterator(min, max), mvTable);
     }
 
