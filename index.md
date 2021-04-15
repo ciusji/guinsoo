@@ -1,7 +1,7 @@
-## Gunsioo Database Enginee
+## Guinsoo Database Enginee
 
 
-### documents
+### Documents
 
 - [home](https://github.com/ciusji/guinsoo/blob/master/docs/home.md)
 - [installation](https://github.com/ciusji/guinsoo/blob/master/docs/installation.md)
