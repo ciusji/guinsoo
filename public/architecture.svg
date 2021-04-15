@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="1193px" height="311px" viewBox="0 0 1193 311" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>guinsoo</title>
+    <title>architecture</title>
     <defs>
         <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="98.1681737%" gradientTransform="translate(0.500000,0.000000),scale(0.863636,1.000000),rotate(80.942857),translate(-0.500000,-0.000000)" id="radialGradient-1">
             <stop stop-color="#FFFFFF" stop-opacity="0.5" offset="0%"></stop>
@@ -8,7 +8,7 @@
         </radialGradient>
         <path d="M43.6293855,9.50424107 L38.8640348,1.35714286 C38.3741791,0.517410714 37.4675163,0 36.4835079,0 L26.9528065,0 C25.973095,0 25.0621353,0.517410714 24.5722796,1.35714286 L22.0714373,5.66607143 L19.4287946,1.35714286 C18.9389389,0.517410714 18.0279792,0 17.0482678,0 L7.51326937,0 C6.53355795,0 5.62259821,0.517410714 5.1327425,1.35714286 L0.367391782,9.50424107 C-0.122463927,10.3439732 -0.122463927,11.3787946 0.367391782,12.2142857 L5.1327425,20.3571429 C5.62259821,21.196875 6.52926097,21.7100446 7.51326937,21.7100446 L12.721209,21.7100446 L10.3406821,25.7899554 C9.85082644,26.6296875 9.85082644,27.6645089 10.3406821,28.5 L15.1060329,36.6428571 C15.6001856,37.4910714 16.5068483,38 17.4865597,38 L27.0215581,38 C28.0012696,38 28.9122293,37.4910714 29.402085,36.6513393 L34.1674357,28.5042411 C34.6572914,27.6645089 34.6572914,26.6339286 34.1674357,25.7941964 L31.7826119,21.7142857 L36.4878049,21.7142857 C37.4675163,21.7142857 38.378476,21.2011161 38.8683317,20.3613839 L43.6293855,12.2142857 C44.1235382,11.3787946 44.1235382,10.3439732 43.6293855,9.50424107 Z M22.1144071,10.9801339 L25.3586269,16.2857143 L19.0119876,16.2857143 L22.1144071,10.9801339 L22.1144071,10.9801339 Z M7.51326937,19 L2.74791865,10.8571429 L7.51326937,2.71428571 L17.0568617,2.71428571 L20.5073366,8.35491071 L14.3024976,19 L7.51326937,19 Z M31.7869089,27.1428571 L27.0215581,35.2857143 L17.4908567,35.2857143 L12.725506,27.1428571 L17.4908567,19 L27.0215581,19 L31.7869089,27.1428571 L31.7869089,27.1428571 Z M36.4835079,19 L30.2485901,19 L23.6871017,8.29977679 L26.9528065,2.71428571 L36.4835079,2.71428571 L41.2488586,10.8571429 L36.4835079,19 L36.4835079,19 Z" id="path-2"></path>
     </defs>
-    <g id="guinsoo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="architecture" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect id="Rectangle" stroke="#CFD4D7" fill="#F9FAFB" fill-rule="nonzero" x="259" y="246" width="672" height="40" rx="4"></rect>
         <rect id="Rectangle" stroke="#CFD4D7" fill="#FFFFFF" fill-rule="nonzero" x="259" y="28" width="672" height="201" rx="4"></rect>
         <path d="M871,48 L871,43 C871,41.3431458 872.343146,40 874,40 L996,40 C997.656854,40 999,41.3431458 999,43 L999,133 C999,134.656854 997.656854,136 996,136 L874,136 C872.343146,136 871,134.656854 871,133 L871,72" id="Path" fill="#F3FAED" fill-rule="nonzero"></path>
@@ -52,17 +52,17 @@
         <text id="DB-Engine" font-family="PingFangSC-Medium, PingFang SC" font-size="21" font-weight="400" fill="#0091FF">
             <tspan x="541" y="136">DB Engine</tspan>
         </text>
-        <rect id="Rectangle" stroke="#FF694B" fill="#FFF5F4" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" x="367" y="45" width="108" height="40"></rect>
+        <rect id="Rectangle" stroke="#FF694B" fill="#FFF5F4" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" x="375" y="46" width="108" height="40"></rect>
         <text id="Parser" font-family="PingFangSC-Medium, PingFang SC" font-size="21" font-weight="400" fill="#E02020">
-            <tspan x="389" y="72">Parser</tspan>
+            <tspan x="397" y="73">Parser</tspan>
         </text>
-        <rect id="Rectangle" stroke="#FF694B" fill="#FFF5F4" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" x="697" y="45" width="108" height="40"></rect>
+        <rect id="Rectangle" stroke="#FF694B" fill="#FFF5F4" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" x="705" y="46" width="108" height="40"></rect>
         <text id="Planning" font-family="PingFangSC-Medium, PingFang SC" font-size="21" font-weight="400" fill="#E02020">
-            <tspan x="709" y="72">Planning</tspan>
+            <tspan x="717" y="73">Planning</tspan>
         </text>
-        <rect id="Rectangle" stroke="#FF694B" fill="#FFF5F4" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" x="475" y="45" width="222" height="40"></rect>
+        <rect id="Rectangle" stroke="#FF694B" fill="#FFF5F4" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" x="483" y="46" width="222" height="40"></rect>
         <text id="Command-Execution" font-family="PingFangSC-Medium, PingFang SC" font-size="21" font-weight="400" fill="#E02020">
-            <tspan x="482" y="73">Command Execution</tspan>
+            <tspan x="490" y="74">Command Execution</tspan>
         </text>
         <text id="Transformed-Data" font-family="PingFangSC-Medium, PingFang SC" font-size="21" font-weight="400" fill="#A8D974">
             <tspan x="871.601" y="85">Transformed </tspan>
