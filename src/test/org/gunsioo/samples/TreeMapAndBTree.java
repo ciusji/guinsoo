@@ -237,7 +237,7 @@ public class TreeMapAndBTree {
         conn.commit();
 
         stat.close();
-        conn.close();;
+        conn.close();
 
         System.out.println("Duration666: ~ " + (System.currentTimeMillis() - startTime));
     }
