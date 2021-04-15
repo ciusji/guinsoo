@@ -22,6 +22,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+
+import com.sun.xml.internal.bind.v2.model.annotation.Quick;
 import org.gunsioo.api.DatabaseEventListener;
 import org.gunsioo.api.ErrorCode;
 import org.gunsioo.api.JavaObjectSerializer;
@@ -48,6 +50,7 @@ import org.gunsioo.mvstore.db.Store;
 import org.gunsioo.pagestore.PageStore;
 import org.gunsioo.pagestore.db.LobStorageBackend;
 import org.gunsioo.pagestore.db.SessionPageStore;
+import org.gunsioo.quickstore.QuickStore;
 import org.gunsioo.result.Row;
 import org.gunsioo.result.RowFactory;
 import org.gunsioo.result.SearchRow;
@@ -208,6 +211,7 @@ public final class Database implements DataHandler, CastDataProvider {
     private HashMap<TableLinkConnection, TableLinkConnection> linkConnections;
     private final TempFileDeleter tempFileDeleter = TempFileDeleter.getInstance();
     private PageStore pageStore;
+    private QuickStore quickStore;
     private int cacheSize;
     private int compactMode;
     private SourceCompiler compiler;
@@ -344,7 +348,11 @@ public final class Database implements DataHandler, CastDataProvider {
                     store = createStore();
                 } else {
                     store = null;
-                    createPageStore(ci);
+                    if (Constants.PAGE_DB.equals(ci.getStore())) {
+                        createPageStore(ci);
+                    } else {
+                        createQuickStore(ci);
+                    }
                 }
                 starting = false;
             } else if (dbSettings.mvStore) {
@@ -358,7 +366,11 @@ public final class Database implements DataHandler, CastDataProvider {
                 // Discard page_store engine, the only engine is MVStore.
                 settingKeys.removeIf(name -> name.startsWith("PAGE_STORE_"));
             } else {
-                settingKeys.removeIf(name -> "COMPRESS".equals(name) || "REUSE_SPACE".equals(name));
+                if (quickStore != null) {
+                    settingKeys.removeIf(name -> "COMPRESS".equals(name) || "REUSE_SPACE".equals(name));
+                } else {
+                    throw DbException.getUnsupportedException("QUICK_STORE ENGINE IS DEVELOPING");
+                }
             }
             systemUser = new User(this, 0, SYSTEM_USER_NAME, true);
             systemUser.setAdmin(true);
@@ -2542,6 +2554,10 @@ public final class Database implements DataHandler, CastDataProvider {
         }
         pageStore.setLogMode(logMode);
         pageStore.open();
+    }
+
+    private void createQuickStore(ConnectionInfo ci) {
+        quickStore = new QuickStore(ci);
     }
 
     public PageStore getPageStore() {

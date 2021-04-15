@@ -393,6 +393,10 @@ public class Constants {
      */
     public static final String PUBLIC_ROLE_NAME = "PUBLIC";
 
+    public static final String PAGE_DB = "1";
+    public static final String MV_DB = "2";
+    public static final String QUICK_DB = "3";
+
     /**
      * The number of bytes in random salt that is used to hash passwords.
      */
@@ -535,6 +539,10 @@ public class Constants {
      * 10000 means 10 seconds.
      */
     public static final int VIEW_COST_CACHE_MAX_AGE = 10_000;
+
+    public static final int SMALL_STORE_KEYS = 5_000_000;
+
+    public static final String EXT_KEYS = "0123456789-0123456789";
 
     /**
      * The name of the index cache that is used for temporary view (subqueries

@@ -70,27 +70,19 @@ public final class Engine {
                     String fileName;
                     if (p == null) {
                         String store = ci.getStore();
-                        if ("2".equals(store)) {
+                        if (Constants.MV_DB.equals(store)) {
                             fileName = name + Constants.SUFFIX_MV_FILE;
-                        } else if ("1".equals(store)) {
+                        } else if (Constants.PAGE_DB.equals(store)) {
                             fileName = name + Constants.SUFFIX_PAGE_FILE;
-                        } else if ("3".equals(store)) {
+                            ci.setProperty("MV_STORE", "FALSE");
+                        } else if (Constants.QUICK_DB.equals(store)) {
                             fileName = name + Constants.SUFFIX_QUICK_FILE;
+                            ci.setProperty("MV_STORE", "FALSE");
                         } else {
-                            fileName = name + Constants.SUFFIX_MV_FILE;
+                            throw DbException.getUnsupportedException("Unsupported DB Engine");
                         }
                         if (!FileUtils.exists(fileName)) {
-                            fileName = name + Constants.SUFFIX_PAGE_FILE;
-                            if (FileUtils.exists(fileName)) {
-                                ci.setProperty("MV_STORE", "false");
-                            } else {
-                                throwNotFound(ifExists, forbidCreation, name);
-                                fileName = name + Constants.SUFFIX_OLD_DATABASE_FILE;
-                                if (FileUtils.exists(fileName)) {
-                                    throw DbException.getFileVersionError(fileName);
-                                }
-                                fileName = null;
-                            }
+                            FileUtils.createFile(fileName);
                         }
                     } else {
                         fileName = name + (Utils.parseBoolean(p, true, false) ? Constants.SUFFIX_MV_FILE
@@ -102,7 +94,6 @@ public final class Engine {
                     }
                     // remove not parse property
                     ci.removeProperty("STORE", false);
-                    ci.setStore("0");
                     if (fileName != null && !FileUtils.canWrite(fileName)) {
                         ci.setProperty("ACCESS_MODE_DATA", "r");
                     }
