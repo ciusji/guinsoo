@@ -1,5 +1,7 @@
 # Guinsoo Database Enginee
 
+![logo](../public/architecture.svg)
+
 
 ## Overview 
 
@@ -13,5 +15,4 @@ Working from the top down, the layers look like this:
 * Undo log, redo log, and transactions layer.
 * B-tree engine and page-based storage allocation.
 * Filesystem abstraction.
-
 
