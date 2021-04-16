@@ -13,6 +13,6 @@ Working from the top down, the layers look like this:
 * Command execution and planning.
 * Table/Index/Constraints.
 * Undo log, redo log, and transactions layer.
-* B-tree engine and page-based storage allocation.
+* B-tree/ART-tree engine and page-based storage allocation.
 * Filesystem abstraction.
 

@@ -168,6 +168,7 @@ public class TableFilter implements ColumnResolver {
         hashCode = session.nextObjectId();
         this.orderInFrom = orderInFrom;
         this.indexHints = indexHints;
+        System.out.println("TableFilter Alias: " + alias);
     }
 
     /**

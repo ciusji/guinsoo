@@ -242,6 +242,102 @@ public class TreeMapAndBTree {
         System.out.println("Duration666: ~ " + (System.currentTimeMillis() - startTime));
     }
 
+    public void queryFunction() throws Exception {
+        Class.forName("org.gunsioo.Driver");
+        // unsupported "MVSTORE && LOG"
+        // STORE: 1==pagestore, 2==mvstore, 3==quickstore
+        String url = "jdbc:gunsioo:file:~/1;UNDO_LOG=0;CACHE_SIZE=65536;STORE=2";
+        // String url = "jdbc:gunsioo:file:~/test;UNDO_LOG=0;CACHE_SIZE=8192;LOG=1;MV_STORE=FALSE";
+        // String url = "jdbc:gunsioo:file:~/test;MV_STORE=FALSE;LOG=0";
+        // String url = "jdbc:gunsioo:mem:db;MV_STORE=FALSE;LOG=0";
+        // String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=65536";
+        Connection conn = DriverManager.getConnection(url, "sa", "");
+        Statement stat = conn.createStatement();
+
+        long startTime = System.currentTimeMillis();
+        // ??? why cost more than 1 seconds
+        // !!! char to row object cost more that 1 seconds.
+        // stat.execute("call csvload('" + path + "');");
+        // create table ... as select ... from => tableAlias
+//        stat.execute("SELECT\n" +
+//                " *\n" +
+//                "FROM\n" +
+//                "  (\n" +
+//                "    SELECT\n" +
+//                "      entity_field,\n" +
+//                "      date_field,\n" +
+//                "      config_2_6852\n" +
+//                "    FROM\n" +
+//                "      table_config_2_6852\n" +
+//                "    WHERE\n" +
+//                "      (\n" +
+//                "        date_field BETWEEN '20210301'\n" +
+//                "        AND '20210307'\n" +
+//                "      )\n" +
+//                "  ) as lt\n" +
+//                "  INNER JOIN (\n" +
+//                "    SELECT\n" +
+//                "      '20210301' as delta_date,\n" +
+//                "      '20210301' as origin_date\n" +
+//                "    UNION ALL\n" +
+//                "    SELECT\n" +
+//                "      '20210303' as delta_date,\n" +
+//                "      '20210303' as origin_date\n" +
+//                "    UNION ALL\n" +
+//                "    SELECT\n" +
+//                "      '20210302' as delta_date,\n" +
+//                "      '20210302' as origin_date\n" +
+//                "    UNION ALL\n" +
+//                "    SELECT\n" +
+//                "      '20210305' as delta_date,\n" +
+//                "      '20210305' as origin_date\n" +
+//                "    UNION ALL\n" +
+//                "    SELECT\n" +
+//                "      '20210304' as delta_date,\n" +
+//                "      '20210304' as origin_date\n" +
+//                "    UNION ALL\n" +
+//                "    SELECT\n" +
+//                "      '20210307' as delta_date,\n" +
+//                "      '20210307' as origin_date\n" +
+//                "    UNION ALL\n" +
+//                "    SELECT\n" +
+//                "      '20210306' as delta_date,\n" +
+//                "      '20210306' as origin_date\n" +
+//                "  ) as rt ON (lt.date_field = rt.delta_date)");
+
+        stat.execute("SELECT\n" +
+                "      entity_field,\n" +
+                "      date_field,\n" +
+                "      config_2_6852\n" +
+                "    FROM\n" +
+                "      table_config_2_6852\n" +
+                "    WHERE\n" +
+                "      (\n" +
+                "        date_field BETWEEN '20210301'\n" +
+                "        AND '20210307'\n" +
+                "      )");
+
+//        stat.execute("SELECT\n" +
+//                "      count(*)\n" +
+//                "    FROM\n" +
+//                "      table_config_2_6852\n" +
+//                "    WHERE\n" +
+//                "      (\n" +
+//                "        date_field BETWEEN '20210301'\n" +
+//                "        AND '20210307'\n" +
+//                "      )");
+
+
+        System.out.println("Duration600: ~ " + (System.currentTimeMillis() - startTime));
+
+        conn.commit();
+
+        stat.close();
+        conn.close();
+
+        System.out.println("Duration666: ~ " + (System.currentTimeMillis() - startTime));
+    }
+
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
         // tab.btreeMapUsage();
@@ -250,7 +346,8 @@ public class TreeMapAndBTree {
         // tab.btreeMapUsage();
         // tab.callFunction();
         // tab.insertDirect();
-        tab.loadFunction();
+        // tab.loadFunction();
+        tab.queryFunction();
 
     }
 }

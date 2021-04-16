@@ -4,6 +4,7 @@
 
 Welcome to **Guinsoo**, the faster SQL database. The main features of **Guinsoo** are:
 * Super-fast, open source, JDBC API
+* Vectorized processing
 * In-memory, non-blocking store, designed for low-latency applications
 * Embedded and server modes; disk-based or in-memory databases
 * Transaction support, multi-version concurrency
@@ -21,6 +22,7 @@ Welcome to **Guinsoo**, the faster SQL database. The main features of **Guinsoo*
 | Multi-Version Concurrency | Yes | Yes | Yes | Yes | No |
 | High Concurrency | Yes | No | No | No | No |
 | Columnar-based Storage | Yes | No | No | No | No |
+| Vectorized Processing | Yes | No | No | No | No |
 
 
 

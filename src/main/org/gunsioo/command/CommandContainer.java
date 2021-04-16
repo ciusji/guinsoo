@@ -248,12 +248,12 @@ public class CommandContainer extends Command {
     }
 
     @Override
-    public ResultInterface query(long maxrows) {
+    public ResultInterface query(long maxRows) {
         recompileIfRequired();
         setProgress(DatabaseEventListener.STATE_STATEMENT_START);
         start();
         prepared.checkParameters();
-        ResultInterface result = prepared.query(maxrows);
+        ResultInterface result = prepared.query(maxRows);
         prepared.trace(startTimeNanos, result.isLazy() ? 0 : result.getRowCount());
         setProgress(DatabaseEventListener.STATE_STATEMENT_END);
         return result;
