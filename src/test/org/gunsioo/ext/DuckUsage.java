@@ -54,8 +54,208 @@ public class DuckUsage {
         System.out.println("Duration6666: " + (System.currentTimeMillis() - start));
     }
 
+    public void caclData() throws ClassNotFoundException, SQLException {
+        Class.forName("org.duckdb.DuckDBDriver");
+        Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+        Statement stmt = conn.createStatement();
+        long start = System.currentTimeMillis();
+
+        String path1 = "/Users/admin/Desktop/table_relation_1_c1_2596";
+        String path2 = "/Users/admin/Desktop/table_config_2_6852";
+        String path3 = "/Users/admin/Desktop/table_config_1_12399";
+        stmt.execute("create table table_relation_1_c1_2596 as select * from read_csv_auto('" + path1 + "')");
+        stmt.execute("create table table_config_2_6852 as select * from read_csv_auto('" + path2 + "')");
+        stmt.execute("create table table_config_1_12399 as select * from read_csv_auto('" + path3 + "')");
+        // stmt.execute("copy huge from '" + path + "';");
+        stmt.execute("SELECT\n" +
+                "  lt.ENTITY_FIELD,\n" +
+                "  lt.DATE_FIELD,(\n" +
+                "    CASE\n" +
+                "      WHEN (1 = 1) THEN c1\n" +
+                "    END\n" +
+                "  ) as config_1_12399\n" +
+                "FROM\n" +
+                "  (\n" +
+                "    SELECT\n" +
+                "      ENTITY_FIELD,\n" +
+                "      DATE_FIELD,\n" +
+                "      sum(config_2_6852) as c1\n" +
+                "    FROM\n" +
+                "      (\n" +
+                "        SELECT\n" +
+                "          lt.ENTITY_FIELD,\n" +
+                "          lt.DATE_FIELD,\n" +
+                "          rt.config_2_6852\n" +
+                "        FROM\n" +
+                "          (\n" +
+                "            SELECT\n" +
+                "              ENTITY_FIELD,\n" +
+                "              data_field,\n" +
+                "              DATE_FIELD\n" +
+                "            FROM\n" +
+                "              table_relation_1_c1_2596\n" +
+                "            WHERE\n" +
+                "              (\n" +
+                "                DATE_FIELD BETWEEN '20210301'\n" +
+                "                AND '20210330'\n" +
+                "              )\n" +
+                "          ) as lt\n" +
+                "          LEFT OUTER JOIN (\n" +
+                "            SELECT\n" +
+                "              lt.ENTITY_FIELD,\n" +
+                "              rt.origin_date as DATE_FIELD,\n" +
+                "              config_2_6852\n" +
+                "            FROM\n" +
+                "              (\n" +
+                "                SELECT\n" +
+                "                  ENTITY_FIELD,\n" +
+                "                  DATE_FIELD,\n" +
+                "                  config_2_6852\n" +
+                "                FROM\n" +
+                "                  table_config_2_6852\n" +
+                "                WHERE\n" +
+                "                  (\n" +
+                "                    DATE_FIELD BETWEEN '20210301'\n" +
+                "                    AND '20210330'\n" +
+                "                  )\n" +
+                "              ) as lt\n" +
+                "              INNER JOIN (\n" +
+                "                SELECT\n" +
+                "                  '20210301' as delta_date,\n" +
+                "                  '20210301' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210323' as delta_date,\n" +
+                "                  '20210323' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210322' as delta_date,\n" +
+                "                  '20210322' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210303' as delta_date,\n" +
+                "                  '20210303' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210325' as delta_date,\n" +
+                "                  '20210325' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210302' as delta_date,\n" +
+                "                  '20210302' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210324' as delta_date,\n" +
+                "                  '20210324' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210305' as delta_date,\n" +
+                "                  '20210305' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210327' as delta_date,\n" +
+                "                  '20210327' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210304' as delta_date,\n" +
+                "                  '20210304' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210326' as delta_date,\n" +
+                "                  '20210326' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210307' as delta_date,\n" +
+                "                  '20210307' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210329' as delta_date,\n" +
+                "                  '20210329' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210306' as delta_date,\n" +
+                "                  '20210306' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210328' as delta_date,\n" +
+                "                  '20210328' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210309' as delta_date,\n" +
+                "                  '20210309' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210308' as delta_date,\n" +
+                "                  '20210308' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210330' as delta_date,\n" +
+                "                  '20210330' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210310' as delta_date,\n" +
+                "                  '20210310' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210312' as delta_date,\n" +
+                "                  '20210312' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210311' as delta_date,\n" +
+                "                  '20210311' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210314' as delta_date,\n" +
+                "                  '20210314' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210313' as delta_date,\n" +
+                "                  '20210313' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210316' as delta_date,\n" +
+                "                  '20210316' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210315' as delta_date,\n" +
+                "                  '20210315' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210318' as delta_date,\n" +
+                "                  '20210318' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210317' as delta_date,\n" +
+                "                  '20210317' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210319' as delta_date,\n" +
+                "                  '20210319' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210321' as delta_date,\n" +
+                "                  '20210321' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210320' as delta_date,\n" +
+                "                  '20210320' as origin_date\n" +
+                "              ) as rt ON (lt.DATE_FIELD = rt.delta_date)\n" +
+                "          ) as rt ON (\n" +
+                "            (lt.data_field = rt.ENTITY_FIELD)\n" +
+                "            AND (lt.DATE_FIELD = rt.DATE_FIELD)\n" +
+                "          )\n" +
+                "      ) as tmp\n" +
+                "    GROUP BY\n" +
+                "      ENTITY_FIELD,\n" +
+                "      DATE_FIELD\n" +
+                "  ) as lt");
+
+        System.out.println("Duration6666: " + (System.currentTimeMillis() - start));
+    }
+
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         DuckUsage usage = new DuckUsage();
-        usage.loadData();
+        // usage.loadData();
+        usage.caclData();
     }
 }
