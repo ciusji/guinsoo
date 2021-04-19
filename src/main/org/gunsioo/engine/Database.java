@@ -23,7 +23,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.sun.xml.internal.bind.v2.model.annotation.Quick;
 import org.gunsioo.api.DatabaseEventListener;
 import org.gunsioo.api.ErrorCode;
 import org.gunsioo.api.JavaObjectSerializer;
@@ -363,13 +362,12 @@ public final class Database implements DataHandler, CastDataProvider {
             Set<String> settingKeys = dbSettings.getSettings().keySet();
             if (store != null) {
                 store.getTransactionStore().init();
-                // Discard page_store engine, the only engine is MVStore.
                 settingKeys.removeIf(name -> name.startsWith("PAGE_STORE_"));
             } else {
-                if (quickStore != null) {
+                if (pageStore != null) {
                     settingKeys.removeIf(name -> "COMPRESS".equals(name) || "REUSE_SPACE".equals(name));
                 } else {
-                    throw DbException.getUnsupportedException("QUICK_STORE ENGINE IS DEVELOPING");
+                    throw DbException.getUnsupportedException("QUICK_STORE ENGINE IS COMING");
                 }
             }
             systemUser = new User(this, 0, SYSTEM_USER_NAME, true);
@@ -2557,6 +2555,7 @@ public final class Database implements DataHandler, CastDataProvider {
     }
 
     private void createQuickStore(ConnectionInfo ci) {
+        System.out.println("QUICK_STORE IS COMING");
         quickStore = new QuickStore(ci);
     }
 

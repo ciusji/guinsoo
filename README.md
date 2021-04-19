@@ -2,7 +2,7 @@
 
 ![logo](./public/gunsioo.svg)
 
-Welcome to Guinsoo, a database based on H2 & Chronicle-Map, the Java SQL database.
+Guinsoo, not only a database.
 
 
 ## Feature:

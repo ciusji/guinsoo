@@ -201,7 +201,7 @@ public class TreeMapAndBTree {
     }
 
     public void loadFunction() throws Exception {
-        DeleteDbFiles.execute("~", "tb", true);
+        DeleteDbFiles.execute("~", "test", true);
         // String path = "/Users/admin/Desktop/relations.csv";
         String path = "/Users/admin/Desktop/relations2.csv";
         // String path = "/Users/admin/Desktop/relations4.csv";
@@ -243,92 +243,212 @@ public class TreeMapAndBTree {
     }
 
     public void queryFunction() throws Exception {
+        DeleteDbFiles.execute("~", "test", true);
+
         Class.forName("org.gunsioo.Driver");
         // unsupported "MVSTORE && LOG"
         // STORE: 1==pagestore, 2==mvstore, 3==quickstore
-        String url = "jdbc:gunsioo:file:~/1;UNDO_LOG=0;CACHE_SIZE=65536;STORE=2";
-        // String url = "jdbc:gunsioo:file:~/test;UNDO_LOG=0;CACHE_SIZE=8192;LOG=1;MV_STORE=FALSE";
-        // String url = "jdbc:gunsioo:file:~/test;MV_STORE=FALSE;LOG=0";
-        // String url = "jdbc:gunsioo:mem:db;MV_STORE=FALSE;LOG=0";
-        // String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=65536";
-        Connection conn = DriverManager.getConnection(url, "sa", "");
+        String url = "jdbc:gunsioo:file:~/test;UNDO_LOG=0;LOCK_MODE=0;CACHE_SIZE=65536;STORE=1;UNDO_LOG=0";
+        Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
 
         long startTime = System.currentTimeMillis();
+        String path1 = "/Users/admin/Desktop/table_relation_1_c1_2596";
+        String path2 = "/Users/admin/Desktop/table_config_2_6852";
+        long startTime1 = System.currentTimeMillis();
+        // String path3 = "/Users/admin/Desktop/table_config_1_12399";
+        stat.execute("create table table_relation_1_c1_2596 as select * from csvread('" + path1 + "')");
+        System.out.println("Duration500: ~ " + (System.currentTimeMillis() - startTime1));
+        stat.execute("create index idx1 on table_relation_1_c1_2596(ENTITY_FIELD);");
+        stat.execute("create index idx2 on table_relation_1_c1_2596(data_field);");
+        stat.execute("create index idx3 on table_relation_1_c1_2596(DATE_FIELD);");
+        stat.execute("create table table_config_2_6852 as select * from csvread('" + path2 + "')");
+        stat.execute("alter table table_config_2_6852 alter column config_2_6852 float");
+        stat.execute("create index idx4 on table_config_2_6852(ENTITY_FIELD);");
+        stat.execute("create index idx5 on table_config_2_6852(config_2_6852);");
+        stat.execute("create index idx6 on table_config_2_6852(DATE_FIELD);");
+        // stat.execute("create table table_config_1_12399 as select * from csvread('" + path3 + "')");
+        // stat.execute("alter table table_config_1_12399 alter column config_1_12399 float");
         // ??? why cost more than 1 seconds
         // !!! char to row object cost more that 1 seconds.
         // stat.execute("call csvload('" + path + "');");
         // create table ... as select ... from => tableAlias
-//        stat.execute("SELECT\n" +
-//                " *\n" +
-//                "FROM\n" +
-//                "  (\n" +
-//                "    SELECT\n" +
-//                "      entity_field,\n" +
-//                "      date_field,\n" +
-//                "      config_2_6852\n" +
-//                "    FROM\n" +
-//                "      table_config_2_6852\n" +
-//                "    WHERE\n" +
-//                "      (\n" +
-//                "        date_field BETWEEN '20210301'\n" +
-//                "        AND '20210307'\n" +
-//                "      )\n" +
-//                "  ) as lt\n" +
-//                "  INNER JOIN (\n" +
-//                "    SELECT\n" +
-//                "      '20210301' as delta_date,\n" +
-//                "      '20210301' as origin_date\n" +
-//                "    UNION ALL\n" +
-//                "    SELECT\n" +
-//                "      '20210303' as delta_date,\n" +
-//                "      '20210303' as origin_date\n" +
-//                "    UNION ALL\n" +
-//                "    SELECT\n" +
-//                "      '20210302' as delta_date,\n" +
-//                "      '20210302' as origin_date\n" +
-//                "    UNION ALL\n" +
-//                "    SELECT\n" +
-//                "      '20210305' as delta_date,\n" +
-//                "      '20210305' as origin_date\n" +
-//                "    UNION ALL\n" +
-//                "    SELECT\n" +
-//                "      '20210304' as delta_date,\n" +
-//                "      '20210304' as origin_date\n" +
-//                "    UNION ALL\n" +
-//                "    SELECT\n" +
-//                "      '20210307' as delta_date,\n" +
-//                "      '20210307' as origin_date\n" +
-//                "    UNION ALL\n" +
-//                "    SELECT\n" +
-//                "      '20210306' as delta_date,\n" +
-//                "      '20210306' as origin_date\n" +
-//                "  ) as rt ON (lt.date_field = rt.delta_date)");
+        long startTime2 = System.currentTimeMillis();
 
         stat.execute("SELECT\n" +
-                "      entity_field,\n" +
-                "      date_field,\n" +
-                "      config_2_6852\n" +
+                "      ENTITY_FIELD,\n" +
+                "      DATE_FIELD,\n" +
+                "      sum(config_2_6852) as c1\n" +
                 "    FROM\n" +
-                "      table_config_2_6852\n" +
-                "    WHERE\n" +
                 "      (\n" +
-                "        date_field BETWEEN '20210301'\n" +
-                "        AND '20210307'\n" +
-                "      )");
+                "        SELECT\n" +
+                "          lt.ENTITY_FIELD,\n" +
+                "          lt.DATE_FIELD,\n" +
+                "          rt.config_2_6852\n" +
+                "        FROM\n" +
+                "          (\n" +
+                "            SELECT\n" +
+                "              ENTITY_FIELD,\n" +
+                "              data_field,\n" +
+                "              DATE_FIELD\n" +
+                "            FROM\n" +
+                "              table_relation_1_c1_2596\n" +
+                "            WHERE\n" +
+                "              (\n" +
+                "                DATE_FIELD BETWEEN '20210301'\n" +
+                "                AND '20210330'\n" +
+                "              )\n" +
+                "          ) as lt\n" +
+                "          LEFT OUTER JOIN (\n" +
+                "            SELECT\n" +
+                "              lt.ENTITY_FIELD,\n" +
+                "              rt.origin_date as DATE_FIELD,\n" +
+                "              config_2_6852\n" +
+                "            FROM\n" +
+                "              (\n" +
+                "                SELECT\n" +
+                "                  ENTITY_FIELD,\n" +
+                "                  DATE_FIELD,\n" +
+                "                  config_2_6852\n" +
+                "                FROM\n" +
+                "                  table_config_2_6852\n" +
+                "                WHERE\n" +
+                "                  (\n" +
+                "                    DATE_FIELD BETWEEN '20210301'\n" +
+                "                    AND '20210330'\n" +
+                "                  )\n" +
+                "              ) as lt\n" +
+                "              INNER JOIN (\n" +
+                "                SELECT\n" +
+                "                  '20210301' as delta_date,\n" +
+                "                  '20210301' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210323' as delta_date,\n" +
+                "                  '20210323' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210322' as delta_date,\n" +
+                "                  '20210322' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210303' as delta_date,\n" +
+                "                  '20210303' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210325' as delta_date,\n" +
+                "                  '20210325' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210302' as delta_date,\n" +
+                "                  '20210302' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210324' as delta_date,\n" +
+                "                  '20210324' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210305' as delta_date,\n" +
+                "                  '20210305' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210327' as delta_date,\n" +
+                "                  '20210327' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210304' as delta_date,\n" +
+                "                  '20210304' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210326' as delta_date,\n" +
+                "                  '20210326' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210307' as delta_date,\n" +
+                "                  '20210307' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210329' as delta_date,\n" +
+                "                  '20210329' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210306' as delta_date,\n" +
+                "                  '20210306' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210328' as delta_date,\n" +
+                "                  '20210328' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210309' as delta_date,\n" +
+                "                  '20210309' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210308' as delta_date,\n" +
+                "                  '20210308' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210330' as delta_date,\n" +
+                "                  '20210330' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210310' as delta_date,\n" +
+                "                  '20210310' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210312' as delta_date,\n" +
+                "                  '20210312' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210311' as delta_date,\n" +
+                "                  '20210311' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210314' as delta_date,\n" +
+                "                  '20210314' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210313' as delta_date,\n" +
+                "                  '20210313' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210316' as delta_date,\n" +
+                "                  '20210316' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210315' as delta_date,\n" +
+                "                  '20210315' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210318' as delta_date,\n" +
+                "                  '20210318' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210317' as delta_date,\n" +
+                "                  '20210317' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210319' as delta_date,\n" +
+                "                  '20210319' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210321' as delta_date,\n" +
+                "                  '20210321' as origin_date\n" +
+                "                UNION ALL\n" +
+                "                SELECT\n" +
+                "                  '20210320' as delta_date,\n" +
+                "                  '20210320' as origin_date\n" +
+                "              ) as rt ON (lt.DATE_FIELD = rt.delta_date)\n" +
+                "          ) as rt ON (\n" +
+                "            (lt.data_field = rt.ENTITY_FIELD)\n" +
+                "            AND (lt.DATE_FIELD = rt.DATE_FIELD)\n" +
+                "          )\n" +
+                "      ) as tmp\n" +
+                "    GROUP BY\n" +
+                "      ENTITY_FIELD,\n" +
+                "      DATE_FIELD");
 
-//        stat.execute("SELECT\n" +
-//                "      count(*)\n" +
-//                "    FROM\n" +
-//                "      table_config_2_6852\n" +
-//                "    WHERE\n" +
-//                "      (\n" +
-//                "        date_field BETWEEN '20210301'\n" +
-//                "        AND '20210307'\n" +
-//                "      )");
-
-
-        System.out.println("Duration600: ~ " + (System.currentTimeMillis() - startTime));
+        System.out.println("Duration600: ~ " + (System.currentTimeMillis() - startTime2));
 
         conn.commit();
 

@@ -19,10 +19,7 @@
 
 package org.gunsioo.ext;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * DuckUsage
@@ -67,7 +64,7 @@ public class DuckUsage {
         stmt.execute("create table table_config_2_6852 as select * from read_csv_auto('" + path2 + "')");
         stmt.execute("create table table_config_1_12399 as select * from read_csv_auto('" + path3 + "')");
         // stmt.execute("copy huge from '" + path + "';");
-        stmt.execute("SELECT\n" +
+        ResultSet resultSet = stmt.executeQuery("SELECT\n" +
                 "  lt.ENTITY_FIELD,\n" +
                 "  lt.DATE_FIELD,(\n" +
                 "    CASE\n" +
@@ -249,6 +246,10 @@ public class DuckUsage {
                 "      ENTITY_FIELD,\n" +
                 "      DATE_FIELD\n" +
                 "  ) as lt");
+
+//        while (resultSet.next()) {
+//            System.out.println(resultSet.getObject("ENTITY_FIELD"));
+//        }
 
         System.out.println("Duration6666: " + (System.currentTimeMillis() - start));
     }
