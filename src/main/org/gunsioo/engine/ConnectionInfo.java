@@ -109,6 +109,7 @@ public class ConnectionInfo implements Cloneable {
         }
         setUserName(removeProperty("USER", ""));
         name = url.substring(Constants.START_URL.length());
+        // parse mem/file database name (a-single-file)
         parseName();
         convertPasswords();
         String recoverTest = removeProperty("RECOVER_TEST", null);

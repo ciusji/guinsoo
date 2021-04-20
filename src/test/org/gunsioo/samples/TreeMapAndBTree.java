@@ -30,6 +30,7 @@ import java.util.TreeMap;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.gunsioo.mvstore.OffHeapStore;
+import org.gunsioo.pagestore.PageStore;
 import org.gunsioo.tools.DeleteDbFiles;
 
 /**
@@ -170,7 +171,9 @@ public class TreeMapAndBTree {
         // String path = "/Users/admin/Desktop/relations3.csv";
 
         Class.forName("org.gunsioo.Driver");
-        String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
+        // mem:<databaseName>
+        String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096;STORE=2";
+        // String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
 
@@ -464,10 +467,10 @@ public class TreeMapAndBTree {
         // tab.sqlInsert();
         // tab.sqlInsertByHikari();
         // tab.btreeMapUsage();
-        // tab.callFunction();
+        tab.callFunction();
         // tab.insertDirect();
         // tab.loadFunction();
-        tab.queryFunction();
+        // tab.queryFunction();
 
     }
 }

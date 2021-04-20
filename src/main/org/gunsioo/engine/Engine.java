@@ -93,7 +93,7 @@ public final class Engine {
                         }
                     }
                     // remove not parse property
-                    ci.removeProperty("STORE", false);
+                    ci.removeProperty("STORE", "1");
                     if (fileName != null && !FileUtils.canWrite(fileName)) {
                         ci.setProperty("ACCESS_MODE_DATA", "r");
                     }
