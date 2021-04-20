@@ -27,6 +27,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TreeMap;
+import java.util.stream.Stream;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.gunsioo.mvstore.OffHeapStore;
@@ -43,8 +45,8 @@ import org.gunsioo.tools.DeleteDbFiles;
 public class TreeMapAndBTree {
 
     // private int limit = 1_000_000;
-    // private int limit = 3_000_000;
-    private int limit = 5_000_000;
+    private int limit = 3_000_000;
+    // private int limit = 5_000_000;
     // private int limit = 30_000_000;
 
     public void treeMapUsage() {
@@ -71,7 +73,7 @@ public class TreeMapAndBTree {
 
         // MVMap<Integer, String> bTree = MVStore.open(null).openMap("data");
 
-        for (int i=0; i<limit; i++) {
+        for (int i = 0; i < limit; i++) {
             bTree.put(i, "Hello World-" + i);
         }
 
@@ -466,8 +468,8 @@ public class TreeMapAndBTree {
         // tab.btreeMapUsage();
         // tab.sqlInsert();
         // tab.sqlInsertByHikari();
-        // tab.btreeMapUsage();
-        tab.callFunction();
+        tab.btreeMapUsage();
+        // tab.callFunction();
         // tab.insertDirect();
         // tab.loadFunction();
         // tab.queryFunction();

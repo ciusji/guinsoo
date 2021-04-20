@@ -77,7 +77,7 @@ public class MapdbUsage {
         long startTime = System.currentTimeMillis();
         AtomicLong longKey = new AtomicLong(0);
         // add and read some data
-        int bufferSize = 1024 * 2;
+        int bufferSize = 1024 * 4;
         try (BufferedReader br = new BufferedReader(new FileReader(path), bufferSize)) {
             br.lines().parallel().forEach(it -> map.put(longKey.getAndIncrement(), it));
             // br.lines().parallel().forEach(it -> map.putIfAbsent(longKey.getAndIncrement(), it));
@@ -107,7 +107,7 @@ public class MapdbUsage {
     public void testStoreConcurrency4() throws IOException {
         // open the store (in-memory if fileName is null)
         // MVStore s = MVStore.open(null);
-        MVStore s = MVStore.open("~/test");
+        MVStore s = MVStore.open(null);
 //        OffHeapStore offHeapStore = new OffHeapStore();
 //        MVStore s = new MVStore.Builder()
 //                .fileStore(offHeapStore)
@@ -118,7 +118,7 @@ public class MapdbUsage {
         long startTime = System.currentTimeMillis();
         AtomicLong longKey = new AtomicLong(0);
         // add and read some data
-        int bufferSize = 1024;
+        int bufferSize = 1024 * 4;
         try (BufferedReader br = new BufferedReader(new FileReader(path), bufferSize)) {
             br.lines().parallel().forEach(it -> map.put(longKey.getAndIncrement(), it));
             // br.lines().parallel().forEach(it -> map.putIfAbsent(longKey.getAndIncrement(), it));
