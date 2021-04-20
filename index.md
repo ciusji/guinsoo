@@ -1,13 +1,13 @@
-## Guinsoo Database Enginee
+# Guinsoo Database Enginee
 
 `Guinsoo's Scythe of Vyse, is just guinsoo (羊刀) of the database name.`
 
+<br/>
 
-### Why Guinsoo
+## Why Guinsoo
 
 There are many database management systems out there. But **Guinsoo** is only for one-size-fits all
 database system.
-
 
 #### Simple Operation
 
@@ -34,8 +34,9 @@ By the way, the OLTP feature is provided by [h2database](https://www.h2database.
 **Guinsoo** is open source, which is released under the 
 [MPL 2.0 & EPL 1.0](https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
 
+<br/>
 
-### Documentation
+## Documentation
 
 - [home](https://github.com/ciusji/guinsoo/blob/master/docs/home.md)
 - [installation](https://github.com/ciusji/guinsoo/blob/master/docs/installation.md)
@@ -45,8 +46,9 @@ By the way, the OLTP feature is provided by [h2database](https://www.h2database.
 - [advanced](https://github.com/ciusji/guinsoo/blob/master/docs/advanced.md)
 - [architecture](https://github.com/ciusji/guinsoo/blob/master/docs/architecture.md)
 
+<br/>
 
-### Contributing
+## Contributing
 
 This project and everyone can participate in it. 
 
