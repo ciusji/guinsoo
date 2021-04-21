@@ -22,7 +22,7 @@ Welcome to **Guinsoo**, the faster SQL database. The main features of **Guinsoo*
 
 ## Features
 
-| | Guinsoo | H2 | MySQL | PostgreSQL | SQLite |
+| | GuinsooDB | H2 | MySQL | PostgreSQL | SQLite |
 | ----  | ---- | ---- | ---- | ---- | ---- |
 | Memory Mode | Yes | Yes | No | No | Yes |
 | JDBC Driver | Yes | Yes | Yes | Yes | Yes |
