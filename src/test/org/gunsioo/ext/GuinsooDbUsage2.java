@@ -274,7 +274,7 @@ public class GuinsooDbUsage2 {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         GuinsooDbUsage2 usage = new GuinsooDbUsage2();
         // usage.loadData1();
-        usage.loadData2();
-        // usage.caclData();
+        // usage.loadData2();
+        usage.caclData();
     }
 }
