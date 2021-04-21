@@ -125,8 +125,7 @@
             <artifactId>guinsoodb_jdbc</artifactId>
             <version>0.1.9</version>
             <scope>system</scope>
-<!--            <systemPath>/Users/admin/PublicGit/guinsoodb/build/release/tools/jdbc/guinsoodb_jdbc.jar</systemPath>-->
-            <systemPath>/Users/admin/Desktop/jdbc/guinsoodb_jdbc.jar</systemPath>
+            <systemPath>/Users/admin/PublicGit/guinsoodb/build/release/tools/jdbc/guinsoodb_jdbc.jar</systemPath>
         </dependency>
         <!-- END TEST DEPENDENCIES !-->
     </dependencies>
