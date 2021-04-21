@@ -30,25 +30,42 @@ import java.sql.*;
  */
 public class GuinsooDbUsage2 {
 
-    public void loadData() throws ClassNotFoundException, SQLException {
+    public void loadData1() throws ClassNotFoundException, SQLException {
         Class.forName("org.guinsoodb.GuinsooDBDriver");
         Connection conn = DriverManager.getConnection("jdbc:guinsoodb:");
         Statement stmt = conn.createStatement();
         long start = System.currentTimeMillis();
 
         // String path = "/Users/admin/Desktop/relations5.csv";
-        // stmt.execute("create table duck as select * from read_csv_auto('" + path + "')");
-        // stmt.execute("select count(distinct aor_id) from duck;");
+        // stmt.execute("create table tt as select * from read_csv_auto('" + path + "')");
+        // stmt.execute("select count(distinct aor_id) from tt;");
 
         String path = "/Users/admin/Desktop/huge.csv";
         // stmt.execute("create table huge as select * from read_csv_auto('" + path + "')");
         stmt.execute("create table huge(num integer);");
         stmt.execute("copy huge from '" + path + "';");
+        System.out.println("Duration1: " + (System.currentTimeMillis() - start));
         long start2 = System.currentTimeMillis();
         stmt.execute("select count(distinct num) from huge;");
         System.out.println("Duration2: " + (System.currentTimeMillis() - start2));
 
-        System.out.println("Duration6666: " + (System.currentTimeMillis() - start));
+        System.out.println("Duration All: " + (System.currentTimeMillis() - start));
+    }
+
+    public void loadData2() throws ClassNotFoundException, SQLException {
+        Class.forName("org.guinsoodb.GuinsooDBDriver");
+        Connection conn = DriverManager.getConnection("jdbc:guinsoodb:");
+        Statement stmt = conn.createStatement();
+        long start = System.currentTimeMillis();
+
+        String path = "/Users/admin/Desktop/huge.csv";
+        stmt.execute("create table huge as select * from read_csv_auto('" + path + "')");
+        System.out.println("Duration1: " + (System.currentTimeMillis() - start));
+        long start2 = System.currentTimeMillis();
+        stmt.execute("select count(distinct num) from huge;");
+        System.out.println("Duration2: " + (System.currentTimeMillis() - start2));
+
+        System.out.println("Duration All: " + (System.currentTimeMillis() - start));
     }
 
     public void caclData() throws ClassNotFoundException, SQLException {
@@ -256,7 +273,8 @@ public class GuinsooDbUsage2 {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         GuinsooDbUsage2 usage = new GuinsooDbUsage2();
-        usage.loadData();
+        // usage.loadData1();
+        usage.loadData2();
         // usage.caclData();
     }
 }

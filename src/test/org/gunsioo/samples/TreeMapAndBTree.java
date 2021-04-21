@@ -135,6 +135,7 @@ public class TreeMapAndBTree {
         stat.execute("call csvread('" + path + "');");
         long endTime = System.currentTimeMillis();
         System.out.println("Duration666: ~ " + (endTime - startTime));
+
     }
 
     public void insertDirect() throws ClassNotFoundException, SQLException {
@@ -418,8 +419,8 @@ public class TreeMapAndBTree {
         // tab.btreeMapUsage();
         // tab.sqlInsert();
         // tab.sqlInsertByHikari();
-        tab.btreeMapUsage();
-        // tab.callFunction();
+        // tab.btreeMapUsage();
+        tab.callFunction();
         // tab.insertDirect();
         // tab.loadFunction();
         // tab.queryFunction();

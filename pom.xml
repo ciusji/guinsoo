@@ -43,6 +43,7 @@
         <servlet.version>4.0.1</servlet.version>
         <slf4j.version>1.7.30</slf4j.version>
         <chronicle.version>3.17.2</chronicle.version>
+        <guinsoodb_driver.version>0.1.9</guinsoodb_driver.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -93,6 +94,13 @@
             <artifactId>chronicle-map</artifactId>
             <version>${chronicle.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.guinsoodb</groupId>
+            <artifactId>guinsoodb_jdbc</artifactId>
+            <version>${guinsoodb_driver.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/driver/jdbc/guinsoodb_jdbc.jar</systemPath>
+        </dependency>
         <!-- END COMPILE DEPENDENCIES !-->
 
         <!-- START TEST DEPENDENCIES !-->
@@ -119,13 +127,6 @@
             <artifactId>asm</artifactId>
             <version>${asm.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.guinsoodb</groupId>
-            <artifactId>guinsoodb_jdbc</artifactId>
-            <version>0.1.9</version>
-            <scope>system</scope>
-            <systemPath>/Users/admin/PublicGit/guinsoodb/build/release/tools/jdbc/guinsoodb_jdbc.jar</systemPath>
         </dependency>
         <!-- END TEST DEPENDENCIES !-->
     </dependencies>
