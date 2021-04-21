@@ -2,6 +2,12 @@
 
 ![logo](../public/gunsioo.svg)
 
+`Guinsoo, not only a  database.`
+
+<br/>
+
+## Home
+
 Welcome to **Guinsoo**, the faster SQL database. The main features of **Guinsoo** are:
 * Super-fast, open source, JDBC API
 * Vectorized processing
@@ -12,6 +18,7 @@ Welcome to **Guinsoo**, the faster SQL database. The main features of **Guinsoo*
 * Encrypted databases
 * Fulltext search
 
+<br/>
 
 ## Features
 
@@ -24,8 +31,10 @@ Welcome to **Guinsoo**, the faster SQL database. The main features of **Guinsoo*
 | Columnar-based Storage | Yes | No | No | No | No |
 | Vectorized Processing | Yes | No | No | No | No |
 
-
+<br/>
 
 ## Contribute
 
 You can contribute to the development of **Gunsioo** by sending feedback and bug reports.
+
+For more ideas, please [email](https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=bqjimaster@gmail.com) to me.
