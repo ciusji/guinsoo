@@ -20,7 +20,7 @@ Welcome to **Guinsoo**, the faster SQL database. The main features of **Guinsoo*
 
 <br/>
 
-## Features
+## Contrast
 
 | | GuinsooDB | H2 | MySQL | PostgreSQL | SQLite |
 | ----  | ---- | ---- | ---- | ---- | ---- |
