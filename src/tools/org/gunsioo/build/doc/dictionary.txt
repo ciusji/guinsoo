@@ -364,7 +364,7 @@ lawsuits lax layer layers layout lazily lazy lcase lceil lck lcmp lconst ldap
 ldbc ldc ldiv ldquo lea leach lead leading leads leaf leak leaked leaks leaning
 leap learning least leave leaves leaving lee left leftmost leftover legacy legal
 legend lehmann lempel len length lengths lenient leod less lesser let lets letter
-letters level levels lexicographical lfloor lgpl liability liable lib liberal libraries
+letters level levels lexicographical lfloor lgpl liability liable driver liberal libraries
 library licensable license licensed licensees licenses licensing lies life lifespan
 lifetime liftweb light lightweight like likely lim limit limitation limitations
 limited limiting limits line linear linearly linefeed lines linestring lineup

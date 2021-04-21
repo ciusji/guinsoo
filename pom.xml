@@ -99,7 +99,7 @@
             <artifactId>guinsoodb_jdbc</artifactId>
             <version>${guinsoodb_driver.version}</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/jdbc/guinsoodb_jdbc.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/driver/jdbc/guinsoodb_jdbc.jar</systemPath>
         </dependency>
         <!-- END COMPILE DEPENDENCIES !-->
 
@@ -147,10 +147,8 @@
                     <include>**/*.css</include>
                     <include>**/*.js</include>
                     <include>META-INF/**</include>
+                    <include>driver/**</include>
                 </includes>
-            </resource>
-            <resource>
-                <directory>/lib</directory>
             </resource>
             <resource>
                 <directory>src/java9/precompiled</directory>
