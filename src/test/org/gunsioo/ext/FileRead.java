@@ -19,9 +19,6 @@
 
 package org.gunsioo.ext;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -40,23 +37,6 @@ import java.util.stream.Stream;
 public class FileRead {
 
     private final String file = "/Users/admin/Desktop/relations3.csv";
-
-    /**
-     * OpenCSV read
-     *
-     * duration: ~1490
-     *
-     * @throws IOException io exception.
-     */
-    public void readByOpenCsv() throws IOException {
-        try (CSVReader reader = new CSVReader(new FileReader(file))) {
-            List<String[]> r = reader.readAll();
-            // r.forEach(x -> System.out.println(Arrays.toString(x)));
-            System.out.println(r.size());
-        } catch (FileNotFoundException | CsvException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Buffer read

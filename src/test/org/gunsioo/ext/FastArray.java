@@ -19,7 +19,6 @@
 
 package org.gunsioo.ext;
 
-import org.apache.commons.collections.FastArrayList;
 import org.gunsioo.util.FastList;
 
 import java.util.ArrayList;
@@ -49,26 +48,6 @@ public class FastArray {
     // Duration: 5753
     public void putNumByFastList() {
         FastList<Integer> fastList = new FastList<>(Integer.class);
-        for (int i=0; i<limit; i++) {
-            fastList.add(i);
-        }
-        System.out.println(fastList.size());
-    }
-
-    // Duration:
-    public void putNumByFastArray() {
-        FastArrayList fastList = new FastArrayList();
-        // fastList.setFast(true);
-        for (int i=0; i<limit; i++) {
-            fastList.add(i);
-        }
-        System.out.println(fastList.size());
-    }
-
-    // Duration: 10719
-    public void putNumByFastList2() {
-        org.eclipse.collections.impl.list.mutable.FastList<Integer> fastList =
-                new org.eclipse.collections.impl.list.mutable.FastList<>();
         for (int i=0; i<limit; i++) {
             fastList.add(i);
         }

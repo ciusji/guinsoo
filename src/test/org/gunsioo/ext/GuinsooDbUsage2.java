@@ -22,17 +22,17 @@ package org.gunsioo.ext;
 import java.sql.*;
 
 /**
- * DuckUsage
+ * GuinsooDbUsage2
  *
  * @author cius.ji
  * @blame guinsoo Group
  * @since 1.8+
  */
-public class DuckUsage {
+public class GuinsooDbUsage2 {
 
     public void loadData() throws ClassNotFoundException, SQLException {
-        Class.forName("org.duckdb.DuckDBDriver");
-        Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+        Class.forName("org.guinsoodb.GuinsooDBDriver");
+        Connection conn = DriverManager.getConnection("jdbc:guinsoodb:");
         Statement stmt = conn.createStatement();
         long start = System.currentTimeMillis();
 
@@ -52,8 +52,8 @@ public class DuckUsage {
     }
 
     public void caclData() throws ClassNotFoundException, SQLException {
-        Class.forName("org.duckdb.DuckDBDriver");
-        Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+        Class.forName("org.guinsoodb.GuinsooDBDriver");
+        Connection conn = DriverManager.getConnection("jdbc:guinsoodb:");
         Statement stmt = conn.createStatement();
         long start = System.currentTimeMillis();
 
@@ -255,7 +255,7 @@ public class DuckUsage {
     }
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        DuckUsage usage = new DuckUsage();
+        GuinsooDbUsage2 usage = new GuinsooDbUsage2();
         // usage.loadData();
         usage.caclData();
     }
