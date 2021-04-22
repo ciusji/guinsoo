@@ -19,6 +19,7 @@
 
 package org.gunsioo.samples;
 
+import org.gunsioo.ConnectionBuilder;
 import org.gunsioo.mvstore.MVMap;
 import org.gunsioo.mvstore.MVStore;
 
@@ -122,11 +123,18 @@ public class TreeMapAndBTree {
         String path = "/Users/admin/Desktop/relations2.csv";
         // String path = "/Users/admin/Desktop/relations3.csv";
 
+        // load driver(s)
         Class.forName("org.gunsioo.Driver");
+
         // mem:<databaseName>
-        String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096;STORE=2";
         // String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
-        Connection conn = DriverManager.getConnection(url);
+        String url = "jdbc:gunsioo:mem:;UNDO_LOG=0;CACHE_SIZE=4096;STORE=2";
+
+        Connection conn = ConnectionBuilder
+                .getInstance()
+                .setUrl(url)
+                .build();
+
         Statement stat = conn.createStatement();
 
         long startTime = System.currentTimeMillis();

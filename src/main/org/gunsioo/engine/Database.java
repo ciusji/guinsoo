@@ -358,6 +358,7 @@ public final class Database implements DataHandler, CastDataProvider {
                 if (Constants.PAGE_DB.equals(ci.getStore())) {
                     throw DbException.getUnsupportedException("PAGE_STORE NOT SUPPORT MEM MODEL");
                 } else if (Constants.QUICK_DB.equals(ci.getStore())) {
+
                     throw DbException.getUnsupportedException("QUICK_STORE IS COMING");
                 } else {
                     ci.removeProperty("STORE", "1");
