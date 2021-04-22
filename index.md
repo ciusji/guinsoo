@@ -2,6 +2,10 @@
 
 `Guinsoo's Scythe of Vyse, is just guinsoo (羊刀) of the database name.`
 
+Powered by [guinsoodb](https://guinsoolab.github.io/guinsoodb/).
+
+For more information, please referrer [GLab](https://guinsoolab.github.io/glab/).
+
 <br/>
 
 ## Why Guinsoo
