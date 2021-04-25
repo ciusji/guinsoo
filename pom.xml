@@ -31,6 +31,12 @@
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:git:git@github.com:ciusji/guinsoo.git</connection>
+        <developerConnection>scm:git@github.com:ciusji/guinsoo.git</developerConnection>
+        <url>https://github.com/ciusji/guinsoo</url>
+    </scm>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -136,6 +142,10 @@
             <id>ossrh</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 
     <build>
@@ -183,19 +193,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.2</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <mainClass>org.gunsioo.tools.Console</mainClass>
-                        </manifest>
-                        <manifestEntries>
-                            <Automatic-Module-Name>com.h2database</Automatic-Module-Name>
-                            <Multi-Release>true</Multi-Release>
-                            <Premain-Class>org.gunsioo.util.Profiler</Premain-Class>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
             </plugin>
             <!-- Add tools folder to test sources but consider moving them to src/test -->
             <plugin>
@@ -236,6 +233,25 @@
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <goals>deploy</goals>
                 </configuration>
             </plugin>
         </plugins>
