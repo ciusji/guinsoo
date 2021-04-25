@@ -49,7 +49,7 @@
         <servlet.version>4.0.1</servlet.version>
         <slf4j.version>1.7.30</slf4j.version>
         <chronicle.version>3.17.2</chronicle.version>
-        <guinsoodb_driver.version>0.1.9</guinsoodb_driver.version>
+        <guinsoodb_driver.version>0.1.0-SNAPSHOT</guinsoodb_driver.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -101,11 +101,9 @@
             <version>${chronicle.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.guinsoodb</groupId>
-            <artifactId>guinsoodb_jdbc</artifactId>
+            <groupId>org.guinsoo</groupId>
+            <artifactId>guinsoo_jdbc</artifactId>
             <version>${guinsoodb_driver.version}</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/src/main/driver/jdbc/guinsoodb_jdbc.jar</systemPath>
         </dependency>
         <!-- END COMPILE DEPENDENCIES !-->
 
@@ -137,17 +135,6 @@
         <!-- END TEST DEPENDENCIES !-->
     </dependencies>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
     <build>
         <sourceDirectory>src/main</sourceDirectory>
         <testSourceDirectory>src/test</testSourceDirectory>
@@ -164,7 +151,6 @@
                     <include>**/*.css</include>
                     <include>**/*.js</include>
                     <include>META-INF/**</include>
-                    <include>driver/**</include>
                 </includes>
             </resource>
             <resource>
@@ -225,26 +211,21 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <useReleaseProfile>false</useReleaseProfile>
-                    <releaseProfiles>release</releaseProfiles>
-                    <goals>deploy</goals>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

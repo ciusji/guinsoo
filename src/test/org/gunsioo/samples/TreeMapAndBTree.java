@@ -120,7 +120,7 @@ public class TreeMapAndBTree {
 
     public void callFunction() throws Exception {
         // String path = "/Users/admin/Desktop/relations.csv";
-        String path = "/Users/admin/Desktop/relations2.csv";
+        // String path = "/Users/admin/Desktop/relations2.csv";
         // String path = "/Users/admin/Desktop/relations3.csv";
 
         // load driver(s)
