@@ -4,6 +4,8 @@
 
 `Guinsoo, not only a  database.`
 
+For more information, please referrer [GLab](https://guinsoolab.github.io/glab/).
+
 <br/>
 
 ## Home

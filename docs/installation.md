@@ -29,17 +29,22 @@ For java pom:
 ```java
 <dependency>
     <groupId>org.guinsoo</groupId>
-    <artifactId>guindoo_driver</artifactId>
+    <artifactId>guindoo</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 </dependency>
 ```
 
 A simple usage:
 ```java
-Class.forName("org.guinsoo.GuinsooDbDriver");
-Connection conn = DriverManager.getConnection("jdbc:guinsoo:");
-Statement stmt = conn.createStatement();
-ResultSet rs = stmt.executeQuery("SELECT 42");
+String url = "jdbc:gunsioo:mem:;UNDO_LOG=0;CACHE_SIZE=4096;STORE=3";
+Connection conn = ConnectionBuilder
+	.getInstance()
+    .setUrl(url)
+    .build();
+Statement stat = conn.createStatement();
+stat.execute("select 4;");
+stat.close();
+conn.close()
 ```
 
 More examples is building.
