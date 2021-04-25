@@ -77,7 +77,7 @@ public class ConnectionBuilder {
                 break;
             case 3:
                 Class.forName("org.guinsoodb.GuinsooDBDriver");
-                jdbcUrl = "jdbc:guinsoo:";
+                jdbcUrl = "jdbc:guinsoodb:";
                 break;
             default:
                 throw new Exception("Database engine initialize failed");

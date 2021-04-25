@@ -124,11 +124,11 @@ public class TreeMapAndBTree {
         // String path = "/Users/admin/Desktop/relations3.csv";
 
         // load driver(s)
-        Class.forName("org.gunsioo.Driver");
+        // Class.forName("org.gunsioo.Driver");
 
         // mem:<databaseName>
         // String url = "jdbc:gunsioo:mem:db;UNDO_LOG=0;CACHE_SIZE=4096";
-        String url = "jdbc:gunsioo:mem:;UNDO_LOG=0;CACHE_SIZE=4096;STORE=2";
+        String url = "jdbc:gunsioo:mem:;UNDO_LOG=0;CACHE_SIZE=4096;STORE=3";
 
         Connection conn = ConnectionBuilder
                 .getInstance()
@@ -140,7 +140,7 @@ public class TreeMapAndBTree {
         long startTime = System.currentTimeMillis();
         // ??? why cost more than 1 seconds
         // !!! char to row object cost more that 1 seconds.
-        stat.execute("call csvread('" + path + "');");
+        stat.execute("select 4");
         long endTime = System.currentTimeMillis();
         System.out.println("Duration666: ~ " + (endTime - startTime));
 
