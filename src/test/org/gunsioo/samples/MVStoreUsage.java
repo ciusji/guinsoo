@@ -19,6 +19,8 @@
 
 package org.gunsioo.samples;
 
+import net.openhft.chronicle.map.ChronicleMap;
+import net.openhft.chronicle.map.ChronicleMapBuilder;
 import org.gunsioo.mvstore.MVMap;
 import org.gunsioo.mvstore.MVStore;
 import org.gunsioo.mvstore.OffHeapStore;
@@ -39,17 +41,18 @@ import java.util.concurrent.atomic.AtomicLong;
  * @since 1.8+
  */
 public class MVStoreUsage {
-
-    private String path = "/Users/admin/Desktop/relations4.csv";
+    // relations4: 10_000_000
+    // relations3:  2_000_000
+    private String path = "/Users/admin/Desktop/relations3.csv";
     private String name = "relations";
 
     public void testStoreConcurrency() throws IOException {
         // open the store (in-memory if fileName is null)
-        // MVStore s = MVStore.open(null);
-        OffHeapStore offHeapStore = new OffHeapStore();
-        MVStore s = new MVStore.Builder()
-                .fileStore(offHeapStore)
-                .open();
+        MVStore s = MVStore.open(null);
+//        OffHeapStore offHeapStore = new OffHeapStore();
+//        MVStore s = new MVStore.Builder()
+//                .fileStore(offHeapStore)
+//                .open();
 
         MVMap<Long, String> map = s.openMap(name);
 
@@ -58,13 +61,30 @@ public class MVStoreUsage {
         // add and read some data
         int bufferSize = 1024;
         try (BufferedReader br = new BufferedReader(new FileReader(path), bufferSize)) {
-            br.lines().parallel().forEach(it -> map.put(longKey.getAndIncrement(), it));
-            // br.lines().parallel().forEach(it -> map.putIfAbsent(longKey.getAndIncrement(), it));
+            // br.lines().parallel().forEach(it -> map.put(longKey.getAndIncrement(), it));
+            br.lines().parallel().forEach(it -> map.putIfAbsent(longKey.getAndIncrement(), it));
         }
         System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
 
         s.commit();
         s.close();
+    }
+
+    public void testStoreConcurrency2() throws IOException {
+        ChronicleMap<Long, String> map = ChronicleMapBuilder
+                .of(Long.class, String.class)
+                .entries(2_500_000)
+                .averageValue("_xx_hash_")
+                .create();
+
+        long startTime = System.currentTimeMillis();
+        AtomicLong longKey = new AtomicLong(0);
+        // add and read some data
+        int bufferSize = 1024;
+        try (BufferedReader br = new BufferedReader(new FileReader(path), bufferSize)) {
+            br.lines().parallel().forEach(it -> map.put(longKey.getAndIncrement(), it));
+        }
+        System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
     }
 
     public void testTransaction() {
@@ -95,6 +115,7 @@ public class MVStoreUsage {
     public static void main(String[] args) throws IOException {
         MVStoreUsage usage = new MVStoreUsage();
         usage.testStoreConcurrency();
+        // usage.testStoreConcurrency2();
         // usage.testTransaction();
     }
 }

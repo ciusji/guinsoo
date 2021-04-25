@@ -27,8 +27,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.TreeMap;
-import org.gunsioo.mvstore.OffHeapStore;
 import org.gunsioo.tools.DeleteDbFiles;
 
 /**
@@ -60,18 +60,23 @@ public class TreeMapAndBTree {
     // Duration(3_000_000): 2496
     // Duration(5_000_000): 4206
     public void btreeMapUsage() {
-        long startTime = System.currentTimeMillis();
-        OffHeapStore offHeapStore = new OffHeapStore();
-        MVStore store = new MVStore.Builder()
-                .fileStore(offHeapStore)
-                .open();
-        MVMap<Integer, String> bTree = store.openMap("data");
+//        OffHeapStore offHeapStore = new OffHeapStore();
+//        MVStore store = new MVStore.Builder()
+//                .fileStore(offHeapStore)
+//                .open();
+//        MVMap<Integer, String> bTree = store.openMap("data");
 
-        // MVMap<Integer, String> bTree = MVStore.open(null).openMap("data");
+        MVMap<Integer, String> bTree = MVStore.open(null).openMap("data");
 
+        ArrayList<Integer> lists = new ArrayList<>();
         for (int i = 0; i < limit; i++) {
-            bTree.put(i, "Hello World-" + i);
+            lists.add(i);
         }
+
+        long startTime = System.currentTimeMillis();
+        // empty put, cost 800ms about each 3_000_000 entries.
+        // <int, string> put, cost 3000ms about each 3_000_000 entries.
+        lists.parallelStream().forEach(it -> bTree.put(it, "Hello World-" + it));
 
         // (heap memory) Duration: ~ 51903
         // (off-heap memory) Duration: ~ 14470
@@ -424,11 +429,11 @@ public class TreeMapAndBTree {
 
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
-        // tab.btreeMapUsage();
+        tab.btreeMapUsage();
         // tab.sqlInsert();
         // tab.sqlInsertByHikari();
         // tab.btreeMapUsage();
-        tab.callFunction();
+        // tab.callFunction();
         // tab.insertDirect();
         // tab.loadFunction();
         // tab.queryFunction();
