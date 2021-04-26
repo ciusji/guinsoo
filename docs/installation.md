@@ -39,7 +39,7 @@ Database Engine:
 ## Querying
 
 **GuinsooDB** supports the standard JDBC methods. First a statement object has to be created from the simple method of 
-`ConnectionBuilder`. Below are two examples. See also the 
+`ConnectionBuilder`. Below is a example. See also the 
 [JDBC guides](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/).
 
 ```java
