@@ -105,7 +105,7 @@ public final class CSVLoadFunction extends TableFunction {
 
     @Override
     public String getName() {
-        return "CSVLOAD";
+        return "LOAD_CSV";
     }
 
     @Override

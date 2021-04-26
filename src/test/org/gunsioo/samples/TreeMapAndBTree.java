@@ -91,7 +91,7 @@ public class TreeMapAndBTree {
         Class.forName("org.gunsioo.Driver");
         // String url = "jdbc:gunsioo:mem:db;LOCK_MODE=0;UNDO_LOG=0";
         // String url = "jdbc:gunsioo:mem:db;LOCK_MODE=0;UNDO_LOG=0;CACHE_SIZE=4096";
-        String url = "jdbc:gunsioo:mem:db;LOG=0;UNDO_LOG=0;CACHE_SIZE=65536";
+        String url = "jdbc:gunsioo:mem:db;CACHE_SIZE=65536";
         // String url = "jdbc:gunsioo:file:~/test;UNDO_LOG=0;CACHE_SIZE=4096";
         Connection conn = DriverManager.getConnection(url);
         Statement stat = conn.createStatement();
@@ -103,7 +103,7 @@ public class TreeMapAndBTree {
         // TTT 6306 ms
         // TTT 3225 ms (without special data typed key)
         // stat.execute("create table " + name + "(poi_id long primary key, dt varchar, aor_id long) as select * from csvread('" + path + "');");
-        stat.execute("create table " + name + " as select * from csvread('" + path + "');");
+        stat.execute("create table " + name + " as select * from read_csv('" + path + "');");
         // stat.execute("create table " + name + "(poi_id long, dt varchar, aor_id long) as select * from csvread('" + path + "');");
         long startTime3 = System.currentTimeMillis();
         System.out.println("Duration3: ~ " + (startTime3 - startTime2));
@@ -429,8 +429,8 @@ public class TreeMapAndBTree {
 
     public static void main(String[] args) throws Exception {
         TreeMapAndBTree tab = new TreeMapAndBTree();
-        tab.btreeMapUsage();
-        // tab.sqlInsert();
+        // tab.btreeMapUsage();
+        tab.sqlInsert();
         // tab.sqlInsertByHikari();
         // tab.btreeMapUsage();
         // tab.callFunction();

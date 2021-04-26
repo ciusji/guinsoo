@@ -2308,10 +2308,10 @@ public class Parser {
                 return readUnnestFunction();
             case "TABLE_DISTINCT":
                 return readTableFunction(ArrayTableFunction.TABLE_DISTINCT);
-            case "CSVREAD":
+            case "READ_CSV":
                 recompileAlways = true;
                 return readParameters(new CSVReadFunction());
-            case "CSVLOAD":
+            case "LOAD_CSV":
                  recompileAlways = true;
                  return readParameters(new CSVLoadFunction());
             case "LINK_SCHEMA":
@@ -4677,7 +4677,7 @@ public class Parser {
         case "DB_OBJECT_SQL":
             return new DBObjectFunction(readExpression(), readNextArgument(), readIfArgument(),
                     DBObjectFunction.DB_OBJECT_SQL);
-        case "CSVWRITE":
+        case "WRITE_CSV":
             return readParameters(new CSVWriteFunction());
         case "SIGNAL":
             return new SignalFunction(readExpression(), readLastArgument());

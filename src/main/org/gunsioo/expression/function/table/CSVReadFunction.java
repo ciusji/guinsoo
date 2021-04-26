@@ -109,7 +109,7 @@ public final class CSVReadFunction extends TableFunction {
 
     @Override
     public String getName() {
-        return "CSVREAD";
+        return "READ_CSV";
     }
 
     @Override

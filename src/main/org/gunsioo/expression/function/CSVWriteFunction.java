@@ -105,7 +105,7 @@ public final class CSVWriteFunction extends FunctionN {
 
     @Override
     public String getName() {
-        return "CSVWRITE";
+        return "WRITE_CSV";
     }
 
     @Override
