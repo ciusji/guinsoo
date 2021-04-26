@@ -16,7 +16,7 @@ The **GuinsooDB** Java JDBC API can be installed from [mvn repository](https://m
 
 <br/>
 
-## Basic API Usage
+### Basic API Usage
 
 **GuinsooDB**'s JDBC API implements the main part of the standard Java Database Connectivity API. Below is usage parts.
 
@@ -36,7 +36,7 @@ Database Engine:
 
 <br/>
 
-## Querying
+### Querying
 
 **GuinsooDB** supports the standard JDBC methods. First a statement object has to be created from the simple method of 
 `ConnectionBuilder`. Below is a example. See also the 
