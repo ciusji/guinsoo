@@ -16,8 +16,7 @@ import java.util.TreeMap;
  */
 public class OffHeapStore extends FileStore {
 
-    private final TreeMap<Long, ByteBuffer> memory =
-            new TreeMap<>();
+    private final TreeMap<Long, ByteBuffer> memory = new TreeMap<>();
 
     @Override
     public void open(String fileName, boolean readOnly, char[] encryptionKey) {

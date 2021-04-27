@@ -23,8 +23,6 @@ import net.openhft.chronicle.map.ChronicleMap;
 import org.gunsioo.engine.ConnectionInfo;
 import org.gunsioo.engine.Constants;
 
-import java.util.Map;
-
 /**
  * QuickStore
  *

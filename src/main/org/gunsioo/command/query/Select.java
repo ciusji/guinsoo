@@ -462,7 +462,7 @@ public class Select extends Query {
                     }
                 }
                 groupData.done();
-                processGroupResult(columnCount, result, offset, quickOffset, /* Having was performed earlier */ false);
+                processGroupResult(columnCount, result, offset, quickOffset, false);
             } finally {
                 isGroupWindowStage2 = false;
             }
@@ -830,9 +830,9 @@ public class Select extends Query {
             } else if (isDistinctQuery) {
                 queryDistinct(to, offset, limit, withTies, quickOffset);
             } else {
-                long start = System.currentTimeMillis();
+                // long start = System.currentTimeMillis();
                 lazyResult = queryFlat(columnCount, to, offset, limit, withTies, quickOffset);
-                System.out.println("Duration<queryFlat>: " + (System.currentTimeMillis() - start));
+                // System.out.println("Duration<queryFlat>: " + (System.currentTimeMillis() - start));
             }
             if (quickOffset) {
                 offset = 0;

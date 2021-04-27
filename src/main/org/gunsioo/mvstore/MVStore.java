@@ -3340,8 +3340,8 @@ public class MVStore implements AutoCloseable {
                             fileStore.toString());
             if (backgroundWriterThread.compareAndSet(null, t)) {
                 t.start();
-                serializationExecutor = createSingleThreadExecutor("H2-serialization");
-                bufferSaveExecutor = createSingleThreadExecutor("H2-save");
+                serializationExecutor = createSingleThreadExecutor("Guinsoo-serialization");
+                bufferSaveExecutor = createSingleThreadExecutor("Guinsoo-save");
             }
         }
     }
