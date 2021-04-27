@@ -19,9 +19,7 @@
 
 package org.gunsioo.quickstore;
 
-import net.openhft.chronicle.map.ChronicleMap;
 import org.gunsioo.engine.ConnectionInfo;
-import org.gunsioo.engine.Constants;
 
 /**
  * QuickStore
@@ -32,26 +30,9 @@ import org.gunsioo.engine.Constants;
  */
 public class QuickStore {
 
-    private ChronicleMap<Long, String> xxMap;
-
     public QuickStore() {
     }
 
     public QuickStore(ConnectionInfo info) {
-        ChronicleMap<Long, String> map = ChronicleMap
-                .of(Long.class, String.class)
-                .name(info.getName())
-                .entries(Constants.SMALL_STORE_KEYS)
-                .averageValue(Constants.EXT_KEYS)
-                .create();
-        setXxMap(map);
-    }
-
-    public void setXxMap(ChronicleMap<Long, String> xxMap) {
-        this.xxMap = xxMap;
-    }
-
-    public ChronicleMap<Long, String> getXxMap() {
-        return xxMap;
     }
 }

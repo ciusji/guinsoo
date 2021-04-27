@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
-
 import org.gunsioo.api.DatabaseEventListener;
 import org.gunsioo.api.ErrorCode;
 import org.gunsioo.api.JavaObjectSerializer;

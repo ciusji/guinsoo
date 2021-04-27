@@ -6,9 +6,9 @@
     <artifactId>guinsoo</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Guinsoo Database Engine</name>
+    <name>GLab.guinsoo</name>
     <url>https://github.com/ciusji/guinsoo</url>
-    <description>Guinsoo Database Engine</description>
+    <description>GLab.guinsoo</description>
 
     <licenses>
         <license>
@@ -48,7 +48,6 @@
         <pgjdbc.version>42.2.14</pgjdbc.version>
         <servlet.version>4.0.1</servlet.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <chronicle.version>3.17.2</chronicle.version>
         <guinsoodb_driver.version>0.1.0-SNAPSHOT</guinsoodb_driver.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -96,26 +95,6 @@
             <version>${jts.version}</version>
         </dependency>
         <dependency>
-            <groupId>net.openhft</groupId>
-            <artifactId>chronicle-map</artifactId>
-            <version>${chronicle.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>chronicle-core</artifactId>
-                    <groupId>net.openhft</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>chronicle-bytes</artifactId>
-                    <groupId>net.openhft</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>net.openhft</groupId>
-            <artifactId>chronicle-bytes</artifactId>
-            <version>2.20.110</version>
-        </dependency>
-        <dependency>
             <groupId>org.guinsoo</groupId>
             <artifactId>guinsoo_jdbc</artifactId>
             <version>${guinsoodb_driver.version}</version>
@@ -149,6 +128,26 @@
         </dependency>
         <!-- END TEST DEPENDENCIES !-->
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>default-tools.jar</id>
+            <activation>
+                <file>
+                    <exists>${java.home}/../lib/tools.jar</exists>
+                </file>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sun</groupId>
+                    <artifactId>tools</artifactId>
+                    <scope>system</scope>
+                    <version>1.8</version>
+                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
     <build>
         <sourceDirectory>src/main</sourceDirectory>

@@ -19,15 +19,11 @@
 
 package org.gunsioo.samples;
 
-import net.openhft.chronicle.map.ChronicleMap;
-import net.openhft.chronicle.map.ChronicleMapBuilder;
 import org.gunsioo.mvstore.MVMap;
 import org.gunsioo.mvstore.MVStore;
-import org.gunsioo.mvstore.OffHeapStore;
 import org.gunsioo.mvstore.tx.Transaction;
 import org.gunsioo.mvstore.tx.TransactionMap;
 import org.gunsioo.mvstore.tx.TransactionStore;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -68,23 +64,6 @@ public class MVStoreUsage {
 
         s.commit();
         s.close();
-    }
-
-    public void testStoreConcurrency2() throws IOException {
-        ChronicleMap<Long, String> map = ChronicleMapBuilder
-                .of(Long.class, String.class)
-                .entries(2_500_000)
-                .averageValue("_xx_hash_")
-                .create();
-
-        long startTime = System.currentTimeMillis();
-        AtomicLong longKey = new AtomicLong(0);
-        // add and read some data
-        int bufferSize = 1024;
-        try (BufferedReader br = new BufferedReader(new FileReader(path), bufferSize)) {
-            br.lines().parallel().forEach(it -> map.put(longKey.getAndIncrement(), it));
-        }
-        System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
     }
 
     public void testTransaction() {
