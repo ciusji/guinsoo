@@ -1,4 +1,4 @@
-# Guinsoo Database Enginee
+# Guinsoo
 
 `Guinsoo's Scythe of Vyse, is just guinsoo (羊刀) of the database name.`
 
