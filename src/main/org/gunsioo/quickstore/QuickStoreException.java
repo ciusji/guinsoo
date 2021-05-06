@@ -23,7 +23,6 @@ package org.gunsioo.quickstore;
  * QuickStoreException
  *
  * @author cius.ji
- * @blame guinsoo Group
  * @since 1.8+
  */
 public class QuickStoreException extends RuntimeException {

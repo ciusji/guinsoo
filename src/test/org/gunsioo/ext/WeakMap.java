@@ -25,7 +25,6 @@ import java.util.WeakHashMap;
  * WeakMap
  *
  * @author cius.ji
- * @blame h2 Group
  * @since 1.8+
  */
 public class WeakMap {

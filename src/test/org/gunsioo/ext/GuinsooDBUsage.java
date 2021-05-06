@@ -25,7 +25,6 @@ import java.sql.*;
  * GuinsooDBUsage
  *
  * @author cius.ji
- * @blame guinsoo Group
  * @since 1.8+
  */
 public class GuinsooDBUsage {

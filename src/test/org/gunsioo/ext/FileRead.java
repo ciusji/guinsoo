@@ -31,7 +31,6 @@ import java.util.stream.Stream;
  * FileRead
  *
  * @author cius.ji
- * @blame guinsoo Group
  * @since 1.8+
  */
 public class FileRead {

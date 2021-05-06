@@ -28,7 +28,6 @@ import java.util.LinkedList;
  * FastArray
  *
  * @author cius.ji
- * @blame guinsoo Group
  * @since 1.8+
  */
 public class FastArray {

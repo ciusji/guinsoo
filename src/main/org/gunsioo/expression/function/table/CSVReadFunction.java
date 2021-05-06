@@ -21,7 +21,6 @@ import org.gunsioo.util.StringUtils;
 /**
  * A CSVREAD function.
  *
- * @blame guinsoo Team
  */
 public final class CSVReadFunction extends TableFunction {
 

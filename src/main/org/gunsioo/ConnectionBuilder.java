@@ -26,7 +26,6 @@ import java.sql.DriverManager;
  * ConnectionBuilder
  *
  * @author cius.ji
- * @blame guinsoo Group
  * @since 1.8+
  */
 public class ConnectionBuilder {

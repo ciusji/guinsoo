@@ -33,7 +33,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * MVStoreUsage
  *
  * @author cius.ji
- * @blame guinsoo Group
  * @since 1.8+
  */
 public class MVStoreUsage {

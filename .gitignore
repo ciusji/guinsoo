@@ -6,3 +6,4 @@
 .checkstyle
 .pmd
 target/
+.tmp/

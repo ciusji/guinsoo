@@ -37,7 +37,6 @@ import org.gunsioo.tools.DeleteDbFiles;
  * TreeMapAndBTree
  *
  * @author cius.ji
- * @blame guinsoo Group
  * @since 1.8+
  */
 public class TreeMapAndBTree {

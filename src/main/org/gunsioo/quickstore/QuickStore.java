@@ -25,7 +25,6 @@ import org.gunsioo.engine.ConnectionInfo;
  * QuickStore
  *
  * @author cius.ji
- * @blame guinsoo Group
  * @since 1.8+
  */
 public class QuickStore {

@@ -37,7 +37,6 @@ import java.util.function.UnaryOperator;
  * FastList
  *
  * @author cius.ji
- * @blame guinsoo Group
  * @since 1.8+
  */
 public final class FastList<T> implements List<T>, RandomAccess, Serializable {
