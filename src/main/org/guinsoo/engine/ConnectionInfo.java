@@ -125,26 +125,26 @@ public class ConnectionInfo implements Cloneable {
     }
 
     static {
-        String[] commonSettings = { //
-                "ACCESS_MODE_DATA", "AUTO_RECONNECT", "AUTO_SERVER", "AUTO_SERVER_PORT", //
-                "CACHE_TYPE", //
-                "FILE_LOCK", //
-                "JMX", //
-                "NETWORK_TIMEOUT", //
-                "OLD_INFORMATION_SCHEMA", "OPEN_NEW", //
-                "PAGE_SIZE", //
-                "RECOVER", //
+        String[] commonSettings = {
+                "ACCESS_MODE_DATA", "AUTO_RECONNECT", "AUTO_SERVER", "AUTO_SERVER_PORT",
+                "CACHE_TYPE",
+                "FILE_LOCK",
+                "JMX",
+                "NETWORK_TIMEOUT",
+                "OLD_INFORMATION_SCHEMA", "OPEN_NEW",
+                "PAGE_SIZE",
+                "RECOVER",
         };
-        String[] settings = { //
-                "AUTHREALM", "AUTHZPWD", "AUTOCOMMIT", //
-                "CIPHER", "CREATE", //
-                "FORBID_CREATION", //
-                "IGNORE_UNKNOWN_SETTINGS", "IFEXISTS", "INIT", //
-                "NO_UPGRADE", //
-                "PASSWORD", "PASSWORD_HASH", //
-                "RECOVER_TEST", //
-                "USER", //
-                "STORE", //
+        String[] settings = {
+                "AUTHREALM", "AUTHZPWD", "AUTOCOMMIT",
+                "CIPHER", "CREATE",
+                "FORBID_CREATION",
+                "IGNORE_UNKNOWN_SETTINGS", "IFEXISTS", "INIT",
+                "NO_UPGRADE",
+                "PASSWORD", "PASSWORD_HASH",
+                "RECOVER_TEST",
+                "USER",
+                "STORE",
         };
         HashSet<String> set = new HashSet<>(128);
         set.addAll(SetTypes.getTypes());
@@ -159,12 +159,12 @@ public class ConnectionInfo implements Cloneable {
             }
         }
         KNOWN_SETTINGS = set;
-        settings = new String[] { //
-                "ASSERT", //
-                "BINARY_COLLATION", //
-                "DB_CLOSE_ON_EXIT", //
-                "PAGE_STORE", //
-                "UUID_COLLATION", //
+        settings = new String[] {
+                "ASSERT",
+                "BINARY_COLLATION",
+                "DB_CLOSE_ON_EXIT",
+                "PAGE_STORE",
+                "UUID_COLLATION",
         };
         set = new HashSet<>(32);
         for (String setting : commonSettings) {

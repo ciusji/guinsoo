@@ -14,10 +14,7 @@ import java.lang.management.OperatingSystemMXBean;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -775,5 +772,25 @@ public class Utils {
          */
         Class<?> loadClass(String name)
                 throws ClassNotFoundException;
+    }
+
+    public static Map<String, String> readSettingsFromURL(String url) {
+        Map<String, String> map = new HashMap<>(8);
+        int idx = url.indexOf(';');
+        if (idx >= 0) {
+            String settings = url.substring(idx + 1);
+            String[] list = StringUtils.arraySplit(settings, ';', false);
+            for (String setting : list) {
+                if (setting.isEmpty()) {
+                    continue;
+                }
+                int equal = setting.indexOf('=');
+                String value = setting.substring(equal + 1);
+                String key = setting.substring(0, equal);
+                map.put(key, value);
+
+            }
+        }
+        return map;
     }
 }

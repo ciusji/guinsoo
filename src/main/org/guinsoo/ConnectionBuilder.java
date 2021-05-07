@@ -21,6 +21,9 @@ package org.guinsoo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Map;
+
+import static org.guinsoo.util.Utils.readSettingsFromURL;
 
 /**
  * ConnectionBuilder
@@ -95,14 +98,20 @@ public class ConnectionBuilder {
     }
 
     private int parseEngine() {
-        if (!url.toUpperCase().contains("STORE=")) {
+        String key = "STORE";
+        String pageStore = "1";
+        String mvStore = "2";
+        String quickStore = "3";
+        Map<String, String> map = readSettingsFromURL(url.toUpperCase());
+        if (map.size() == 0 || !map.containsKey(key)) {
             return -1;
         } else {
-            if (url.toUpperCase().contains("STORE=1")) {
+            String value = map.get(key);
+            if (pageStore.equals(value)) {
                 return 1;
-            } else if (url.toUpperCase().contains("STORE=2")) {
+            } else if (mvStore.equals(value)) {
                 return 2;
-            } else if (url.toUpperCase().contains("STORE=3")) {
+            } else if (quickStore.equals(value)) {
                 return 3;
             } else {
                 return -1;
