@@ -180,11 +180,11 @@
             <testResource>
                 <directory>src/test</directory>
                 <includes>
-                    <include>org/gunsioo/test/bench/test.properties</include>
-                    <include>org/gunsioo/test/script/testScrip.sql</include>
-                    <include>org/gunsioo/test/scripts/**/*.sql</include>
-                    <include>org/gunsioo/samples/newsfeed.sql</include>
-                    <include>org/gunsioo/samples/optimizations.sql</include>
+                    <include>org/guinsoo/test/bench/test.properties</include>
+                    <include>org/guinsoo/test/script/testScrip.sql</include>
+                    <include>org/guinsoo/test/scripts/**/*.sql</include>
+                    <include>org/guinsoo/samples/newsfeed.sql</include>
+                    <include>org/guinsoo/samples/optimizations.sql</include>
                 </includes>
             </testResource>
         </testResources>

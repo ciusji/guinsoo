@@ -9,7 +9,7 @@ The **GuinsooDB** Java JDBC API can be installed from [mvn repository](https://m
 ```java
 <dependency>
     <groupId>org.guinsoo</groupId>
-    <artifactId>guindoo</artifactId>
+    <artifactId>guinsoo</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 </dependency>
 ```
@@ -22,7 +22,7 @@ The **GuinsooDB** Java JDBC API can be installed from [mvn repository](https://m
 
 To create a **GuinsooDB** connection, use the JDBC URL like so:
 ```java
-String url = "jdbc:gunsioo:mem:;STORE=3";
+String url = "jdbc:guinsoo:mem:;STORE=3";
 Connection conn = ConnectionBuilder.getInstance()
     .setUrl(url)
     .build();

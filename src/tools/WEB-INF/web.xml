@@ -11,7 +11,7 @@
 
     <servlet>
         <servlet-name>GunsiooConsole</servlet-name>
-        <servlet-class>org.gunsioo.server.web.WebServlet</servlet-class>
+        <servlet-class>org.guinsoo.server.web.WebServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 

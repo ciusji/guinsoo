@@ -12,13 +12,13 @@ jobs:
   include:
     - jdk: openjdk11
       before_script:
-        - "cd gunsioo"
+        - "cd guinsoo"
         - "echo $JAVA_OPTS"
         - "export JAVA_OPTS=-Xmx512m"
     - jdk: oraclejdk8
       dist: trusty
       group: edge
       before_script:
-        - "cd gunsioo"
+        - "cd guinsoo"
         - "echo $JAVA_OPTS"
         - "export JAVA_OPTS=-Xmx512m"

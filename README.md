@@ -1,6 +1,6 @@
 # Guinsoo
 
-![logo](./public/gunsioo.svg)
+![logo](public/guinsoo.svg)
 
 Guinsoo, not only a database.
 
