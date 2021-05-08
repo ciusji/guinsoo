@@ -1280,6 +1280,9 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Read pages from the data area of the the table.
+     */
     private Prepared parseAnalyze() {
         Analyze command = new Analyze(session);
         if (readIf(TABLE)) {

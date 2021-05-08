@@ -22,16 +22,12 @@ package org.guinsoo.samples;
 import org.guinsoo.ConnectionBuilder;
 import org.guinsoo.mvstore.MVMap;
 import org.guinsoo.mvstore.MVStore;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.TreeMap;
-
 import org.guinsoo.mvstore.OffHeapStore;
 import org.guinsoo.tools.DeleteDbFiles;
+import org.guinsoo.util.Profiler;
 
 /**
  * TreeMapAndBTree
@@ -146,9 +142,16 @@ public class TreeMapAndBTree {
         Statement stat = conn.createStatement();
 
         long startTime = System.currentTimeMillis();
-        // ??? why cost more than 1 seconds
-        // !!! char to row object cost more that 1 seconds.
-        stat.execute("select * from relations;");
+        Profiler profile = new Profiler();
+        profile.startCollecting();
+        /// !!!
+        ResultSet resultSet = stat.executeQuery("explain analyze select * from relations;");
+        profile.stopCollecting();
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString(1));
+        }
+        /// Profile of thread dumps
+        /// System.out.println(profile.getTop(3));
         stat.execute("select count(distinct poi_id) from relations;");
         long endTime = System.currentTimeMillis();
         System.out.println("Duration666: ~ " + (endTime - startTime));
