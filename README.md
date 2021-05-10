@@ -15,7 +15,7 @@ Guinsoo, not only a database.
 * Encrypted databases
 * Fulltext search
 
-More information: https://github.com/ciusji/guinsoo
+More information: https://ciusji.github.io/guinsoo/
 
 
 ## Overview
