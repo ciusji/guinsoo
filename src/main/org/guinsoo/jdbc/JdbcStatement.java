@@ -79,6 +79,7 @@ public class JdbcStatement extends TraceObject implements Statement, JdbcStateme
                 boolean updatable = resultSetConcurrency == ResultSet.CONCUR_UPDATABLE;
                 setExecutingStatement(command);
                 try {
+                    // Convert row-at-a-tuple to JDBC Result
                     result = command.executeQuery(maxRows, scrollable);
                     lazy = result.isLazy();
                 } finally {

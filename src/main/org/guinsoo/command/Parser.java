@@ -8884,6 +8884,7 @@ public class Parser {
         }
     }
 
+    // Session scoped.
     private Prepared parseSet() {
         if (readIf(AT)) {
             Set command = new Set(session, SetTypes.VARIABLE);

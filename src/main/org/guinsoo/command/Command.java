@@ -189,6 +189,7 @@ public abstract class Command implements CommandInterface {
                     try {
                         ResultInterface result = query(maxrows);
                         callStop = !result.isLazy();
+                        /// For more, referrer https://dev.mysql.com/doc/refman/8.0/en/char.html
                         if (database.getMode().charPadding == CharPadding.IN_RESULT_SETS) {
                             return ResultWithPaddedStrings.get(result);
                         }

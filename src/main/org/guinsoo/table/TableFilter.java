@@ -208,7 +208,7 @@ public class TableFilter implements ColumnResolver {
     }
 
     /**
-     * Get the best plan item (index, cost) to use for the current join
+     * Get the best plan item (index, cost) to use for the current join (join or nested-join)
      * order.
      *
      * @param s the session
