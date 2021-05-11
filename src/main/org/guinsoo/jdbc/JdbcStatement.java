@@ -72,6 +72,7 @@ public class JdbcStatement extends TraceObject implements Statement, JdbcStateme
                 checkClosed();
                 closeOldResultSet();
                 sql = JdbcConnection.translateSQL(sql, escapeProcessing);
+                /// !!!
                 CommandInterface command = conn.prepareCommand(sql, fetchSize);
                 ResultInterface result;
                 boolean lazy = false;
