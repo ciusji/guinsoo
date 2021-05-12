@@ -1,10 +1,10 @@
 # Guinsoo
 
-`Guinsoo's Scythe of Vyse, is just guinsoo (羊刀) of the database name.`
+![logo](./public/guinsoo-app.svg)
 
-Powered by [guinsoodb](https://guinsoolab.github.io/guinsoodb/).
+`Guinsoo's Scythe of Vyse, is just guinsoo (羊刀) of the app name, powered by GuinsooDB`
 
-For more information, please referrer [GLab](https://guinsoolab.github.io/glab/).
+Powered by [Guinsoo Lab](https://guinsoolab.github.io/glab/).
 
 <br/>
 
@@ -42,13 +42,12 @@ By the way, the OLTP feature is provided by [h2database](https://www.h2database.
 
 ## Documentation
 
-- [home](https://github.com/ciusji/guinsoo/blob/master/docs/home.md)
-- [installation](https://github.com/ciusji/guinsoo/blob/master/docs/installation.md)
-- [quickstart](https://github.com/ciusji/guinsoo/blob/master/docs/quickstart.md)
-- [feature](https://github.com/ciusji/guinsoo/blob/master/docs/features.md)
-- [performance](https://github.com/ciusji/guinsoo/blob/master/docs/performance.md)
-- [advanced](https://github.com/ciusji/guinsoo/blob/master/docs/advanced.md)
-- [architecture](https://github.com/ciusji/guinsoo/blob/master/docs/architecture.md)
+- [Home](./docs/home.md)
+- [Quick start](./docs/quickstart.md)
+- [Feature](./docs/features.md)
+- [Performance](./docs/performance.md)
+- [Advanced](./docs/advanced.md)
+- [Architecture](./docs/architecture.md)
 
 <br/>
 
