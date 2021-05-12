@@ -1,9 +1,12 @@
 # Guinsoo
 
-![logo](public/guinsoo.svg)
+![logo](public/guinsoo-app.svg)
 
-Guinsoo, not only a database.
+`Guinsoo, not only a database.`
 
+Powered by [Guinsoo Lab](https://guinsoolab.github.io/glab/).
+
+<br/>
 
 ## Feature:
 
@@ -17,6 +20,7 @@ Guinsoo, not only a database.
 
 More information: https://ciusji.github.io/guinsoo/
 
+<br>
 
 ## Overview
 
@@ -31,6 +35,7 @@ Working from the top down, the layers look like this:
 * B-tree engine and page-based storage allocation.
 * Filesystem abstraction.
 
+<br>
 
 ## Support
 
