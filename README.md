@@ -33,6 +33,7 @@ Working from the top down, the layers look like this:
 * Transactions layer.
 * B-tree/ART.
 * Filesystem abstraction.
+* More Plugins powered by [GLab](https://guinsoolab.github.io/glab/).
 
 <br>
 
