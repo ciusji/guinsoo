@@ -43,7 +43,7 @@ By the way, the OLTP feature is provided by [h2database](https://www.h2database.
 ## Documentation
 
 - [Home](./docs/home.md)
-- [Quick start](./docs/quickstart.md)
+- [Quickstart](./docs/quickstart.md)
 - [Feature](./docs/features.md)
 - [Performance](./docs/performance.md)
 - [Advanced](./docs/advanced.md)
