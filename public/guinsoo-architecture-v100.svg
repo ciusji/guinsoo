@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="1331px" height="654px" viewBox="0 0 1331 654" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>guinsoo-architecture</title>
-    <g id="guinsoo-architecture" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <title>guinsoo-architecture-v100</title>
+    <g id="guinsoo-architecture-v100" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect id="Rectangle" fill-opacity="0.5" fill="#D8D8D8" x="0" y="0" width="307" height="654"></rect>
         <text id="social" font-family="Verdana" font-size="24" font-weight="normal" fill="#6D7278">
             <tspan x="45.4199219" y="240">social</tspan>

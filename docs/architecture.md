@@ -2,7 +2,7 @@
 
 <br/>
 
-![architecture](../public/guinsoo-architecture.svg)
+![architecture-v1.0.0](../public/guinsoo-architecture-v100.svg)
 
 
 <br/>
