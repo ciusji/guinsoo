@@ -46,8 +46,12 @@ Database Engine:
 // create a table
 Statement stmt = conn.createStatement();
 stmt.execute("create table student(id integer, name varchar)");
+
 // insert items
 stmt.execute("insert into student values (1, 'guinsoo')");
+
+// or copy from csv file
+// stmt.execute("copy student from '~/Desktop/student.csv'");
 ```
 
 ```java
