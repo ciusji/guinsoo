@@ -19,6 +19,13 @@
 
 package org.guinsoo.samples;
 
+import org.guinsoo.ConnectionBuilder;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  * GrammarChecker
  *
@@ -27,11 +34,32 @@ package org.guinsoo.samples;
  */
 public class GrammarChecker {
 
-    public void checkExplainAnalyze() {
+    private static final String url = "jdbc:guinsoo:file:~/tb;STORE=2";
+    private static Connection conn = null;
 
+    static {
+        try {
+            conn = ConnectionBuilder
+                    .getInstance()
+                    .setUrl(url)
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void checkFromTables() {
+    public void checkExplainAnalyze() throws SQLException {
+        Statement stat = conn.createStatement();
+        // `analyze` would execute physical plan (fetch all rows)
+        String sql = "explain analyze select * from relations;";
+        ResultSet resultSet = stat.executeQuery(sql);
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString(1));
+        }
+    }
+
+    public void checkFromTables() throws SQLException {
+        Statement stat = conn.createStatement();
 
     }
 
@@ -47,7 +75,15 @@ public class GrammarChecker {
 
     }
 
-    public static void main(String[] args) {
+    public void checkGroupBy() {
+
+    }
+
+    public void checkUniq() {
+
+    }
+
+    public static void main(String[] args) throws SQLException {
         GrammarChecker grammarChecker = new GrammarChecker();
         grammarChecker.checkExplainAnalyze();
     }
