@@ -30,6 +30,7 @@ import org.guinsoo.expression.condition.Comparison;
  * @author Thomas Mueller
  * @author Noel Grandin
  * @author Nicolas Fortin, Atelier SIG, IRSTV FR CNRS 24888
+ * @author ciusji
  */
 public class IndexCondition {
 

@@ -42,7 +42,7 @@ public final class MVSecondaryIndex extends MVIndex<SearchRow, Value> {
     /**
      * The multi-value table.
      */
-    private final MVTable                         mvTable;
+    private final MVTable mvTable;
     private final TransactionMap<SearchRow,Value> dataMap;
 
     public MVSecondaryIndex(Database db, MVTable table, int id, String indexName,

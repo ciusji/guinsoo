@@ -58,9 +58,25 @@ public class GrammarChecker {
         }
     }
 
+    /**
+     * CREATE TABLE
+     * <p>
+     * create cached|memory temp|global\local table if not exists name ...
+     *
+     * temporary tables are deleted hen closing or opening a database.
+     *
+     * tables with `NOT PERSISTENT` modifier are kept fully in memory, a
+     * nd all rows are lost when the database is closed.
+     *
+     * @throws SQLException SQL Exception
+     */
     public void checkFromTables() throws SQLException {
         Statement stat = conn.createStatement();
-
+        String sql = "select * from relations as t1, relations2 as t2 where t1.poi_id = t2.poi_id;";
+        ResultSet resultSet = stat.executeQuery(sql);
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString(1));
+        }
     }
 
     public void checkJoinTables() {
@@ -85,6 +101,7 @@ public class GrammarChecker {
 
     public static void main(String[] args) throws SQLException {
         GrammarChecker grammarChecker = new GrammarChecker();
-        grammarChecker.checkExplainAnalyze();
+        // grammarChecker.checkExplainAnalyze();
+        grammarChecker.checkFromTables();
     }
 }
