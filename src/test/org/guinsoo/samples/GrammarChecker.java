@@ -72,7 +72,7 @@ public class GrammarChecker {
      */
     public void checkFromTables() throws SQLException {
         Statement stat = conn.createStatement();
-        String sql = "select * from relations as t1, relations2 as t2 where t1.poi_id = t2.poi_id;";
+        String sql = "explain select * from relations as t1, relations2 as t2 where t1.poi_id = t2.poi_id;";
         ResultSet resultSet = stat.executeQuery(sql);
         while (resultSet.next()) {
             System.out.println(resultSet.getString(1));
@@ -82,7 +82,7 @@ public class GrammarChecker {
     /**
      * JOIN is more important !
      *
-     * @throws SQLException
+     * @throws SQLException SQL Exception
      */
     public void checkJoinTables() throws SQLException {
         Statement stat = conn.createStatement();
@@ -94,13 +94,29 @@ public class GrammarChecker {
 
     /**
      * `WITH` statement
+     *
+     * @throws SQLException SQL Exception
      */
-    public void checkWithTables() {
-
+    public void checkWithTables() throws SQLException {
+        Statement stat = conn.createStatement();
+        String sql = "with cte as (select * from relations2) select * from cte, relations as t0 where cte.poi_id=t0.poi_id;";
+        ResultSet resultSet = stat.executeQuery(sql);
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString(1));
+        }
     }
 
-    public void checkSubFrom() {
-
+    /**
+     * `IN` statement
+     *
+     * @throws SQLException SQL Exception
+     */
+    public void checkInFrom() throws SQLException {
+        Statement stat = conn.createStatement();
+        String sql = "select * from relations2 where poi_id in (select poi_id from relations)";
+        long startTime = System.currentTimeMillis();
+        stat.execute(sql);
+        System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
     }
 
     public void checkGroupBy() {
@@ -115,6 +131,8 @@ public class GrammarChecker {
         GrammarChecker grammarChecker = new GrammarChecker();
         // grammarChecker.checkExplainAnalyze();
         // grammarChecker.checkFromTables();
-        grammarChecker.checkJoinTables();
+        // grammarChecker.checkJoinTables();
+        // grammarChecker.checkWithTables();
+        grammarChecker.checkInFrom();
     }
 }

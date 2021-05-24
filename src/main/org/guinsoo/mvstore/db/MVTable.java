@@ -111,7 +111,6 @@ public class MVTable extends RegularTable {
         this.store = store;
         this.transactionStore = store.getTransactionStore();
         traceLock = database.getTrace(Trace.LOCK);
-
         primaryIndex = new MVPrimaryIndex(database, this, getId(),
                 IndexColumn.wrap(getColumns()), IndexType.createScan(true));
         indexes.add(primaryIndex);
