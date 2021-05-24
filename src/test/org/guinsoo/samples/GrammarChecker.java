@@ -79,10 +79,22 @@ public class GrammarChecker {
         }
     }
 
-    public void checkJoinTables() {
-
+    /**
+     * JOIN is more important !
+     *
+     * @throws SQLException
+     */
+    public void checkJoinTables() throws SQLException {
+        Statement stat = conn.createStatement();
+        String sql = "select * from relations as t1 inner join relations2 as t2 on t1.poi_id = t2.poi_id;";
+        long startTime = System.currentTimeMillis();
+        stat.execute(sql);
+        System.out.println("Duration: " + (System.currentTimeMillis() - startTime));
     }
 
+    /**
+     * `WITH` statement
+     */
     public void checkWithTables() {
 
     }
@@ -102,6 +114,7 @@ public class GrammarChecker {
     public static void main(String[] args) throws SQLException {
         GrammarChecker grammarChecker = new GrammarChecker();
         // grammarChecker.checkExplainAnalyze();
-        grammarChecker.checkFromTables();
+        // grammarChecker.checkFromTables();
+        grammarChecker.checkJoinTables();
     }
 }
