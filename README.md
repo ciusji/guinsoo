@@ -1,6 +1,11 @@
+# ![logo](public/guinsoo-app.svg)
+
 # Guinsoo
 
-![logo](public/guinsoo-app.svg)
+[![size](https://img.shields.io/github/repo-size/ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
+[![version](https://img.shields.io/github/v/tag/ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
+[![cov](https://img.shields.io/codecov/c/github/ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
+[![downloads](https://img.shields.io/github/downloads/ciusji/guinsoo/total)](https://github.com/ciusji/guinsoo)
 
 `Guinsoo, not only a database.`
 

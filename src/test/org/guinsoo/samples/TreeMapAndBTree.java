@@ -225,7 +225,7 @@ public class TreeMapAndBTree {
         // unsupported "MVSTORE && LOG"
         // STORE: 1==pagestore, 2==mvstore, 3==quickstore
         // String url = "jdbc:guinsoo:file:~/test;UNDO_LOG=0;LOCK_MODE=0;CACHE_SIZE=65536;STORE=1;";
-        String url = "jdbc:guinsoo:mem:;CACHE_SIZE=65536;STORE=3";
+        String url = "jdbc:guinsoo:mem:;CACHE_SIZE=65536;STORE=2";
         // Connection conn = DriverManager.getConnection(url);
         Connection conn = ConnectionBuilder.getInstance()
                 .setUrl(url)
@@ -237,12 +237,14 @@ public class TreeMapAndBTree {
         String patguinsoo = "/Users/admin/Desktop/table_config_2_6852";
         long startTime1 = System.currentTimeMillis();
         // String path3 = "/Users/admin/Desktop/table_config_1_12399";
-        stat.execute("create table table_relation_1_c1_2596 as select * from read_csv('" + path1 + "', AUTO_DETECT=TRUE)");
+        // stat.execute("create table table_relation_1_c1_2596 as select * from read_csv('" + path1 + "', AUTO_DETECT=TRUE)");
+        stat.execute("create table table_relation_1_c1_2596 as select * from read_csv('" + path1 + "')");
         System.out.println("Duration500: ~ " + (System.currentTimeMillis() - startTime1));
 //        stat.execute("create index idx1 on table_relation_1_c1_2596(ENTITY_FIELD);");
 //        stat.execute("create index idx2 on table_relation_1_c1_2596(data_field);");
 //        stat.execute("create index idx3 on table_relation_1_c1_2596(DATE_FIELD);");
-        stat.execute("create table table_config_2_6852 as select * from read_csv('" + patguinsoo + "', AUTO_DETECT=TRUE)");
+        // stat.execute("create table table_config_2_6852 as select * from read_csv('" + patguinsoo + "', AUTO_DETECT=TRUE)");
+        stat.execute("create table table_config_2_6852 as select * from read_csv('" + patguinsoo + "')");
 //        stat.execute("alter table table_config_2_6852 alter column config_2_6852 float");
 //        stat.execute("create index idx4 on table_config_2_6852(ENTITY_FIELD);");
 //        stat.execute("create index idx5 on table_config_2_6852(config_2_6852);");
@@ -545,10 +547,10 @@ public class TreeMapAndBTree {
         // tab.sqlInsert();
         // tab.sqlInsertByHikari();
         // tab.btreeMapUsage();
-        tab.callFunction();
+        // tab.callFunction();
         // tab.insertDirect();
         // tab.loadFunction();
-        // tab.queryFunction();
+        tab.queryFunction();
 
     }
 }
