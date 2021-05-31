@@ -20,6 +20,8 @@
 package org.guinsoo.samples;
 
 import org.guinsoo.ConnectionBuilder;
+import org.guinsoo.util.StringUtils;
+import org.guinsoo.util.Utils;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -33,6 +35,7 @@ import java.sql.Statement;
 public class QuickUsage {
 
     public static void main(String[] args) throws Exception {
+
         String url = "jdbc:guinsoo:mem:;STORE=3";
         Connection conn = ConnectionBuilder.getInstance()
                 .setUrl(url)

@@ -19,6 +19,9 @@
 
 package org.guinsoo;
 
+import org.guinsoo.util.StringUtils;
+import org.guinsoo.util.Utils;
+
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -88,30 +91,38 @@ public class ConnectionBuilder {
                 jdbcUrl = url;
                 break;
             case 3:
-                long start = System.currentTimeMillis();
                 Method add = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
                 add.setAccessible(true);
                 URLClassLoader classloader = (URLClassLoader)ClassLoader.getSystemClassLoader();
-                /// System.out.println(ConnectionBuilder.getInstance().getClass().getResource(""));
-                /// System.out.println(this.getClass().getResource("/"));
-                String jarFile = "/Users/admin/.m2/repository/io/github/ciusji/guinsoo/0.2.0-SNAPSHOT/guinsoo-0.2.0-SNAPSHOT.jar";
+                String xPath = ConnectionBuilder.getInstance().getClass().getResource("")
+                        .getPath().replace("file:", "");
+                String jarFile = xPath.split("!")[0];
                 JarFile jar = new JarFile(jarFile);
                 Enumeration<JarEntry> enumFiles = jar.entries();
                 JarEntry entry;
                 while (enumFiles.hasMoreElements()) {
                     entry = enumFiles.nextElement();
-                    if (entry.getName().indexOf("META-INF/drivers/jdbc/guinsoodb_jdbc.jar") == 0) {
-                        System.out.println(entry.getName());
-                        InputStream inputStream = jar.getInputStream(entry);
-                        Path path = Files.createTempFile("RemoteClassLoader", "jar");
-                        path.toFile().deleteOnExit();
-                        Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
-                        URL classUrl = path.toUri().toURL();
-                        add.invoke(classloader, classUrl);
-                        String className = "org.guinsoodb.GuinsooDBDriver";
-                        Class.forName(className);
-                        System.out.println("Load Druation: " + (System.currentTimeMillis() - start));
+                    InputStream inputStream = null;
+                    String osName = StringUtils.toLowerEnglish(Utils.getProperty("os.name", "linux"));
+                    if (osName.contains("windows")) {
+                        throw new Exception("Incompatible with Windows System");
+                    } else if (osName.contains("mac") || osName.contains("darwin")) {
+                        if (entry.getName().indexOf("META-INF/drivers/jdbc/guinsoodb_jdbc_mac.jar") == 0) {
+                            inputStream = jar.getInputStream(entry);
+                        }
+                    } else {
+                        if (entry.getName().indexOf("META-INF/drivers/jdbc/guinsoodb_jdbc_linux.jar") == 0) {
+                            inputStream = jar.getInputStream(entry);
+                        }
                     }
+                    Path path = Files.createTempFile("RemoteClassLoader", "jar");
+                    path.toFile().deleteOnExit();
+                    assert inputStream != null;
+                    Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
+                    URL classUrl = path.toUri().toURL();
+                    add.invoke(classloader, classUrl);
+                    String className = "org.guinsoodb.GuinsooDBDriver";
+                    Class.forName(className);
                 }
                 jdbcUrl = "jdbc:guinsoodb:";
                 break;
