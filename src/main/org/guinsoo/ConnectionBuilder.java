@@ -19,12 +19,19 @@
 
 package org.guinsoo;
 
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Enumeration;
 import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import static org.guinsoo.util.Utils.readSettingsFromURL;
 
@@ -85,16 +92,27 @@ public class ConnectionBuilder {
                 Method add = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
                 add.setAccessible(true);
                 URLClassLoader classloader = (URLClassLoader)ClassLoader.getSystemClassLoader();
-                System.out.println(ConnectionBuilder.getInstance().getClass().getResource(""));
-                System.out.println(this.getClass().getResource("/"));
-                // String jarFile = "file:/Users/admin/PublicGit/guinsoo/src/main/META-INF/drivers/jdbc/guinsoodb_jdbc.jar";
-                String jarFile = "file:/Users/admin/PublicGit/guinsoo/src/main/META-INF/drivers/jdbc/guinsoodb_jdbc.jar";
-                URL classUrl = new URL(jarFile);
-                add.invoke(classloader, classUrl);
-                String className = "org.guinsoodb.GuinsooDBDriver";
-                Class.forName(className);
-                System.out.println("Load Druation: " + (System.currentTimeMillis() - start));
-                /// Class.forName("org.guinsoodb.GuinsooDBDriver");
+                /// System.out.println(ConnectionBuilder.getInstance().getClass().getResource(""));
+                /// System.out.println(this.getClass().getResource("/"));
+                String jarFile = "/Users/admin/.m2/repository/io/github/ciusji/guinsoo/0.2.0-SNAPSHOT/guinsoo-0.2.0-SNAPSHOT.jar";
+                JarFile jar = new JarFile(jarFile);
+                Enumeration<JarEntry> enumFiles = jar.entries();
+                JarEntry entry;
+                while (enumFiles.hasMoreElements()) {
+                    entry = enumFiles.nextElement();
+                    if (entry.getName().indexOf("META-INF/drivers/jdbc/guinsoodb_jdbc.jar") == 0) {
+                        System.out.println(entry.getName());
+                        InputStream inputStream = jar.getInputStream(entry);
+                        Path path = Files.createTempFile("RemoteClassLoader", "jar");
+                        path.toFile().deleteOnExit();
+                        Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
+                        URL classUrl = path.toUri().toURL();
+                        add.invoke(classloader, classUrl);
+                        String className = "org.guinsoodb.GuinsooDBDriver";
+                        Class.forName(className);
+                        System.out.println("Load Druation: " + (System.currentTimeMillis() - start));
+                    }
+                }
                 jdbcUrl = "jdbc:guinsoodb:";
                 break;
             default:
