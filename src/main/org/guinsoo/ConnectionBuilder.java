@@ -19,6 +19,9 @@
 
 package org.guinsoo;
 
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Map;
@@ -78,7 +81,20 @@ public class ConnectionBuilder {
                 jdbcUrl = url;
                 break;
             case 3:
-                Class.forName("org.guinsoodb.GuinsooDBDriver");
+                long start = System.currentTimeMillis();
+                Method add = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+                add.setAccessible(true);
+                URLClassLoader classloader = (URLClassLoader)ClassLoader.getSystemClassLoader();
+                System.out.println(ConnectionBuilder.getInstance().getClass().getResource(""));
+                System.out.println(this.getClass().getResource("/"));
+                // String jarFile = "file:/Users/admin/PublicGit/guinsoo/src/main/META-INF/drivers/jdbc/guinsoodb_jdbc.jar";
+                String jarFile = "file:/Users/admin/PublicGit/guinsoo/src/main/META-INF/drivers/jdbc/guinsoodb_jdbc.jar";
+                URL classUrl = new URL(jarFile);
+                add.invoke(classloader, classUrl);
+                String className = "org.guinsoodb.GuinsooDBDriver";
+                Class.forName(className);
+                System.out.println("Load Druation: " + (System.currentTimeMillis() - start));
+                /// Class.forName("org.guinsoodb.GuinsooDBDriver");
                 jdbcUrl = "jdbc:guinsoodb:";
                 break;
             default:
