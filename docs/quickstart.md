@@ -10,11 +10,10 @@ The **Guinsoo** Java JDBC API can be installed from mvn repository.
 
 ```java
 <dependency>
-    <groupId>org.guinsoo</groupId>
-    <artifactId>guinsoo</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+  <groupId>io.github.ciusji</groupId>
+  <artifactId>guinsoo</artifactId>
+  <version>0.2.1</version>
 </dependency>
-
 ```
 
 ## Basic API Usage
