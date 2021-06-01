@@ -115,14 +115,19 @@ public class ConnectionBuilder {
                             inputStream = jar.getInputStream(entry);
                         }
                     }
-                    Path path = Files.createTempFile("RemoteClassLoader", "jar");
-                    path.toFile().deleteOnExit();
-                    assert inputStream != null;
-                    Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
-                    URL classUrl = path.toUri().toURL();
-                    add.invoke(classloader, classUrl);
-                    String className = "org.guinsoodb.GuinsooDBDriver";
-                    Class.forName(className);
+                    if (inputStream != null) {
+                        try {
+                            Path path = Files.createTempFile("RemoteClassLoader", "jar");
+                            path.toFile().deleteOnExit();
+                            Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
+                            URL classUrl = path.toUri().toURL();
+                            add.invoke(classloader, classUrl);
+                            String className = "org.guinsoodb.GuinsooDBDriver";
+                            Class.forName(className);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
                 jdbcUrl = "jdbc:guinsoodb:";
                 break;
