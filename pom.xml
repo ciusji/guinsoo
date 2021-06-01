@@ -270,6 +270,10 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- publish: https://central.sonatype.org/publish/publish-maven/ -->
+            <!-- verify: https://github.com/keybase/keybase-issues/issues/2798 -->
+            <!-- sendKey: https://stackoverflow.com/questions/19462617/no-public-key-key-with-id-xxxxx-was-not-able-to-be-located-oss-sonatype-org -->
+            <!-- sendKey: https://unix.stackexchange.com/questions/613839/help-understanding-gpg-list-keys-output -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
