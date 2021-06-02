@@ -43,6 +43,53 @@ Working from the top down, the layers look like this:
 
 <br>
 
+## Installation
+
+### Apache Maven
+```java
+<dependency>
+    <groupId>io.github.ciusji</groupId>
+    <artifactId>guinsoo</artifactId>
+    <version>0.2.1</version>
+</dependency>
+```
+
+### Gradle Groovy DSL
+```java
+implementation 'io.github.ciusji:guinsoo:0.2.1'
+```
+
+### Gradle Kotlin DSL 
+```java
+implementation("io.github.ciusji:guinsoo:0.2.1")
+```
+
+### Scala SBT
+```java
+libraryDependencies += "io.github.ciusji" % "guinsoo" % "0.2.1"
+```
+
+### Apache Lvy
+```java
+<dependency org="io.github.ciusji" name="guinsoo" rev="0.2.1" />
+```
+
+### Groovy Grape
+```java
+@Grapes(
+  @Grab(group='io.github.ciusji', module='guinsoo', version='0.2.1')
+)
+```
+
+### Apache Buildr
+```java
+'io.github.ciusji:guinsoo:jar:0.2.1'
+```
+
+For more version information, please click [here](https://search.maven.org/artifact/io.github.ciusji/guinsoo). 
+
+<br>
+
 ## Documentation
 
 [Guinsoo Documentation](https://ciusji.github.io/guinsoo/).
@@ -51,4 +98,14 @@ Working from the top down, the layers look like this:
 
 ## Support
 
-* [Issue tracker](https://github.com/ciusji/guinsoo/issues) for bug reports and feature requests
+[Issue tracker](https://github.com/ciusji/guinsoo/issues) for bug reports and feature requests.
+
+<br>
+
+## Appendix
+
+* [GuinsooLab, a perfect calculation-container](https://guinsoolab.github.io/glab/)
+* [Spotrix, explore insights for everyone](https://spotrix.github.io/spotrix-web/)
+
+
+
