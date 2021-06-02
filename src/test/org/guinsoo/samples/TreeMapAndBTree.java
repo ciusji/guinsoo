@@ -101,12 +101,12 @@ public class TreeMapAndBTree {
         // table: relations
         // TTT 6306 ms
         // TTT 3225 ms (without special data typed key)
-        // stat.execute("create table " + name + "(poi_id long primary key, dt varchar, aor_id long) as select * from csvread('" + path + "');");
+        // stat.execute("create table " + name + "(poixy_id long primary key, dt varchar, aor_id long) as select * from csvread('" + path + "');");
         stat.execute("create table " + name + " as select * from read_csv('" + path + "');");
-        // stat.execute("create table " + name + "(poi_id long, dt varchar, aor_id long) as select * from csvread('" + path + "');");
+        // stat.execute("create table " + name + "(poixy_id long, dt varchar, aor_id long) as select * from csvread('" + path + "');");
         long startTime3 = System.currentTimeMillis();
         System.out.println("Duration3: ~ " + (startTime3 - startTime2));
-        stat.execute("create index ix_3 on " + name + "(dt, aor_id);");
+        stat.execute("create index ix_3 on " + name + "(dt, aorxy_id);");
         long startTime4 = System.currentTimeMillis();
         System.out.println("Duration4: ~ " + (startTime4 - startTime3));
 
@@ -152,7 +152,7 @@ public class TreeMapAndBTree {
         }
         /// Profile of thread dumps
         /// System.out.println(profile.getTop(3));
-        stat.execute("select count(distinct poi_id) from relations;");
+        stat.execute("select count(distinct poixy_id) from relations;");
         long endTime = System.currentTimeMillis();
         System.out.println("Duration666: ~ " + (endTime - startTime));
 
@@ -165,7 +165,7 @@ public class TreeMapAndBTree {
         Statement stat = conn.createStatement();
 
         long startTime = System.currentTimeMillis();
-        stat.execute("create table test(poi_id long primary key, dt varchar, aor_id long);");
+        stat.execute("create table test(poixy_id long primary key, dt varchar, aor_id long);");
         stat.execute("insert into test values (1, '20210606', 80000);");
 
         conn.commit();
@@ -203,11 +203,11 @@ public class TreeMapAndBTree {
         System.out.println("Duration600: ~ " + (System.currentTimeMillis() - startTime));
 
         long startTime2 = System.currentTimeMillis();
-        stat.execute("create index idx1 on " + name + "(poi_id);");
+        stat.execute("create index idx1 on " + name + "(poixy_id);");
         System.out.println("Duration601: ~ " + (System.currentTimeMillis() - startTime2));
 
         long startTime3 = System.currentTimeMillis();
-        stat.execute("select count(distinct poi_id) from relations;");
+        stat.execute("select count(distinct poixy_id) from relations;");
         System.out.println("Duration602: ~ " + (System.currentTimeMillis() - startTime3));
 
         conn.commit();

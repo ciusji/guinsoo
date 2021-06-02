@@ -47,7 +47,7 @@ public class Performance {
         Statement stat = conn.createStatement();
         stat.execute("drop table if exists " + name);
         // table: submit_orders
-        stat.execute("create table " + name + "(poi_id long primary key, dt varchar, sub_ord_num long) as select * from csvread('" + path + "');");
+        stat.execute("create table " + name + "(poixy_id long primary key, dt varchar, sub_ord_num long) as select * from csvread('" + path + "');");
         stat.execute("create index ix_1 on " + name + "(dt, sub_ord_num);");
         conn.commit();
         stat.close();
@@ -61,7 +61,7 @@ public class Performance {
         Statement stat = conn.createStatement();
         stat.execute("drop table if exists " + name);
         // table: push_orders
-        stat.execute("create table " + name + "(poi_id long primary key, dt varchar, push_ord_num long) as select * from csvread('" + path + "');");
+        stat.execute("create table " + name + "(poixy_id long primary key, dt varchar, push_ord_num long) as select * from csvread('" + path + "');");
         stat.execute("create index ix_2 on " + name + "(dt, push_ord_num);");
         conn.commit();
         stat.close();
@@ -75,7 +75,7 @@ public class Performance {
         Statement stat = conn.createStatement();
         stat.execute("drop table if exists " + name);
         // table: relations
-        stat.execute("create table " + name + "(poi_id long primary key, dt varchar, aor_id long) as select * from csvread('" + path + "');");
+        stat.execute("create table " + name + "(poixy_id long primary key, dt varchar, aor_id long) as select * from csvread('" + path + "');");
         stat.execute("create index ix_3 on " + name + "(dt, aor_id);");
         conn.commit();
         stat.close();
@@ -89,7 +89,7 @@ public class Performance {
         Statement stat = conn.createStatement();
         stat.execute("drop table if exists " + name);
         // table: submit_cash
-        stat.execute("create table " + name + "(poi_id long primary key, dt varchar, poi_ord_amt double) as select * from csvread('" + path + "');");
+        stat.execute("create table " + name + "(poixy_id long primary key, dt varchar, poi_ord_amt double) as select * from csvread('" + path + "');");
         stat.execute("create index ix_4 on " + name + "(dt, poi_ord_amt);");
         conn.commit();
         stat.close();
