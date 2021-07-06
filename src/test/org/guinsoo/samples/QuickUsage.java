@@ -37,12 +37,16 @@ public class QuickUsage {
     public static void main(String[] args) throws Exception {
 
         String url = "jdbc:guinsoo:mem:;STORE=3";
+
         Connection conn = ConnectionBuilder.getInstance()
                 .setUrl(url)
                 .build();
+
         Statement stmt = conn.createStatement();
+
         stmt.execute("select 90 + 100;");
 
         System.out.println("It's OK!");
+
     }
 }

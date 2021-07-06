@@ -118,12 +118,14 @@ public class ConnectionBuilder {
                     if (inputStream != null) {
                         try {
                             Path path = Files.createTempFile("RemoteClassLoader", "jar");
-                            path.toFile().deleteOnExit();
+                            /// deleted when the virtual machine terminates.
+                            /// path.toFile().deleteOnExit();
                             Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
                             URL classUrl = path.toUri().toURL();
                             add.invoke(classloader, classUrl);
                             String className = "org.guinsoodb.GuinsooDBDriver";
                             Class.forName(className);
+                            path.toFile().delete();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
