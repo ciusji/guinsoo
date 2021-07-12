@@ -1,6 +1,6 @@
 [English](./README.md) | [中文](./README-CN.md)
 
-<br/> 
+<br/>
 
 # ![logo](public/guinsoo-app.svg)
 
@@ -12,27 +12,28 @@
 [![cov](https://img.shields.io/codecov/c/github/ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
 [![downloads](https://img.shields.io/github/downloads/ciusji/guinsoo/total)](https://github.com/ciusji/guinsoo)
 
-`Guinsoo, not only a database.`
+`Guinsoo，不只是一个数据库。`
 
-Powered by [Guinsoo Lab](https://guinsoolab.github.io/glab/).
+由 [Guinsoo Lab](https://guinsoolab.github.io/glab/) 支持。
 
 <br/>
 
-## Feature
+## 特点
 
-* Super-fast, open source, JDBC API
-* In-memory, non-blocking store, designed for low-latency applications
-* Embedded and server modes; disk-based or in-memory databases
-* Transaction support, multi-version concurrency
-* Encrypted databases
+* 开源、免费
+* 支持 JDBC，使用简单
+* 多引擎支持，内置 In-memory 引擎
+* 嵌入式开发，易于维护
+* 支持事务，支持 MVCC
+* 数据文件加密
 
-More information: https://ciusji.github.io/guinsoo/
+更多信息可关注 https://ciusji.github.io/guinsoo/。
 
 <br>
 
-## Overview
+## 概览
 
-Working from the top down, the layers look like this:
+Guinsoo 层次架构，自上而下依次为：
 
 * [GuinsooPad](https://guinsoolab.github.io/guinsoopad/).
 * JDBC driver.
@@ -47,7 +48,7 @@ Working from the top down, the layers look like this:
 
 <br>
 
-## Installation
+## 安装
 
 ### Apache Maven
 ```java
@@ -90,26 +91,26 @@ libraryDependencies += "io.github.ciusji" % "guinsoo" % "0.2.1"
 'io.github.ciusji:guinsoo:jar:0.2.1'
 ```
 
-For more version information, please click [here](https://search.maven.org/artifact/io.github.ciusji/guinsoo). 
+更多版本信息，可点击 [here](https://search.maven.org/artifact/io.github.ciusji/guinsoo) 查看。 
 
 <br>
 
-## Documentation
+## 文档
 
-[Guinsoo Documentation](https://ciusji.github.io/guinsoo/).
-
-<br>
-
-## Support
-
-[Issue tracker](https://github.com/ciusji/guinsoo/issues) for bug reports and feature requests.
+[Guinsoo 使用文档](https://ciusji.github.io/guinsoo/)。
 
 <br>
 
-## Appendix
+## 支持
 
-* [GuinsooLab, a perfect calculation-container](https://guinsoolab.github.io/glab/)
-* [Spotrix, explore insights for everyone](https://spotrix.github.io/spotrix-web/)
+[Issue tracker](https://github.com/ciusji/guinsoo/issues)，如有 BUG，欢迎提交 Issue。
+
+<br>
+
+## 附录
+
+* [GuinsooLab — 高性能嵌入式计算容器](https://guinsoolab.github.io/glab/)
+* [Spotrix — 桌面版自主见解洞察](https://spotrix.github.io/spotrix-web/)
 
 
 
