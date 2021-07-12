@@ -6,7 +6,7 @@
 
 # Guinsoo
 
-[![maven](https://img.shields.io/maven-central/v/io.github.ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
+[![maven](https://img.shields.io/maven-central/v/io.github.ciusji/guinsoo)](https://search.maven.org/search?q=guinsoo)
 [![size](https://img.shields.io/github/repo-size/ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
 [![version](https://img.shields.io/github/v/tag/ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
 [![cov](https://img.shields.io/codecov/c/github/ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
