@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2021 Guinsoo Group. Multiple-Licensed under the MPL 2.0,
+ * Copyright 2021 Guinsoo Group. Multiple-Licensed under the MPL 2.0,
  * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Guinsoo Group
  */
@@ -27,7 +27,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 import org.guinsoo.api.ErrorCode;
-import org.guinsoo.api.H2Type;
+import org.guinsoo.api.DBType;
 import org.guinsoo.test.TestBase;
 import org.guinsoo.test.TestDb;
 
@@ -792,7 +792,7 @@ public class TestUpdatableResultSet extends TestDb {
             rs.updateObject(2, value, JDBCType.INTEGER);
             break;
         case 5:
-            rs.updateObject(2, value, H2Type.INTEGER);
+            rs.updateObject(2, value, DBType.INTEGER);
             break;
         case 6:
             rs.updateObject("V", value, 0);
@@ -801,19 +801,19 @@ public class TestUpdatableResultSet extends TestDb {
             rs.updateObject("V", value, JDBCType.INTEGER);
             break;
         case 8:
-            rs.updateObject("V", value, H2Type.INTEGER);
+            rs.updateObject("V", value, DBType.INTEGER);
             break;
         case 9:
             rs.updateObject(2, value, JDBCType.INTEGER, 0);
             break;
         case 10:
-            rs.updateObject(2, value, H2Type.INTEGER, 0);
+            rs.updateObject(2, value, DBType.INTEGER, 0);
             break;
         case 11:
             rs.updateObject("V", value, JDBCType.INTEGER, 0);
             break;
         case 12:
-            rs.updateObject("V", value, H2Type.INTEGER, 0);
+            rs.updateObject("V", value, DBType.INTEGER, 0);
         }
     }
 

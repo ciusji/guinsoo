@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2021 Guinsoo Group. Multiple-Licensed under the MPL 2.0,
+ * Copyright 2021 Guinsoo Group. Multiple-Licensed under the MPL 2.0,
  * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Guinsoo Group
  */
@@ -40,7 +40,7 @@ import java.util.TimeZone;
 import java.util.UUID;
 
 import org.guinsoo.api.ErrorCode;
-import org.guinsoo.api.H2Type;
+import org.guinsoo.api.DBType;
 import org.guinsoo.api.Interval;
 import org.guinsoo.api.IntervalQualifier;
 import org.guinsoo.test.TestBase;
@@ -642,7 +642,7 @@ public class TestPreparedStatement extends TestDb {
             prep.setObject(1, value, JDBCType.INTEGER, 0);
             break;
         case 6:
-            prep.setObject(1, value, H2Type.INTEGER, 0);
+            prep.setObject(1, value, DBType.INTEGER, 0);
         }
     }
 

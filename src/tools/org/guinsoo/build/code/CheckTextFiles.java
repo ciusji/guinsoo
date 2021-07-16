@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2021 Guinsoo Group. Multiple-Licensed under the MPL 2.0,
+ * Copyright 2021 Guinsoo Group. Multiple-Licensed under the MPL 2.0,
  * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Guinsoo Group
  */
@@ -26,7 +26,7 @@ public class CheckTextFiles {
     private static final int MAX_SOURCE_LINE_SIZE = 120;
 
     // must contain "+" otherwise this here counts as well
-    private static final String COPYRIGHT1 = "Copyright 2004-2021";
+    private static final String COPYRIGHT1 = "Copyright 2021";
     private static final String COPYRIGHT2 = "Guinsoo Group.";
     private static final String LICENSE = "Multiple-Licensed " +
             "under the MPL 2.0";

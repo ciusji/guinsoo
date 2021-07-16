@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2021 Guinsoo Group. Multiple-Licensed under the MPL 2.0,
+ * Copyright 2021 Guinsoo Group. Multiple-Licensed under the MPL 2.0,
  * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Guinsoo Group
  */
@@ -17,7 +17,7 @@ import org.guinsoo.engine.Constants;
 import org.guinsoo.engine.Mode;
 import org.guinsoo.message.DbException;
 import org.guinsoo.api.ErrorCode;
-import org.guinsoo.api.H2Type;
+import org.guinsoo.api.DBType;
 import org.guinsoo.api.IntervalQualifier;
 import org.guinsoo.util.StringUtils;
 
@@ -429,7 +429,7 @@ public class DataType {
      * @return the value type
      */
     public static int convertSQLTypeToValueType(SQLType sqlType) {
-        if (sqlType instanceof H2Type) {
+        if (sqlType instanceof DBType) {
             return sqlType.getVendorTypeNumber();
         } else if (sqlType instanceof JDBCType) {
             return convertSQLTypeToValueType(sqlType.getVendorTypeNumber());
@@ -521,7 +521,7 @@ public class DataType {
         if (sqlType instanceof JDBCType) {
             return "JDBCType." + sqlType.getName();
         }
-        if (sqlType instanceof H2Type) {
+        if (sqlType instanceof DBType) {
             return sqlType.toString();
         }
         return unknownSqlTypeToString(new StringBuilder("/* "), sqlType).append(" */ null").toString();
