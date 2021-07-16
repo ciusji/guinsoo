@@ -15,12 +15,12 @@ public class Constants {
     /**
      * The build date is updated for each public release.
      */
-    public static final String BUILD_DATE = "2019-10-14";
+    public static final String BUILD_DATE = "2021-03-21";
 
     /**
      * The build date of the last stable release.
      */
-    public static final String BUILD_DATE_STABLE = "2019-03-13";
+    public static final String BUILD_DATE_STABLE = "2021-04-24";
 
     /**
      * Sequential version number. Even numbers are used for official releases,
@@ -458,6 +458,8 @@ public class Constants {
      * The database URL prefix of this database.
      */
     public static final String START_URL = "jdbc:guinsoo:";
+
+    public static final String CURRENT_VERSION = "guinsoo-0.2.2-SNAPSHOT";
 
     /**
      * The file name suffix of all database files.

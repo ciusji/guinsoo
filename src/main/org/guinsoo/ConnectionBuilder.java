@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import static org.guinsoo.engine.Constants.CURRENT_VERSION;
 import static org.guinsoo.util.Utils.readSettingsFromURL;
 
 /**
@@ -83,6 +84,7 @@ public class ConnectionBuilder {
         }
 
         String jdbcUrl;
+        String testJarTag = "/target/test-classes/";
 
         switch (parseEngine()) {
             case 1:
@@ -97,7 +99,14 @@ public class ConnectionBuilder {
                 String xPath = ConnectionBuilder.getInstance().getClass().getResource("")
                         .getPath().replace("file:", "");
                 String jarFile = xPath.split("!")[0];
-                JarFile jar = new JarFile(jarFile);
+                JarFile jar;
+                if (jarFile.contains(testJarTag)) {
+                    String filePath = jarFile.split("test-classes")[0] + CURRENT_VERSION + ".jar";
+                    System.out.println(filePath);
+                    jar = new JarFile(filePath);
+                } else {
+                    jar = new JarFile(jarFile);
+                }
                 Enumeration<JarEntry> enumFiles = jar.entries();
                 JarEntry entry;
                 while (enumFiles.hasMoreElements()) {

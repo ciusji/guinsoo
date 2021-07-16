@@ -20,8 +20,6 @@
 package org.guinsoo.samples;
 
 import org.guinsoo.ConnectionBuilder;
-import org.guinsoo.util.StringUtils;
-import org.guinsoo.util.Utils;
 
 import java.sql.Connection;
 import java.sql.Statement;

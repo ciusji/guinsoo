@@ -369,6 +369,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      * @param args the argument list
      * @return the server
      */
+    @Deprecated
     public static Server createWebServer(String... args) throws SQLException {
         return createWebServer(args, null, false);
     }
@@ -384,6 +385,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      *            whether creation of databases using the key should be allowed
      * @return the server
      */
+    @Deprecated
     public static Server createWebServer(String[] args, String key, boolean allowSecureCreation) throws SQLException {
         WebServer service = new WebServer();
         service.setKey(key);
