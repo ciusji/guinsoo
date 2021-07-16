@@ -11,7 +11,7 @@ import org.guinsoo.dev.ftp.server.FtpEventListener;
 import org.guinsoo.dev.ftp.server.FtpServer;
 import org.guinsoo.store.fs.FileUtils;
 import org.guinsoo.test.TestBase;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 
 /**
  * Tests the FTP server tool.

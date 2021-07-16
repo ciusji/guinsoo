@@ -16,7 +16,7 @@ import org.guinsoo.api.DatabaseEventListener;
 import org.guinsoo.api.ErrorCode;
 import org.guinsoo.test.TestBase;
 import org.guinsoo.test.TestDb;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 
 /**
  * Tests automatic embedded/server mode.

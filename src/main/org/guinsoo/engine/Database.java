@@ -74,7 +74,7 @@ import org.guinsoo.table.TableSynonym;
 import org.guinsoo.table.TableType;
 import org.guinsoo.table.TableView;
 import org.guinsoo.tools.DeleteDbFiles;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 import org.guinsoo.util.JdbcUtils;
 import org.guinsoo.util.MathUtils;
 import org.guinsoo.util.NetUtils;

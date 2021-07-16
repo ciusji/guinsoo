@@ -5,7 +5,7 @@
  */
 package org.guinsoo.samples;
 
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 
 /**
  * This very simple sample application stops a Guinsoo TCP server

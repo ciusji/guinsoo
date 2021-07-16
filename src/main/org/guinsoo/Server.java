@@ -3,13 +3,11 @@
  * and the EPL 1.0 (https://github.com/ciusji/guinsoo/blob/master/LICENSE.txt).
  * Initial Developer: Guinsoo Group
  */
-package org.guinsoo.tools;
+package org.guinsoo;
 
-import java.net.URI;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.guinsoo.engine.SysProperties;
 import org.guinsoo.message.DbException;
 import org.guinsoo.server.Service;
 import org.guinsoo.server.ShutdownHandler;
@@ -17,23 +15,37 @@ import org.guinsoo.server.TcpServer;
 import org.guinsoo.server.pg.PgServer;
 import org.guinsoo.server.web.WebServer;
 import org.guinsoo.api.ErrorCode;
-import org.guinsoo.util.StringUtils;
 import org.guinsoo.util.Tool;
-import org.guinsoo.util.Utils;
 
 /**
- * Starts the Guinsoo Console (web-) server, TCP, and PG server.
+ * Starts the Guinsoo service, TCP, and PG server.
+ *
+ * @author ciusji
  */
 public class Server extends Tool implements Runnable, ShutdownHandler {
 
     private final Service service;
-    private Server web, tcp, pg;
+    private Server tcp, pg;
     private ShutdownHandler shutdownHandler;
     private boolean started;
 
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     public Server() {
-        // nothing to do
+        // echo logo
         this.service = null;
+        System.out.println(ANSI_GREEN + "\n" +
+                "                _                      \n" +
+                "   ____ ___  __(_)___  _________  ____ \n" +
+                "  / __ `/ / / / / __ \\/ ___/ __ \\/ __ \\\n" +
+                " / /_/ / /_/ / / / / (__  ) /_/ / /_/ /\n" +
+                " \\__, /\\__,_/_/_/ /_/____/\\____/\\____/ \n" +
+                "/____/                               \n" +
+                "  \n" +
+                "version 0.2.2, redefine your data.  \n"
+                + ANSI_RESET
+        );
     }
 
     /**
@@ -113,7 +125,6 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      * The options -xAllowOthers are potentially risky.
      * <br />
      * For details, see Advanced Topics / Protection against Remote Access.
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */
@@ -126,24 +137,6 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
             String arg = args[i];
             if (arg == null) {
             } else if ("-?".equals(arg) || "-help".equals(arg)) {
-                // ok
-            } else if (arg.startsWith("-web")) {
-                if ("-web".equals(arg)) {
-                    // ok
-                } else if ("-webAllowOthers".equals(arg)) {
-                    // no parameters
-                } else if ("-webDaemon".equals(arg)) {
-                    // no parameters
-                } else if ("-webSSL".equals(arg)) {
-                    // no parameters
-                } else if ("-webPort".equals(arg)) {
-                    i++;
-                } else if ("-webAdminPassword".equals(arg)) {
-                    i++;
-                } else {
-                    throwUnsupportedOption(arg);
-                }
-            } else if ("-browser".equals(arg)) {
                 // ok
             } else if (arg.startsWith("-tcp")) {
                 if ("-tcp".equals(arg)) {
@@ -215,8 +208,8 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
 
     @Override
     public void runTool(String... args) throws SQLException {
-        boolean tcpStart = false, pgStart = false, webStart = false;
-        boolean browserStart = false;
+        boolean tcpStart = false, pgStart = false;
+        /// boolean browserStart = false;
         boolean tcpShutdown = false, tcpShutdownForce = false;
         String tcpPassword = "";
         String tcpShutdownServer = "";
@@ -227,26 +220,6 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
             } else if ("-?".equals(arg) || "-help".equals(arg)) {
                 showUsage();
                 return;
-            } else if (arg.startsWith("-web")) {
-                if ("-web".equals(arg)) {
-                    startDefaultServers = false;
-                    webStart = true;
-                } else if ("-webAllowOthers".equals(arg)) {
-                    // no parameters
-                } else if ("-webDaemon".equals(arg)) {
-                    // no parameters
-                } else if ("-webSSL".equals(arg)) {
-                    // no parameters
-                } else if ("-webPort".equals(arg)) {
-                    i++;
-                } else if ("-webAdminPassword".equals(arg)) {
-                    i++;
-                } else {
-                    showUsageAndThrowUnsupportedOption(arg);
-                }
-            } else if ("-browser".equals(arg)) {
-                startDefaultServers = false;
-                browserStart = true;
             } else if (arg.startsWith("-tcp")) {
                 if ("-tcp".equals(arg)) {
                     startDefaultServers = false;
@@ -303,8 +276,6 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
         if (startDefaultServers) {
             tcpStart = true;
             pgStart = true;
-            webStart = true;
-            browserStart = true;
         }
         // TODO server: maybe use one single properties file?
         if (tcpShutdown) {
@@ -323,32 +294,6 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
                 pg = createPgServer(args);
                 pg.start();
                 out.println(pg.getStatus());
-            }
-            if (webStart) {
-                web = createWebServer(args);
-                web.setShutdownHandler(this);
-                SQLException result = null;
-                try {
-                    web.start();
-                } catch (Exception e) {
-                    result = DbException.toSQLException(e);
-                }
-                out.println(web.getStatus());
-                // start browser in any case (even if the server is already
-                // running) because some people don't look at the output, but
-                // are wondering why nothing happens
-                if (browserStart) {
-                    try {
-                        openBrowser(web.getURL());
-                    } catch (Exception e) {
-                        out.println(e.getMessage());
-                    }
-                }
-                if (result != null) {
-                    throw result;
-                }
-            } else if (browserStart) {
-                out.println("The browser can only start if a web server is started (-web)");
             }
         } catch (SQLException e) {
             stopAll();
@@ -439,7 +384,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      *            whether creation of databases using the key should be allowed
      * @return the server
      */
-    static Server createWebServer(String[] args, String key, boolean allowSecureCreation) throws SQLException {
+    public static Server createWebServer(String[] args, String key, boolean allowSecureCreation) throws SQLException {
         WebServer service = new WebServer();
         service.setKey(key);
         service.setAllowSecureCreation(allowSecureCreation);
@@ -452,8 +397,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      * Create a new TCP server, but does not start it yet. Example:
      *
      * <pre>
-     * Server server = Server.createTcpServer(
-     *     "-tcpPort", "9123", "-tcpAllowOthers").start();
+     * Server server = Server.createTcpServer("-tcpPort", "9123", "-tcpAllowOthers").start();
      * </pre>
      * Supported options are:
      * -tcpPort, -tcpSSL, -tcpPassword, -tcpAllowOthers, -tcpDaemon,
@@ -479,8 +423,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      * Create a new PG server, but does not start it yet.
      * Example:
      * <pre>
-     * Server server =
-     *     Server.createPgServer("-pgAllowOthers").start();
+     * Server server = Server.createPgServer("-pgAllowOthers").start();
      * </pre>
      * Supported options are:
      * -pgPort, -pgAllowOthers, -pgDaemon,
@@ -505,6 +448,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      * @throws SQLException if the server could not be started
      */
     public Server start() throws SQLException {
+        int tryTimes = 64;
         try {
             started = true;
             service.start();
@@ -517,7 +461,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
             Thread t = new Thread(this, name);
             t.setDaemon(service.isDaemon());
             t.start();
-            for (int i = 1; i < 64; i += i) {
+            for (int i = 1; i < tryTimes; i += i) {
                 wait(i);
                 if (isRunning(false)) {
                     return this;
@@ -545,10 +489,9 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
     }
 
     private void stopAll() {
-        Server s = web;
+        Server s = tcp;
         if (s != null && s.isRunning(false)) {
             s.stop();
-            web = null;
         }
         s = tcp;
         if (s != null && s.isRunning(false)) {
@@ -645,87 +588,9 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      *
      * @param url the URL to open
      */
+    @Deprecated
     public static void openBrowser(String url) throws Exception {
-        try {
-            String osName = StringUtils.toLowerEnglish(
-                    Utils.getProperty("os.name", "linux"));
-            Runtime rt = Runtime.getRuntime();
-            String browser = Utils.getProperty(SysProperties.H2_BROWSER, null);
-            if (browser == null) {
-                // under Linux, this will point to the default system browser
-                try {
-                    browser = System.getenv("BROWSER");
-                } catch (SecurityException se) {
-                    // ignore
-                }
-            }
-            if (browser != null) {
-                if (browser.startsWith("call:")) {
-                    browser = browser.substring("call:".length());
-                    Utils.callStaticMethod(browser, url);
-                } else if (browser.contains("%url")) {
-                    String[] args = StringUtils.arraySplit(browser, ',', false);
-                    for (int i = 0; i < args.length; i++) {
-                        args[i] = StringUtils.replaceAll(args[i], "%url", url);
-                    }
-                    rt.exec(args);
-                } else if (osName.contains("windows")) {
-                    rt.exec(new String[] { "cmd.exe", "/C",  browser, url });
-                } else {
-                    rt.exec(new String[] { browser, url });
-                }
-                return;
-            }
-            try {
-                Class<?> desktopClass = Class.forName("java.awt.Desktop");
-                // Desktop.isDesktopSupported()
-                Boolean supported = (Boolean) desktopClass.
-                    getMethod("isDesktopSupported").
-                    invoke(null, new Object[0]);
-                URI uri = new URI(url);
-                if (supported) {
-                    // Desktop.getDesktop();
-                    Object desktop = desktopClass.getMethod("getDesktop").
-                        invoke(null);
-                    // desktop.browse(uri);
-                    desktopClass.getMethod("browse", URI.class).
-                        invoke(desktop, uri);
-                    return;
-                }
-            } catch (Exception e) {
-                // ignore
-            }
-            if (osName.contains("windows")) {
-                rt.exec(new String[] { "rundll32", "url.dll,FileProtocolHandler", url });
-            } else if (osName.contains("mac") || osName.contains("darwin")) {
-                // Mac OS: to open a page with Safari, use "open -a Safari"
-                Runtime.getRuntime().exec(new String[] { "open", url });
-            } else {
-                String[] browsers = { "xdg-open", "chromium", "google-chrome",
-                        "firefox", "mozilla-firefox", "mozilla", "konqueror",
-                        "netscape", "opera", "midori" };
-                boolean ok = false;
-                for (String b : browsers) {
-                    try {
-                        rt.exec(new String[] { b, url });
-                        ok = true;
-                        break;
-                    } catch (Exception e) {
-                        // ignore and try the next
-                    }
-                }
-                if (!ok) {
-                    // No success in detection.
-                    throw new Exception(
-                            "Browser detection failed, and java property 'guinsoo.browser' " +
-                            "and environment variable BROWSER are not set to a browser executable.");
-                }
-            }
-        } catch (Exception e) {
-            throw new Exception(
-                    "Failed to start a browser to open the URL " +
-            url + ": " + e.getMessage());
-        }
+        ///
     }
 
     /**
@@ -736,8 +601,9 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      *
      * @param conn the database connection (the database must be open)
      */
+    @Deprecated
     public static void startWebServer(Connection conn) throws SQLException {
-        startWebServer(conn, false);
+        /// startWebServer(conn, false);
     }
 
     /**
@@ -750,28 +616,9 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      * @param ignoreProperties if {@code true} properties from
      *         {@code .guinsoo.server.properties} will be ignored
      */
-    public static void startWebServer(Connection conn, boolean ignoreProperties) throws SQLException {
-        WebServer webServer = new WebServer();
-        String[] args;
-        if (ignoreProperties) {
-            args = new String[] { "-webPort", "0", "-properties", "null"};
-        } else {
-            args = new String[] { "-webPort", "0" };
-        }
-        Server web = new Server(webServer, args);
-        web.start();
-        Server server = new Server();
-        server.web = web;
-        webServer.setShutdownHandler(server);
-        String url = webServer.addSession(conn);
-        try {
-            Server.openBrowser(url);
-            while (!webServer.isStopped()) {
-                Thread.sleep(1000);
-            }
-        } catch (Exception e) {
-            // ignore
-        }
+    @Deprecated
+    public static void startWebServer(Connection conn, boolean ignoreProperties) {
+        ///
     }
 
 }

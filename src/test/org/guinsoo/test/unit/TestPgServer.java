@@ -33,7 +33,7 @@ import org.guinsoo.server.pg.PgServer;
 import org.guinsoo.store.Data;
 import org.guinsoo.test.TestBase;
 import org.guinsoo.test.TestDb;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 import org.guinsoo.util.DateTimeUtils;
 
 /**

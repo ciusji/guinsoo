@@ -83,7 +83,6 @@ import org.guinsoo.value.ValueLobDatabase;
 
 /**
  * Helps recovering a corrupted database.
- * @guinsoo.resource
  */
 public class Recover extends Tool implements DataHandler {
 

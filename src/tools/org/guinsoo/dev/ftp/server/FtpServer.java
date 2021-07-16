@@ -19,7 +19,7 @@ import java.util.Locale;
 import java.util.Properties;
 import org.guinsoo.server.Service;
 import org.guinsoo.store.fs.FileUtils;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 import org.guinsoo.util.IOUtils;
 import org.guinsoo.util.NetUtils;
 import org.guinsoo.util.SortedProperties;

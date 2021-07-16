@@ -8,6 +8,7 @@ package org.guinsoo.tools;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.guinsoo.Server;
 import org.guinsoo.server.ShutdownHandler;
 import org.guinsoo.util.JdbcUtils;
 import org.guinsoo.util.MathUtils;
@@ -17,10 +18,12 @@ import org.guinsoo.util.Utils;
 
 /**
  * Starts the Guinsoo Console (web-) server, as well as the TCP and PG server.
- * @guinsoo.resource
  *
  * @author Thomas Mueller, Ridvan Agar
+ * @author ciusji
+ * @since guinsoo 0.2.1
  */
+@Deprecated
 public class Console extends Tool implements ShutdownHandler {
 
     Server web;
@@ -59,7 +62,6 @@ public class Console extends Tool implements ShutdownHandler {
      * for details, see the Server tool.<br />
      * If a service can not be started, the program
      * terminates with an exit code of 1.
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

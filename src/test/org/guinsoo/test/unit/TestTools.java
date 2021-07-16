@@ -57,7 +57,7 @@ import org.guinsoo.tools.Recover;
 import org.guinsoo.tools.Restore;
 import org.guinsoo.tools.RunScript;
 import org.guinsoo.tools.Script;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 import org.guinsoo.tools.SimpleResultSet;
 import org.guinsoo.tools.SimpleResultSet.SimpleArray;
 import org.guinsoo.util.JdbcUtils;

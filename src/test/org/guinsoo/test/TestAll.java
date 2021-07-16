@@ -230,7 +230,7 @@ import org.guinsoo.test.unit.TestValueMemory;
 import org.guinsoo.test.utils.OutputCatcher;
 import org.guinsoo.test.utils.SelfDestructor;
 import org.guinsoo.tools.DeleteDbFiles;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 import org.guinsoo.util.AbbaLockingDetector;
 import org.guinsoo.util.Profiler;
 import org.guinsoo.util.StringUtils;

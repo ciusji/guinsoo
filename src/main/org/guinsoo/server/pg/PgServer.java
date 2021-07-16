@@ -30,7 +30,8 @@ import org.guinsoo.value.Value;
  * https://www.postgresql.org/docs/7.4/catalogs.html
  *
  * @author Thomas Mueller
- * @author Sergi Vladykin 2009-07-03 (convertType)
+ * @author Sergi Vladykin
+ * @author ciusji
  */
 public class PgServer implements Service {
 

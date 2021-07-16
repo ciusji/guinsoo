@@ -39,6 +39,7 @@ import org.guinsoo.util.Utils;
 /**
  * Console for environments with AWT support.
  */
+@Deprecated
 public class GUIConsole extends Console implements ActionListener, MouseListener, WindowListener {
     private long lastOpenNs;
 

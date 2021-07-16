@@ -32,7 +32,7 @@ import org.guinsoo.util.Utils;
 
 /**
  * Interactive command line tool to access a database using JDBC.
- * @guinsoo.resource
+ * @author ciusji
  */
 public class Shell extends Tool implements Runnable {
 

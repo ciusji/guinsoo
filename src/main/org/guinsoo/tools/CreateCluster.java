@@ -22,7 +22,7 @@ import org.guinsoo.util.Tool;
  * Creates a cluster from a stand-alone database.
  * <br />
  * Copies a database to another location if required.
- * @guinsoo.resource
+ * @author ciusji
  */
 public class CreateCluster extends Tool {
 
@@ -42,7 +42,6 @@ public class CreateCluster extends Tool {
      * <tr><td>[-serverList &lt;list&gt;]</td>
      * <td>The comma separated list of host names or IP addresses</td></tr>
      * </table>
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

@@ -21,7 +21,7 @@ import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.guinsoo.test.TestBase;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 import org.guinsoo.util.StringUtils;
 import org.guinsoo.util.Utils;
 

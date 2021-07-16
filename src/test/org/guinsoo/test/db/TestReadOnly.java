@@ -20,7 +20,7 @@ import org.guinsoo.store.fs.FileUtils;
 import org.guinsoo.test.TestBase;
 import org.guinsoo.test.TestDb;
 import org.guinsoo.tools.Backup;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 
 /**
  * Test for the read-only database feature.

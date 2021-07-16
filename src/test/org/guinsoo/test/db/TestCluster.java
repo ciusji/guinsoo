@@ -19,7 +19,7 @@ import org.guinsoo.test.TestBase;
 import org.guinsoo.test.TestDb;
 import org.guinsoo.tools.CreateCluster;
 import org.guinsoo.tools.DeleteDbFiles;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 import org.guinsoo.util.JdbcUtils;
 
 /**

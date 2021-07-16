@@ -20,7 +20,7 @@ import java.util.Properties;
 import org.guinsoo.api.ErrorCode;
 import org.guinsoo.test.TestBase;
 import org.guinsoo.test.TestDb;
-import org.guinsoo.tools.Server;
+import org.guinsoo.Server;
 
 /**
  * Tests the compatibility with older versions
@@ -108,7 +108,7 @@ public class TestOldVersion extends TestDb {
                 "jdbc:guinsoo:tcp://localhost:" + port + "/mem:test", null);
         server.stop();
 
-        Class<?> serverClass = cl.loadClass("org.guinsoo.tools.Server");
+        Class<?> serverClass = cl.loadClass("org.guinsoo.Server");
         Method m;
         m = serverClass.getMethod("createTcpServer", String[].class);
         Object serverOld = m.invoke(null, new Object[] { new String[] {
