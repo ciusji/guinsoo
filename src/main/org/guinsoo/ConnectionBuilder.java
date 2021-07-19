@@ -42,6 +42,9 @@ import static org.guinsoo.util.Utils.readSettingsFromURL;
 /**
  * ConnectionBuilder
  *
+ * <p>
+ * The ONLY entry of guinsoo.
+ *
  * @author cius.ji
  * @since 1.8+
  */
