@@ -72,7 +72,6 @@ public class Shell extends Tool implements Runnable {
      * </table>
      * If special characters don't work as expected, you may need to use
      * -Dfile.encoding=UTF-8 (Mac OS X) or CP850 (Windows).
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

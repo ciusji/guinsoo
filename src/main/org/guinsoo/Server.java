@@ -65,26 +65,12 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
     }
 
     /**
-     * When running without options, -tcp, -web, -browser and -pg are started.
+     * When running without options, -tcp and -pg are started.
      * <br />
      * Options are case sensitive. Supported options are:
      * <table>
      * <tr><td>[-help] or [-?]</td>
      * <td>Print the list of options</td></tr>
-     * <tr><td>[-web]</td>
-     * <td>Start the web server with the Guinsoo Console</td></tr>
-     * <tr><td>[-webAllowOthers]</td>
-     * <td>Allow other computers to connect - see below</td></tr>
-     * <tr><td>[-webDaemon]</td>
-     * <td>Use a daemon thread</td></tr>
-     * <tr><td>[-webPort &lt;port&gt;]</td>
-     * <td>The port (default: 8082)</td></tr>
-     * <tr><td>[-webSSL]</td>
-     * <td>Use encrypted (HTTPS) connections</td></tr>
-     * <tr><td>[-webAdminPassword]</td>
-     * <td>Password of DB Console administrator</td></tr>
-     * <tr><td>[-browser]</td>
-     * <td>Start a browser connecting to the web server</td></tr>
      * <tr><td>[-tcp]</td>
      * <td>Start the TCP server</td></tr>
      * <tr><td>[-tcpAllowOthers]</td>
