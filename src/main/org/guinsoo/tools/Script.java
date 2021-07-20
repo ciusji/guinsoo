@@ -14,7 +14,6 @@ import org.guinsoo.util.Tool;
 
 /**
  * Creates a SQL script file by extracting the schema and data of a database.
- * @guinsoo.resource
  */
 public class Script extends Tool {
 
@@ -36,7 +35,6 @@ public class Script extends Tool {
      * <tr><td>[-quiet]</td>
      * <td>Do not print progress information</td></tr>
      * </table>
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */
