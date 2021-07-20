@@ -21,7 +21,6 @@ import org.guinsoo.util.Tool;
 
 /**
  * Restores a Guinsoo database by extracting the database files from a .zip file.
- * @guinsoo.resource
  */
 public class Restore extends Tool {
 
@@ -39,7 +38,6 @@ public class Restore extends Tool {
      * <tr><td>[-quiet]</td>
      * <td>Do not print progress information</td></tr>
      * </table>
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

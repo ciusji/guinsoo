@@ -31,7 +31,6 @@ import org.guinsoo.util.Tool;
  * <br />
  * This tool can not be used to change a password of a user.
  * The database must be closed before using this tool.
- * @guinsoo.resource
  */
 public class ChangeFileEncryption extends Tool {
 
@@ -60,7 +59,6 @@ public class ChangeFileEncryption extends Tool {
      * <tr><td>[-quiet]</td>
      * <td>Do not print progress information</td></tr>
      * </table>
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

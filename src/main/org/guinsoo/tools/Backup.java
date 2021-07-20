@@ -32,7 +32,6 @@ import org.guinsoo.util.Tool;
  * quiet mode. However, if the database is changed while the backup is running
  * in quiet mode, the backup could be corrupt.
  *
- * @guinsoo.resource
  */
 public class Backup extends Tool {
 
@@ -50,7 +49,6 @@ public class Backup extends Tool {
      * <tr><td>[-quiet]</td>
      * <td>Do not print progress information</td></tr>
      * </table>
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

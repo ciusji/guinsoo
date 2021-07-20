@@ -23,7 +23,6 @@ import org.guinsoo.util.Tool;
  * Converts a .trace.db file to a SQL script and Java source code.
  * <br />
  * SQL statement statistics are listed as well.
- * @guinsoo.resource
  */
 public class ConvertTraceFile extends Tool {
 
@@ -67,7 +66,6 @@ public class ConvertTraceFile extends Tool {
      * <tr><td>[-javaClass &lt;file&gt;]</td>
      * <td>The Java directory and class file name (default: Test)</td></tr>
      * </table>
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

@@ -17,7 +17,6 @@ import org.guinsoo.util.Tool;
  * Deletes all files belonging to a database.
  * <br />
  * The database must be closed before calling this tool.
- * @guinsoo.resource
  */
 public class DeleteDbFiles extends Tool {
 
@@ -33,7 +32,6 @@ public class DeleteDbFiles extends Tool {
      * <tr><td>[-quiet]</td>
      * <td>Do not print progress information</td></tr>
      * </table>
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

@@ -152,7 +152,6 @@ public class Recover extends Tool implements DataHandler {
      * <td>Print the transaction log</td></tr>
      * </table>
      * Encrypted databases need to be decrypted first.
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

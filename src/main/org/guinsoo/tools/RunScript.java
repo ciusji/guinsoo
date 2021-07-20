@@ -30,7 +30,6 @@ import org.guinsoo.util.Tool;
 
 /**
  * Runs a SQL script against a database.
- * @guinsoo.resource
  */
 public class RunScript extends Tool {
 
@@ -61,7 +60,6 @@ public class RunScript extends Tool {
      * <tr><td>[-options ...]</td>
      * <td>RUNSCRIPT options (embedded H2; -*Results not supported)</td></tr>
      * </table>
-     * @guinsoo.resource
      *
      * @param args the command line arguments
      */

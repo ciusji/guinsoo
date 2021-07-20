@@ -7,7 +7,6 @@ package org.guinsoo.jmx;
 
 /**
  * Information and management operations for the given database.
- * @guinsoo.resource
  *
  * @author Eric Dong
  * @author Thomas Mueller
@@ -16,7 +15,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * Is the database open in exclusive mode?
-     * @guinsoo.resource
      *
      * @return true if the database is open in exclusive mode, false otherwise
      */
@@ -24,7 +22,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * Is the database read-only?
-     * @guinsoo.resource
      *
      * @return true if the database is read-only, false otherwise
      */
@@ -33,7 +30,6 @@ public interface DatabaseInfoMBean {
     /**
      * The database compatibility mode (REGULAR if no compatibility mode is
      * used).
-     * @guinsoo.resource
      *
      * @return the database mode
      */
@@ -41,7 +37,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * Is multi-threading enabled?
-     * @guinsoo.resource
      *
      * @return true if multi-threading is enabled, false otherwise
      */
@@ -50,7 +45,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * Is MVCC (multi version concurrency) enabled?
-     * @guinsoo.resource
      *
      * @return true if MVCC is enabled, false otherwise
      */
@@ -59,7 +53,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * The transaction log mode (0 disabled, 1 without sync, 2 enabled).
-     * @guinsoo.resource
      *
      * @return the transaction log mode
      */
@@ -74,7 +67,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * The number of write operations since the database was created.
-     * @guinsoo.resource
      *
      * @return the total write count
      */
@@ -82,7 +74,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * The number of write operations since the database was opened.
-     * @guinsoo.resource
      *
      * @return the write count
      */
@@ -90,7 +81,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * The file read count since the database was opened.
-     * @guinsoo.resource
      *
      * @return the read count
      */
@@ -98,7 +88,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * The database file size in KB.
-     * @guinsoo.resource
      *
      * @return the number of pages
      */
@@ -106,7 +95,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * The maximum cache size in KB.
-     * @guinsoo.resource
      *
      * @return the maximum size
      */
@@ -121,7 +109,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * The current cache size in KB.
-     * @guinsoo.resource
      *
      * @return the current size
      */
@@ -129,7 +116,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * The database version.
-     * @guinsoo.resource
      *
      * @return the version
      */
@@ -137,7 +123,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * The trace level (0 disabled, 1 error, 2 info, 3 debug).
-     * @guinsoo.resource
      *
      * @return the level
      */
@@ -152,7 +137,6 @@ public interface DatabaseInfoMBean {
 
     /**
      * List the database settings.
-     * @guinsoo.resource
      *
      * @return the database settings
      */
@@ -161,7 +145,6 @@ public interface DatabaseInfoMBean {
     /**
      * List sessions, including the queries that are in
      * progress, and locked tables.
-     * @guinsoo.resource
      *
      * @return information about the sessions
      */
