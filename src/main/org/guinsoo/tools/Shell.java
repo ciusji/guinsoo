@@ -21,7 +21,6 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.guinsoo.engine.Constants;
-import org.guinsoo.server.web.ConnectionInfo;
 import org.guinsoo.api.ErrorCode;
 import org.guinsoo.util.JdbcUtils;
 import org.guinsoo.util.ScriptReader;
@@ -628,4 +627,41 @@ public class Shell extends Tool implements Runnable {
         return rowCount;
     }
 
+}
+
+class ConnectionInfo implements Comparable<ConnectionInfo> {
+
+    public String driver;
+
+    public String url;
+
+    public String user;
+
+    String name;
+
+    int lastAccess;
+
+    public ConnectionInfo() {
+    }
+
+    public ConnectionInfo(String data) {
+        String[] array = StringUtils.arraySplit(data, '|', false);
+        name = get(array, 0);
+        driver = get(array, 1);
+        url = get(array, 2);
+        user = get(array, 3);
+    }
+
+    private static String get(String[] array, int i) {
+        return array != null && array.length > i ? array[i] : "";
+    }
+
+    String getString() {
+        return StringUtils.arrayCombine(new String[] { name, driver, url, user }, '|');
+    }
+
+    @Override
+    public int compareTo(ConnectionInfo o) {
+        return Integer.compare(o.lastAccess, lastAccess);
+    }
 }

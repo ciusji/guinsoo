@@ -7,10 +7,7 @@ package org.guinsoo.test.unit;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Enumeration;
 import java.util.EventListener;
 import java.util.HashMap;
@@ -23,14 +20,11 @@ import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import javax.servlet.SessionCookieConfig;
 import javax.servlet.SessionTrackingMode;
 import javax.servlet.descriptor.JspConfigDescriptor;
-import org.guinsoo.api.ErrorCode;
-import org.guinsoo.server.web.DbStarter;
 import org.guinsoo.test.TestBase;
 import org.guinsoo.test.TestDb;
 
@@ -389,49 +383,7 @@ public class TestServlet extends TestDb {
 
     @Override
     public void test() throws SQLException {
-        DbStarter listener = new DbStarter();
-
-        TestServletContext context = new TestServletContext();
-        String url = getURL("servlet", true);
-        context.setInitParameter("db.url", url);
-        context.setInitParameter("db.user", getUser());
-        context.setInitParameter("db.password", getPassword());
-        context.setInitParameter("db.tcpServer", "-tcpPort 8888");
-
-        ServletContextEvent event = new ServletContextEvent(context);
-        listener.contextInitialized(event);
-
-        Connection conn1 = listener.getConnection();
-        Connection conn1a = (Connection) context.getAttribute("connection");
-        assertTrue(conn1 == conn1a);
-        Statement stat1 = conn1.createStatement();
-        stat1.execute("CREATE TABLE T(ID INT)");
-
-        String u2 = url.substring(url.indexOf("servlet"));
-        u2 = "jdbc:guinsoo:tcp://localhost:8888/" + getBaseDir() + "/" + u2;
-        Connection conn2 = DriverManager.getConnection(
-                u2, getUser(), getPassword());
-        Statement stat2 = conn2.createStatement();
-        stat2.execute("SELECT * FROM T");
-        stat2.execute("DROP TABLE T");
-
-        assertThrows(ErrorCode.TABLE_OR_VIEW_NOT_FOUND_DATABASE_EMPTY_1, stat1).
-                execute("SELECT * FROM T");
-        conn2.close();
-
-        listener.contextDestroyed(event);
-
-        // listener must be stopped
-        assertThrows(ErrorCode.CONNECTION_BROKEN_1,
-                () -> getConnection("jdbc:guinsoo:tcp://localhost:8888/" + getBaseDir() + "/servlet", getUser(),
-                        getPassword()));
-
-        // connection must be closed
-        assertThrows(ErrorCode.OBJECT_CLOSED, stat1).
-                execute("SELECT * FROM DUAL");
-
-        deleteDb("servlet");
-
+        // nothing to do.
     }
 
 }

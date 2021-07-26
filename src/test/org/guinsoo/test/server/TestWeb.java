@@ -16,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.sql.Connection;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Vector;
@@ -24,7 +23,6 @@ import java.util.Vector;
 import javax.servlet.AsyncContext;
 import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
@@ -42,7 +40,6 @@ import javax.servlet.http.Part;
 import org.guinsoo.api.ErrorCode;
 import org.guinsoo.engine.Constants;
 import org.guinsoo.engine.SysProperties;
-import org.guinsoo.server.web.WebServlet;
 import org.guinsoo.store.fs.FileUtils;
 import org.guinsoo.test.TestBase;
 import org.guinsoo.test.TestDb;
@@ -69,7 +66,6 @@ public class TestWeb extends TestDb {
 
     @Override
     public void test() throws Exception {
-        testServlet();
         testWrongParameters();
         testTools();
         testAlreadyRunning();
@@ -77,47 +73,6 @@ public class TestWeb extends TestDb {
         testServer();
         testWebApp();
         testIfExists();
-    }
-
-    private void testServlet() throws Exception {
-        WebServlet servlet = new WebServlet();
-        final HashMap<String, String> configMap = new HashMap<>();
-        configMap.put("ifExists", "");
-        configMap.put("", "");
-        ServletConfig config = new ServletConfig() {
-
-            @Override
-            public String getServletName() {
-                return "H2Console";
-            }
-
-            @Override
-            public Enumeration<String> getInitParameterNames() {
-                return new Vector<>(configMap.keySet()).elements();
-            }
-
-            @Override
-            public String getInitParameter(String name) {
-                return configMap.get(name);
-            }
-
-            @Override
-            public ServletContext getServletContext() {
-                return null;
-            }
-
-        };
-        servlet.init(config);
-
-
-        TestHttpServletRequest request = new TestHttpServletRequest();
-        request.setPathInfo("/");
-        TestHttpServletResponse response = new TestHttpServletResponse();
-        TestServletOutputStream out = new TestServletOutputStream();
-        response.setServletOutputStream(out);
-        servlet.doGet(request, response);
-        assertContains(out.toString(), "location.href = 'login.jsp");
-        servlet.destroy();
     }
 
     private void testWrongParameters() {

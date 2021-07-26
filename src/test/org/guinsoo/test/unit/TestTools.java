@@ -5,10 +5,6 @@
  */
 package org.guinsoo.test.unit;
 
-import java.awt.Button;
-import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -41,7 +37,6 @@ import java.util.UUID;
 
 import org.guinsoo.Driver;
 import org.guinsoo.api.ErrorCode;
-import org.guinsoo.engine.SysProperties;
 import org.guinsoo.store.FileLister;
 import org.guinsoo.store.fs.FileUtils;
 import org.guinsoo.test.TestBase;
@@ -49,10 +44,8 @@ import org.guinsoo.test.TestDb;
 import org.guinsoo.test.trace.Player;
 import org.guinsoo.tools.Backup;
 import org.guinsoo.tools.ChangeFileEncryption;
-import org.guinsoo.tools.Console;
 import org.guinsoo.tools.ConvertTraceFile;
 import org.guinsoo.tools.DeleteDbFiles;
-import org.guinsoo.tools.GUIConsole;
 import org.guinsoo.tools.Recover;
 import org.guinsoo.tools.Restore;
 import org.guinsoo.tools.RunScript;
@@ -97,7 +90,6 @@ public class TestTools extends TestDb {
         Driver.load();
         testSimpleResultSet();
         testTcpServerWithoutPort();
-        testConsole();
         testJdbcDriverUtils();
         testWrongServer();
         testDeleteFiles();
@@ -130,79 +122,6 @@ public class TestTools extends TestDb {
         assertEquals(9123, s1.getPort());
         assertThrows(ErrorCode.EXCEPTION_OPENING_PORT_2, () -> Server.createTcpServer("-tcpPort", "9123").start());
         s1.stop();
-    }
-
-    private void testConsole() throws Exception {
-        String old = System.getProperty(SysProperties.H2_BROWSER);
-        GUIConsole c = new GUIConsole();
-        c.setOut(new PrintStream(new ByteArrayOutputStream()));
-        try {
-
-            // start including browser
-            lastUrl = "-";
-            System.setProperty(SysProperties.H2_BROWSER, "call:" +
-                    TestTools.class.getName() + ".openBrowser");
-            c.runTool("-web", "-webPort", "9002", "-tool", "-browser", "-tcp",
-                    "-tcpPort", "9003", "-pg", "-pgPort", "9004");
-            assertContains(lastUrl, ":9002");
-            shutdownConsole(c);
-
-            // check if starting the browser works
-            c.runTool("-web", "-webPort", "9002", "-tool");
-            lastUrl = "-";
-            c.actionPerformed(new ActionEvent(this, 0, "console"));
-            assertContains(lastUrl, ":9002");
-            lastUrl = "-";
-            // double-click prevention is 100 ms
-            Thread.sleep(200);
-            try {
-                MouseEvent me = new MouseEvent(new Button(), 0, 0, 0, 0, 0, 0,
-                        false, MouseEvent.BUTTON1);
-                c.mouseClicked(me);
-                assertContains(lastUrl, ":9002");
-                lastUrl = "-";
-                // no delay - ignore because it looks like a double click
-                c.mouseClicked(me);
-                assertEquals("-", lastUrl);
-                // open the window
-                c.actionPerformed(new ActionEvent(this, 0, "status"));
-                c.actionPerformed(new ActionEvent(this, 0, "exit"));
-
-                // check if the service was stopped
-                c.runTool("-webPort", "9002");
-
-            } catch (HeadlessException e) {
-                // ignore
-            }
-
-            shutdownConsole(c);
-
-            // trying to use the same port for two services should fail,
-            // but also stop the first service
-            assertThrows(ErrorCode.EXCEPTION_OPENING_PORT_2,
-                    () -> c.runTool("-web", "-webPort", "9002", "-tcp", "-tcpPort", "9002"));
-            c.runTool("-web", "-webPort", "9002");
-
-        } finally {
-            if (old != null) {
-                System.setProperty(SysProperties.H2_BROWSER, old);
-            } else {
-                System.clearProperty(SysProperties.H2_BROWSER);
-            }
-            shutdownConsole(c);
-        }
-    }
-
-    private static void shutdownConsole(Console c) {
-        c.shutdown();
-        if (Thread.currentThread().isInterrupted()) {
-            // Clear interrupted state so test can continue its work safely
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                // Ignore
-            }
-        }
     }
 
     /**

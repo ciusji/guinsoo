@@ -13,7 +13,6 @@ import org.guinsoo.server.Service;
 import org.guinsoo.server.ShutdownHandler;
 import org.guinsoo.server.TcpServer;
 import org.guinsoo.server.pg.PgServer;
-import org.guinsoo.server.web.WebServer;
 import org.guinsoo.api.ErrorCode;
 import org.guinsoo.util.Tool;
 
@@ -357,28 +356,7 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
      */
     @Deprecated
     public static Server createWebServer(String... args) throws SQLException {
-        return createWebServer(args, null, false);
-    }
-
-    /**
-     * Create a new web server, but does not start it yet.
-     *
-     * @param args
-     *            the argument list
-     * @param key
-     *            key, or null
-     * @param allowSecureCreation
-     *            whether creation of databases using the key should be allowed
-     * @return the server
-     */
-    @Deprecated
-    public static Server createWebServer(String[] args, String key, boolean allowSecureCreation) throws SQLException {
-        WebServer service = new WebServer();
-        service.setKey(key);
-        service.setAllowSecureCreation(allowSecureCreation);
-        Server server = new Server(service, args);
-        service.setShutdownHandler(server);
-        return server;
+        return null;
     }
 
     /**

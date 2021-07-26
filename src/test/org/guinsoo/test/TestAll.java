@@ -146,31 +146,11 @@ import org.guinsoo.test.store.TestRandomMapOps;
 import org.guinsoo.test.store.TestSpinLock;
 import org.guinsoo.test.store.TestStreamStore;
 import org.guinsoo.test.store.TestTransactionStore;
-import org.guinsoo.test.synth.TestBtreeIndex;
-import org.guinsoo.test.synth.TestConcurrentUpdate;
-import org.guinsoo.test.synth.TestCrashAPI;
-import org.guinsoo.test.synth.TestDiskFull;
-import org.guinsoo.test.synth.TestFuzzOptimizations;
-import org.guinsoo.test.synth.TestHaltApp;
-import org.guinsoo.test.synth.TestJoin;
-import org.guinsoo.test.synth.TestKill;
-import org.guinsoo.test.synth.TestKillRestart;
-import org.guinsoo.test.synth.TestKillRestartMulti;
-import org.guinsoo.test.synth.TestLimit;
-import org.guinsoo.test.synth.TestMultiThreaded;
-import org.guinsoo.test.synth.TestNestedJoins;
-import org.guinsoo.test.synth.TestOuterJoins;
-import org.guinsoo.test.synth.TestRandomCompare;
-import org.guinsoo.test.synth.TestRandomSQL;
-import org.guinsoo.test.synth.TestTimer;
-import org.guinsoo.test.synth.sql.TestSynth;
-import org.guinsoo.test.synth.thread.TestMulti;
 import org.guinsoo.test.unit.TestAnsCompression;
 import org.guinsoo.test.unit.TestAutoReconnect;
 import org.guinsoo.test.unit.TestBinaryArithmeticStream;
 import org.guinsoo.test.unit.TestBinaryOperation;
 import org.guinsoo.test.unit.TestBitStream;
-import org.guinsoo.test.unit.TestBnf;
 import org.guinsoo.test.unit.TestCache;
 import org.guinsoo.test.unit.TestCharsetCollator;
 import org.guinsoo.test.unit.TestCollation;
@@ -510,32 +490,11 @@ kill -9 `jps -l | grep "org.guinsoo.test." | cut -d " " -f 1`
                 reopen.init();
                 FilePathRec.setRecorder(reopen);
                 test.runTests();
-            } else if ("crash".equals(args[0])) {
-                test.endless = true;
-                new TestCrashAPI().runTest(test);
-            } else if ("synth".equals(args[0])) {
-                new TestSynth().runTest(test);
-            } else if ("kill".equals(args[0])) {
-                new TestKill().runTest(test);
-            } else if ("random".equals(args[0])) {
-                test.endless = true;
-                new TestRandomSQL().runTest(test);
-            } else if ("join".equals(args[0])) {
-                new TestJoin().runTest(test);
-                test.endless = true;
-            } else if ("btree".equals(args[0])) {
-                new TestBtreeIndex().runTest(test);
             } else if ("all".equals(args[0])) {
                 test.testEverything();
             } else if ("codeCoverage".equals(args[0])) {
                 test.codeCoverage = true;
                 test.runCoverage();
-            } else if ("multiThread".equals(args[0])) {
-                new TestMulti().runTest(test);
-            } else if ("halt".equals(args[0])) {
-                new TestHaltApp().runTest(test);
-            } else if ("timer".equals(args[0])) {
-                new TestTimer().runTest(test);
             }
         } else {
             test.testAll(args, 0);
@@ -829,20 +788,6 @@ kill -9 `jps -l | grep "org.guinsoo.test." | cut -d " " -f 1`
             addTest(new TestRowLocks());
             addTest(new TestAnalyzeTableTx());
 
-            // synth
-            addTest(new TestBtreeIndex());
-            addTest(new TestConcurrentUpdate());
-            addTest(new TestDiskFull());
-            addTest(new TestCrashAPI());
-            addTest(new TestFuzzOptimizations());
-            addTest(new TestLimit());
-            addTest(new TestRandomCompare());
-            addTest(new TestKillRestart());
-            addTest(new TestKillRestartMulti());
-            addTest(new TestMultiThreaded());
-            addTest(new TestOuterJoins());
-            addTest(new TestNestedJoins());
-
             runAddedTests();
 
             // serial
@@ -854,7 +799,6 @@ kill -9 `jps -l | grep "org.guinsoo.test." | cut -d " " -f 1`
             addTest(new TestMultiThread());
             addTest(new TestPowerOff());
             addTest(new TestReorderWrites());
-            addTest(new TestRandomSQL());
             addTest(new TestQueryCache());
             addTest(new TestUrlJavaObjectSerializer());
             addTest(new TestWeb());
@@ -881,7 +825,6 @@ kill -9 `jps -l | grep "org.guinsoo.test." | cut -d " " -f 1`
 
         addTest(new TestMVTableEngine());
         addTest(new TestAutoReconnect());
-        addTest(new TestBnf());
         addTest(new TestCache());
         addTest(new TestCollation());
         addTest(new TestCompress());
