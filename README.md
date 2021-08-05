@@ -34,7 +34,7 @@ More information: https://ciusji.github.io/guinsoo/
 
 Working from the top down, the layers look like this:
 
-* [GuinsooPad](https://guinsoolab.github.io/guinsoopad/).
+* [GuinsooPad - a BI tool](https://guinsoolab.github.io/guinsoopad/).
 * JDBC driver.
 * Connection/session management.
 * SQL Parser.
