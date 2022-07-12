@@ -2,7 +2,7 @@
     <img src="/public/guinsoo.svg" width=120 alt="logo" />
     <br />
     <br />
-    <small>Powered by [GuinsooLab](https://guinsoolab.github.io/glab)</small>
+    <small> Powered by <a href="https://guinsoolab.github.io/glab">GuinsooLab</a></small>
 </div>
 
 # Guinsoo
