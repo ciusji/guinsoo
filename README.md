@@ -1,8 +1,9 @@
-[English](./README.md) | [中文](./README-CN.md)
-
-<br/> 
-
-# ![logo](public/guinsoo-app.svg)
+<div align="center">
+    <img src="/public/guinsoo.svg" width=120 alt="logo" />
+    <br />
+    <br />
+    <small>Powered by [GuinsooLab](https://guinsoolab.github.io/glab)</small>
+</div>
 
 # Guinsoo
 
@@ -12,7 +13,7 @@
 [![cov](https://img.shields.io/codecov/c/github/ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
 [![downloads](https://img.shields.io/github/downloads/ciusji/guinsoo/total)](https://github.com/ciusji/guinsoo)
 
-`Guinsoo, not only a database.`
+`A metadata store database for GuinsooLab stack.`
 
 Powered by [Guinsoo Lab](https://guinsoolab.github.io/glab/).
 

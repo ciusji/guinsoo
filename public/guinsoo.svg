@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="913px" height="732px" viewBox="0 0 913 732" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>guinsoo</title>
+    <defs>
+        <radialGradient cx="100%" cy="0%" fx="100%" fy="0%" r="147.522703%" gradientTransform="translate(1.000000,0.000000),scale(0.922023,1.000000),rotate(137.323221),translate(-1.000000,-0.000000)" id="radialGradient-1">
+            <stop stop-color="#32C5FF" offset="0%"></stop>
+            <stop stop-color="#B620E0" offset="51.2583893%"></stop>
+            <stop stop-color="#F7B500" offset="100%"></stop>
+        </radialGradient>
+        <linearGradient x1="100%" y1="6.71239172%" x2="0%" y2="93.2876083%" id="linearGradient-2">
+            <stop stop-color="#32C5FF" offset="0%"></stop>
+            <stop stop-color="#B620E0" offset="51.2583893%"></stop>
+            <stop stop-color="#F7B500" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="guinsoo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(111.496769, 72.262892)">
+            <polygon id="Path-10" fill="url(#radialGradient-1)" points="0 102.773865 0 418.320372 93.8944697 481.092903 257.228359 481.092903 93.8944697 382.77342 93.8944697 71.5442378 424.536928 276.31857 424.536928 342.772085 521.779527 405.339029 521.779527 225.058906 162.736708 -1.42795832e-14"></polygon>
+            <polygon id="Path-11" fill="url(#linearGradient-2)" points="163.010824 174.004828 163.010824 353.785668 521.779527 586.793934 690.076872 481.092903 690.076872 157.734094 589.094549 96.3810921 426.543848 96.3810921 589.094549 203.912826 589.094549 503.384396 260.889764 295.237108 260.889764 240.546451"></polygon>
+        </g>
+    </g>
+</svg>

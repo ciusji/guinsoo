@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
     <name>guinsoo</name>
     <url>https://github.com/ciusji/guinsoo</url>
-    <description>Guinsoo, not only fast.</description>
+    <description>A metadata store database for GuinsooLab stack.</description>
 
     <licenses>
         <license>
