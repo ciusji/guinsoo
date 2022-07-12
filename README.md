@@ -15,7 +15,7 @@
 
 `A metadata store database for GuinsooLab stack.`
 
-Powered by [Guinsoo Lab](https://guinsoolab.github.io/glab/).
+For more information please visit [here](https://ciusji.gitbook.io/guinsoolab/).
 
 <br/>
 
