@@ -15,4 +15,4 @@ if [ "$1" = "clean" ] ; then rm -rf temp bin ; fi
 if [ ! -d "temp" ] ; then mkdir temp ; fi
 if [ ! -d "bin" ] ; then mkdir bin ; fi
 "$JAVA_HOME/bin/javac" -sourcepath src/tools -d bin src/tools/org/guinsoo/build/*.java
-"$JAVA_HOME/bin/java" -Xmx512m -cp "bin:$JAVA_HOME/driver/tools.jar:temp" org.guinsoo.build.Build $@
+"$JAVA_HOME/bin/java" -Xmx1g -cp "bin:$JAVA_HOME/driver/tools.jar:temp" org.guinsoo.build.Build $@
