@@ -43,7 +43,8 @@ public class Server extends Tool implements Runnable, ShutdownHandler {
                 " \\__, /\\__,_/_/_/ /_/____/\\____/\\____/ \n" +
                 "/____/                               \n" +
                 "  \n" +
-                "version 0.2.2, redefine your data.  \n"
+                "version 0.2.2 \n" +
+                "A metadata store database for GuinsooLab stack. \n"
                 + ANSI_RESET
         );
     }
