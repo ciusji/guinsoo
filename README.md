@@ -1,6 +1,9 @@
+<div align="right">
+    <img src="/public/guinsoolab-badge.png" width="60" alt="badge">
+    <br />
+</div>
 <div align="center">
     <img src="/public/guinsoo.svg" width=120 alt="logo" />
-    <br />
     <br />
     <small> Powered by <a href="https://guinsoolab.github.io/glab">GuinsooLab</a></small>
 </div>
