@@ -5,10 +5,10 @@
 <div align="center">
     <img src="/public/guinsoo.svg" width=120 alt="logo" />
     <br />
-    <small> Powered by <a href="https://guinsoolab.github.io/glab">GuinsooLab</a></small>
+    <small>Powered by <a href="https://guinsoolab.github.io/glab">GuinsooLab</a></small>
 </div>
 
-# Guinsoo
+# [Guinsoo](https://ciusji.gitbook.io/guinsoo/)
 
 [![maven](https://img.shields.io/maven-central/v/io.github.ciusji/guinsoo)](https://search.maven.org/search?q=guinsoo)
 [![size](https://img.shields.io/github/repo-size/ciusji/guinsoo)](https://github.com/ciusji/guinsoo)
@@ -20,25 +20,23 @@
 
 For more information please visit [here](https://ciusji.gitbook.io/guinsoolab/).
 
-<br/>
 
-## Feature
+## Features
 
 * Super-fast, open source, JDBC API
 * In-memory, non-blocking store, designed for low-latency applications
 * Embedded and server modes; disk-based or in-memory databases
 * Transaction support, multi-version concurrency
+* Fulltext search
 * Encrypted databases
 
-More information: https://ciusji.github.io/guinsoo/
+More information, please refer to [here](https://ciusji.gitbook.io/guinsoo/).
 
-<br>
 
 ## Overview
 
 Working from the top down, the layers look like this:
 
-* [GuinsooPad - a BI tool](https://guinsoolab.github.io/guinsoopad/).
 * JDBC driver.
 * Connection/session management.
 * SQL Parser.
@@ -47,13 +45,11 @@ Working from the top down, the layers look like this:
 * Transactions layer.
 * B-tree/ART.
 * Filesystem abstraction.
-* More Plugins powered by [GLab](https://guinsoolab.github.io/glab/).
 
-<br>
 
-## Installation
+## Quickstart
 
-### Apache Maven
+Step 1: Add maven dependency
 ```java
 <dependency>
     <groupId>io.github.ciusji</groupId>
@@ -62,58 +58,63 @@ Working from the top down, the layers look like this:
 </dependency>
 ```
 
-### Gradle Groovy DSL
+Step 2: Connect and execute SQL
+
 ```java
-implementation 'io.github.ciusji:guinsoo:0.2.1'
+Class.forName("org.guinsoo.Driver");
+Connection conn = DriverManager.getConnection("jdbc:guinsoo:mem:");
+Statement stat = conn.createStatement();
+
+stat.execute("YOUR SQL");
+
+stat.close();
+conn.close();
 ```
 
-### Gradle Kotlin DSL 
-```java
-implementation("io.github.ciusji:guinsoo:0.2.1")
-```
+More usage about Guinsoo please click [here](https://ciusji.gitbook.io/guinsoo/guides/tutorial).
 
-### Scala SBT
-```java
-libraryDependencies += "io.github.ciusji" % "guinsoo" % "0.2.1"
-```
-
-### Apache Lvy
-```java
-<dependency org="io.github.ciusji" name="guinsoo" rev="0.2.1" />
-```
-
-### Groovy Grape
-```java
-@Grapes(
-  @Grab(group='io.github.ciusji', module='guinsoo', version='0.2.1')
-)
-```
-
-### Apache Buildr
-```java
-'io.github.ciusji:guinsoo:jar:0.2.1'
-```
-
-For more version information, please click [here](https://search.maven.org/artifact/io.github.ciusji/guinsoo). 
-
-<br>
 
 ## Documentation
 
-[Guinsoo Documentation](https://ciusji.github.io/guinsoo/).
+### Guides
 
-<br>
+- [Introduction](https://ciusji.gitbook.io/guinsoo/guides/introduction)
+- [Quickstart](https://ciusji.gitbook.io/guinsoo/guides/quickstart)
+- [Features](https://ciusji.gitbook.io/guinsoo/guides/features)
+- [Installation](https://ciusji.gitbook.io/guinsoo/guides/installation)
+- [Tutorial](https://ciusji.gitbook.io/guinsoo/guides/tutorial)
+- [Security](https://ciusji.gitbook.io/guinsoo/guides/security)
+- [Performance](https://ciusji.gitbook.io/guinsoo/guides/performance)
+- [Advanced](https://ciusji.gitbook.io/guinsoo/guides/advanced)
 
-## Support
+### Reference
+
+- [Commands](https://ciusji.gitbook.io/guinsoo/reference/commands)
+- [Functions](https://ciusji.gitbook.io/guinsoo/reference/functions)
+- [Aggregate](https://ciusji.gitbook.io/guinsoo/reference/aggregate)
+- [Window](https://ciusji.gitbook.io/guinsoo/reference/window)
+- [Data Types](https://ciusji.gitbook.io/guinsoo/reference/data-types)
+- [SQL Grammar](https://ciusji.gitbook.io/guinsoo/reference/sql-grammar)
+- [System Table](https://ciusji.gitbook.io/guinsoo/reference/system-table)
+
+### Support
+
+- [FAQ](https://ciusji.gitbook.io/guinsoo/support/faq)
+
+### Appendix
+
+- [License](https://ciusji.gitbook.io/guinsoo/appendix/license)
+- [Links](https://ciusji.gitbook.io/guinsoo/appendix/links)
+- [Architecture](https://ciusji.gitbook.io/guinsoo/appendix/architecture)
+
+
+## Issues
 
 [Issue tracker](https://github.com/ciusji/guinsoo/issues) for bug reports and feature requests.
 
-<br>
 
-## Appendix
+## Others
 
-* [GuinsooLab, a perfect calculation-container](https://guinsoolab.github.io/glab/)
-* [Spotrix, explore insights for everyone](https://spotrix.github.io/spotrix-web/)
-
-
+- [GuinsooLab, a perfect calculation-container](https://guinsoolab.github.io/glab/)
+- [Spotrix, explore insights for everyone](https://spotrix.github.io/spotrix-web/)
 
