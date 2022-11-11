@@ -71,7 +71,7 @@ stat.close();
 conn.close();
 ```
 
-More usage about Guinsoo please click [here](https://ciusji.gitbook.io/guinsoo/guides/tutorial).
+For more language, such as Python, Java, C++, Rust, Node or others, please click [here](https://ciusji.gitbook.io/guinsoo/guides/tutorial).
 
 
 ## Documentation
