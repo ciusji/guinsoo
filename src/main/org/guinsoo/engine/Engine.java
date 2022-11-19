@@ -69,20 +69,19 @@ public final class Engine {
                     String p = ci.getProperty("MV_STORE");
                     String fileName;
                     if (p == null) {
-                        String store = ci.getStore();
-                        if (Constants.MV_DB.equals(store)) {
-                            fileName = name + Constants.SUFFIX_MV_FILE;
-                        } else if (Constants.PAGE_DB.equals(store)) {
-                            fileName = name + Constants.SUFFIX_PAGE_FILE;
-                            ci.setProperty("MV_STORE", "FALSE");
-                        } else if (Constants.QUICK_DB.equals(store)) {
-                            fileName = name + Constants.SUFFIX_QUICK_FILE;
-                            ci.setProperty("MV_STORE", "FALSE");
-                        } else {
-                            throw DbException.getUnsupportedException("Unsupported DB Engine");
-                        }
+                        fileName = name + Constants.SUFFIX_MV_FILE;
                         if (!FileUtils.exists(fileName)) {
-                            FileUtils.createFile(fileName);
+                            fileName = name + Constants.SUFFIX_PAGE_FILE;
+                            if (FileUtils.exists(fileName)) {
+                                ci.setProperty("MV_STORE", "false");
+                            } else {
+                                throwNotFound(ifExists, forbidCreation, name);
+                                fileName = name + Constants.SUFFIX_OLD_DATABASE_FILE;
+                                if (FileUtils.exists(fileName)) {
+                                    throw DbException.getFileVersionError(fileName);
+                                }
+                                fileName = null;
+                            }
                         }
                     } else {
                         fileName = name + (Utils.parseBoolean(p, true, false) ? Constants.SUFFIX_MV_FILE

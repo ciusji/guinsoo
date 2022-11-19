@@ -19,9 +19,8 @@
 
 package org.guinsoo.samples;
 
-import org.guinsoo.ConnectionBuilder;
-
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.Statement;
 
 /**
@@ -34,11 +33,9 @@ public class QuickUsage {
 
     public static void main(String[] args) throws Exception {
 
-        String url = "jdbc:guinsoo:mem:;STORE=3";
+        String url = "jdbc:guinsoo:file:/Users/admin/Git/Private/grist-modeling/examples/xxx;MODE=PostgreSQL";
 
-        Connection conn = ConnectionBuilder.getInstance()
-                .setUrl(url)
-                .build();
+        Connection conn = DriverManager.getConnection(url, "sa", "sa");
 
         Statement stmt = conn.createStatement();
 
