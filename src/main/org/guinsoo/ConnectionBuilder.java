@@ -48,6 +48,7 @@ import static org.guinsoo.util.Utils.readSettingsFromURL;
  * @author cius.ji
  * @since 1.8+
  */
+@Deprecated
 public class ConnectionBuilder {
     /**
      * database url
