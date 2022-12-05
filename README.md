@@ -54,7 +54,7 @@ Step 1: Add maven dependency
 <dependency>
     <groupId>io.github.ciusji</groupId>
     <artifactId>guinsoo</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
 </dependency>
 ```
 

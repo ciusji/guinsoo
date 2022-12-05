@@ -33,9 +33,9 @@ public class QuickUsage {
 
     public static void main(String[] args) throws Exception {
 
-        String url = "jdbc:guinsoo:file:/Users/admin/Git/Private/grist-modeling/examples/xxx;MODE=PostgreSQL";
+        String url = "jdbc:guinsoo:file:/Users/admin/Git/Public/spotrix/spotrix;MODE=PostgreSQL";
 
-        Connection conn = DriverManager.getConnection(url, "sa", "sa");
+        Connection conn = DriverManager.getConnection(url, "root", "123456");
 
         Statement stmt = conn.createStatement();
 

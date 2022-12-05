@@ -4,7 +4,7 @@
 
     <groupId>io.github.ciusji</groupId>
     <artifactId>guinsoo</artifactId>
-    <version>0.2.2-SNAPSHOT</version>
+    <version>0.2.2</version>
     <packaging>jar</packaging>
     <name>guinsoo</name>
     <url>https://github.com/ciusji/guinsoo</url>
@@ -276,7 +276,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
+                <version>1.6</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
