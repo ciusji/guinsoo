@@ -1,9 +1,9 @@
 <div align="right">
-    <img src="/public/guinsoolab-badge.png" width="60" alt="badge">
+    <img src="https://raw.githubusercontent.com/ciusji/guinsoo/master/public/guinsoolab-badge.png" width="60" alt="badge">
     <br />
 </div>
 <div align="center">
-    <img src="/public/guinsoo.svg" width=120 alt="logo" />
+    <img src="https://raw.githubusercontent.com/ciusji/guinsoo/master/public/guinsoo.svg" width=120 alt="logo" />
     <br />
     <small>Powered by <a href="https://guinsoolab.github.io/glab">GuinsooLab</a></small>
 </div>
@@ -49,7 +49,7 @@ Working from the top down, the layers look like this:
 
 ## Quickstart
 
-Step 1: Add maven dependency
+Step 1: Add maven dependency (click [here](https://search.maven.org/artifact/io.github.ciusji/guinsoo) to find more versions ð)
 ```java
 <dependency>
     <groupId>io.github.ciusji</groupId>
