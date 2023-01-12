@@ -3,7 +3,7 @@
     <br />
 </div>
 <div align="center">
-    <img src="https://raw.githubusercontent.com/ciusji/guinsoo/master/public/guinsoo.svg" width=120 alt="logo" />
+    <img src="https://raw.githubusercontent.com/ciusji/guinsoo/master/public/guinsoo.png" width=120 alt="logo" />
     <br />
     <small>Powered by <a href="https://guinsoolab.github.io/glab">GuinsooLab</a></small>
 </div>
