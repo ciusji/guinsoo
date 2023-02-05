@@ -123,3 +123,4 @@ For more language, such as Python, Java, C++, Rust, Node or others, please click
 Guinsoo is released under [Mozilla Public License Version 2.0](./LICENSE.txt)
 
 <img src="https://raw.githubusercontent.com/GuinsooLab/glab/main/src/images/guinsoolab-group.svg" width="120" alt="license" />
+
