@@ -117,10 +117,3 @@ For more language, such as Python, Java, C++, Rust, Node or others, please click
 
 - [GuinsooLab, a perfect calculation-container](https://guinsoolab.github.io/glab/)
 - [Spotrix, explore insights for everyone](https://spotrix.github.io/spotrix-web/)
-
-## License
-
-Guinsoo is released under [Mozilla Public License Version 2.0](./LICENSE.txt)
-
-<img src="https://raw.githubusercontent.com/GuinsooLab/glab/main/src/images/guinsoolab-group.svg" width="120" alt="license" />
-
